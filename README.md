@@ -41,16 +41,17 @@ Map:
 // Query Title: List of keys in people              // Varies by request
 function map(patient) {
 
-    var keys = Object.keys(patient.json);           // For each patient (in JSON) find keys (an object)
-    emit("Keys used: " + keys, 1);                  // Emit keys, putting "Keys used" in front
+    var keys = Object.keys(patient.json);           // For each patient (JSON)
+                                                    // ...find keys (an object)
+    emit("Keys used: " + keys, 1);                  // Emit keys, labeled "Keys used:"
 }
 ```
-
+123456789012345678901234567890123456789012345678901234567890123456789012345678901234567
 
 Reduce:
 
 ```bash
 function reduce(key, values) {
-  return Array.sum(values);                         // Tally up whatever value we queried
+  return Array.sum(values);                         // Tally up results
 }
 ```
