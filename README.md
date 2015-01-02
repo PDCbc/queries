@@ -46,7 +46,6 @@ function map(patient) {
     emit("Keys used: " + keys, 1);                  // Emit keys, labeled "Keys used:"
 }
 ```
-123456789012345678901234567890123456789012345678901234567890123456789012345678901234567
 
 Reduce:
 
