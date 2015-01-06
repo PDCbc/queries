@@ -1,4 +1,4 @@
-// Reference Number: PDC-009-b
+// Reference Number: PDC-008
 // Query Title: BMI or WC documented in last 2 yrs 12 - 19
 function map(patient) {
     var targetWaistCircumferenceCodes = {
