@@ -14,7 +14,7 @@ function map( patient ){
   var gndr = obj.gender;
   
   if( gndr === null || gndr === undefined ){
-    // Count null or undefined (=== checks for null or undefined)
+    // Count null or undefined (or use == which checks for both)
     emit( "Numerator", 1 );
   }
   else if( gndr === "M" || gndr === "F" ){
