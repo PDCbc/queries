@@ -4,7 +4,7 @@
 // DQ-DEM-02
 //
 // Note: E2E doesn't differentiate for active status
-// When that is added this query should be revised
+// -- When that is added this query should be revised
 
 function map( patient ){
   // Patient is hQuery's definition of a person.  Use its JSON object.
@@ -14,17 +14,18 @@ function map( patient ){
   var gndr = obj.gender;
   
   if( gndr === null || gndr === undefined ){
-    // Count null or undefined (or use == which checks for both)
+    // Count null or undefined (OR use == which accepts null or undefined)
     emit( "Numerator", 1 );
   }
-  else if( gndr === "M" || gndr === "F" ){
-    // Count M of F, but emit 0 so it isn't tallied.
+  else if( gndr === "M" || gndr === "F" || gndr === "UN" ){
+    // Count M, F or UN (undifferentiated), but emit 0 so it isn't tallied.
     emit( "Numerator", 0 );
   }
   else{
     // Anything here is an expected value, so flag it.
     emit ( "Warning; unexpected value!!!"+ gndr, 1 );
   }
+  
   // Everyone is counted towards the denominator.
   emit( "Denominator", 1 );
 }

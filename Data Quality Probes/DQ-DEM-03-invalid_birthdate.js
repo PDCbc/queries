@@ -1,4 +1,5 @@
-// Count active patients with an invalid date of birth
+// Count active patients with an invalid date of birth,
+// excluding anyone over 120 years old
 //
 // DQ-DEM-03
 //
@@ -10,12 +11,20 @@ function map( patient ){
   var obj = patient.json;
   
   // Birthdate is a key in patient.json.  Select it.
-  var bdNumber = obj.birthdate;
+  // Note: Formatted in milliseconds, so multiply by 1000.
+  var bdNumber = obj.birthdate*1000;
   
   // This is a date, so format it as one.  (we know this by context)
   var bd = new Date( bdNumber );
   
-  // EMCA-262 (standard) says invalid dates have time = NaN.
+  // Today's date.
+  var now = new Date();
+    
+  // Calculate age using hQuery.Patient's age method.
+  var age = patient.age(now);
+
+  // JavaScript standard, says a malformed Date object's getTime method
+  // will return NaN (not a number).
   function invalidDateFinder( d ){
     // Grab just the time;
     var time = d.getTime();
@@ -25,7 +34,7 @@ function map( patient ){
   }
   
   // Numerator = 1 for fail, 0 for pass, since we're counting fails.
-  if( invalidDateFinder( bd )){
+  if( invalidDateFinder( bd ) || age > 120 ){
     emit( "Numerator", 1 );
   }
   else  {
