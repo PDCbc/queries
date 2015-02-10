@@ -1,5 +1,6 @@
 // Reference Number: PDC-008
 // Query Title: BMI or WC documented in last 2 yrs 12 - 19
+
 function map(patient) {
     var targetWaistCircumferenceCodes = {
         "LOINC": ["56115-9"]
@@ -60,14 +61,19 @@ function map(patient) {
         return hasWaistCircumference() || hasBMI() || (hasHeight() && hasWeight());
     }
 
+    //emr_primary_care_provider_id"
     if (population(patient)) {
-        emit("denominator_patients_12-19", 1);
+        emit("denominator", 1);
+        emit("denominator_" + patient['json']['primary_care_provider_id'], 1);
         if (hasRecordedValues()) {
-            emit("numerator_has_recorded_values", 1);
+            emit("numerator", 1);
+            emit("numerator_" + patient['json']['primary_care_provider_id'], 1);
         }
     }
 
     // Empty Case
-    emit("numerator_has_recorded_values", 0);
-    emit("denominator_patients_12-19", 0);
+    emit("numerator", 0);
+    emit("numerator_" + patient['json']['primary_care_provider_id'], 0);
+    emit("denominator", 0);
+    emit("denominator_" + patient['json']['primary_care_provider_id'], 0);
 }

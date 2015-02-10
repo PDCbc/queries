@@ -1,6 +1,7 @@
 // Reference Number: PDC-027
 // Query Title: Diabetics with LDL in last yr <= 2.5
 // TODO: Add freetext definition search
+
 function map(patient) {
     var targetLabCodes = {
         "pCLOCD": ["39469-2"]
@@ -42,12 +43,6 @@ function map(patient) {
     function hasMatchingLabValue() {
         for (var i = 0; i < resultList.length; i++) {
             if (resultList[i].includesCodeFrom(targetLabCodes) && resultList[i].timeStamp() > start) {
-                // Emit excluded when resultList[] exists, but has no entries
-                if(resultList[i].values() === null || resultList[i].values === undefined || resultList[i].values.length === 0)
-                {
-                    emit('excluded', 1);
-                    continue;
-                }
                 if (resultList[i].values()[0].units() !== null &&
                     resultList[i].values()[0].units().toLowerCase() === "mmol/L".toLowerCase()) {
                     if (resultList[i].values()[0].scalar() <= ldlLimit) {
@@ -60,16 +55,19 @@ function map(patient) {
     }
 
     if (hasProblemCode()) {
-        emit("denominator_diabetics", 1);
+        emit("denominator", 1);
+        emit("denominator_" + patient['json']['primary_care_provider_id'], 1);
         if(hasLabCode()) {
-            emit("has_ldl_result", 1);
             if(hasMatchingLabValue()) {
-                emit("numerator_has_matching_ldl_value", 1);
+                emit("numerator", 1);
+        emit("numerator_" + patient['json']['primary_care_provider_id'], 1);
             }
         }
     }
 
     // Empty Case
-    emit("numerator_has_matching_ldl_value", 0);
-    emit("denominator_diabetics", 0);
+    emit("numerator", 0);
+    emit("numerator_" + patient['json']['primary_care_provider_id'], 0);
+    emit("denominator", 0);
+    emit("denominator_" + patient['json']['primary_care_provider_id'], 0);
 }

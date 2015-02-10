@@ -2,6 +2,7 @@
 // Query Title: Practice population profile
 // TODO: Add freetext definition search
 // TODO: Add Colon screening portion of query
+
 function map(patient) {
     var targetLabCodes = {
         "pCLOCD": ["58453-2", "14563-1", "14564-9", "14565-6"]
@@ -35,13 +36,17 @@ function map(patient) {
     }
 
     if (population(patient)) {
-        emit("denominator_patients_50-74", 1);
+        emit("denominator", 1);
+  emit("denominator_" + patient['json']['primary_care_provider_id'], 1);
         if (hasLabCode()) {
-            emit("numerator_has_hemoccult_result", 1);
+            emit("numerator", 1);
+            emit("numerator_" + patient['json']['primary_care_provider_id'], 1);
         }
     }
 
     // Empty Case
-    emit("numerator_has_hemoccult_result", 0);
-    emit("denominator_patients_50-74", 0);
+    emit("numerator", 0);
+    emit("numerator_" + patient['json']['primary_care_provider_id'], 0);
+    emit("denominator", 0);
+    emit("denominator_" + patient['json']['primary_care_provider_id'], 1);
 }

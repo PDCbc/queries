@@ -1,6 +1,7 @@
 // Reference Number: PDC-014
-// Query Title: Pneumococcal vaccination age 65+
-// TODO: Add freetext definition search
+// // Query Title: Pneumococcal vaccination age 65+
+// // TODO: Add freetext definition search
+
 function map(patient) {
     var targetImmunizationCodes = {
         "whoATC": ["J07AL02"],
@@ -22,18 +23,17 @@ function map(patient) {
         return immunizationList.match(targetImmunizationCodes).length;
     }
 
-    if (hasImmunization()) {
-        emit("total_pneumovax", 1);
-    }
-
     if (population(patient)) {
-        emit("denominator_patients_>64", 1);
+        emit("denominator", 1);
+  emit("denominator_" + patient['json']['primary_care_provider_id'], 1);
         if (hasImmunization()) {
-            emit("numerator_senior_pop_pneumovax", 1);
+            emit("numerator", 1);
+      emit("numerator_" + patient['json']['primary_care_provider_id'], 1);
         }
     }
-
     // Empty Case
-    emit("numerator_senior_pop_pneumovax", 0);
-    emit("denominator_patients_>64", 0);
+    emit("numerator", 0);
+    emit("numerator_" + patient['json']['primary_care_provider_id'], 0);
+    emit("denominator", 0);
+    emit("denominator_" + patient['json']['primary_care_provider_id'], 0);
 }

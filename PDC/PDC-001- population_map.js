@@ -11,9 +11,9 @@ function map(patient) {
       emit("denominator", 1);
       return;
     }
-  
+
     age = Math.floor(age);
-    
+
     if (genderValue !== null && genderValue !== undefined) {
         if (patient.gender().toUpperCase() === "M") {
             gender = "male";
@@ -25,9 +25,9 @@ function map(patient) {
     } else {
         gender = "undifferentiated";
     }
-    
+
     for(i=0, j=9;i<=90; i+=10,j+=10)
-    { 
+    {
       if(i==90 && age>=i)
       {
         emit(gender + '_90+_' + patient.json.primary_care_provider_id, 1);
@@ -41,6 +41,6 @@ function map(patient) {
           emit(gender + '_' + i.toString() + '-' + j.toString() + '_' + patient.json.primary_care_provider_id, 0);
       }
     }
-    
+
     emit("denominator", 1);
 }
