@@ -29,9 +29,8 @@ function map( patient ){
   else
     emit( gdr + "90+" + pid, 0 );
 
-  // Emit for remaining ranges (of 10 yrs)
-  var i = 80;
-  for( ; i >= 0; i-=10 ){
+  // Emit for remaining ranges (10 yrs, descending)
+  for( var i = 80; i >= 0; i-=10 ){
     var range = i + "-" +( i + 9 );
     if( age >= i && age <( i + 10 ))
       emit( gdr + range + pid, 1 );
