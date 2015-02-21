@@ -10,18 +10,12 @@ function map( patient ){
   var gdr = patient.gender();
 
   // Convert gdr to an expected value
-  if( gdr === null || gdr === undefined ){
+  if( gdr && gdr.toString().toUpperCase() === "F" )
+    gdr = "female_";
+  else if( gdr && gdr.toString().toUpperCase() === "M" )
+    gdr = "male_";
+  else
     gdr = "undifferentiated_";
-  }
-  else {
-    gdr = gdr.toString().toUpperCase();
-    if( gdr === "F" )
-      gdr = "female_";
-    else if( gdr === "M" )
-      gdr = "male_";
-    else
-      gdr = "undifferentiated_";
-  }
 
   // Edge cases assigned -1 (out of specified ranges)
   if( typeof age !== 'number' || age < 0 || age > 120 ){
@@ -31,9 +25,9 @@ function map( patient ){
 
   // Emit for 90+ special case
   if( age >= 90 )
-    emit( gdr + "_90+" + pid, 1 );
+    emit( gdr + "90+" + pid, 1 );
   else
-    emit( gdr + "_90+" + pid, 0 );
+    emit( gdr + "90+" + pid, 0 );
 
   // Emit for remaining ranges (of 10 yrs)
   var i = 80;
@@ -44,7 +38,4 @@ function map( patient ){
     else
       emit( gdr + range + pid, 0 );
   }
-
-  // Denominator is counted every time
-  emit( "denominator", 1 );
 }
