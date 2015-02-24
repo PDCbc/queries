@@ -29,6 +29,7 @@ function map( patient ){
 
   // 1 or 0: recorded waist circumference, BMI or (height && weight)?
   function checkTarget(){
+    // API .match() returns matches (LOINCs) in CodedEntryList objects (vitals)
     var hasWCOrBMI = vitals.match( targetWC, start, end ).length || vitals.match(targetBM, start, end).length;
     var hasHtAndWt = vitals.match( targetHt, start, end ).length && vitals.match(targetWt, start, end).length;
     return hasWCOrBMI || hasHtAndWt;
