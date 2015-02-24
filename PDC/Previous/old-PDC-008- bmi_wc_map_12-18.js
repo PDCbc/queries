@@ -19,7 +19,7 @@ function map(patient) {
     };
 
     var ageMin = 12;
-    var ageMax = 19;
+    var ageMax = 18;
 
     var vitalSignList = patient.vitalSigns();
 

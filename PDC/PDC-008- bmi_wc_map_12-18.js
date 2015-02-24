@@ -1,5 +1,5 @@
-// Reference Number: PDC-009
-// Query Title: BMI or WC documented in last 2 yrs, age 19+
+// Reference Number: PDC-008
+// Query Title: BMI or WC documented in last 2 yrs, age 12-18
 
 function map( patient ){
   // Store physician ID, via JSON key
@@ -16,7 +16,8 @@ function map( patient ){
       targetWt ={ "LOINC": ["3141-9"]  };        // Weight
 
   // Target age range
-  var ageMin = 19;
+  var ageMin = 12,
+      ageMax = 18;
 
   // Target dates: ends now, started two years ago, empty date defaults to now
   var end   = new Date(),
@@ -24,7 +25,8 @@ function map( patient ){
 
   // 1 or 0: patient in our age range?
   function checkDenominator(){
-    return ageMin <= patient.age( end );
+    var age = patient.age( end );
+    return ageMin <= age && age <= ageMax;
   }
 
   // 1 or 0: recorded waist circumference, BMI or (height && weight)?

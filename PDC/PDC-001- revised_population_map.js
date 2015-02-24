@@ -18,7 +18,7 @@ function map( patient ){
     gdr = "undifferentiated_";
 
   // Edge cases assigned -1 (out of specified ranges)
-  if( typeof age !== 'number' || age < 0 || age > 120 ){
+  if( typeof age !== 'number' || age < 0 ){
     emit( "age_unspecified" + pid, 1 );
     age = -1;
   }
