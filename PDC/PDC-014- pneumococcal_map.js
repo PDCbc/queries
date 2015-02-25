@@ -9,10 +9,10 @@ function map( patient ){
   var ageMin = 65;
 
   // Store a list of recorded immunizations (CodedEntryList, API), patient object fn()
-  var targetList = patient.immunizations();
+  var tgtList = patient.immunizations();
 
   // whoATC and SNOMED CT codes denote searchable medical terms (immunizations)
-  var targetCodes = {
+  var tgtCodes = {
       "whoATC": ["J07AL02"],
       "SNOMED-CT": ["12866006", "394678003"]
   };
@@ -25,15 +25,14 @@ function map( patient ){
     return ageMin <= patient.age( now );
   }
 
-  // 1 or 0: targetList has at least one match in targetCodes (vaccinations)?
+  // 1 or 0: tgtList has at least one match in tgtCodes (vaccinations)?
   function checkTarget(){
-    // API .match() returns targetCodes found in targetList (CodedEntryList object)
-    return 0 < targetList.match( targetCodes ).length;
+    return 0 < tgtList.match( tgtCodes ).length;
   }
 
   // Numerator must be a member of denominator and target groups
-  var inDen = checkDenominator();
-  var inNum = inDen && checkTarget();
+  var inDen = checkDenominator(),
+      inNum = inDen && checkTarget();
   emit( "denominator" + pid, inDen );
-  emit( "numerator" + pid,   inNum );
+  emit( "numerator"   + pid, inNum );
 }

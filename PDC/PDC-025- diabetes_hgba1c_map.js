@@ -28,13 +28,12 @@ function map( patient ){
 
   // 1 or 0: are tgtGoces (HGBA1C, last 6 months), in tgtList (test results)?
   function checkTarget() {
-    // API .match() returns targetCodes found in targetList (CodedEntryList object)
     return 0 < tgtList.match( tgtCodes, start, end ).length;
   }
 
   // Numerator must be a member of denominator and target groups
-  var den = checkDenominator();
-  var num = den && checkTarget();
-  emit( "denominator" + pid, den );
-  emit( "numerator"   + pid, num );
+  var inDen = checkDenominator(),
+      inNum = inDen && checkTarget();
+  emit( "denominator" + pid, inDen );
+  emit( "numerator"   + pid, inNum );
 }

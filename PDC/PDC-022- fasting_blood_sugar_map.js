@@ -8,11 +8,9 @@ function map( patient ){
   // Denominator: patients 45+
   var ageMin = 45;
 
-  // Target: Store a list of recorded immunizations (CodedEntryList, API), patient object fn()
-  var tgtList = patient.results();
-
-  // These are searchable medical terms (?)
-  var targetLabCodes = {
+  // Target: list of test results, codes indicating fasting BS test
+  var tgtList = patient.results(),
+      targetLabCodes = {
       "pCLOCD": ["14771-0"]
   };
 
@@ -22,19 +20,17 @@ function map( patient ){
 
   // 1 or 0: patient in our age range?
   function checkDenominator(){
-    var age = patient.age( end );
     return ageMin <= patient.age( end );
   }
 
   // 1 or 0: tgtList has at least one match in targetCodes (vaccinations)?
   function checkTarget(){
-    // API .match() returns targetCodes found in tgtList (CodedEntryList object)
     return 0 < tgtList.match( targetCodes, start, end ).length;
   }
 
   // Numerator must be a member of denominator and target groups
-  var den = checkDenominator();
-  var num = inDen && checkTarget();
-  emit( "denominator" + pid, den );
-  emit( "numerator"   + pid, num );
+  var inDen = checkDenominator(),
+      inNum = inDen && checkTarget();
+  emit( "denominator" + pid, inDen );
+  emit( "numerator"   + pid, inNum );
 }
