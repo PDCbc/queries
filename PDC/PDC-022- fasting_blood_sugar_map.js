@@ -1,45 +1,40 @@
 // Reference Number: PDC-022
-// Query Title: Fasting blood sugar in last 3 yrs age > 45
-// TODO: Add freetext definition search
-function map(patient) {
-    var targetLabCodes = {
-        "pCLOCD": ["14771-0"]
-    };
+// Query Title: Fasting blood sugar documented in last 3 yrs, age 45+
 
-    var ageLimit = 45;
-    var resultList = patient.results();
+function map( patient ){
+  // Store physician ID, via JSON key
+  var pid = "_" + patient.json.primary_care_provider_id;
 
-    var now = new Date(2013, 10, 30);
-    var start = addDate(now, -3, 0, 0);
-    var end = addDate(now, 0, 0, 0);
+  // Denominator: patients 45+
+  var ageMin = 45;
 
-    // Shifts date by year, month, and date specified
-    function addDate(date, y, m, d) {
-        var n = new Date(date);
-        n.setFullYear(date.getFullYear() + (y || 0));
-        n.setMonth(date.getMonth() + (m || 0));
-        n.setDate(date.getDate() + (d || 0));
-        return n;
-    }
+  // Target: Store a list of recorded immunizations (CodedEntryList, API), patient object fn()
+  var tgtList = patient.results();
 
-    // Checks if patient is older than ageLimit
-    function population(patient) {
-        return (patient.age(now) > ageLimit);
-    }
+  // These are searchable medical terms (?)
+  var targetLabCodes = {
+      "pCLOCD": ["14771-0"]
+  };
 
-    // Checks for Fasting Blood Sugar labs performed within the last 3 years
-    function hasLabCode() {
-        return resultList.match(targetLabCodes, start, end).length;
-    }
+  // Target dates: ends now, started three years ago, empty date defaults to now
+  var end   = new Date(),
+      start = new Date( end.getFullYear() - 3, end.getMonth(), end.getDate() );
 
-    if (population(patient)) {
-        emit("denominator_patients_>45", 1);
-        if (hasLabCode()) {
-            emit("numerator_has_blood_sugar_result", 1);
-        }
-    }
+  // 1 or 0: patient in our age range?
+  function checkDenominator(){
+    var age = patient.age( end );
+    return ageMin <= patient.age( end );
+  }
 
-    // Empty Case
-    emit("numerator_has_blood_sugar_result", 0);
-    emit("denominator_patients_>45", 0);
+  // 1 or 0: tgtList has at least one match in targetCodes (vaccinations)?
+  function checkTarget(){
+    // API .match() returns targetCodes found in tgtList (CodedEntryList object)
+    return 0 < tgtList.match( targetCodes, start, end ).length;
+  }
+
+  // Numerator must be a member of denominator and target groups
+  var den = checkDenominator();
+  var num = inDen && checkTarget();
+  emit( "denominator" + pid, den );
+  emit( "numerator"   + pid, num );
 }

@@ -1,49 +1,40 @@
 // Reference Number: PDC-025
 // Query Title: Diabetics with HGBA1C in last 6 mo
-// TODO: Add freetext definition search
-function map(patient) {
-    var targetLabCodes = {
-        "pCLOCD": ["4548-4"]
-    };
 
-    var targetProblemCodes = {
-        "ICD9": ["250*"]
-    };
+function map( patient ){
+  // Store physician ID, via JSON key
+  var pid = "_" + patient.json.primary_care_provider_id;
 
-    var resultList = patient.results();
-    var problemList = patient.conditions();
+  // Denominator: list of conditions, codes indicating diabetes
+  var denList  = patient.conditions(),
+      denCodes = {
+      "ICD9": ["250*"]
+  };
 
-    var now = new Date(2013, 10, 30);
-    var start = addDate(now, 0, -6, 0);
-    var end = addDate(now, 0, 0, 0);
+  // Target: list of test results, codes indicating HGBA1C (last 6 months)
+  var tgtList  = patient.results(),
+      tgtCodes = {
+      "pCLOCD": ["4548-4"]
+  };
 
-    // Shifts date by year, month, and date specified
-    function addDate(date, y, m, d) {
-        var n = new Date(date);
-        n.setFullYear(date.getFullYear() + (y || 0));
-        n.setMonth(date.getMonth() + (m || 0));
-        n.setDate(date.getDate() + (d || 0));
-        return n;
-    }
+  // Target dates: ends now, starts six months ago
+  var end   = new Date(),
+      start = new Date( end.getFullYear(), end.getMonth() - 6, end.getDate() );
 
-    // Checks for HGBA1C labs performed within the last 6 months
-    function hasLabCode() {
-        return resultList.match(targetLabCodes, start, end).length;
-    }
+  // 1 or 0: are denCodes (disabetes) in denList (conditions)?
+  function checkDenominator() {
+    return 0 < denList.regex_match( denCodes ).length;
+  }
 
-    // Checks for diabetic patients
-    function hasProblemCode() {
-        return problemList.regex_match(targetProblemCodes).length;
-    }
+  // 1 or 0: are tgtGoces (HGBA1C, last 6 months), in tgtList (test results)?
+  function checkTarget() {
+    // API .match() returns targetCodes found in targetList (CodedEntryList object)
+    return 0 < tgtList.match( tgtCodes, start, end ).length;
+  }
 
-    if (hasProblemCode()) {
-        emit("denominator_diabetics", 1);
-        if(hasLabCode()) {
-            emit("numerator_has_hgba1c_result", 1);
-        }
-    }
-
-    // Empty Case
-    emit("numerator_has_hgba1c_result", 0);
-    emit("denominator_diabetics", 0);
+  // Numerator must be a member of denominator and target groups
+  var den = checkDenominator();
+  var num = den && checkTarget();
+  emit( "denominator" + pid, den );
+  emit( "numerator"   + pid, num );
 }
