@@ -1,75 +1,55 @@
 // Reference Number: PDC-026
-// Query Title: Diabetics with HGBA1C in last yr <= 7.0
-// TODO: Add freetext definition search
-function map(patient) {
-    var targetLabCodes = {
-        "pCLOCD": ["4548-4"]
-    };
+// Query Title: Diabetics with HGBA1C in the last year, value 7+
+//
+// Denominator: diabetics
+// Target: HGBA1C >= 7, recorded in last year
+// Numerator: intersection of denominator and target
+//
+// Explanation: Of patients with diabetes, how many have had HGBA1C recorded
+//   in the last year, such that LDL >= 7.0?
+//
+function map( patient ){
+  // Store physician ID, via JSON key
+  var pid = "_" + patient.json.primary_care_provider_id;
 
-    var targetProblemCodes = {
-        "ICD9": ["250*"]
-    };
+  // Denominator: list of conditions, codes indicating diabetes
+  var dConditions   = patient.conditions(),
+      dCondiCodes   ={ "ICD9" :[ "250*" ]},
+      dCondiMatches = dConditions.regex_match( dCondiCodes );
 
-    var hgba1cLimit = 7;
+  // Target dates: ends now, starts one year ago
+  var end   = new Date(),
+      start = new Date( end.getFullYear() - 1, end.getMonth(), end.getDate() );
 
-    var resultList = patient.results();
-    var problemList = patient.conditions();
+  // Target: list of test results, codes indicating HGBA1C (last 6 months)
+  var tTResults  = patient.results(),
+      tTResCodes ={ "pCLOCD" :[ "4548-4" ]},
+      tTRMatches = tTResults.match( tTResCodes, start, end );
 
-    var now = new Date(2013, 10, 30);
-    var start = addDate(now, -1, 0, 0);
-    var end = addDate(now, 0, 0, 0);
+  // Target: HGBA1C >= 7.0
+  var tMin = 7.0;
 
-    // Shifts date by year, month, and date specified
-    function addDate(date, y, m, d) {
-        var n = new Date(date);
-        n.setFullYear(date.getFullYear() + (y || 0));
-        n.setMonth(date.getMonth() + (m || 0));
-        n.setDate(date.getDate() + (d || 0));
-        return n;
+  // 1 or 0: are dCondiCodes (disabetes) in dConditions (conditions)?
+  function checkDenominator() {
+    return 0 < dCondiMatches.length;
+  }
+
+  // 1 or 0: are tTResCodes (HGBA1C, last 6 months), in tTResults (test results)?
+  function checkTarget() {
+    if(! tTRMatches.length )
+      return false;
+
+    for( var i = 0, l = tTRMatches.length; i < l; i++ ){
+      if( tTRMatches.length[ i ].values()[ 0 ].scalar >= tMin ){
+        return true;
+      }
     }
+    return false;
+  }
 
-    // Checks for HGBA1C labs performed within the last year
-    function hasLabCode() {
-        return resultList.match(targetLabCodes, start, end).length;
-    }
-
-    // Checks for diabetic patients
-    function hasProblemCode() {
-        return problemList.regex_match(targetProblemCodes).length;
-    }
-
-    // Checks if HGBA1C meets parameters
-    function hasMatchingLabValue() {
-        for (var i = 0; i < resultList.length; i++) {
-            if (resultList[i].includesCodeFrom(targetLabCodes) && resultList[i].timeStamp() > start) {
-                // Emit excluded when resultList[] exists, but empty
-                if(resultList[i].values() === null || resultList[i].values === undefined || resultList[i].values.length === 0)
-                {
-                  emit('excluded', 1);
-                  continue;
-                }
-                if (resultList[i].values()[0].units() !== null &&
-                    resultList[i].values()[0].units().toLowerCase() === "%".toLowerCase()) {
-                    if (resultList[i].values()[0].scalar() <= hgba1cLimit) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    if (hasProblemCode()) {
-        emit("denominator_diabetics", 1);
-        if(hasLabCode()) {
-            emit("has_hgba1c_result", 1);
-            if(hasMatchingLabValue()) {
-                emit("numerator_has_matching_hgba1c_value", 1);
-            }
-        }
-    }
-
-    // Empty Case
-    emit("numerator_has_matching_hgba1c_value", 0);
-    emit("denominator_diabetics", 0);
+  // Numerator must be a member of denominator and target groups
+  var inDen = checkDenominator(),
+      inNum = inDen && checkTarget();
+  emit( "denominator" + pid, inDen );
+  emit( "numerator"   + pid, inNum );
 }
