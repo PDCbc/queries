@@ -29,11 +29,11 @@ function map( patient ){
   * Target Group
   *
   * Values:
-  *   1 year ago <= date <= now, 0 <= LDL <= 2.5 (=tMax)
+  *   1 year ago <= date <= now, 0 <= BP_S <= 130, 0 <= BP_D <= 80
   *
   * Sets:
-  *   list of test results, code for systolic, code for diastolic,
-  *   date filtered matches for systolic, date filtered matches for diastolic
+  *   S: list of test results, code for systolic, code for diastolic,
+  *   D: date filtered matches for systolic, date filtered matches for diastolic
   */
   var targetEnd   = new Date(),
       targetStart = new Date( targetEnd.getFullYear() - 1, targetEnd.getMonth(), targetEnd.getDate() ),
@@ -78,7 +78,7 @@ function checkDenominator( matches ) {
 * Checks the patient for a target group match
 *
 *   1 or 0: BP <= 130/80? (already filtered by date)?
-*     0 <= systolic <= 130, 0 <= diastolic <= 80
+*           0 <= systolic <= 130, 0 <= diastolic <= 80
 */
 function checkTarget( matches, min, max ) {
 
