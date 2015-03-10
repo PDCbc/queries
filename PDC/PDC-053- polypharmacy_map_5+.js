@@ -68,23 +68,22 @@ function checkDenominator( ageMin ) {
 /**
 * Checks the patient for a target group match
 *
-*   1 or 0: BP <= 130/80? (already filtered by date)?
-*           0 <= systolic <= 130, 0 <= diastolic <= 80
+*   1 or 0: 5+ medications
 */
 function checkTarget( matches, min ) {
-
   if(! matches.length )
     return false;
 
-  var now = new Date();
-  var count = 0;
+  var now = new Date(),
+      count = 0;
 
   for( var i = 0, l = matches.length; i < l; i++ ){
-    var drug = matches[ i ];
-    var drugEnd   = drug.indicateMedicationStop().getTime();
-    var drugStart = drug.indicateMedicationStart().getTime();
+    var drug  = matches[ i ],
+        start = drug.indicateMedicationStart().getTime(),
+        pad   = ( drug.indicateMedicationStop().getTime() - start )* 1.2,
+        end   = start + pad;
 
-    if( drugStart <= now && now <= drugEnd )
+    if( start <= now && now <= end )
       count++;
   }
   return min <= count;

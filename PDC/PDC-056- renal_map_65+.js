@@ -1,8 +1,9 @@
 /**
-* Query Title: PDC-053
-* Description: Patients, 65 and older, on 10 or more medications
+* Query Title: PDC-056
+* Description: Patients 65+ w/ impaired renal on digoxin > 125 mcg/day
 *
-* Explanation: Of patients aged 65+, how many have 10+ current medications?
+* Explanation: Of patients aged 65+ with impaired renal function, how many
+*   are on over 125 mcg/day of diboxin?
 */
 
 function map( patient ){
@@ -68,23 +69,23 @@ function checkDenominator( ageMin ) {
 /**
 * Checks the patient for a target group match
 *
-*   1 or 0: 10+ medications
-
+*   1 or 0: BP <= 130/80? (already filtered by date)?
+*           0 <= systolic <= 130, 0 <= diastolic <= 80
 */
 function checkTarget( matches, min ) {
+
   if(! matches.length )
     return false;
 
-  var now = new Date(),
-      count = 0;
+  var now = new Date();
+  var count = 0;
 
   for( var i = 0, l = matches.length; i < l; i++ ){
-    var drug  = matches[ i ],
-        start = drug.indicateMedicationStart().getTime(),
-        pad   = ( drug.indicateMedicationStop().getTime() - start )* 1.2,
-        end   = start + pad;
+    var drug = matches[ i ];
+    var drugEnd   = drug.indicateMedicationStop().getTime();
+    var drugStart = drug.indicateMedicationStart().getTime();
 
-    if( start <= now && now <= end )
+    if( drugStart <= now && now <= drugEnd )
       count++;
   }
   return min <= count;
