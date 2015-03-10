@@ -3,7 +3,7 @@
 
 function map( patient ){
   //constants
-  var gdrs = ["female_", "male_", "undifferentiated_"];
+  var gdrs = ["female_", "male_", "undifferentiated_", "undefined_"];
 
   // Store physician ID, via JSON key
   var pid = "_" + patient.json.primary_care_provider_id;
