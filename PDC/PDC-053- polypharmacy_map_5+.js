@@ -83,8 +83,6 @@ function checkTarget( matches, min ) {
     var drug = matches[ i ];
     var drugEnd   = drug.indicateMedicationStop().getTime();
     var drugStart = drug.indicateMedicationStart().getTime();
-//    drugStart = new Date( drugStart.getFullYear() - 10, drugStart.getMonth(), drugStart.getDate() );
-
 
     if( drugStart <= now && now <= drugEnd )
       count++;
