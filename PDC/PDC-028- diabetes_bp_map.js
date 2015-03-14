@@ -3,7 +3,7 @@
 * Description: Diabetics with all BP <= 130/80 in last yr
 *
 * Explanation: Of patients with diabetes, how many have had their blood pressure
-*              recorded in the last year, such that BP <= 130/80?
+*   recorded in the last year, such that BP <= 130/80?
 */
 
 function map( patient ){
@@ -57,8 +57,8 @@ function map( patient ){
   * Numerator:    Intersection of denominator and target
   */
   var denominator = checkDenominator( denomiMatches ),
-      numerator   = denominator && checkTarget( targetMatches_S, targetMin_S, targetMax_S)
-                    && checkTarget( targetMatches_D, targetMin_D, targetMax_S );
+      numerator   = denominator && checkTarget( targetMatches_S, targetMin_S, targetMax_S) &&
+                    checkTarget( targetMatches_D, targetMin_D, targetMax_S );
       emit( "denominator" + pid, denominator );
       emit( "numerator"   + pid, numerator   );
 }
