@@ -1,58 +1,51 @@
 /**
-* Query Title: PDC-056
+* Query Title: PDC-057
 * Query Type:  Ratio
-* Description: 65+ w/ impaired renal: digoxin > 125/day?
+* Desctiption: Statins for primary prevention
 */
 function map( patient ){
   /**
   * Denominator:
-  *   - 65+ years old
-  *   - impaired renal function
-  *   --> eGFR < 50 ml/min OR creatine > 150 μmol/l
+  *   - have received a statin medication (for cholesterol)
   */
-  var d_ageMin         = 0,
-      d_valMax_GFR     = 49.9,
-      d_valMin_Cre     = 150.1;
+  // List of medications, codes for statins
+  var d_medList  = patient.medications(),
+      d_medCodes ={ "whoATC" :[ "C10AA", "C10BX" ]};
 
-  // List of lab test results, codes for eGFR and creatine
-  var d_resList        = patient.results(),
-      d_resCodes_GFR   ={ "pCLOCD" :[ "33914-3" ]},
-      d_resCodes_Cre   ={ "pCLOCD" :[ "45066-8", "14682-9", "2160-0", "33914-3",
-                                      "50044-7", "48642-3", "48643-1" ]};
+  // Filters
+  var d_final = emit_filter_general( d_medList, d_medCodes );
 
   function checkDenominator(){
-    var d_final_GFR = filter_general( d_resList, d_resCodes_GFR, 0, d_valMax_GFR ),
-        d_final_Cre = filter_general( d_resList, d_resCodes_Cre, d_valMin_Cre );
-
-    return isAge( d_ageMin )&&( isMatch( d_final_GFR )|| isMatch( d_final_Cre ));
+    return isMatch( d_final );
   }
 
 
   /**
   * Numerator:
   *   - in denominator
-  *   - digoxin (medication) > 125 mcg/day (using 0.125 mg/day)
   *   - medication is active
+  *   - have not had a stroke
+  *   - have not had a myocardial infarction (MI, heart attack)
+  *   - have not had an acute myocardial infarction (AMI, heart attack)
   */
-  // List of medications, codes for digoxin
-  var n_medMin   = 0.1251;
+  // Filtered list of medications, list of conditions, codes for conditions
+  var n_medList     = d_final,
+      n_conditions  = patient.conditions(),
+      n_condCodes   ={ "ICD9":[ "410..*", "411..*", "412..*", "429.7",
+                                "410",    "411",    "412",    "V17.1",
+                                "438",    "433.1",  "434.1",  "438..*" ]};
 
-  var n_medList  = patient.medications(),
-      n_medCodes ={ "whoATC":[ "C01AA*" ],
-                    "HC-DIN":[ "02281236", "02281228", "02281201", "02245428",
-                               "02245427", "02245426", "02048264", "02048272",
-                               "0021415",  "00698296", "00647470" ]};
+  // Filters
+  var n_medsFinal = filter_activeMeds( n_medList ),
+      n_condFinal = filter_general( n_conditions, n_condCodes );
 
   function checkNumerator(){
-    var n_final = filter_general( n_medList, n_medCodes, n_medMin );
-    n_final = filter_activeMeds( n_final );
-
-    return isMatch( n_final );
+    return isMatch( n_medsFinal )&&(! isMatch( n_condFinal ));
   }
 
 
   /**
-  * Emit Numerator and Denominator
+  * Emit Numerator and Denominator, tagged with physician ID
   */
   var denominator = checkDenominator(),
       numerator   = denominator && checkNumerator(),
