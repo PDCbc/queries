@@ -1,61 +1,3 @@
-/**
-* Query Title: PDC-057
-* Query Type:  Ratio
-* Desctiption: Statins for primary prevention
-*/
-function map( patient ){
-  /**
-  * Denominator:
-  *   - have received a statin medication (for cholesterol)
-  */
-  // List of medications, codes for statins
-  var d_medList  = patient.medications(),
-      d_medCodes ={ "whoATC" :[ "C10AA", "C10BX" ]};
-
-  // Filters
-  var d_final = filter_general( d_medList, d_medCodes );
-
-  function checkDenominator(){
-    return isMatch( d_final );
-  }
-
-
-  /**
-  * Numerator:
-  *   - in denominator
-  *   - medication is active
-  *   - have not had a stroke
-  *   - have not had a myocardial infarction (MI, heart attack)
-  *   - have not had an acute myocardial infarction (AMI, heart attack)
-  */
-  // Filtered list of medications, list of conditions, codes for conditions
-  var n_medList     = d_final,
-      n_conditions  = patient.conditions(),
-      n_condCodes   ={ "ICD9":[ "410..*", "411..*", "412..*", "429.7",
-                                "410",    "411",    "412",    "V17.1",
-                                "438",    "433.1",  "434.1",  "438..*" ]};
-
-  // Filters
-  var n_medsFinal = filter_activeMeds( n_medList ),
-      n_condFinal = filter_general( n_conditions, n_condCodes );
-
-  function checkNumerator(){
-    return isMatch( n_medsFinal )&&(! isMatch( n_condFinal ));
-  }
-
-
-  /**
-  * Emit Numerator and Denominator, tagged with physician ID
-  */
-  var denominator = checkDenominator(),
-      numerator   = denominator && checkNumerator(),
-      pid = "_" + patient.json.primary_care_provider_id;
-
-  emit( "denominator" + pid, denominator );
-  emit( "numerator"   + pid, numerator   );
-}
-
-
 /*******************************************************************************
 * Helper Functions                                                             *
 *   These should be the same for all queries.  Copy a fresh set on every edit! *
@@ -143,4 +85,52 @@ function isAge( ageMin, ageMax ) {
 
   ageNow = patient.age( new Date() );
   return ( ageMin <= ageNow && ageNow <= ageMax );
+}
+
+
+/*******************************************************************************
+* Debugging Functions                                                          *
+*   These are badly commented, non-optimized and intended for development.     *
+*******************************************************************************/
+
+
+/**
+* Substitute for filter_general() to troubleshoot values
+*/
+function emit_filter_general( list, codes, min, max ){
+  var filtered = list.match( codes );
+
+  if( typeof min === 'number' )
+    filtered = filter_values( filtered, min,( max || 1000000000 ));
+
+  emit_values( filtered, min, max );
+
+  return filtered;
+}
+
+
+/**
+* Used by emit_filter_...() functions to emit age, ID and values
+*/
+function emit_values( list, min, max ){
+  for( var i = 0, L = list.length; i < L; i++ ){
+
+    if( list[ i ].values()[0] ){
+      var scalar = list[ i ].values()[0].scalar();
+
+      scalar = scalarToString( scalar );
+      var units  = " " + list[ i ].values()[0].units(),
+          age    = " -- " + scalarToString( patient.age ( new Date() )),
+          first  = " -- " + patient.json.first.substr( 1, 5 );
+      emit( scalar + units + age + first, 1 );
+    }
+  }
+}
+
+
+/**
+* Round a scalar (or int) and convert to string, otherwise string emit crashes
+*/
+function scalarToString( scalar ){
+  return Math.floor( scalar.toString() );
 }
