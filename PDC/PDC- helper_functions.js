@@ -8,6 +8,7 @@
 * Filters a list of lab results:
 *   - lab, medication and condition codes (e.g. pCLOCD, whoATC, HC-DIN)
 *   - minimum and maximum values
+*   --> exclusive range, boundary cases are excluded
 */
 function filter_general( list, codes, min, max ){
   // Use API's .match() to filter with codes
@@ -46,6 +47,7 @@ function filter_activeMeds( matches ){
 
 /**
 * Used by filter_general() and filter_general()
+*   --> exclusive range, boundary cases are excluded
 */
 function filter_values( list, min, max ){
   // Default values
@@ -58,7 +60,7 @@ function filter_values( list, min, max ){
     var entry  = list[ i ],
         scalar = entry.values()[0].scalar();
 
-    if( min <= scalar && scalar <= max )
+    if( min < scalar && scalar < max )
       toReturn.push( entry );
   }
   return toReturn;

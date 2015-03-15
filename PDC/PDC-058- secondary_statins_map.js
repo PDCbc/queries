@@ -8,15 +8,15 @@ function map( patient ){
   * Denominator:
   *   - have received a statin medication (for cholesterol)
   */
-  // List of medications, codes for statins
-  var d_medList  = patient.medications(),
-      d_medCodes ={ "whoATC" :[ "C10AA", "C10BX" ]};
-
-  // Filters
-  var d_medFinal = filter_general( d_medList, d_medCodes );
-
   function checkDenominator(){
-    return isMatch( d_medFinal );
+    // List of medications, codes for statins
+    var medList  = patient.medications(),
+        medCodes ={ "whoATC" :[ "C10AA", "C10BX" ]};
+
+    // Filters
+    var medications = filter_general( medList, medCodes );
+
+    return isMatch( medications );
   }
 
 
@@ -27,24 +27,26 @@ function map( patient ){
   *   - OR have had a myocardial infarction (MI, heart attack)
   *   - OR have had an acute myocardial infarction (AMI, heart attack)
   */
-  // Filtered list of medications, list of conditions, codes for conditions
-  var n_medList     = d_final,
-      n_conditions  = patient.conditions(),
-      n_condCodes   ={ "ICD9":[ "410..*", "411..*", "412..*", "429.7",
-                                "410",    "411",    "412",    "V17.1",
-                                "438",    "433.1",  "434.1",  "438..*" ]};
-
-  // Filters
-  var n_medsFinal = filter_activeMeds( n_medList ),
-      n_condFinal = filter_general( n_conditions, n_condCodes );
-
   function checkNumerator(){
-    return isMatch( n_medsFinal )&& isMatch( n_condFinal );
+    // Filtered list of medications, list of conditions, codes for conditions
+    var medList  = d_final,
+        conList  = patient.conditions(),
+        conCodes ={ "ICD9":[ "410..*", "411..*", "412..*", "429.7",
+                             "410",    "411",    "412",    "V17.1",
+                             "438",    "433.1",  "434.1",  "438..*" ]};
+
+    // Filters
+    var medications = filter_activeMeds( medList ),
+        conditions  = filter_general( conList, conCodes );
+
+    return isMatch( medications )&& isMatch( conditions );
   }
 
 
   /**
-  * Emit Numerator and Denominator, tagged with physician ID
+  * Emit Numerator and Denominator:
+  *   - numerator must also be in denominator
+  *   - tagged with physician ID
   */
   var denominator = checkDenominator(),
       numerator   = denominator && checkNumerator(),
@@ -62,9 +64,10 @@ function map( patient ){
 
 
 /**
-* Filters a list:
+* Filters a list of lab results:
 *   - lab, medication and condition codes (e.g. pCLOCD, whoATC, HC-DIN)
 *   - minimum and maximum values
+*   --> exclusive range, boundary cases are excluded
 */
 function filter_general( list, codes, min, max ){
   // Use API's .match() to filter with codes
@@ -72,7 +75,6 @@ function filter_general( list, codes, min, max ){
 
   // If there are values, then filter with them
   if( typeof min === 'number' ){
-    // Default value
     max = max ||  1000000000;
     filteredList = filter_values( filteredList, min, max );
   }
@@ -103,12 +105,12 @@ function filter_activeMeds( matches ){
 
 
 /**
-* Filters a list (used by filter_general()):
-*   - minimum and maximum values
+* Used by filter_general() and filter_general()
+*   --> exclusive range, boundary cases are excluded
 */
 function filter_values( list, min, max ){
   // Default values
-  max = max ||  1000000000;
+  max = max || 1000000000;
 
   var toReturn = new hQuery.CodedEntryList();
 
@@ -117,7 +119,7 @@ function filter_values( list, min, max ){
     var entry  = list[ i ],
         scalar = entry.values()[0].scalar();
 
-    if( min <= scalar && scalar <= max )
+    if( min < scalar && scalar < max )
       toReturn.push( entry );
   }
   return toReturn;
@@ -125,7 +127,7 @@ function filter_values( list, min, max ){
 
 
 /**
-* T/F: Does a list contain matches (/is not empty)?
+* T/F: Does a filtered list contain matches (/is not empty)?
 */
 function isMatch( list ) {
   return 0 < list.length;
@@ -136,9 +138,57 @@ function isMatch( list ) {
 * T/F: Does the patient fall in this age range?
 */
 function isAge( ageMin, ageMax ) {
-  // Default value
+  // Default values
   ageMax = ageMax || 200;
 
   ageNow = patient.age( new Date() );
-  return( ageMin <= ageNow && ageNow <= ageMax );
+  return ( ageMin <= ageNow && ageNow <= ageMax );
+}
+
+
+/*******************************************************************************
+* Debugging Functions                                                          *
+*   These are badly commented, non-optimized and intended for development.     *
+*******************************************************************************/
+
+
+/**
+* Substitute for filter_general() to troubleshoot values
+*/
+function emit_filter_general( list, codes, min, max ){
+  var filtered = list.match( codes );
+
+  if( typeof min === 'number' )
+    filtered = filter_values( filtered, min,( max || 1000000000 ));
+
+  emit_values( filtered, min, max );
+
+  return filtered;
+}
+
+
+/**
+* Used by emit_filter_...() functions to emit age, ID and values
+*/
+function emit_values( list, min, max ){
+  for( var i = 0, L = list.length; i < L; i++ ){
+
+    if( list[ i ].values()[0] ){
+      var scalar = list[ i ].values()[0].scalar();
+
+      scalar = scalarToString( scalar );
+      var units  = " " + list[ i ].values()[0].units(),
+          age    = " -- " + scalarToString( patient.age ( new Date() )),
+          first  = " -- " + patient.json.first.substr( 1, 5 );
+      emit( scalar + units + age + first, 1 );
+    }
+  }
+}
+
+
+/**
+* Round a scalar (or int) and convert to string, otherwise string emit crashes
+*/
+function scalarToString( scalar ){
+  return Math.floor( scalar.toString() );
 }

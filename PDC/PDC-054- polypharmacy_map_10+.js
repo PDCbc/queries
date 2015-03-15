@@ -8,28 +8,28 @@ function map( patient ){
   * Denominator:
   *   - 65+ years old
   */
-  var d_ageMin = 65;
-
   function checkDenominator(){
-    return isAge( d_ageMin );
+    var ageMin = 65;
+
+    return isAge( ageMin );
   }
 
 
   /**
   * Numerator:
-  *   - 5+ medications
+  *   - 10+ medications
   *   - medications are active
   */
-  var n_medMin    = 10;
-
-  // List of medications
-  var n_medList   = patient.medications();
-
-  // Filters
-  var n_medActive = filter_activeMeds( n_medList );
-
   function checkNumerator(){
-    return isMatch( n_medActive )&&( n_medMin <= n_medActive.length );
+    var medMin    = 10;
+
+    // List of medications
+    var medList   = patient.medications();
+
+    // Filters
+    var medActive = filter_activeMeds( medList );
+
+    return isMatch( medActive )&&( medMin <= medActive.length );
   }
 
 
@@ -38,7 +38,7 @@ function map( patient ){
   */
   var denominator = checkDenominator(),
       numerator   = denominator && checkNumerator(),
-      pid = "_" + patient.json.primary_care_provider_id;
+      pid         = "_" + patient.json.primary_care_provider_id;
 
   emit( "denominator" + pid, denominator );
   emit( "numerator"   + pid, numerator   );
@@ -55,6 +55,7 @@ function map( patient ){
 * Filters a list of lab results:
 *   - lab, medication and condition codes (e.g. pCLOCD, whoATC, HC-DIN)
 *   - minimum and maximum values
+*   --> exclusive range, boundary cases are excluded
 */
 function filter_general( list, codes, min, max ){
   // Use API's .match() to filter with codes
@@ -93,6 +94,7 @@ function filter_activeMeds( matches ){
 
 /**
 * Used by filter_general() and filter_general()
+*   --> exclusive range, boundary cases are excluded
 */
 function filter_values( list, min, max ){
   // Default values
@@ -105,7 +107,7 @@ function filter_values( list, min, max ){
     var entry  = list[ i ],
         scalar = entry.values()[0].scalar();
 
-    if( min <= scalar && scalar <= max )
+    if( min < scalar && scalar < max )
       toReturn.push( entry );
   }
   return toReturn;
