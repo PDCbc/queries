@@ -37,9 +37,8 @@ function filter_activeMeds( matches ){
         pad   =( drug.indicateMedicationStop().getTime() - start )* 1.2,
         end   = start + pad;
 
-    if( start <= now && now <= end ){
+    if( start <= now && now <= end )
       toReturn.push( drug );
-    }
   }
   return toReturn;
 }
@@ -50,8 +49,7 @@ function filter_activeMeds( matches ){
 */
 function filter_values( list, min, max ){
   // Default values
-  min = min || -1000000000;
-  max = max ||  1000000000;
+  max = max || 1000000000;
 
   var toReturn = new hQuery.CodedEntryList();
 
@@ -80,7 +78,6 @@ function isMatch( list ) {
 */
 function isAge( ageMin, ageMax ) {
   // Default values
-  ageMin = ageMin || 0;
   ageMax = ageMax || 200;
 
   ageNow = patient.age( new Date() );

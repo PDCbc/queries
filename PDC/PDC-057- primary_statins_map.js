@@ -22,7 +22,6 @@ function map( patient ){
 
   /**
   * Numerator:
-  *   - in denominator
   *   - medication is active
   *   - have not had a stroke
   *   - have not had a myocardial infarction (MI, heart attack)
@@ -63,7 +62,7 @@ function map( patient ){
 
 
 /**
-* Filters a list of lab results:
+* Filters a list:
 *   - lab, medication and condition codes (e.g. pCLOCD, whoATC, HC-DIN)
 *   - minimum and maximum values
 */
@@ -73,6 +72,7 @@ function filter_general( list, codes, min, max ){
 
   // If there are values, then filter with them
   if( typeof min === 'number' ){
+    // Default value
     max = max ||  1000000000;
     filteredList = filter_values( filteredList, min, max );
   }
@@ -95,20 +95,19 @@ function filter_activeMeds( matches ){
         pad   =( drug.indicateMedicationStop().getTime() - start )* 1.2,
         end   = start + pad;
 
-    if( start <= now && now <= end ){
+    if( start <= now && now <= end )
       toReturn.push( drug );
-    }
   }
   return toReturn;
 }
 
 
 /**
-* Used by filter_general() and filter_general()
+* Filters a list (used by filter_general()):
+*   - minimum and maximum values
 */
 function filter_values( list, min, max ){
   // Default values
-  min = min || -1000000000;
   max = max ||  1000000000;
 
   var toReturn = new hQuery.CodedEntryList();
@@ -126,7 +125,7 @@ function filter_values( list, min, max ){
 
 
 /**
-* T/F: Does a filtered list contain matches (/is not empty)?
+* T/F: Does a list contain matches (/is not empty)?
 */
 function isMatch( list ) {
   return 0 < list.length;
@@ -137,10 +136,9 @@ function isMatch( list ) {
 * T/F: Does the patient fall in this age range?
 */
 function isAge( ageMin, ageMax ) {
-  // Default values
-  ageMin = ageMin || 0;
+  // Default value
   ageMax = ageMax || 200;
 
   ageNow = patient.age( new Date() );
-  return ( ageMin <= ageNow && ageNow <= ageMax );
+  return( ageMin <= ageNow && ageNow <= ageMax );
 }
