@@ -8,23 +8,24 @@ function map( patient ){
   * Denominator:
   *   - 65+ years old
   *   - impaired renal function
-  *   --> eGFR < 50 ml/min OR creatine > 150 μmol/l
+  *   --> EGFR < 50 ml/min OR creatinine > 150 μmol/l
   */
   function checkDenominator(){
-    var ageMin         = 65,
-        valMax_GFR     = 50,
-        valMin_Cre     = 150;
+    var ageMin     = 65,
+        valMax_E   = 50,
+        valMin_C   = 150,
 
     // List of lab test results, codes for eGFR and creatine
-    var resList        = patient.results(),
-        resCodes_GFR   ={ "pCLOCD" :[ "33914-3" ]},
-        resCodes_Cre   ={ "pCLOCD" :[ "45066-8", "14682-9", "2160-0", "33914-3",
-                                      "50044-7", "48642-3", "48643-1" ]};
+        resList    = patient.results(),
+        resCodes_E ={ "pCLOCD" :[ "33914-3" ]},
+        resCodes_C ={ "pCLOCD" :[ "45066-8", "14682-9", "2160-0", "33914-3",
+                                  "50044-7", "48642-3", "48643-1" ]},
 
-    var resFinal_GFR = filter_general( resList, resCodes_GFR, 0, valMax_GFR ),
-        resFinal_Cre = filter_general( resList, resCodes_Cre, valMin_Cre );
+    // Filters
+        results_E = filter_general( resList, resCodes_E, 0, valMax_E ),
+        results_C = filter_general( resList, resCodes_C, valMin_C );
 
-    return isAge( ageMin )&&( isMatch( resFinal_GFR )|| isMatch( resFinal_Cre ));
+    return isAge( ageMin )&&( isMatch( results_E )|| isMatch( results_C ));
   }
 
 
@@ -35,18 +36,20 @@ function map( patient ){
   */
   function checkNumerator(){
     // List of medications, codes for digoxin
-    var medMin   = 0.125;
+    var medMin   = 0.125,
 
-    var medList  = patient.medications(),
+    // List of medications, codes for digoxin (class of medicines)
+        medList  = patient.medications(),
         medCodes ={ "whoATC":[ "C01AA*" ],
-                      "HC-DIN":[ "02281236", "02281228", "02281201", "02245428",
-                                 "02245427", "02245426", "02048264", "02048272",
-                                 "0021415",  "00698296", "00647470" ]};
+                    "HC-DIN":[ "02281236", "02281228", "02281201", "02245428",
+                               "02245427", "02245426", "02048264", "02048272",
+                               "0021415",  "00698296", "00647470" ]},
 
-    var final = filter_general( medList, medCodes, medMin );
-    final = filter_activeMeds( final );
+    // Filters
+        medications = filter_general( medList, medCodes, medMin );
+        medications = filter_activeMeds( medications );
 
-    return isMatch( final );
+    return isMatch( medications );
   }
 
 
@@ -57,10 +60,10 @@ function map( patient ){
   */
   var denominator = checkDenominator(),
       numerator   = denominator && checkNumerator(),
-      pid = "_" + patient.json.primary_care_provider_id;
+      physicianID = "_" + patient.json.primary_care_provider_id;
 
-  emit( "denominator" + pid, denominator );
-  emit( "numerator"   + pid, numerator   );
+  emit( "denominator" + physicianID, denominator );
+  emit( "numerator"   + physicianID, numerator   );
 }
 
 
@@ -150,52 +153,4 @@ function isAge( ageMin, ageMax ) {
 
   ageNow = patient.age( new Date() );
   return ( ageMin <= ageNow && ageNow <= ageMax );
-}
-
-
-/*******************************************************************************
-* Debugging Functions                                                          *
-*   These are badly commented, non-optimized and intended for development.     *
-*******************************************************************************/
-
-
-/**
-* Substitute for filter_general() to troubleshoot values
-*/
-function emit_filter_general( list, codes, min, max ){
-  var filtered = list.match( codes );
-
-  if( typeof min === 'number' )
-    filtered = filter_values( filtered, min,( max || 1000000000 ));
-
-  emit_values( filtered, min, max );
-
-  return filtered;
-}
-
-
-/**
-* Used by emit_filter_...() functions to emit age, ID and values
-*/
-function emit_values( list, min, max ){
-  for( var i = 0, L = list.length; i < L; i++ ){
-
-    if( list[ i ].values()[0] ){
-      var scalar = list[ i ].values()[0].scalar();
-
-      scalar = scalarToString( scalar );
-      var units  = " " + list[ i ].values()[0].units(),
-          age    = " -- " + scalarToString( patient.age ( new Date() )),
-          first  = " -- " + patient.json.first.substr( 1, 5 );
-      emit( scalar + units + age + first, 1 );
-    }
-  }
-}
-
-
-/**
-* Round a scalar (or int) and convert to string, otherwise string emit crashes
-*/
-function scalarToString( scalar ){
-  return Math.floor( scalar.toString() );
 }

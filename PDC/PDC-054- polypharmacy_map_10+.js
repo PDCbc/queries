@@ -21,13 +21,13 @@ function map( patient ){
   *   - medications are active
   */
   function checkNumerator(){
-    var medMin    = 10;
+    var medMin    = 10,
 
     // List of medications
-    var medList   = patient.medications();
+        medList   = patient.medications(),
 
     // Filters
-    var medActive = filter_activeMeds( medList );
+        medActive = filter_activeMeds( medList );
 
     return isMatch( medActive )&&( medMin <= medActive.length );
   }
@@ -38,10 +38,10 @@ function map( patient ){
   */
   var denominator = checkDenominator(),
       numerator   = denominator && checkNumerator(),
-      pid         = "_" + patient.json.primary_care_provider_id;
+      physicianID = "_" + patient.json.primary_care_provider_id;
 
-  emit( "denominator" + pid, denominator );
-  emit( "numerator"   + pid, numerator   );
+  emit( "denominator" + physicianID, denominator );
+  emit( "numerator"   + physicianID, numerator   );
 }
 
 
@@ -131,52 +131,4 @@ function isAge( ageMin, ageMax ) {
 
   ageNow = patient.age( new Date() );
   return ( ageMin <= ageNow && ageNow <= ageMax );
-}
-
-
-/*******************************************************************************
-* Debugging Functions                                                          *
-*   These are badly commented, non-optimized and intended for development.     *
-*******************************************************************************/
-
-
-/**
-* Substitute for filter_general() to troubleshoot values
-*/
-function emit_filter_general( list, codes, min, max ){
-  var filtered = list.match( codes );
-
-  if( typeof min === 'number' )
-    filtered = filter_values( filtered, min,( max || 1000000000 ));
-
-  emit_values( filtered, min, max );
-
-  return filtered;
-}
-
-
-/**
-* Used by emit_filter_...() functions to emit age, ID and values
-*/
-function emit_values( list, min, max ){
-  for( var i = 0, L = list.length; i < L; i++ ){
-
-    if( list[ i ].values()[0] ){
-      var scalar = list[ i ].values()[0].scalar();
-
-      scalar = scalarToString( scalar );
-      var units  = " " + list[ i ].values()[0].units(),
-          age    = " -- " + scalarToString( patient.age ( new Date() )),
-          first  = " -- " + patient.json.first.substr( 1, 5 );
-      emit( scalar + units + age + first, 1 );
-    }
-  }
-}
-
-
-/**
-* Round a scalar (or int) and convert to string, otherwise string emit crashes
-*/
-function scalarToString( scalar ){
-  return Math.floor( scalar.toString() );
 }

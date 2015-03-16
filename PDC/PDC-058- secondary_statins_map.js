@@ -11,10 +11,10 @@ function map( patient ){
   function checkDenominator(){
     // List of medications, codes for statins
     var medList  = patient.medications(),
-        medCodes ={ "whoATC" :[ "C10AA", "C10BX" ]};
+        medCodes ={ "whoATC" :[ "C10AA", "C10BX" ]},
 
     // Filters
-    var medications = filter_general( medList, medCodes );
+        medications = filter_general( medList, medCodes );
 
     return isMatch( medications );
   }
@@ -33,10 +33,10 @@ function map( patient ){
         conList  = patient.conditions(),
         conCodes ={ "ICD9":[ "410..*", "411..*", "412..*", "429.7",
                              "410",    "411",    "412",    "V17.1",
-                             "438",    "433.1",  "434.1",  "438..*" ]};
+                             "438",    "433.1",  "434.1",  "438..*" ]},
 
     // Filters
-    var medications = filter_activeMeds( medList ),
+        medications = filter_activeMeds( medList ),
         conditions  = filter_general( conList, conCodes );
 
     return isMatch( medications )&& isMatch( conditions );
@@ -50,10 +50,10 @@ function map( patient ){
   */
   var denominator = checkDenominator(),
       numerator   = denominator && checkNumerator(),
-      pid = "_" + patient.json.primary_care_provider_id;
+      physicianID = "_" + patient.json.primary_care_provider_id;
 
-  emit( "denominator" + pid, denominator );
-  emit( "numerator"   + pid, numerator   );
+  emit( "denominator" + physicianID, denominator );
+  emit( "numerator"   + physicianID, numerator   );
 }
 
 
@@ -143,52 +143,4 @@ function isAge( ageMin, ageMax ) {
 
   ageNow = patient.age( new Date() );
   return ( ageMin <= ageNow && ageNow <= ageMax );
-}
-
-
-/*******************************************************************************
-* Debugging Functions                                                          *
-*   These are badly commented, non-optimized and intended for development.     *
-*******************************************************************************/
-
-
-/**
-* Substitute for filter_general() to troubleshoot values
-*/
-function emit_filter_general( list, codes, min, max ){
-  var filtered = list.match( codes );
-
-  if( typeof min === 'number' )
-    filtered = filter_values( filtered, min,( max || 1000000000 ));
-
-  emit_values( filtered, min, max );
-
-  return filtered;
-}
-
-
-/**
-* Used by emit_filter_...() functions to emit age, ID and values
-*/
-function emit_values( list, min, max ){
-  for( var i = 0, L = list.length; i < L; i++ ){
-
-    if( list[ i ].values()[0] ){
-      var scalar = list[ i ].values()[0].scalar();
-
-      scalar = scalarToString( scalar );
-      var units  = " " + list[ i ].values()[0].units(),
-          age    = " -- " + scalarToString( patient.age ( new Date() )),
-          first  = " -- " + patient.json.first.substr( 1, 5 );
-      emit( scalar + units + age + first, 1 );
-    }
-  }
-}
-
-
-/**
-* Round a scalar (or int) and convert to string, otherwise string emit crashes
-*/
-function scalarToString( scalar ){
-  return Math.floor( scalar.toString() );
 }
