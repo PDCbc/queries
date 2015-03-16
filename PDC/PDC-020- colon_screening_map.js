@@ -113,8 +113,7 @@ function filter_general( list, codes, p1, p2, p3, p4 ){
 
   // If there are scalar values (min/max), then filter with them
   if( typeof min === 'number' ){
-    var min = min,
-        max = max || 1000000000;
+    max = max || 1000000000;
     filteredList = filter_values( filteredList, min, max );
   }
 
