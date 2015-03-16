@@ -5,10 +5,13 @@
 */
 function map( patient ){
   /**
-  * Denominator:
+  * Denominator
+  *
+  * Base criteria:
   *   - 50 to 74 years old
   */
   function checkDenominator(){
+    // Values
     var ageMin = 50,
         ageMax = 74;
 
@@ -17,7 +20,9 @@ function map( patient ){
 
 
   /**
-  * Numerator:
+  * Numerator
+  *
+  * Additional criteria:
   *   - have received a colon cancer screening (hemoccult test)
   *   --> tested in the last two years
   *   OR
@@ -27,6 +32,7 @@ function map( patient ){
   *   ----> in the last five years
   */
   function checkNumerator(){
+    // Values
     var now    = new Date(),
         back2y = new Date( now.getFullYear() - 2, now.getMonth(), now.getDate() ),
         back5y = new Date( now.getFullYear() - 5, now.getMonth(), now.getDate() ),

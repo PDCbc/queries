@@ -5,7 +5,9 @@
 */
 function map( patient ){
   /**
-  * Denominator:
+  * Denominator
+  *
+  * Base criteria:
   *   - <ageMin> to <ageMax> years old
   *   - has { "convention": ["code", ..., ""]} condition
   *   --> OR values <medMin> < <medication> < <medMax>
@@ -15,59 +17,161 @@ function map( patient ){
   var mapScope_$$$List;
 
   function checkDenominator(){
-    var ageMin = ##,
-        ageMax = ##,
-        valMin = ###,
-        valMax = ###,
-        ...
+    // Values
+    //   - ages and min/max values
+    var ageMin   = ##,
+        ageMax   = ##,
+        valMin   = ###,
+        valMax   = ###,
 
-    // Lists and codes
-        $$$List  = patient.$$$(),
-        ...
-        $$$Codes ={ "$$$" :[ "#####-#", ..., "#####-#" ]},
-        ...
+    // Dates
+    //   - subtract from now as Y, M, D
+    //   - change now with: Date( YYYY, MM, DD ),
+        now      = new Date(),
+        medStart = new Date( now.getFullYear() - ###, now.getMonth(), now.getDate() ),
+        resStart = new Date( now.getFullYear() - ###, now.getMonth(), now.getDate() ),
+        vitStart = new Date( now.getFullYear() - ###, now.getMonth(), now.getDate() ),
+
+    // Lists
+        conList  = patient.conditions(),
+        immList  = patient.immunizations(),
+        medList  = patient.medications(),
+        resList  = patient.results(),
+        vitList  = patient.vitalSigns(),
+
+    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+        conCodes ={ "ICD9"      :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ]},  // TERMS
+
+    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+        immCodes ={ "whoATC"    :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ],   // TERMS
+                    "SNOMED-CT" :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ]},  // TERMS
+
+    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+        medCodes ={ "whoATC"    :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ],   // TERMS
+                    "HC-DIN"    :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ]},  // TERMS
+
+    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+        resCodes ={ "pCLOCD"    :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ]},  // TERMS
+
+    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+        vitCodes ={ "LOINC"     :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ]},  // TERMS
 
     // Filters
-        $$$medications = filter_general( $$$List, $$$Codes, valMin, valMax );
-        ...
-        $$$conditions  = filter_general( $$$List, $$$Codes, valMin, valMax );
+    //   - start/end and min/max may be used in either paired order
+    //   - values may be ommitted (from right ) as necessary
+    conditions    = filter_general( conList, conCodes, minStart, maxEnd, startMin, endMax ),
+    immunizations = filter_general( immList, immCodes, minStart, maxEnd, startMin, endMax ),
+    medications   = filter_general( medList, medCodes, minStart, maxEnd, startMin, endMax ),
+    results       = filter_general( resList, resCodes, minStart, maxEnd, startMin, endMax ),
+    vitalSigns    = filter_general( vitList, vitCodes, minStart, maxEnd, startMin, endMax );
 
+    // Inclusion/exclusion
+    //   - isAge() and isMatch() are boolean (yes/no)
+    //   - use && (AND) and || (OR) with brackets (...)
     return isAge( ageMin, ageMax )  && / ||
-           isMatch( $$$medications )&& / ||
-           ...                      && / ||
-           isMatch( $$$conditions )
+           isMatch( conditions )    && / ||
+           isMatch( immunizations ) && / ||
+           isMatch( medications )   && / ||
+           isMatch( results )       && / ||
+           isMatch( vitalSigns );
   }
 
 
   /**
-  * Numerator:
+  * Numerator
+  *
+  * Additional criteria:
   *   - <ageMin> to <ageMax> years old
   *   - has { "convention": ["code", ..., ""]} condition
   *   --> OR values <medMin> < <medication> < <medMax>
   *   - medication is active (filter_medActive())
   */
   function checkNumerator(){
-    var ageMin = ##,
-        ageMax = ##,
-        valMin = ###,
-        valMax = ###,
-        ...
+    // Values
+    //   - ages and min/max values
+    var ageMin   = ##,
+        ageMax   = ##,
+        valMin   = ###,
+        valMax   = ###,
 
-    // Lists and codes
-        $$$List  = patient.$$$(),
-        ...
-        $$$Codes ={ "$$$" :[ "#####-#", ..., "#####-#" ]},
-        ...
+    // Dates
+    //   - subtract from now as Y, M, D
+    //   - change now with: Date( YYYY, MM, DD ),
+        now      = new Date(),
+        medStart = new Date( now.getFullYear() - ###, now.getMonth(), now.getDate() ),
+        resStart = new Date( now.getFullYear() - ###, now.getMonth(), now.getDate() ),
+        vitStart = new Date( now.getFullYear() - ###, now.getMonth(), now.getDate() ),
+
+    // Lists
+        conList  = patient.conditions(),
+        immList  = patient.immunizations(),
+        medList  = patient.medications(),
+        resList  = patient.results(),
+        vitList  = patient.vitalSigns(),
+
+    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+        conCodes ={ "ICD9"      :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ]},  // TERMS
+
+    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+        immCodes ={ "whoATC"    :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ],   // TERMS
+                    "SNOMED-CT" :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ]},  // TERMS
+
+    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+        medCodes ={ "whoATC"    :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ],   // TERMS
+                    "HC-DIN"    :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ]},  // TERMS
+
+    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+        resCodes ={ "pCLOCD"    :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ]},  // TERMS
+
+    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+        vitCodes ={ "LOINC"     :[ "#####",     // TERMS
+                                   "#####",     // TERMS
+                                   "#####" ]},  // TERMS
 
     // Filters
-        $$$medications = filter_general( $$$List, $$$Codes, valMin, valMax );
-        ...
-        $$$conditions  = filter_general( $$$List, $$$Codes, valMin, valMax );
+    //   - start/end and min/max may be used in either paired order
+    //   - values may be ommitted (from right ) as necessary
+    conditions    = filter_general( conList, conCodes, minStart, maxEnd, startMin, endMax ),
+    immunizations = filter_general( immList, immCodes, minStart, maxEnd, startMin, endMax ),
+    medications   = filter_general( medList, medCodes, minStart, maxEnd, startMin, endMax ),
+    results       = filter_general( resList, resCodes, minStart, maxEnd, startMin, endMax ),
+    vitalSigns    = filter_general( vitList, vitCodes, minStart, maxEnd, startMin, endMax );
 
+    // Inclusion/exclusion
+    //   - isAge() and isMatch() are boolean (yes/no)
+    //   - use && (AND) and || (OR) with brackets (...)
     return isAge( ageMin, ageMax )  && / ||
-           isMatch( $$$medications )&& / ||
-           ...                      && / ||
-           isMatch( $$$conditions )
+           isMatch( conditions )    && / ||
+           isMatch( immunizations ) && / ||
+           isMatch( medications )   && / ||
+           isMatch( results )       && / ||
+           isMatch( vitalSigns );
   }
 
 
