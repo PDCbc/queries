@@ -90,21 +90,39 @@ function map( patient ){
 *   These should be the same for all queries.  Copy a fresh set on every edit! *
 *******************************************************************************/
 
-### These will eventually be moved to a common library! ###
 
 /**
 * Filters a list of lab results:
 *   - lab, medication and condition codes (e.g. pCLOCD, whoATC, HC-DIN)
 *   - minimum and maximum values
 *   --> exclusive range, boundary cases are excluded
+*   - start and end dates
 */
-function filter_general( list, codes, min, max ){
-  // Use API's .match() to filter with codes
-  var filteredList = list.match( codes );
+function filter_general( list, codes, p1, p2, p3, p4 ){
+  // Default variables = undefined
+  var min, max, start, end;
 
-  // If there are values, then filter with them
+  // Check parameters, which can be dates or scalars (numbers)
+  if( p1 instanceof Date ){
+    start = p1;
+    end   = p2;
+    min   = p3;
+    max   = p4;
+  }
+  else {
+    min   = p1;
+    max   = p2;
+    start = p3;
+    end   = p4;
+  }
+
+  // Check parameters, which can be dates or scalars (numbers)
+  var filteredList = list.match( codes, start, end );
+
+  // If there are scalar values (min/max), then filter with them
   if( typeof min === 'number' ){
-    max = max ||  1000000000;
+    // Default value
+    max = max || 1000000000;
     filteredList = filter_values( filteredList, min, max );
   }
 
@@ -138,7 +156,7 @@ function filter_activeMeds( matches ){
 *   --> exclusive range, boundary cases are excluded
 */
 function filter_values( list, min, max ){
-  // Default values
+  // Default value
   max = max || 1000000000;
 
   var toReturn = new hQuery.CodedEntryList();
@@ -180,7 +198,6 @@ function isAge( ageMin, ageMax ) {
 *   These are badly commented, non-optimized and intended for development.     *
 *******************************************************************************/
 
-### These should be removed from completed queries! ###
 
 /**
 * Substitute for filter_general() to troubleshoot values
@@ -198,7 +215,7 @@ function emit_filter_general( list, codes, min, max ){
 
 
 /**
-* Used by emit_filter_...() functions to emit age, ID and values
+* Used by emit_filter_general() to emit age, ID and values
 */
 function emit_values( list, min, max ){
   for( var i = 0, L = list.length; i < L; i++ ){

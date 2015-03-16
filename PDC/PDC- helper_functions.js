@@ -29,16 +29,15 @@ function filter_general( list, codes, p1, p2, p3, p4 ){
     end   = p4;
   }
 
-  // Use API's .match() to filter with codes and dates (if they exist)
+  // Check parameters, which can be dates or scalars (numbers)
   var filteredList = list.match( codes, start, end );
 
   // If there are scalar values (min/max), then filter with them
   if( typeof min === 'number' ){
+    // Default value
     max = max || 1000000000;
     filteredList = filter_values( filteredList, min, max );
   }
-
-  filteredList = new hQuery.CodedEntryList();
 
   return filteredList;
 }
@@ -70,7 +69,7 @@ function filter_activeMeds( matches ){
 *   --> exclusive range, boundary cases are excluded
 */
 function filter_values( list, min, max ){
-  // Default values
+  // Default value
   max = max || 1000000000;
 
   var toReturn = new hQuery.CodedEntryList();
@@ -129,7 +128,7 @@ function emit_filter_general( list, codes, min, max ){
 
 
 /**
-* Used by emit_filter_...() functions to emit age, ID and values
+* Used by emit_filter_general() to emit age, ID and values
 */
 function emit_values( list, min, max ){
   for( var i = 0, L = list.length; i < L; i++ ){

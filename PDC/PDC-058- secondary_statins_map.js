@@ -68,14 +68,33 @@ function map( patient ){
 *   - lab, medication and condition codes (e.g. pCLOCD, whoATC, HC-DIN)
 *   - minimum and maximum values
 *   --> exclusive range, boundary cases are excluded
+*   - start and end dates
 */
-function filter_general( list, codes, min, max ){
-  // Use API's .match() to filter with codes
-  var filteredList = list.match( codes );
+function filter_general( list, codes, p1, p2, p3, p4 ){
+  // Default variables = undefined
+  var min, max, start, end;
 
-  // If there are values, then filter with them
+  // Check parameters, which can be dates or scalars (numbers)
+  if( p1 instanceof Date ){
+    start = p1;
+    end   = p2;
+    min   = p3;
+    max   = p4;
+  }
+  else {
+    min   = p1;
+    max   = p2;
+    start = p3;
+    end   = p4;
+  }
+
+  // Check parameters, which can be dates or scalars (numbers)
+  var filteredList = list.match( codes, start, end );
+
+  // If there are scalar values (min/max), then filter with them
   if( typeof min === 'number' ){
-    max = max ||  1000000000;
+    // Default value
+    max = max || 1000000000;
     filteredList = filter_values( filteredList, min, max );
   }
 
@@ -109,7 +128,7 @@ function filter_activeMeds( matches ){
 *   --> exclusive range, boundary cases are excluded
 */
 function filter_values( list, min, max ){
-  // Default values
+  // Default value
   max = max || 1000000000;
 
   var toReturn = new hQuery.CodedEntryList();
