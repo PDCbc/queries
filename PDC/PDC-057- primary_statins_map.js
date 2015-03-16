@@ -31,7 +31,7 @@ function map( patient ){
   *   - have not had an acute myocardial infarction (AMI, heart attack)
   */
   function checkNumerator(){
-    // Denominator's list of medications, list of conditions, conditionn codes
+    // Denominator's list of medications, list of conditions, condition codes
     var medList  = mapScope_medications,
         conList  = patient.conditions(),
         conCodes ={ "ICD9":[ "410..*", "411..*", "412..*", "429.7",
