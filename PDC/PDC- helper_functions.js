@@ -31,7 +31,7 @@ function filter_general( list, codes, p1, p2, p3, p4 ){
 
   // Use API's match functions to filter based on codes and dates
   //   - Immunizations, medications and results use an exact code match
-  //   - Conditions use a regex match, so make sure to preface with '\\b'!
+  //   - Conditions use a regex match, so make sure to preface with '^'!
   if(( list[0] )&&( list[0].json._type === 'Condition' ))
     filteredList = list.regex_match( codes, start, end );
   else

@@ -11,11 +11,12 @@ function map( patient ){
   *   - diagnosed with diabetes
   */
   function checkDenominator(){
-    // Lists
+    // Coded entry lists
     var conList       = patient.conditions(),
 
-    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
-        conCodes      ={ "ICD9"      :[ "^250" ]},  // TERMS
+    // Medical codes
+        // http://www.cms.gov/medicare-coverage-database/staticpages/icd-9-code-lookup.aspx?KeyWord=diabetes
+        conCodes      ={ "ICD9"      :[ "^250" ]},  // Diabetes, types 1 and 2
 
     // Filters
         conditions    = filter_general( conList, conCodes );
@@ -30,13 +31,18 @@ function map( patient ){
   *
   * Additional criteria:
   *   - HGBA1C recorded
-  *   ---> in last six months
+  *   ---> in last year
+  *   ---> HGBA1C >= 7 (used 6.999, since min/max is exclusive)
   */
   function checkNumerator(){
+    // Values
+    //   - value ranges are EXCLUSIVE, edge cases are NOT counted
+    var resMin   = 6.999,
+
     // Dates
     //   - end:   () for current date, otherwise ( YYYY, MM, DD )
     //   - start: subtract from end as Y, M, D
-    var end      = new Date(),
+        end      = new Date(),
         resStart = new Date( end.getFullYear(), end.getMonth() - 6, end.getDate() ),
 
     // Lists
@@ -56,7 +62,7 @@ function map( patient ){
                                                  // http://search.loinc.org/search.zul?query=hemoglobin+a1c
 
     // Filters
-        results       = filter_general( resList, resCodes, resStart );
+        results       = filter_general( resList, resCodes, resStart, resMin );
 
     // Inclusion/exclusion
     return isMatch( results );

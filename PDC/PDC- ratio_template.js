@@ -7,7 +7,11 @@ function map( patient ){
   // Coded entry lists declared here can be used for denominator and numerator
   //   - pass filtered lists, less overhead than unfiltered (longer) lists
   //   - not usually necessary
-  var mapScope_< con / imm / med / res / vit >List;
+  var mapScope_conList,
+      mapScope_immList,
+      mapScope_medList,
+      mapScope_resList,
+      mapScope_vitList,
 
 
   /**
@@ -20,7 +24,7 @@ function map( patient ){
   *   - medication is active (filter_medActive())
   */
   function checkDenominator(){
-    // Values
+    // Ages
     //   - age ranges are INCLUSIVE, edge cases are counted
     var ageMin   = ##,
         ageMax   = ##,
@@ -43,7 +47,7 @@ function map( patient ){
         vitStart = new Date( end.getFullYear() - ###, end.getMonth(), end.getDate() ),
 
     // Coded entry lists
-    //   - Note: Conditions used a regex match.  Preface codes with '\\b'
+    //   - Note: Conditions used a regex match.  Preface codes with '^'!
         conList  = patient.conditions(),
         immList  = patient.immunizations(),
         medList  = patient.medications(),
@@ -51,36 +55,36 @@ function map( patient ){
         vitList  = patient.vitalSigns(),
 
     // Medical codes
+        // http://www.cms.gov/medicare-coverage-database/staticpages/icd-9-code-lookup.aspx
         conCodes ={ "ICD9"      :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
-                                   // http://search.loinc.org/search.zul?query=SEARCH+TERMS
 
+        // http://search.loinc.org
         immCodes ={ "whoATC"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ],   // TERMS
                     "SNOMED-CT" :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
-                                   // http://search.loinc.org/search.zul?query=SEARCH+TERMS
 
+        // http://search.loinc.org
         medCodes ={ "whoATC"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ],   // TERMS
                     "HC-DIN"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
-                                   // http://search.loinc.org/search.zul?query=SEARCH+TERMS
 
+        // http://search.loinc.org
         resCodes ={ "pCLOCD"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
-                                   // http://search.loinc.org/search.zul?query=SEARCH+TERMS
 
+        // http://search.loinc.org
         vitCodes ={ "LOINC"     :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
-                                   // http://search.loinc.org/search.zul?query=SEARCH+TERMS
 
     // Filters
     //   - start/end and min/max may be used in either paired order
@@ -113,34 +117,43 @@ function map( patient ){
   *   - medication is active (filter_medActive())
   */
   function checkNumerator(){
-    // Values
-    //   - ages and min/max values
+    // Ages
+    //   - age ranges are INCLUSIVE, edge cases are counted
     var ageMin   = ##,
         ageMax   = ##,
-        valMin   = ###,
-        valMax   = ###,
+
+    // Values
+    //   - value ranges are EXCLUSIVE, edge cases are NOT counted
+        resMin   = ###,
+        resMax   = ###,
+        medMin   = ###,
+        medMax   = ###,
+        vitMin   = ###,
+        vitMax   = ###,
 
     // Dates
-    //   - subtract from end as Y, M, D
-    //   - change end with: Date( YYYY, MM, DD ),
+    //   - end:   () for current date, otherwise ( YYYY, MM, DD )
+    //   - start: subtract from end as Y, M, D
         end      = new Date(),
         medStart = new Date( end.getFullYear() - ###, end.getMonth(), end.getDate() ),
         resStart = new Date( end.getFullYear() - ###, end.getMonth(), end.getDate() ),
         vitStart = new Date( end.getFullYear() - ###, end.getMonth(), end.getDate() ),
 
-    // Lists
+    // Coded entry lists
+    //   - Note: Conditions used a regex match.  Preface codes with '^'!
         conList  = patient.conditions(),
         immList  = patient.immunizations(),
         medList  = patient.medications(),
         resList  = patient.results(),
         vitList  = patient.vitalSigns(),
 
-    // http://search.loinc.org/search.zul?query=SEARCH+TERMS
+    // Medical codes
+        // http://www.cms.gov/medicare-coverage-database/staticpages/icd-9-code-lookup.aspx
         conCodes ={ "ICD9"      :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
 
-    // http://search.loinc.org/search.zul?query=SEARCH+TERMS
+        // http://search.loinc.org
         immCodes ={ "whoATC"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ],   // TERMS
@@ -148,7 +161,7 @@ function map( patient ){
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
 
-    // http://search.loinc.org/search.zul?query=SEARCH+TERMS
+        // http://search.loinc.org
         medCodes ={ "whoATC"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ],   // TERMS
@@ -156,24 +169,23 @@ function map( patient ){
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
 
-    // http://search.loinc.org/search.zul?query=SEARCH+TERMS
+        // http://search.loinc.org
         resCodes ={ "pCLOCD"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
 
-    // http://search.loinc.org/search.zul?query=SEARCH+TERMS
+        // http://search.loinc.org
         vitCodes ={ "LOINC"     :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
-
     // Filters
     //   - start/end and min/max may be used in either paired order
     //   - values may be ommitted (from right ) as necessary
-    conditions    = filter_general( conList, conCodes, minStart, maxEnd, startMin, endMax ),
-    immunizations = filter_general( immList, immCodes, minStart, maxEnd, startMin, endMax ),
-    medications   = filter_general( medList, medCodes, minStart, maxEnd, startMin, endMax ),
-    results       = filter_general( resList, resCodes, minStart, maxEnd, startMin, endMax ),
-    vitalSigns    = filter_general( vitList, vitCodes, minStart, maxEnd, startMin, endMax );
+    conditions    = filter_general( conList, conCodes, conStart, conEnd, conMin, conMax ),
+    immunizations = filter_general( immList, immCodes, immStart, immEnd, immMin, immMax ),
+    medications   = filter_general( medList, medCodes, medStart, medEnd, medMin, medMax ),
+    results       = filter_general( resList, resCodes, resStart, resEnd, resMin, resMax ),
+    vitalSigns    = filter_general( vitList, vitCodes, vitStart, vitEnd, vitMin, vitMax );
 
     // Inclusion/exclusion
     //   - isAge() and isMatch() are boolean (yes/no)
