@@ -13,7 +13,7 @@
 */
 function filter_general( list, codes, p1, p2, p3, p4 ){
   // Default variables = undefined
-  var min, max, start, end;
+  var min, max, start, end, filteredList;
 
   // Check parameters, which can be dates or scalars (numbers)
   if( p1 instanceof Date ){
@@ -29,8 +29,13 @@ function filter_general( list, codes, p1, p2, p3, p4 ){
     end   = p4;
   }
 
-  // Check parameters, which can be dates or scalars (numbers)
-  var filteredList = list.match( codes, start, end );
+  // Use API's match functions to filter based on codes and dates
+  //   - Immunizations, medications and results use an exact code match
+  //   - Conditions use a regex match, so make sure to preface with '\\b'!
+  if(( list[0] )&&( list[0].json._type === 'Condition' ))
+    filteredList = list.regex_match( codes, start, end );
+  else
+    filteredList = list.match( codes, start, end );
 
   // If there are scalar values (min/max), then filter with them
   if( typeof min === 'number' ){
@@ -51,7 +56,7 @@ function filter_activeMeds( matches ){
   var now      = new Date(),
       toReturn = new hQuery.CodedEntryList();
 
-  for( var i = 0, l = matches.length; i < l; i++ ){
+  for( var i = 0, L = matches.length; i < L; i++ ){
     var drug  = matches[ i ],
         start = drug.indicateMedicationStart().getTime(),
         pad   =( drug.indicateMedicationStop().getTime() - start )* 1.2,

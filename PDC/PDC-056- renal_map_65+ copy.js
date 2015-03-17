@@ -82,7 +82,7 @@ function map( patient ){
 */
 function filter_general( list, codes, p1, p2, p3, p4 ){
   // Default variables = undefined
-  var min, max, start, end, filteredList;
+  var min, max, start, end;
 
   // Check parameters, which can be dates or scalars (numbers)
   if( p1 instanceof Date ){
@@ -98,13 +98,8 @@ function filter_general( list, codes, p1, p2, p3, p4 ){
     end   = p4;
   }
 
-  // Use API's match functions to filter based on codes and dates
-  //   - Immunizations, medications and results use an exact code match
-  //   - Conditions use a regex match, so make sure to preface with '\\b'!
-  if(( list[0] )&&( list[0].json._type === 'Condition' ))
-    filteredList = list.regex_match( codes, start, end );
-  else
-    filteredList = list.match( codes, start, end );
+  // Check parameters, which can be dates or scalars (numbers)
+  var filteredList = list.match( codes, start, end );
 
   // If there are scalar values (min/max), then filter with them
   if( typeof min === 'number' ){
@@ -115,7 +110,6 @@ function filter_general( list, codes, p1, p2, p3, p4 ){
 
   return filteredList;
 }
-
 
 
 /**

@@ -13,7 +13,8 @@ function map( patient ){
   function checkDenominator(){
     // Values
     var ageMin = 45;
-
+    
+    // Inclusion/exclusion
     return isAge( ageMin );
   }
 
@@ -30,11 +31,11 @@ function map( patient ){
     var end   = new Date(),
         start = new Date( end.getFullYear() - 3, end.getMonth(), end.getDate() ),
 
-      // Lists and codes
+      // Coded entry lists
         resList  = patient.results(),
 
-      // http://search.loinc.org/search.zul?query=fasting+glucose
-        resCodes ={ "pCLOCD":[ "1493-6",    // Glucose [Mass/​volume] in Serum or Plasma --1.5 hours post 0.05-0.15 U insulin/​kg IV 12 hours fasting
+      // Medical codes
+        resCodes ={ "pCLOCD":[ "1493-6",     // Glucose [Mass/​volume] in Serum or Plasma --1.5 hours post 0.05-0.15 U insulin/​kg IV 12 hours fasting
                                "1500-8",     // Glucose [Mass/​volume] in Serum or Plasma --1 hour post 0.05-0.15 U insulin/​kg IV post 12H CFst
                                "1554-5",     // Glucose [Mass/​volume] in Serum or Plasma --12 hours fasting
                                "1550-3",     // Glucose [Mass/​volume] in Serum or Plasma --pre 12 hour fast
@@ -51,10 +52,12 @@ function map( patient ){
                                "17865-7",    // Glucose [Mass/​volume] in Serum or Plasma --8 hours fasting
                                "41604-0",    // Fasting glucose [Mass/​volume] in Capillary blood by Glucometer
                                "63382-6" ]}, // Fasting glucose [Mass/​volume] in Urine
+                                             // http://search.loinc.org/search.zul?query=fasting+glucose
 
     // Filters
       results = filter_general( resList, resCodes, start, end );
 
+    // Inclusion/exclusion
     return isMatch( results );
   }
 

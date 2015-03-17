@@ -1,9 +1,15 @@
 /**
 * Query Title: PDC-###
 * Query Type:  Ratio
-* Description: $$$ ...
+* Description: Numerator-y words / denominator-y words
 */
 function map( patient ){
+  // Coded entry lists declared here can be used for denominator and numerator
+  //   - pass filtered lists, less overhead than unfiltered (longer) lists
+  //   - not usually necessary
+  var mapScope_< con / imm / med / res / vit >List;
+
+
   /**
   * Denominator
   *
@@ -13,71 +19,77 @@ function map( patient ){
   *   --> OR values <medMin> < <medication> < <medMax>
   *   - medication is active (filter_medActive())
   */
-  // Declare shared variables within the scope for map()
-  var mapScope_$$$List;
-
   function checkDenominator(){
     // Values
-    //   - ages and min/max values
+    //   - age ranges are INCLUSIVE, edge cases are counted
     var ageMin   = ##,
         ageMax   = ##,
-        valMin   = ###,
-        valMax   = ###,
+
+    // Values
+    //   - value ranges are EXCLUSIVE, edge cases are NOT counted
+        resMin   = ###,
+        resMax   = ###,
+        medMin   = ###,
+        medMax   = ###,
+        vitMin   = ###,
+        vitMax   = ###,
 
     // Dates
-    //   - subtract from now as Y, M, D
-    //   - change now with: Date( YYYY, MM, DD ),
-        now      = new Date(),
-        medStart = new Date( now.getFullYear() - ###, now.getMonth(), now.getDate() ),
-        resStart = new Date( now.getFullYear() - ###, now.getMonth(), now.getDate() ),
-        vitStart = new Date( now.getFullYear() - ###, now.getMonth(), now.getDate() ),
+    //   - end:   () for current date, otherwise ( YYYY, MM, DD )
+    //   - start: subtract from end as Y, M, D
+        end      = new Date(),
+        medStart = new Date( end.getFullYear() - ###, end.getMonth(), end.getDate() ),
+        resStart = new Date( end.getFullYear() - ###, end.getMonth(), end.getDate() ),
+        vitStart = new Date( end.getFullYear() - ###, end.getMonth(), end.getDate() ),
 
-    // Lists
+    // Coded entry lists
+    //   - Note: Conditions used a regex match.  Preface codes with '\\b'
         conList  = patient.conditions(),
         immList  = patient.immunizations(),
         medList  = patient.medications(),
         resList  = patient.results(),
         vitList  = patient.vitalSigns(),
 
-    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+    // Medical codes
         conCodes ={ "ICD9"      :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
+                                   // http://search.loinc.org/search.zul?query=SEARCH+TERMS
 
-    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
         immCodes ={ "whoATC"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ],   // TERMS
                     "SNOMED-CT" :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
+                                   // http://search.loinc.org/search.zul?query=SEARCH+TERMS
 
-    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
         medCodes ={ "whoATC"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ],   // TERMS
                     "HC-DIN"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
+                                   // http://search.loinc.org/search.zul?query=SEARCH+TERMS
 
-    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
         resCodes ={ "pCLOCD"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
+                                   // http://search.loinc.org/search.zul?query=SEARCH+TERMS
 
-    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
         vitCodes ={ "LOINC"     :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
+                                   // http://search.loinc.org/search.zul?query=SEARCH+TERMS
 
     // Filters
     //   - start/end and min/max may be used in either paired order
     //   - values may be ommitted (from right ) as necessary
-    conditions    = filter_general( conList, conCodes, minStart, maxEnd, startMin, endMax ),
-    immunizations = filter_general( immList, immCodes, minStart, maxEnd, startMin, endMax ),
-    medications   = filter_general( medList, medCodes, minStart, maxEnd, startMin, endMax ),
-    results       = filter_general( resList, resCodes, minStart, maxEnd, startMin, endMax ),
-    vitalSigns    = filter_general( vitList, vitCodes, minStart, maxEnd, startMin, endMax );
+    conditions    = filter_general( conList, conCodes, conStart, conEnd, conMin, conMax ),
+    immunizations = filter_general( immList, immCodes, immStart, immEnd, immMin, immMax ),
+    medications   = filter_general( medList, medCodes, medStart, medEnd, medMin, medMax ),
+    results       = filter_general( resList, resCodes, resStart, resEnd, resMin, resMax ),
+    vitalSigns    = filter_general( vitList, vitCodes, vitStart, vitEnd, vitMin, vitMax );
 
     // Inclusion/exclusion
     //   - isAge() and isMatch() are boolean (yes/no)
@@ -109,12 +121,12 @@ function map( patient ){
         valMax   = ###,
 
     // Dates
-    //   - subtract from now as Y, M, D
-    //   - change now with: Date( YYYY, MM, DD ),
-        now      = new Date(),
-        medStart = new Date( now.getFullYear() - ###, now.getMonth(), now.getDate() ),
-        resStart = new Date( now.getFullYear() - ###, now.getMonth(), now.getDate() ),
-        vitStart = new Date( now.getFullYear() - ###, now.getMonth(), now.getDate() ),
+    //   - subtract from end as Y, M, D
+    //   - change end with: Date( YYYY, MM, DD ),
+        end      = new Date(),
+        medStart = new Date( end.getFullYear() - ###, end.getMonth(), end.getDate() ),
+        resStart = new Date( end.getFullYear() - ###, end.getMonth(), end.getDate() ),
+        vitStart = new Date( end.getFullYear() - ###, end.getMonth(), end.getDate() ),
 
     // Lists
         conList  = patient.conditions(),
@@ -123,12 +135,12 @@ function map( patient ){
         resList  = patient.results(),
         vitList  = patient.vitalSigns(),
 
-    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+    // http://search.loinc.org/search.zul?query=SEARCH+TERMS
         conCodes ={ "ICD9"      :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
 
-    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+    // http://search.loinc.org/search.zul?query=SEARCH+TERMS
         immCodes ={ "whoATC"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ],   // TERMS
@@ -136,7 +148,7 @@ function map( patient ){
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
 
-    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+    // http://search.loinc.org/search.zul?query=SEARCH+TERMS
         medCodes ={ "whoATC"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ],   // TERMS
@@ -144,12 +156,12 @@ function map( patient ){
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
 
-    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+    // http://search.loinc.org/search.zul?query=SEARCH+TERMS
         resCodes ={ "pCLOCD"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
 
-    // http://search.loinc.org/search.zul?query=thing+stuff (<= search terms)
+    // http://search.loinc.org/search.zul?query=SEARCH+TERMS
         vitCodes ={ "LOINC"     :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
@@ -204,7 +216,7 @@ function map( patient ){
 */
 function filter_general( list, codes, p1, p2, p3, p4 ){
   // Default variables = undefined
-  var min, max, start, end;
+  var min, max, start, end, filteredList;
 
   // Check parameters, which can be dates or scalars (numbers)
   if( p1 instanceof Date ){
@@ -220,8 +232,13 @@ function filter_general( list, codes, p1, p2, p3, p4 ){
     end   = p4;
   }
 
-  // Check parameters, which can be dates or scalars (numbers)
-  var filteredList = list.match( codes, start, end );
+  // Use API's match functions to filter based on codes and dates
+  //   - Immunizations, medications and results use an exact code match
+  //   - Conditions use a regex match, so make sure to preface with '\\b'!
+  if(( list[0] )&&( list[0].json._type === 'Condition' ))
+    filteredList = list.regex_match( codes, start, end );
+  else
+    filteredList = list.match( codes, start, end );
 
   // If there are scalar values (min/max), then filter with them
   if( typeof min === 'number' ){
@@ -233,7 +250,6 @@ function filter_general( list, codes, p1, p2, p3, p4 ){
   return filteredList;
 }
 
-
 /**
 * Filters a list of medications:
 *   - active status only (20% pad on time interval)
@@ -242,7 +258,7 @@ function filter_activeMeds( matches ){
   var now      = new Date(),
       toReturn = new hQuery.CodedEntryList();
 
-  for( var i = 0, l = matches.length; i < l; i++ ){
+  for( var i = 0, L = matches.length; i < L; i++ ){
     var drug  = matches[ i ],
         start = drug.indicateMedicationStart().getTime(),
         pad   =( drug.indicateMedicationStop().getTime() - start )* 1.2,
