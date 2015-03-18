@@ -14,9 +14,9 @@ function map( patient ){
     // Coded entry lists
     var conList       = patient.conditions(),
 
-    // Medical codes
+    // Medical codes - http://www.cms.gov/medicare-coverage-database/staticpages/icd-9-code-lookup.aspx?KeyWord=diabetes
         conCodes      ={ "ICD9"      :[ "^250" ]},  // Diabetes, types 1 and 2
-                                                    // http://www.cms.gov/medicare-coverage-database/staticpages/icd-9-code-lookup.aspx?KeyWord=diabetes
+
     // Filters
         conditions    = filter_general( conList, conCodes );
 
