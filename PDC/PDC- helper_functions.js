@@ -27,6 +27,9 @@ function filter_general( list, codes, p3, p4, p5, p6 ){
     min   = p5;
     max   = p6;
   }
+  else if(( p3 instanceof Date )&&(! p4 )){
+    start = p3;
+  }
   else if(( p3 instanceof Date )&&( typeof p4 === 'number' )){
     start = p3;
     min   = p4;
@@ -37,6 +40,9 @@ function filter_general( list, codes, p3, p4, p5, p6 ){
     max   = p4;
     start = p5;
     end   = p6;
+  }
+  else if(( typeof p3 === 'number' )&&(! p4 )){
+    min   = p3;
   }
   else if(( typeof p3 === 'number' )&&( p4 instanceof Date )){
     min   = p3;
