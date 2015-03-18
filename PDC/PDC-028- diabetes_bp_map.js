@@ -38,9 +38,9 @@ function map( patient ){
   function checkNumerator(){
     // Values
     var vitMin_S = 0,
-        vitMax_S = 150.001,
+        vitMax_S = 130.001,
         vitMin_D = 0,
-        vitMax_D = 90.001,
+        vitMax_D = 80.001,
 
     // Dates
         end      = new Date(),

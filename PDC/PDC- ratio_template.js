@@ -19,8 +19,9 @@ function map( patient ){
   *
   * Base criteria:
   *   - <ageMin> to <ageMax> years old
-  *   - has { "convention": ["code", ..., ""]} condition
-  *   --> OR values <medMin> < <medication> < <medMax>
+  *   - has { "convention": ["code", ..., ""]} condition, in last 1000000 years
+  *   OR
+  *   - values <medMin> < <medication> < <medMax>, in last 3 days
   *   - medication is active (filter_medActive())
   */
   function checkDenominator(){
@@ -112,8 +113,9 @@ function map( patient ){
   *
   * Additional criteria:
   *   - <ageMin> to <ageMax> years old
-  *   - has { "convention": ["code", ..., ""]} condition
-  *   --> OR values <medMin> < <medication> < <medMax>
+  *   - has { "convention": ["code", ..., ""]} condition, in last 1000000 years
+  *   OR
+  *   - values <medMin> < <medication> < <medMax>, in last 3 days
   *   - medication is active (filter_medActive())
   */
   function checkNumerator(){
