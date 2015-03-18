@@ -12,7 +12,7 @@
 *   - parameters 3 - 6: dates or values, keep low/high pairs together
 *     - minimum and maximum values
 *     - start and end dates
-*     --> inclusive ranges, boundary cases are counted
+*     --> inclusive range, boundary cases are counted
 *     - null/undefined/unsubmitted values are ignored
 */
 function filter_general( list, codes, p3, p4, p5, p6 ){

@@ -79,9 +79,8 @@ function map( patient ){
 *     - LOINC, pCLOCD, whoATC, SNOMED-CT, whoATC
 *   - parameters 3 - 6: dates or values, keep low/high pairs together
 *     - minimum and maximum values
-*     --> exclusive range, boundary cases are omitted
 *     - start and end dates
-*     --> inclusive range, boundary cases are counted
+*     --> inclusive ranges, boundary cases are counted
 *     - null/undefined/unsubmitted values are ignored
 */
 function filter_general( list, codes, p3, p4, p5, p6 ){
@@ -161,7 +160,7 @@ function filter_activeMeds( matches ){
 
 /**
 * Used by filter_general() and filter_general()
-*   - exclusive range, boundary cases are omitted
+*   - inclusive range, boundary cases are counted
 */
 function filter_values( list, min, max ){
   // Default value
@@ -174,7 +173,7 @@ function filter_values( list, min, max ){
     var entry  = list[ i ],
         scalar = entry.values()[0].scalar();
 
-    if( min < scalar && scalar < max )
+    if( min <= scalar && scalar <= max )
       toReturn.push( entry );
   }
   return toReturn;

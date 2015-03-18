@@ -64,32 +64,58 @@ function map( patient ){
 
 
 /**
-* Filters a list of lab results:
-*   - lab, medication and condition codes (e.g. pCLOCD, whoATC, HC-DIN)
-*   - minimum and maximum values
-*   --> exclusive range, boundary cases are excluded
-*   - start and end dates
+* Filters a coded entry list:
+*   - parameters 1 & 2: list, codes
+*     - conditions(), immunizations(), medications(), results() or vitalSigns()
+*     - LOINC, pCLOCD, whoATC, SNOMED-CT, whoATC
+*   - parameters 3 - 6: dates or values, keep low/high pairs together
+*     - minimum and maximum values
+*     - start and end dates
+*     --> inclusive ranges, boundary cases are counted
+*     - null/undefined/unsubmitted values are ignored
 */
-function filter_general( list, codes, p1, p2, p3, p4 ){
+function filter_general( list, codes, p3, p4, p5, p6 ){
   // Default variables = undefined
-  var min, max, start, end;
+  var min, max, start, end, filteredList;
 
-  // Check parameters, which can be dates or scalars (numbers)
-  if( p1 instanceof Date ){
-    start = p1;
-    end   = p2;
-    min   = p3;
-    max   = p4;
-  }
-  else {
-    min   = p1;
-    max   = p2;
+  // Check parameters, which can be dates or number values (scalars)
+  if(( p3 instanceof Date )&&( p4 instanceof Date )){
     start = p3;
     end   = p4;
+    min   = p5;
+    max   = p6;
+  }
+  else if(( p3 instanceof Date )&&(! p4 )){
+    start = p3;
+  }
+  else if(( p3 instanceof Date )&&( typeof p4 === 'number' )){
+    start = p3;
+    min   = p4;
+    max   = p5;
+  }
+  else if(( typeof p3 === 'number' )&&( typeof p4 === 'number' )){
+    min   = p3;
+    max   = p4;
+    start = p5;
+    end   = p6;
+  }
+  else if(( typeof p3 === 'number' )&&(! p4 )){
+    min   = p3;
+  }
+  else if(( typeof p3 === 'number' )&&( p4 instanceof Date )){
+    min   = p3;
+    start = p4;
+    end   = p5;
   }
 
-  // Check parameters, which can be dates or scalars (numbers)
-  var filteredList = list.match( codes, start, end );
+  // Use API's match functions to filter based on codes and dates
+  //   - Immunizations, medications and results use an exact code match
+  //   - Conditions use a regex match, so make sure to preface with '^'!
+  //   - undefined / null values are ignored
+  if(( list[0] )&&( list[0].json._type === 'Condition' ))
+    filteredList = list.regex_match( codes, start, end );
+  else
+    filteredList = list.match( codes, start, end );
 
   // If there are scalar values (min/max), then filter with them
   if( typeof min === 'number' ){
@@ -110,7 +136,7 @@ function filter_activeMeds( matches ){
   var now      = new Date(),
       toReturn = new hQuery.CodedEntryList();
 
-  for( var i = 0, l = matches.length; i < l; i++ ){
+  for( var i = 0, L = matches.length; i < L; i++ ){
     var drug  = matches[ i ],
         start = drug.indicateMedicationStart().getTime(),
         pad   =( drug.indicateMedicationStop().getTime() - start )* 1.2,
@@ -125,7 +151,7 @@ function filter_activeMeds( matches ){
 
 /**
 * Used by filter_general() and filter_general()
-*   --> exclusive range, boundary cases are excluded
+*   - inclusive range, boundary cases are counted
 */
 function filter_values( list, min, max ){
   // Default value
@@ -138,7 +164,7 @@ function filter_values( list, min, max ){
     var entry  = list[ i ],
         scalar = entry.values()[0].scalar();
 
-    if( min < scalar && scalar < max )
+    if( min <= scalar && scalar <= max )
       toReturn.push( entry );
   }
   return toReturn;
@@ -155,6 +181,7 @@ function isMatch( list ) {
 
 /**
 * T/F: Does the patient fall in this age range?
+*   - inclusive range, boundary cases are counted
 */
 function isAge( ageMin, ageMax ) {
   // Default values
@@ -162,4 +189,52 @@ function isAge( ageMin, ageMax ) {
 
   ageNow = patient.age( new Date() );
   return ( ageMin <= ageNow && ageNow <= ageMax );
+}
+
+
+/*******************************************************************************
+* Debugging Functions                                                          *
+*   These are badly commented, non-optimized and intended for development.     *
+*******************************************************************************/
+
+
+/**
+* Substitute for filter_general() to troubleshoot values
+*/
+function emit_filter_general( list, codes, min, max ){
+  var filtered = list.match( codes );
+
+  if( typeof min === 'number' )
+    filtered = filter_values( filtered, min,( max || 1000000000 ));
+
+  emit_values( filtered, min, max );
+
+  return filtered;
+}
+
+
+/**
+* Used by emit_filter_general() to emit age, ID and values
+*/
+function emit_values( list, min, max ){
+  for( var i = 0, L = list.length; i < L; i++ ){
+
+    if( list[ i ].values()[0] ){
+      var scalar = list[ i ].values()[0].scalar();
+
+      scalar = scalarToString( scalar );
+      var units  = " " + list[ i ].values()[0].units(),
+          age    = " -- " + scalarToString( patient.age ( new Date() )),
+          first  = " -- " + patient.json.first.substr( 1, 5 );
+      emit( scalar + units + age + first, 1 );
+    }
+  }
+}
+
+
+/**
+* Round a scalar (or int) and convert to string, otherwise string emit crashes
+*/
+function scalarToString( scalar ){
+  return Math.floor( scalar.toString() );
 }
