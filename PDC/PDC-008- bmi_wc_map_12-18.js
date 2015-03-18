@@ -8,7 +8,7 @@ function map( patient ){
   * Denominator
   *
   * Base criteria:
-  *   - age 20+
+  *   - age 12 - 19
   */
   function checkDenominator(){
     // Ages

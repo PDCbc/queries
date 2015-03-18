@@ -56,12 +56,15 @@ function map( patient ){
         vitList  = patient.vitalSigns(),
 
     // Medical codes
+    //   - Immunizations, medications and results use an exact code match
+    //   - Conditions use a regex match, so make sure to preface with '^'!
         // http://www.cms.gov/medicare-coverage-database/staticpages/icd-9-code-lookup.aspx
         conCodes ={ "ICD9"      :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
 
-        // http://search.loinc.org
+        // hhttp://www.whocc.no/atc_ddd_index/
+        // http://www.snomedbrowser.com -- use 'Concept Type:' Procedure!
         immCodes ={ "whoATC"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ],   // TERMS
@@ -86,12 +89,11 @@ function map( patient ){
         vitCodes ={ "LOINC"     :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
-
     // Filters
     //   - start/end and min/max may be used in either paired order
     //   - values may be ommitted (from right ) as necessary
-    conditions    = filter_general( conList, conCodes, conStart, conEnd, conMin, conMax ),
-    immunizations = filter_general( immList, immCodes, immStart, immEnd, immMin, immMax ),
+    conditions    = filter_general( conList, conCodes, conStart, conEnd ),
+    immunizations = filter_general( immList, immCodes, immStart, immEnd ),
     medications   = filter_general( medList, medCodes, medStart, medEnd, medMin, medMax ),
     results       = filter_general( resList, resCodes, resStart, resEnd, resMin, resMax ),
     vitalSigns    = filter_general( vitList, vitCodes, vitStart, vitEnd, vitMin, vitMax );
@@ -150,12 +152,15 @@ function map( patient ){
         vitList  = patient.vitalSigns(),
 
     // Medical codes
+    //   - Immunizations, medications and results use an exact code match
+    //   - Conditions use a regex match, so make sure to preface with '^'!
         // http://www.cms.gov/medicare-coverage-database/staticpages/icd-9-code-lookup.aspx
         conCodes ={ "ICD9"      :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ]},  // TERMS
 
-        // http://search.loinc.org
+        // hhttp://www.whocc.no/atc_ddd_index/
+        // http://www.snomedbrowser.com -- use 'Concept Type:' Procedure!
         immCodes ={ "whoATC"    :[ "#####",     // TERMS
                                    "#####",     // TERMS
                                    "#####" ],   // TERMS
@@ -183,8 +188,8 @@ function map( patient ){
     // Filters
     //   - start/end and min/max may be used in either paired order
     //   - values may be ommitted (from right ) as necessary
-    conditions    = filter_general( conList, conCodes, conStart, conEnd, conMin, conMax ),
-    immunizations = filter_general( immList, immCodes, immStart, immEnd, immMin, immMax ),
+    conditions    = filter_general( conList, conCodes, conStart, conEnd ),
+    immunizations = filter_general( immList, immCodes, immStart, immEnd ),
     medications   = filter_general( medList, medCodes, medStart, medEnd, medMin, medMax ),
     results       = filter_general( resList, resCodes, resStart, resEnd, resMin, resMax ),
     vitalSigns    = filter_general( vitList, vitCodes, vitStart, vitEnd, vitMin, vitMax );
@@ -244,6 +249,9 @@ function filter_general( list, codes, p3, p4, p5, p6 ){
     min   = p5;
     max   = p6;
   }
+  else if(( p3 instanceof Date )&&(! p4 )){
+    start = p3;
+  }
   else if(( p3 instanceof Date )&&( typeof p4 === 'number' )){
     start = p3;
     min   = p4;
@@ -254,6 +262,9 @@ function filter_general( list, codes, p3, p4, p5, p6 ){
     max   = p4;
     start = p5;
     end   = p6;
+  }
+  else if(( typeof p3 === 'number' )&&(! p4 )){
+    min   = p3;
   }
   else if(( typeof p3 === 'number' )&&( p4 instanceof Date )){
     min   = p3;
