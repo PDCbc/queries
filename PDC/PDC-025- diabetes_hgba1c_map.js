@@ -58,7 +58,7 @@ function map( patient ){
                                                  // http://search.loinc.org/search.zul?query=hemoglobin+a1c
 
     // Filters
-        results       = filter_general( resList, resCodes, resStart, resMin );
+        results       = filter_general( resList, resCodes, resStart );
 
     // Inclusion/exclusion
     return isMatch( results );
