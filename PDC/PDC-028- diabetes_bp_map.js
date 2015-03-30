@@ -44,7 +44,7 @@ function map( patient ){
 
     // Dates
         end      = new Date(),
-        vitStart = new Date( end.getFullYear() - 10, end.getMonth(), end.getDate() ),
+        vitStart = new Date( end.getFullYear() - 1, end.getMonth(), end.getDate() ),
 
     // Lists
         vitList  = patient.vitalSigns(),
