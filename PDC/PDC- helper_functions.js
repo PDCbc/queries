@@ -99,14 +99,17 @@ function filter_values( list, min, max ){
   max = max || 1000000000;
 
   var toReturn = new hQuery.CodedEntryList();
-
-  // Builds a set with values meeting min/max
   for( var i = 0, L = list.length; i < L; i++ ){
-    var entry  = list[ i ],
-        scalar = entry.values()[0].scalar();
-
-    if( min <= scalar && scalar <= max )
-      toReturn.push( entry );
+    // Try-catch for missing value field in lab results
+    try {
+      var entry  = list[ i ],
+          scalar = entry.values()[ 0 ].scalar();
+      if( min <= scalar && scalar <= max )
+        toReturn.push( entry );
+    }
+    catch( err ){
+      emit( "Values key is missing! " + err, 1 );
+    }
   }
   return toReturn;
 }
