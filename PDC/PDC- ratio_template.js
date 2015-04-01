@@ -15,15 +15,15 @@ function map( patient ){
 
 
   /**
-  * Denominator
-  *
-  * Base criteria:
-  *   - <ageMin> to <ageMax> years old
-  *   - has { "convention": ["code", ..., ""]} condition, in last 1000000 years
-  *   OR
-  *   - values <medMin> < <medication> < <medMax>, in last 3 days
-  *   - medication is active (filter_medActive())
-  */
+   * Denominator
+   *
+   * Base criteria:
+   *   - <ageMin> to <ageMax> years old
+   *   - has { "convention": ["code", ..., ""]} condition, in last 1000000 years
+   *   OR
+   *   - values <medMin> < <medication> < <medMax>, in last 3 days
+   *   - medication is active (filter_medActive())
+   */
   function checkDenominator(){
     // Ages
     //   - age ranges are INCLUSIVE, edge cases are counted

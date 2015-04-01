@@ -1,8 +1,8 @@
 /**
-* Query Title: PDC-008
-* Query Type:  Ratio
-* Description: BMI or WC documented, last 2 years / age 12-19
-*/
+ * Query Title: PDC-008
+ * Query Type:  Ratio
+ * Description: BMI or WC documented, last 2 years / age 12-19
+ */
 function map( patient ){
   /**
   * Denominator
@@ -74,8 +74,8 @@ function map( patient ){
       numerator   = denominator && checkNumerator(),
       physicianID = "_" + patient.json.primary_care_provider_id;
 
-  emit( "denominator" + physicianID, denominator );
-  emit( "numerator"   + physicianID, numerator   );
+  emit( "denominator" + physicianID, +denominator );
+  emit( "numerator"   + physicianID, +numerator   );
 }
 
 
@@ -93,7 +93,7 @@ function map( patient ){
 *   - parameters 3 - 6: dates or values, keep low/high pairs together
 *     - minimum and maximum values
 *     - start and end dates
-*     --> inclusive ranges, boundary cases are counted
+*     --> inclusive range, boundary cases are counted
 *     - null/undefined/unsubmitted values are ignored
 */
 function filter_general( list, codes, p3, p4, p5, p6 ){
@@ -180,14 +180,17 @@ function filter_values( list, min, max ){
   max = max || 1000000000;
 
   var toReturn = new hQuery.CodedEntryList();
-
-  // Builds a set with values meeting min/max
   for( var i = 0, L = list.length; i < L; i++ ){
-    var entry  = list[ i ],
-        scalar = entry.values()[0].scalar();
-
-    if( min <= scalar && scalar <= max )
-      toReturn.push( entry );
+    // Try-catch for missing value field in lab results
+    try {
+      var entry  = list[ i ],
+          scalar = entry.values()[ 0 ].scalar();
+      if( min <= scalar && scalar <= max )
+        toReturn.push( entry );
+    }
+    catch( err ){
+      emit( "Values key is missing! " + err, 1 );
+    }
   }
   return toReturn;
 }

@@ -74,8 +74,8 @@ function map( patient ){
       numerator   = denominator && checkNumerator(),
       physicianID = "_" + patient.json.primary_care_provider_id;
 
-  emit( "denominator" + physicianID, denominator );
-  emit( "numerator"   + physicianID, numerator   );
+  emit( "denominator" + physicianID, +denominator );
+  emit( "numerator"   + physicianID, +numerator   );
 }
 
 
