@@ -1,20 +1,20 @@
 /*******************************************************************************
-* Helper Functions                                                             *
-*   These should be the same for all queries.  Copy a fresh set on every edit! *
-*******************************************************************************/
+ * Helper Functions                                                            *
+ *   These should be the same for all queries.  Copy a fresh set on every edit!*
+ ******************************************************************************/
 
 
 /**
-* Filters a coded entry list:
-*   - parameters 1 & 2: list, codes
-*     - conditions(), immunizations(), medications(), results() or vitalSigns()
-*     - LOINC, pCLOCD, whoATC, SNOMED-CT, whoATC
-*   - parameters 3 - 6: dates or values, keep low/high pairs together
-*     - minimum and maximum values
-*     - start and end dates
-*     --> inclusive range, boundary cases are counted
-*     - null/undefined/unsubmitted values are ignored
-*/
+ * Filters a coded entry list:
+ *   - parameters 1 & 2: list, codes
+ *     - conditions(), immunizations(), medications(), results() or vitalSigns()
+ *     - LOINC, pCLOCD, whoATC, SNOMED-CT, whoATC
+ *   - parameters 3 - 6: dates or values, keep low/high pairs together
+ *     - minimum and maximum values
+ *     - start and end dates
+ *     --> inclusive range, boundary cases are counted
+ *     - null/undefined/unsubmitted values are ignored
+ */
 function filter_general( list, codes, p3, p4, p5, p6 ){
   // Default variables = undefined
   var min, max, start, end, filteredList;
@@ -70,9 +70,9 @@ function filter_general( list, codes, p3, p4, p5, p6 ){
 
 
 /**
-* Filters a list of medications:
-*   - active status only (20% pad on time interval)
-*/
+ * Filters a list of medications:
+ *   - active status only (20% pad on time interval)
+ */
 function filter_activeMeds( matches ){
   var now      = new Date(),
       toReturn = new hQuery.CodedEntryList();
@@ -91,9 +91,9 @@ function filter_activeMeds( matches ){
 
 
 /**
-* Used by filter_general() and filter_general()
-*   - inclusive range, boundary cases are counted
-*/
+ * Used by filter_general() and filter_general()
+ *   - inclusive range, boundary cases are counted
+ */
 function filter_values( list, min, max ){
   // Default value
   max = max || 1000000000;
@@ -116,17 +116,17 @@ function filter_values( list, min, max ){
 
 
 /**
-* T/F: Does a filtered list contain matches (/is not empty)?
-*/
+ * T/F: Does a filtered list contain matches (/is not empty)?
+ */
 function isMatch( list ) {
   return 0 < list.length;
 }
 
 
 /**
-* T/F: Does the patient fall in this age range?
-*   - inclusive range, boundary cases are counted
-*/
+ * T/F: Does the patient fall in this age range?
+ *   - inclusive range, boundary cases are counted
+ */
 function isAge( ageMin, ageMax ) {
   // Default values
   ageMax = ageMax || 200;
@@ -137,14 +137,14 @@ function isAge( ageMin, ageMax ) {
 
 
 /*******************************************************************************
-* Debugging Functions                                                          *
-*   These are badly commented, non-optimized and intended for development.     *
-*******************************************************************************/
+ * Debugging Functions                                                         *
+ *   These are badly commented, non-optimized and intended for development.    *
+ ******************************************************************************/
 
 
 /**
-* Substitute for filter_general() to troubleshoot values
-*/
+ * Substitute for filter_general() to troubleshoot values
+ */
 function emit_filter_general( list, codes, min, max ){
   var filtered = list.match( codes );
 
@@ -158,8 +158,8 @@ function emit_filter_general( list, codes, min, max ){
 
 
 /**
-* Used by emit_filter_general() to emit age, ID and values
-*/
+ * Used by emit_filter_general() to emit age, ID and values
+ */
 function emit_values( list, min, max ){
   for( var i = 0, L = list.length; i < L; i++ ){
 
@@ -177,8 +177,8 @@ function emit_values( list, min, max ){
 
 
 /**
-* Round a scalar (or int) and convert to string, otherwise string emit crashes
-*/
+ * Round a scalar (or int) and convert to string, otherwise string emit crashes
+ */
 function scalarToString( scalar ){
   return Math.floor( scalar.toString() );
 }

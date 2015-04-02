@@ -1,15 +1,15 @@
 /**
-* Query Title: PDC-025
-* Query Type:  Ratio
-* Description: HGBA1C in last 6 months / for patients with diabetes
-*/
+ * Query Title: PDC-025
+ * Query Type:  Ratio
+ * Description: HGBA1C in last 6m / diabetes
+ */
 function map( patient ){
   /**
-  * Denominator
-  *
-  * Base criteria:
-  *   - diagnosed with diabetes
-  */
+   * Denominator
+   *
+   * Base criteria:
+   *   - diagnosed with diabetes
+   */
   function checkDenominator(){
     // Coded entry lists
     var conList       = patient.conditions(),
@@ -27,12 +27,12 @@ function map( patient ){
 
 
   /**
-  * Numerator
-  *
-  * Additional criteria:
-  *   - HGBA1C recorded
-  *   ---> in last year
-  */
+   * Numerator
+   *
+   * Additional criteria:
+   *   - HGBA1C recorded
+   *   ---> in last year
+   */
   function checkNumerator(){
     // Values
     // Dates
@@ -45,17 +45,8 @@ function map( patient ){
         resList  = patient.results(),
 
     // Medical codes
-        resCodes ={ "pCLOCD"    :[ "4548-4",     // Hemoglobin A1c/​Hemoglobin.total in Blood
-                                   "4549-2",     // Hemoglobin A1c/​Hemoglobin.total in Blood by Electrophoresis
-                                   "17855-8",    // Hemoglobin A1c/​Hemoglobin.total in Blood by calculation
-                                   "17856-6",    // Hemoglobin A1c/​Hemoglobin.total in Blood by HPLC
-                                   "41995-2",    // Hemoglobin A1c [Mass/​volume] in Blood
-                                   "43150-2",    // Hemoglobin A1c measurement device panel
-                                   "55454-3",    // Hemoglobin A1c in Blood
-                                   "59261-8",    // Hemoglobin A1c/​Hemoglobin.total in Blood by IFCC protocol
-                                   "62388-4",    // Hemoglobin A1c/​Hemoglobin.total in Blood by JDS/​JSCC protocol
-                                   "71875-9" ]}, // Hemoglobin A1c/​Hemoglobin.total [Pure mass fraction] in Blood
-                                                 // http://search.loinc.org/search.zul?query=hemoglobin+a1c
+    // http://search.loinc.org/search.zul?query=hemoglobin+a1c
+        resCodes ={ "pCLOCD"    :[ "4548-4", ]}, // Hemoglobin A1c/​Hemoglobin.total in Blood
 
     // Filters
         results       = filter_general( resList, resCodes, resStart );
@@ -66,10 +57,10 @@ function map( patient ){
 
 
   /**
-  * Emit Numerator and Denominator:
-  *   - numerator must also be in denominator
-  *   - tagged with physician ID
-  */
+   * Emit Numerator and Denominator:
+   *   - numerator must also be in denominator
+   *   - tagged with physician ID
+   */
   var denominator = checkDenominator(),
       numerator   = denominator && checkNumerator(),
       physicianID = "_" + patient.json.primary_care_provider_id;
@@ -80,22 +71,22 @@ function map( patient ){
 
 
 /*******************************************************************************
-* Helper Functions                                                             *
-*   These should be the same for all queries.  Copy a fresh set on every edit! *
-*******************************************************************************/
+ * Helper Functions                                                            *
+ *   These should be the same for all queries.  Copy a fresh set on every edit!*
+ ******************************************************************************/
 
 
 /**
-* Filters a coded entry list:
-*   - parameters 1 & 2: list, codes
-*     - conditions(), immunizations(), medications(), results() or vitalSigns()
-*     - LOINC, pCLOCD, whoATC, SNOMED-CT, whoATC
-*   - parameters 3 - 6: dates or values, keep low/high pairs together
-*     - minimum and maximum values
-*     - start and end dates
-*     --> inclusive ranges, boundary cases are counted
-*     - null/undefined/unsubmitted values are ignored
-*/
+ * Filters a coded entry list:
+ *   - parameters 1 & 2: list, codes
+ *     - conditions(), immunizations(), medications(), results() or vitalSigns()
+ *     - LOINC, pCLOCD, whoATC, SNOMED-CT, whoATC
+ *   - parameters 3 - 6: dates or values, keep low/high pairs together
+ *     - minimum and maximum values
+ *     - start and end dates
+ *     --> inclusive range, boundary cases are counted
+ *     - null/undefined/unsubmitted values are ignored
+ */
 function filter_general( list, codes, p3, p4, p5, p6 ){
   // Default variables = undefined
   var min, max, start, end, filteredList;
@@ -151,9 +142,9 @@ function filter_general( list, codes, p3, p4, p5, p6 ){
 
 
 /**
-* Filters a list of medications:
-*   - active status only (20% pad on time interval)
-*/
+ * Filters a list of medications:
+ *   - active status only (20% pad on time interval)
+ */
 function filter_activeMeds( matches ){
   var now      = new Date(),
       toReturn = new hQuery.CodedEntryList();
@@ -172,91 +163,46 @@ function filter_activeMeds( matches ){
 
 
 /**
-* Used by filter_general() and filter_general()
-*   - inclusive range, boundary cases are counted
-*/
+ * Used by filter_general() and filter_general()
+ *   - inclusive range, boundary cases are counted
+ */
 function filter_values( list, min, max ){
   // Default value
   max = max || 1000000000;
 
   var toReturn = new hQuery.CodedEntryList();
-
-  // Builds a set with values meeting min/max
   for( var i = 0, L = list.length; i < L; i++ ){
-    var entry  = list[ i ],
-        scalar = entry.values()[0].scalar();
-
-    if( min <= scalar && scalar <= max )
-      toReturn.push( entry );
+    // Try-catch for missing value field in lab results
+    try {
+      var entry  = list[ i ],
+          scalar = entry.values()[ 0 ].scalar();
+      if( min <= scalar && scalar <= max )
+        toReturn.push( entry );
+    }
+    catch( err ){
+      emit( "Values key is missing! " + err, 1 );
+    }
   }
   return toReturn;
 }
 
 
 /**
-* T/F: Does a filtered list contain matches (/is not empty)?
-*/
+ * T/F: Does a filtered list contain matches (/is not empty)?
+ */
 function isMatch( list ) {
   return 0 < list.length;
 }
 
 
 /**
-* T/F: Does the patient fall in this age range?
-*   - inclusive range, boundary cases are counted
-*/
+ * T/F: Does the patient fall in this age range?
+ *   - inclusive range, boundary cases are counted
+ */
 function isAge( ageMin, ageMax ) {
   // Default values
   ageMax = ageMax || 200;
 
   ageNow = patient.age( new Date() );
   return ( ageMin <= ageNow && ageNow <= ageMax );
-}
-
-
-/*******************************************************************************
-* Debugging Functions                                                          *
-*   These are badly commented, non-optimized and intended for development.     *
-*******************************************************************************/
-
-
-/**
-* Substitute for filter_general() to troubleshoot values
-*/
-function emit_filter_general( list, codes, min, max ){
-  var filtered = list.match( codes );
-
-  if( typeof min === 'number' )
-    filtered = filter_values( filtered, min,( max || 1000000000 ));
-
-  emit_values( filtered, min, max );
-
-  return filtered;
-}
-
-
-/**
-* Used by emit_filter_general() to emit age, ID and values
-*/
-function emit_values( list, min, max ){
-  for( var i = 0, L = list.length; i < L; i++ ){
-
-    if( list[ i ].values()[0] ){
-      var scalar = list[ i ].values()[0].scalar();
-
-      scalar = scalarToString( scalar );
-      var units  = " " + list[ i ].values()[0].units(),
-          age    = " -- " + scalarToString( patient.age ( new Date() )),
-          first  = " -- " + patient.json.first.substr( 1, 5 );
-      emit( scalar + units + age + first, 1 );
-    }
-  }
-}
-
-
-/**
-* Round a scalar (or int) and convert to string, otherwise string emit crashes
-*/
-function scalarToString( scalar ){
-  return Math.floor( scalar.toString() );
 }

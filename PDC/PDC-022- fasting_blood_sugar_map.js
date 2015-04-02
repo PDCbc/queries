@@ -1,18 +1,18 @@
 /**
-* Query Title: PDC-022
-* Query Type:  Ratio
-* Description: Fasting glucose recorded in last 3 yrs / age 45+
-*/
+ * Query Title: PDC-022
+ * Query Type:  Ratio
+ * Description: Fasting blood sugar in last 3y / age 46+
+ */
 function map( patient ){
   /**
-  * Denominator
-  *
-  * Base criteria:
-  *   - 45+ years old
-  */
+   * Denominator
+   *
+   * Base criteria:
+   *   - 46+ years old
+   */
   function checkDenominator(){
     // Values
-    var ageMin = 45;
+    var ageMin = 46;
 
     // Inclusion/exclusion
     return isAge( ageMin );
@@ -20,12 +20,12 @@ function map( patient ){
 
 
   /**
-  * Numerator
-  *
-  * Additional criteria:
-  *   - has had fasting glucose (blood sugar) recorded
-  *   --> tested in the last three years
-  */
+   * Numerator
+   *
+   * Additional criteria:
+   *   - has had fasting glucose (blood sugar) recorded
+   *   --> tested in the last three years
+   */
   function checkNumerator(){
     // Values
     var end   = new Date(),
@@ -35,24 +35,8 @@ function map( patient ){
         resList  = patient.results(),
 
       // Medical codes
-        resCodes ={ "pCLOCD":[ "1493-6",     // Glucose [Mass/​volume] in Serum or Plasma --1.5 hours post 0.05-0.15 U insulin/​kg IV 12 hours fasting
-                               "1500-8",     // Glucose [Mass/​volume] in Serum or Plasma --1 hour post 0.05-0.15 U insulin/​kg IV post 12H CFst
-                               "1554-5",     // Glucose [Mass/​volume] in Serum or Plasma --12 hours fasting
-                               "1550-3",     // Glucose [Mass/​volume] in Serum or Plasma --pre 12 hour fast
-                               "1555-2",     // Glucose [Mass/​volume] in Urine --12 hours fasting
-                               "1556-0",     // Fasting glucose [Mass/​volume] in Capillary blood
-                               "1557-8",     // Fasting glucose [Mass/​volume] in Venous blood
-                               "1558-6",     // Fasting glucose [Mass/​volume] in Serum or Plasma
-                               "6764-5",     // Fasting glucose [Presence] in Urine by Test strip
-                               "10450-5",    // Glucose [Mass/​volume] in Serum or Plasma --10 hours fasting
-                               "14769-4",    // Glucose [Moles/​volume] in Serum or Plasma --pre 12 hour fast
-                               "14770-2",    // Fasting glucose [Moles/​volume] in Capillary blood by Glucometer
-                               "14771-0",    // Fasting glucose [Moles/​volume] in Serum or Plasma
-                               "16913-6",    // Fasting glucose [Presence] in Urine
-                               "17865-7",    // Glucose [Mass/​volume] in Serum or Plasma --8 hours fasting
-                               "41604-0",    // Fasting glucose [Mass/​volume] in Capillary blood by Glucometer
-                               "63382-6" ]}, // Fasting glucose [Mass/​volume] in Urine
-                                             // http://search.loinc.org/search.zul?query=fasting+glucose
+      // http://search.loinc.org/search.zul?query=fasting+glucose
+        resCodes ={ "pCLOCD":[ "14771-0" ]}, // Fasting glucose [Moles/​volume] in Serum or Plasma
 
     // Filters
       results = filter_general( resList, resCodes, start, end );
@@ -63,10 +47,10 @@ function map( patient ){
 
 
   /**
-  * Emit Numerator and Denominator:
-  *   - numerator must also be in denominator
-  *   - tagged with physician ID
-  */
+   * Emit Numerator and Denominator:
+   *   - numerator must also be in denominator
+   *   - tagged with physician ID
+   */
   var denominator = checkDenominator(),
       numerator   = denominator && checkNumerator(),
       physicianID = "_" + patient.json.primary_care_provider_id;
@@ -77,22 +61,22 @@ function map( patient ){
 
 
 /*******************************************************************************
-* Helper Functions                                                             *
-*   These should be the same for all queries.  Copy a fresh set on every edit! *
-*******************************************************************************/
+ * Helper Functions                                                            *
+ *   These should be the same for all queries.  Copy a fresh set on every edit!*
+ ******************************************************************************/
 
 
 /**
-* Filters a coded entry list:
-*   - parameters 1 & 2: list, codes
-*     - conditions(), immunizations(), medications(), results() or vitalSigns()
-*     - LOINC, pCLOCD, whoATC, SNOMED-CT, whoATC
-*   - parameters 3 - 6: dates or values, keep low/high pairs together
-*     - minimum and maximum values
-*     - start and end dates
-*     --> inclusive ranges, boundary cases are counted
-*     - null/undefined/unsubmitted values are ignored
-*/
+ * Filters a coded entry list:
+ *   - parameters 1 & 2: list, codes
+ *     - conditions(), immunizations(), medications(), results() or vitalSigns()
+ *     - LOINC, pCLOCD, whoATC, SNOMED-CT, whoATC
+ *   - parameters 3 - 6: dates or values, keep low/high pairs together
+ *     - minimum and maximum values
+ *     - start and end dates
+ *     --> inclusive range, boundary cases are counted
+ *     - null/undefined/unsubmitted values are ignored
+ */
 function filter_general( list, codes, p3, p4, p5, p6 ){
   // Default variables = undefined
   var min, max, start, end, filteredList;
@@ -148,9 +132,9 @@ function filter_general( list, codes, p3, p4, p5, p6 ){
 
 
 /**
-* Filters a list of medications:
-*   - active status only (20% pad on time interval)
-*/
+ * Filters a list of medications:
+ *   - active status only (20% pad on time interval)
+ */
 function filter_activeMeds( matches ){
   var now      = new Date(),
       toReturn = new hQuery.CodedEntryList();
@@ -169,91 +153,46 @@ function filter_activeMeds( matches ){
 
 
 /**
-* Used by filter_general() and filter_general()
-*   - inclusive range, boundary cases are counted
-*/
+ * Used by filter_general() and filter_general()
+ *   - inclusive range, boundary cases are counted
+ */
 function filter_values( list, min, max ){
   // Default value
   max = max || 1000000000;
 
   var toReturn = new hQuery.CodedEntryList();
-
-  // Builds a set with values meeting min/max
   for( var i = 0, L = list.length; i < L; i++ ){
-    var entry  = list[ i ],
-        scalar = entry.values()[0].scalar();
-
-    if( min <= scalar && scalar <= max )
-      toReturn.push( entry );
+    // Try-catch for missing value field in lab results
+    try {
+      var entry  = list[ i ],
+          scalar = entry.values()[ 0 ].scalar();
+      if( min <= scalar && scalar <= max )
+        toReturn.push( entry );
+    }
+    catch( err ){
+      emit( "Values key is missing! " + err, 1 );
+    }
   }
   return toReturn;
 }
 
 
 /**
-* T/F: Does a filtered list contain matches (/is not empty)?
-*/
+ * T/F: Does a filtered list contain matches (/is not empty)?
+ */
 function isMatch( list ) {
   return 0 < list.length;
 }
 
 
 /**
-* T/F: Does the patient fall in this age range?
-*   - inclusive range, boundary cases are counted
-*/
+ * T/F: Does the patient fall in this age range?
+ *   - inclusive range, boundary cases are counted
+ */
 function isAge( ageMin, ageMax ) {
   // Default values
   ageMax = ageMax || 200;
 
   ageNow = patient.age( new Date() );
   return ( ageMin <= ageNow && ageNow <= ageMax );
-}
-
-
-/*******************************************************************************
-* Debugging Functions                                                          *
-*   These are badly commented, non-optimized and intended for development.     *
-*******************************************************************************/
-
-
-/**
-* Substitute for filter_general() to troubleshoot values
-*/
-function emit_filter_general( list, codes, min, max ){
-  var filtered = list.match( codes );
-
-  if( typeof min === 'number' )
-    filtered = filter_values( filtered, min,( max || 1000000000 ));
-
-  emit_values( filtered, min, max );
-
-  return filtered;
-}
-
-
-/**
-* Used by emit_filter_general() to emit age, ID and values
-*/
-function emit_values( list, min, max ){
-  for( var i = 0, L = list.length; i < L; i++ ){
-
-    if( list[ i ].values()[0] ){
-      var scalar = list[ i ].values()[0].scalar();
-
-      scalar = scalarToString( scalar );
-      var units  = " " + list[ i ].values()[0].units(),
-          age    = " -- " + scalarToString( patient.age ( new Date() )),
-          first  = " -- " + patient.json.first.substr( 1, 5 );
-      emit( scalar + units + age + first, 1 );
-    }
-  }
-}
-
-
-/**
-* Round a scalar (or int) and convert to string, otherwise string emit crashes
-*/
-function scalarToString( scalar ){
-  return Math.floor( scalar.toString() );
 }
