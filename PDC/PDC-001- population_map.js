@@ -1,6 +1,9 @@
-// Reference Number: PDC-001
-// Query Title: Population profile: age and gender
-
+/**
+ * Query Title: Population Pyramid
+ * Query ID:    PDC-001
+ * Query Type:  Pyramid
+ * Description: Population Profile: Age and Gender
+ */
 function map( patient ){
   //constants
   var gdrs = ["female_", "male_", "undifferentiated_", "undefined_"];

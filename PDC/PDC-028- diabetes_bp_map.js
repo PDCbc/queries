@@ -1,5 +1,6 @@
 /**
- * Query Title: PDC-028
+ * Query Title: DM: w BP<=130/80 1y
+ * Query ID:    PDC-028
  * Query Type:  Ratio
  * Description: BP <= 130/80 in last 1y / diabetes
  */

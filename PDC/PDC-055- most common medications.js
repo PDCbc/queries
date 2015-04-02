@@ -1,6 +1,9 @@
-// Reference Number: PDC-055
-// Query Title: Most common medication classes
-
+/**
+ * Query Title: Rx: Top Med Classes
+ * Query ID:    PDC-055
+ * Query Type:  Count
+ * Description: Most common medication classes
+ */
 function map(patient) {
     var atcLevel = 2; // Level definition based on definition found on Wikipedia
     var atcCutoff = getATCCodeLength(atcLevel);

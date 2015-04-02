@@ -1,5 +1,6 @@
 /**
- * Query Title: PDC-025
+ * Query Title: A1C Check 6m
+ * Query ID:    PDC-025
  * Query Type:  Ratio
  * Description: HGBA1C in last 6m / diabetes
  */

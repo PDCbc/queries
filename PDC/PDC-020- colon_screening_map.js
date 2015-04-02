@@ -1,5 +1,6 @@
 /**
- * Query Title: PDC-020
+ * Query Title: Colon Screen 2y, 50-74
+ * Query ID:    PDC-020
  * Query Type:  Ratio
  * Desctiption: Colon screening in last 2y / age 50-74
  */

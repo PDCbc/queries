@@ -1,5 +1,6 @@
 /**
- * Query Title: PDC-014
+ * Query Title: PneumoVax, 65+
+ * Query ID:    PDC-014
  * Query Type:  Ratio
  * Description: Pneumococcal vaccination / age 65+
  */

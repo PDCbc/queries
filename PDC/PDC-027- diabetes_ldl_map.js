@@ -1,5 +1,6 @@
 /**
- * Query Title: PDC-027
+ * Query Title: DM: w LDL >= 2.5 1y
+ * Query ID:    PDC-027
  * Query Type:  Ratio
  * Description: LDL >= 2.5 mmol/L in last 1y / diabetes
  */
