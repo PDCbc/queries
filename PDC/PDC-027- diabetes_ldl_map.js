@@ -1,15 +1,15 @@
 /**
-* Query Title: PDC-027
-* Query Type:  Ratio
-* Description: LDL >= 2.5 mmol/L in last year / for patients with diabetes
-*/
+ * Query Title: PDC-027
+ * Query Type:  Ratio
+ * Description: LDL >= 2.5 mmol/L in last 1y / diabetes
+ */
 function map( patient ){
   /**
-  * Denominator
-  *
-  * Base criteria:
-  *   - diagnosed with diabetes
-  */
+   * Denominator
+   *
+   * Base criteria:
+   *   - diagnosed with diabetes
+   */
   function checkDenominator(){
     // Coded entry lists
     var conList       = patient.conditions(),
@@ -26,13 +26,12 @@ function map( patient ){
 
 
   /**
-  * Numerator
-  *
-  * Additional criteria:
-  *   - LDL recorded
-  *   ---> LDL >= 2.5 mmol/L
-  *   ---> in last six months
-  */
+   * Numerator
+   *
+   * Additional criteria:
+   *   - LDL >= 2.5 mmol/L
+   *   --> in last six months
+   */
   function checkNumerator(){
     // Values
     //   - ages and min/max values
@@ -60,10 +59,10 @@ function map( patient ){
 
 
   /**
-  * Emit Numerator and Denominator:
-  *   - numerator must also be in denominator
-  *   - tagged with physician ID
-  */
+   * Emit Numerator and Denominator:
+   *   - numerator must also be in denominator
+   *   - tagged with physician ID
+   */
   var denominator = checkDenominator(),
       numerator   = denominator && checkNumerator(),
       physicianID = "_" + patient.json.primary_care_provider_id;

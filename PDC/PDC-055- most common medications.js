@@ -1,5 +1,5 @@
 // Reference Number: PDC-055
-// Query Title: Most commonly prescribed medication classes
+// Query Title: Most common medication classes
 
 function map(patient) {
     var atcLevel = 2; // Level definition based on definition found on Wikipedia

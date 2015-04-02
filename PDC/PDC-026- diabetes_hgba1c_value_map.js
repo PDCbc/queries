@@ -1,7 +1,7 @@
 /**
  * Query Title: PDC-026
  * Query Type:  Ratio
- * Description: HGBA1C >= 7% in last 12m / diabetes
+ * Description: HGBA1C >= 7% in last 1y / diabetes
  */
 function map( patient ){
   /**

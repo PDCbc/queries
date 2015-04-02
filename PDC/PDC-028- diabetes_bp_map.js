@@ -1,7 +1,7 @@
 /**
  * Query Title: PDC-028
  * Query Type:  Ratio
- * Description: BP <= 130/80 in last 12m / diabetes
+ * Description: BP <= 130/80 in last 1y / diabetes
  */
 function map( patient ){
   /**

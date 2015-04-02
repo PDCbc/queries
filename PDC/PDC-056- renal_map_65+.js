@@ -1,7 +1,7 @@
 /**
  * Query Title: PDC-056
  * Query Type:  Ratio
- * Description: Digoxin > 125 mcg/day / impaired renal, age 65+
+ * Description: Digoxin > 125 mcg/day / renal, age 65+
  */
 function map( patient ){
   /**

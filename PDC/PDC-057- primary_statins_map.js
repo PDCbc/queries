@@ -1,7 +1,7 @@
 /**
  * Query Title: PDC-057
  * Query Type:  Ratio
- * Desctiption: Statins for primary prevention / all on statins
+ * Desctiption: Statins: secondary prevention / all
  */
 function map( patient ){
   /**
