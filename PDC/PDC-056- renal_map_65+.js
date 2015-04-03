@@ -1,8 +1,7 @@
 /**
- * Query Title: STOPP: Dig >125 65+
- * Query ID:    PDC-056
+ * Query Title: PDC-056
  * Query Type:  Ratio
- * Description: Digoxin > 125 mcg/day / renal, age 65+
+ * Description: STOPP: Dig >125 65+
  */
 function map( patient ){
   /**

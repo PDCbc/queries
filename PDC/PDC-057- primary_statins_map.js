@@ -1,8 +1,7 @@
 /**
- * Query Title: Statin: Primary prev.
- * Query ID:    PDC-057
+ * Query Title: PDC-057
  * Query Type:  Ratio
- * Desctiption: Statins: secondary prevention / all
+ * Desctiption: Statin: Primary prev
  */
 function map( patient ){
   /**

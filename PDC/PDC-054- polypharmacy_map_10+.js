@@ -1,8 +1,7 @@
 /**
- * Query Title: PolyRx: 10+ meds, 65+
  * Query Title: PDC-054
  * Query Type:  Ratio
- * Desctiption: 10+ medications / age 65+
+ * Desctiption: PolyRx: 10+ meds, 65+
  */
 function map( patient ){
   /**

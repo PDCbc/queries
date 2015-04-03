@@ -1,65 +1,34 @@
 /**
- * Query Title: PDC-025
+ * Query Title: Demo-002
  * Query Type:  Ratio
- * Description: A1C Check 6m
+ * Desctiption: Meds: active / total
  */
 function map( patient ){
+  var mapScope_medications = patient.medications();
+
   /**
-   * Denominator
-   *
-   * Base criteria:
-   *   - diagnosed with diabetes
+   * Denominator:
+   *   - no restrictions
    */
   function checkDenominator(){
-    // Coded entry lists
-    var conList       = patient.conditions(),
-
-    // Medical codes
-        // http://www.cms.gov/medicare-coverage-database/staticpages/icd-9-code-lookup.aspx?KeyWord=diabetes
-        conCodes      ={ "ICD9"      :[ "^250" ]},  // Diabetes, types 1 and 2
-
-    // Filters
-        conditions    = filter_general( conList, conCodes );
-
-    // Inclusion/exclusion
-    return isMatch( conditions );
+    return mapScope_medications.length;
   }
 
 
   /**
-   * Numerator
-   *
-   * Additional criteria:
-   *   - HGBA1C recorded
-   *   ---> in last year
+   * Numerator:
+   *   - medications are active
    */
   function checkNumerator(){
-    // Values
-    // Dates
-    //   - end:   () for current date, otherwise ( YYYY, MM, DD )
-    //   - start: subtract from end as Y, M, D
-    var end      = new Date(),
-        resStart = new Date( end.getFullYear(), end.getMonth() - 6, end.getDate() ),
+    // List of medications
+    var medActive = filter_activeMeds( mapScope_medications );
 
-    // Lists
-        resList  = patient.results(),
-
-    // Medical codes
-    // http://search.loinc.org/search.zul?query=hemoglobin+a1c
-        resCodes ={ "pCLOCD"    :[ "4548-4", ]}, // Hemoglobin A1c/​Hemoglobin.total in Blood
-
-    // Filters
-        results       = filter_general( resList, resCodes, resStart );
-
-    // Inclusion/exclusion
-    return isMatch( results );
+    return medActive.length;
   }
 
 
   /**
-   * Emit Numerator and Denominator:
-   *   - numerator must also be in denominator
-   *   - tagged with physician ID
+   * Emit Numerator and Denominator, tagged with physician ID
    */
   var denominator = checkDenominator(),
       numerator   = denominator && checkNumerator(),

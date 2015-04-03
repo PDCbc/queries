@@ -1,8 +1,7 @@
 /**
- * Query Title: BMI-WC Check, 12-19
- * Query ID:    PDC-008
+ * Query Title: PDC-008
  * Query Type:  Ratio
- * Description: BMI or WC in last 2y / age 12-19
+ * Description: BMI-WC Check, 12-19
  */
 function map( patient ){
   /**

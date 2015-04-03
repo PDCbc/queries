@@ -1,8 +1,7 @@
 /**
- * Query Title: Fasting BS 3y, 46+
- * Query ID:    PDC-022
+ * Query Title: PDC-022
  * Query Type:  Ratio
- * Description: Fasting blood sugar in last 3y / age 46+
+ * Description: Fasting BS 3y, 46+
  */
 function map( patient ){
   /**

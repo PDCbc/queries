@@ -1,8 +1,7 @@
 /**
- * Query Title: DM: w A1C >= 7% 1y
- * Query ID:    PDC-026
+ * Query Title: PDC-026
  * Query Type:  Ratio
- * Description: HGBA1C >= 7% in last 1y / diabetes
+ * Description: DM: w A1C >= 7% 1y
  */
 function map( patient ){
   /**

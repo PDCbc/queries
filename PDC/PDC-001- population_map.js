@@ -1,6 +1,5 @@
 /**
- * Query Title: Population Pyramid
- * Query ID:    PDC-001
+ * Query Title: PDC-001
  * Query Type:  Pyramid
  * Description: Population Profile: Age and Gender
  */
