@@ -1,7 +1,7 @@
 /**
- * Query Title: PDC-981
+ * Query Title: PDC-64
  * Query Type:  Ratio
- * Description: Patients who have HEP C on the problem list / all patients. 
+ * Description: Patients how have Rheumatiod Arthritis documented / All patients
  */
 function map( patient ){
   // Coded entry lists declared here can be used for denominator and numerator
@@ -25,7 +25,7 @@ function map( patient ){
   * Numerator
   *
   * Additional criteria:
-  *   - ICD9 Codes: 070.70, 070.71, 070.41, 070.44, 070.51, 070.54
+  *   - ICD9 Codes: 714.0, 714.30, 714.31, 714.32, 714.33
   *   - Reference: http://www.icd9data.com/2015/Volume1/001-139/070-079/070/default.htm
   */
   function checkNumerator(){
@@ -37,17 +37,16 @@ function map( patient ){
     //   - Immunizations, medications and results use an exact code match
     //   - Conditions use a regex match, so make sure to preface with '^'!
         // http://www.cms.gov/medicare-coverage-database/staticpages/icd-9-code-lookup.aspx
-        conCodes ={ "ICD9"      :[ "^070.70", //REFERENCE: Reference: http://www.icd9data.com/2015/Volume1/001-139/070-079/070/default.htm
-                                   "^070.71",
-                                   "^070.44",
-                                   "^070.41",
-                                   "^070.51",
-                                   "^070.54" ]},  
+        conCodes ={ "ICD9"      :[ "^714.0", //REFERENCE: http://www.icd9data.com/2014/Volume1/710-739/710-719/714/default.htm
+                                   "^714.30",
+                                   "^714.31",
+                                   "^714.32",
+                                   "^714.33"]},  
 
     // Filters
     //   - start/end and min/max may be used in either paired order
     //   - values may be ommitted (from right ) as necessary
-    conditions = filter_general( conList, conCodes);
+    conditions = filter_general( conList, conCodes );
 
     // Inclusion/exclusion
     //   - isAge() and isMatch() are boolean (yes/no)
