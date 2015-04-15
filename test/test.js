@@ -17,18 +17,23 @@
 //node_modules required for the test framework. 
 //the are found in the test/node_modules dir. 
 
-try{
-	var mockReduce = require('mock-reduce'); 
-	var mongoose = require('mongoose'); 
-	var fs = require('fs'); 
-	var parseArgs = require('minimist'); 
-}catch(e){
-	//empty catch. 	
-	//mock-reduce and mongoose both require BSON
-	// however BSON binary is not avaliable, errors
-	// and shows that it is using PureJs version.
-	// we can ignore this error for now. 
-}
+var fs = require('fs'); 
+var exceptions = require("./exception.js"); 
+var parseArgs = require('minimist'); 
+
+//these will throw an error on start up...something due to BSON
+// the error is not a big problem, it just runs JS rather than C++ binaries
+// for the BSON. This just results in a performance hit...not a big deal for testing....
+var mockReduce = require('mock-reduce'); 
+var mongoose = require('mongoose'); 
+
+
+//some paths relative to the project root: 
+var TEST_DIR = "test/"; 
+var VERIFY_DIR = TEST_DIR+"verify/"; 
+var DATA_DIR = TEST_DIR+"data/"; 
+var QUERY_DIR = "queries/"
+
 /*
 * This is a stupid fix for executing queries.....ugh
 * We need to combine the patient.js and map.js files together
@@ -58,7 +63,6 @@ function createMapFunction(map_path, api_path){
 
 	//get the text in the map_path file. 
 	var map = fs.readFileSync(map_path);
-
 
 	//get the text in the api_path file.
 	var api = fs.readFileSync(api_path);
@@ -105,7 +109,7 @@ function createMapFunction(map_path, api_path){
 function runQueryTest(queryMapPath, dataPath, verifierPath){
 	
 	//combine the patient api and query in a single file. 
-	var megaModulePath = createMapFunction(queryMapPath, "./resources/patient.js"); 
+	var megaModulePath = createMapFunction(queryMapPath, TEST_DIR+"resources/patient.js"); 
 
 	//open the single file with all of code for the query. 
 	var megaModule = require(megaModulePath); 
@@ -114,7 +118,8 @@ function runQueryTest(queryMapPath, dataPath, verifierPath){
 	var testData = JSON.parse(fs.readFileSync(dataPath, "utf8")); 
 
 	//get the verifier module. 
-	var verifier = require(verifierPath); 
+	//require(...) is relative to the location of the script, not where you run from...
+	var verifier = require("./verify/"+verifierPath+".js"); 
 
 	var patients = []; 
 
@@ -181,6 +186,60 @@ function cleanup(){
 	//any cleanup for the test environment can go here....
 }
 
+/*
+* Searches in predefined locations for
+* a query, data, and verifier for this query. 
+*
+* THIS FUNCTION ASSUMES YOU RUN FROM THE PROJECT_ROOT! 
+*
+* Looks in for files that match the queryName arg: 
+* 	- 'PROJECT_ROOT/queries/' for a query file.  
+* 	- 'PROJECT_ROOT/test/data/' for a data file.  
+* 	- 'PROJECT_ROOT/test/verify/' for a verifier file.  
+* 
+* @param {string} queryName - the name of the query to search for (without the .js extenion). 
+* 
+* @return a object containing the paths to the files in question. 
+*/
+function lookUpFiles(queryName){
+	var paths = {}; 
+
+	queryName =	queryName.trim(); 
+	//check that they have not entered a path with .js at the end. 
+	if(queryName.match(/(\d|[a-zA-z]).js/i) != null){
+		//remove the .js and use that. 
+		queryName = queryName.substring(0, queryName.length - 3); 
+	}
+
+	//check that the query exists: 
+	if(fs.existsSync(QUERY_DIR+queryName+".js")){
+		paths.queryMap = QUERY_DIR+queryName+".js"
+	}else{
+		throw new exceptions.FileNotFoundException("ERROR: Could not find a query file in PROJECT_ROOT/"+QUERY_DIR+" with name: "+queryName+".js"); 
+		process.exit(); 
+	}
+
+	//check that the data exists: 
+	if(fs.existsSync(DATA_DIR+queryName+".json")){
+		paths.data = DATA_DIR+queryName+".json"
+	}else{
+		throw new exceptions.FileNotFoundException("ERROR: Could not find a test data file in PROJECT_ROOT/"+DATA_DIR+" with name: "+queryName+".json"); 
+		process.exit(); 
+	}
+
+	//check that the verifier exists: 
+	if(fs.existsSync(VERIFY_DIR+queryName+".js")){
+		paths.verify = VERIFY_DIR+queryName+".js"
+	}else{
+		throw new exceptions.FileNotFoundException("ERROR: Could not find a verify function file in PROJECT_ROOT/"+VERIFY_DIR+" with name: "+queryName+".js"); 
+		process.exit(); 
+	}
+
+	paths.name = queryName; 
+
+	return paths; 
+}
+
 
 /*
 * Reads the cmd line arguments and returns an object 
@@ -211,6 +270,14 @@ function processArguments(){
 		console.log("==========================="); 
 	}
 
+	//this is case where they give the name of the query
+	// we need to search for the queries in the respective directories. 
+	if(argv.run != null){
+		return lookUpFiles(argv.run); 
+	}else if(argv.r != null){
+		return lookUpFiles(argv.run); 
+	}
+
 	if(argv.query != null){
 		actions.queryMap = argv.query; 
 	}else if(argv.q != null){
@@ -238,6 +305,7 @@ function processArguments(){
 		console.log("Run: 'js test.js -h' for help message."); 
 	}
 
+
 	return actions; 
 }
 
@@ -253,7 +321,7 @@ function main(){
 	//--------IF WE GET HERE WE HAVE FINISHED PARSING CMD LINE -------
 
 	//Run the test for the given inputs. 
-	runQueryTest(actions.queryMap, actions.data, actions.verify); 
+	runQueryTest(actions.queryMap, actions.data, actions.name); 
 
 	//clean up the environment. 
 	cleanup(); 
