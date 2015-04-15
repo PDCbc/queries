@@ -21,6 +21,7 @@ try{
 	var mockReduce = require('mock-reduce'); 
 	var mongoose = require('mongoose'); 
 	var fs = require('fs'); 
+	var parseArgs = require('minimist'); 
 }catch(e){
 	//empty catch. 	
 	//mock-reduce and mongoose both require BSON
@@ -112,6 +113,7 @@ function runQueryTest(queryMapPath, dataPath, verifierPath){
 	//load the specified test data. 
 	var testData = JSON.parse(fs.readFileSync(dataPath, "utf8")); 
 
+	//get the verifier module. 
 	var verifier = require(verifierPath); 
 
 	var patients = []; 
@@ -161,51 +163,100 @@ function runQueryTest(queryMapPath, dataPath, verifierPath){
 	var accepted =  verifier.verify(result);	
 
 	if(accepted == true){
-		console.log("test passed"); 
+		console.log("Test \""+queryMapPath+"\": PASSED"); 
 	}else{
-		console.log("test failed"); 
+		console.log("Test \""+queryMapPath+"\": FAILED"); 
 	}	
 
 	return accepted;  
 }
 
+/*
+* 
+* Test environment cleanup. 
+*
+*/ 
+function cleanup(){
+
+	//any cleanup for the test environment can go here....
+}
+
+
+/*
+* Reads the cmd line arguments and returns an object 
+* with paths to the  query, data, and verifier for the test. 
+*
+* @return an object containing paths to the query, data, and verifier. 
+*/
+function processArguments(){
+	
+	var actions = {}; 
+
+	var argv = parseArgs(process.argv); 
+
+	if(argv.help != null || argv.h != null){
+		//print the help log. 
+		console.log("==========================="); 
+		console.log("Help Message: "); 
+		console.log("---------------------------"); 
+		console.log("Correct Usage:  "); 
+		console.log("	js test.js --query <path to query> --data <path to data> --verify <path to verify>\n"); 
+		console.log("Arguments: "); 
+		console.log("	-q (--query)	Specify the path to the query you want to execute."); 
+		console.log("	-d (--data)		Specify the path to the test data"); 
+		console.log("	-v (--verify)	Specify the path to the verifier function for this query."); 
+		console.log("\nNotes: "); 
+		console.log("	- If you are receving error messages about JavaScript not being "); 
+		console.log("		able to open files try changing paths to:  './<path>'"); 
+		console.log("==========================="); 
+	}
+
+	if(argv.query != null){
+		actions.queryMap = argv.query; 
+	}else if(argv.q != null){
+		actions.queryMap = argv.q; 
+	}else{
+		console.log("No query was specified, use --query <path to query> or -q <path to query> "); 
+		console.log("Run: 'js test.js -h' for help message."); 
+	}
+
+	if(argv.data != null){
+		actions.data = argv.data; 
+	}else if (argv.d != null){
+		actions.d = argv.d; 
+	}else{
+		console.log("No input data was specified, use --data <path to data> or -q <path to data> "); 
+		console.log("Run: 'js test.js -h' for help message."); 
+	}
+
+	if(argv.verify != null){
+		actions.verify = argv.verify; 
+	}else if (argv.d != null){
+		actions.verify = argv.v; 
+	}else{
+		console.log("No verifier function was specified, use --verify <path to verifier> or -v <path to verifier> "); 
+		console.log("Run: 'js test.js -h' for help message."); 
+	}
+
+	return actions; 
+}
+
 //main function, everything starts here.
 function main(){
 
-	var actions = {
-		folder 		: null,
-		queryMap 	: null, 
-		data 		: null, 
-		verify		: null, 
-	}
+	console.log("----------------------------"); 
+	console.log("Starting....");
+	console.log("----------------------------"); 
 
-	//check that we have a enough arguments
-	if(process.argv.length < 4){
-		//output an error message.
-		console.log("Error, incorrect number of arguments.\nCorrect usage: js test.js <path to query> <path to test data> <verifier>"); 
-
-		//#TODO: Make this so it reads from a file in ./resources and prints a better error message. 
-	}
-
-	//process the arguments and determine what we need to do
-	process.argv.forEach(function(val, index, array){
-		if(index == 0){ //this is the js call.
-			return; 
-		}else if(index == 1){ //the name of the test file (test.js)
-			return; 
-		}else if(index == 2){
-			actions.queryMap = val; 
-		}else if(index == 3){
-			actions.data = val; 
-		}else if(index == 4){
-			actions.verify = val; 
-		}
-	}); 
+	var actions = processArguments(); 
 
 	//--------IF WE GET HERE WE HAVE FINISHED PARSING CMD LINE -------
 
 	//Run the test for the given inputs. 
 	runQueryTest(actions.queryMap, actions.data, actions.verify); 
+
+	//clean up the environment. 
+	cleanup(); 
 }
 
 //first action in the script, call main. 
