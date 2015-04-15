@@ -1,8 +1,33 @@
-var mockReduce = require('mock-reduce'); 
-var mongoose = require('mongoose'); 
-var fs = require('fs'); 
+/**
+* Testing tool for Query development 
+*
+* @author: Simon Diemert
+* @date: 2015-04-15
+*
+* This tool is used to run tests for the queries that are meant to run 
+* on the PDC's network. It takes as input: 
+* 	- A query map function (and any helper functions).
+*	- A json file of the patients (conformant to patient api) to run the query on
+*	- A file containing a single function that should be run to check the results. 
+*		- This function should be called verify(results) and take a single parameter
+*			which is the array of results from the map/reduce on the patient data. 
+*/
 
 
+//node_modules required for the test framework. 
+//the are found in the test/node_modules dir. 
+
+try{
+	var mockReduce = require('mock-reduce'); 
+	var mongoose = require('mongoose'); 
+	var fs = require('fs'); 
+}catch(e){
+	//empty catch. 	
+	//mock-reduce and mongoose both require BSON
+	// however BSON binary is not avaliable, errors
+	// and shows that it is using PureJs version.
+	// we can ignore this error for now. 
+}
 /*
 * This is a stupid fix for executing queries.....ugh
 * We need to combine the patient.js and map.js files together
@@ -67,48 +92,30 @@ function createMapFunction(map_path, api_path){
 	return "./tmp/megafile.js"; 
 }
 
-//main function, everything starts here.
-function main(){
-	var actions = {
-		folder 		: null,
-		queryMap 	: null, 
-		data 		: null
-	}
 
-	//check that we have a enough arguments
-	if(process.argv.length < 4){
-		//output an error message.
-		console.log("Error, incorrect number of arguments.\nCorrect usage: js test.js <path to query> <path to test data>"); 
-	}
-
-	//process the arguments and determine what we need to do
-	process.argv.forEach(function(val, index, array){
-		if(index == 0){ //this is the js call.
-			return; 
-		}else if(index == 1){ //the name of the test file (test.js)
-			return; 
-		}else if(index == 2){
-			actions.queryMap = val; 
-		}else if(index == 3){
-			actions.data = val; 
-		}
-	}); 
-
-	//--------IF WE GET HERE WE HAVE FINISHED PARSING CMD LINE -------
-
-	//load the query (map and reduce modules), and the test data
-	console.log(actions); 
-
+/**
+* Runs the query with test data and verifier specified by 
+* the parameters. 
+*
+* @param queryMapPath - the path to the query file
+* @param dataPath - the path to the data file for the query.
+* @param verifierpath - path to the verifier function for the query. 
+*/
+function runQueryTest(queryMapPath, dataPath, verifierPath){
+	
 	//combine the patient api and query in a single file. 
-	var megaModulePath = createMapFunction(actions.queryMap, "./resources/patient.js"); 
+	var megaModulePath = createMapFunction(queryMapPath, "./resources/patient.js"); 
 
 	//open the single file with all of code for the query. 
 	var megaModule = require(megaModulePath); 
 
 	//load the specified test data. 
-	var testData = JSON.parse(fs.readFileSync(actions.data, "utf8")); 
+	var testData = JSON.parse(fs.readFileSync(dataPath, "utf8")); 
+
+	var verifier = require(verifierPath); 
 
 	var patients = []; 
+
 	var patient = null; 
 
 	//loop through patients and create a patient object from the patient API
@@ -128,11 +135,9 @@ function main(){
 	schema.statics.callsMapReduce = function() {
 		var mapReduce = {
 			map: function(){
-				console.log("CALLING MAP: ")
 				megaModule.map(this); 
 			}, 
 			reduce: function(key, values) {
-				console.log("REDUCE: ")
 				var s = 0; 
 				values.forEach(function(d){
 					s += d; 
@@ -147,13 +152,60 @@ function main(){
 	mockReduce.install(mongoose); 
 	mockReduce.setNextTestData(patients); 
 	var model = mongoose.model('model', schema); 
+
+	//call the map reduce using mock-reduce. 
 	var result = model.callsMapReduce(); 
 
-	//print results
-	console.log(result); 
+	//verify results using the user's defined 
+	//verify function. 
+	var accepted =  verifier.verify(result);	
 
-	//validate results are as expected:
-	// TODO: make me
+	if(accepted == true){
+		console.log("test passed"); 
+	}else{
+		console.log("test failed"); 
+	}	
+
+	return accepted;  
+}
+
+//main function, everything starts here.
+function main(){
+
+	var actions = {
+		folder 		: null,
+		queryMap 	: null, 
+		data 		: null, 
+		verify		: null, 
+	}
+
+	//check that we have a enough arguments
+	if(process.argv.length < 4){
+		//output an error message.
+		console.log("Error, incorrect number of arguments.\nCorrect usage: js test.js <path to query> <path to test data> <verifier>"); 
+
+		//#TODO: Make this so it reads from a file in ./resources and prints a better error message. 
+	}
+
+	//process the arguments and determine what we need to do
+	process.argv.forEach(function(val, index, array){
+		if(index == 0){ //this is the js call.
+			return; 
+		}else if(index == 1){ //the name of the test file (test.js)
+			return; 
+		}else if(index == 2){
+			actions.queryMap = val; 
+		}else if(index == 3){
+			actions.data = val; 
+		}else if(index == 4){
+			actions.verify = val; 
+		}
+	}); 
+
+	//--------IF WE GET HERE WE HAVE FINISHED PARSING CMD LINE -------
+
+	//Run the test for the given inputs. 
+	runQueryTest(actions.queryMap, actions.data, actions.verify); 
 }
 
 //first action in the script, call main. 
