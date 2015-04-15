@@ -257,6 +257,11 @@ function main(){
 
 	//clean up the environment. 
 	cleanup(); 
+
+	//print finished message
+	console.log("----------------------------"); 
+	console.log("Finished.");
+	console.log("----------------------------"); 
 }
 
 //first action in the script, call main. 
