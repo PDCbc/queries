@@ -1,0 +1,139 @@
+[
+  {
+    "birthdate": -223262033,
+    "conditions": [
+      {
+        "codes": {
+          "SNOMED-CT": [
+            "109838007"
+          ]
+        },
+        "time": 1263167138,
+        "description": "Colorectal Cancer",
+        "ageAtOnset": 20,
+        "priority": 1,
+        "ordinality": {
+          "code": "8319008",
+          "codeSystem": "SNOMED-CT"
+        },
+        "severity": {
+          "code": "371924009",
+          "codeSystem": "SNOMED-CT"
+        },
+        "problemStatus": {
+          "code": "55561003",
+          "codeSystem": "SNOMED-CT"
+        }
+      }
+    ], 
+    "procedures": [
+      {
+        "codes": {
+          "CPT": [
+            "44388"
+          ],
+          "LOINC":["18746-8"],
+          "pCLOCD":["14563-1"]
+        },
+        "site": {
+          "code": "71854001",
+          "codeSystem": "SNOMED-CT"
+        },
+        "time": 1073238725,
+        "performer": {
+          "person": {
+            "first": "Bobby",
+            "last": "Tables"
+          }
+        },
+        "description": "Colonscopy",
+        "source": {
+          "code": "158967008",
+          "codeSystem": "SNOMED-CT"
+        },
+        "incisionTime": 1073238725
+      }
+    ],
+    "results": [
+    {
+      "codes": {
+        "SNOMED-CT": [
+          "104150001"
+        ]
+      },
+      "time": 1263168508,
+      "description": "Sucralose hemolysis test",
+      "status_code": {
+        "HL7 ActStatus": ["completed"]
+      },
+      "comment": "Negative"
+    },
+    {
+      "time":1420074061, 
+      "codes":{
+        "LOINC":["18746-8"]
+      }
+    },
+    {
+      "time":1420074061, 
+      "codes":{
+        "pCLOCD":["14563-1", "14564-9"]
+      }
+    }
+  ]
+}, 
+{
+    "birthdate": 223262033,
+    "conditions": [
+      {
+        "codes": {
+          "SNOMED-CT": [
+            "109838007"
+          ]
+        },
+        "time": 1263167138,
+        "description": "Colorectal Cancer",
+        "ageAtOnset": 20,
+        "priority": 1,
+        "ordinality": {
+          "code": "8319008",
+          "codeSystem": "SNOMED-CT"
+        },
+        "severity": {
+          "code": "371924009",
+          "codeSystem": "SNOMED-CT"
+        },
+        "problemStatus": {
+          "code": "55561003",
+          "codeSystem": "SNOMED-CT"
+        }
+      }
+    ], 
+    "procedures": [
+      {
+        "codes": {
+          "CPT": [
+            "44388"
+          ]
+        },
+        "site": {
+          "code": "71854001",
+          "codeSystem": "SNOMED-CT"
+        },
+        "time": 1073238725,
+        "performer": {
+          "person": {
+            "first": "Bobby",
+            "last": "Tables"
+          }
+        },
+        "description": "Colonscopy",
+        "source": {
+          "code": "158967008",
+          "codeSystem": "SNOMED-CT"
+        },
+        "incisionTime": 1073238725
+      }
+    ]
+  }
+]

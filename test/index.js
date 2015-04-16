@@ -57,8 +57,8 @@ var QUERY_DIR = "queries/"
 function createMapFunction(map_path, api_path){
 
 	//make a new directory to work in. 
-	if (!fs.existsSync("./tmp")){
-		fs.mkdirSync("./tmp"); 
+	if (!fs.existsSync(TEST_DIR+"tmp")){
+		fs.mkdirSync(TEST_DIR+"tmp"); 
 	}
 
 	//get the text in the map_path file. 
@@ -68,6 +68,7 @@ function createMapFunction(map_path, api_path){
 	var api = fs.readFileSync(api_path);
 
 	var new_string = "";
+
 
 	//need this for making the hQuery api visible globally. 
 	new_string += "this.hQuery || (this.hQuery = {});\n"
@@ -83,18 +84,23 @@ function createMapFunction(map_path, api_path){
 
 	//now make a new patient that is globally accessible so that
 	//query has access. 
-	new_string += "var patient = new hQuery.Patient(this);\n"; 
+	//new_string += "var patient = new hQuery.Patient(this);\n"; 
+	new_string += "var patient = null;\n"; 
+
+	new_string += "function initMod(val){\n"
+	new_string += "		patient = new hQuery.Patient(val.json);\n"
+	new_string += "};\n"
 
 	//add module exports 
-	new_string += " module.exports = { map : map, hQuery : this.hQuery, patient : patient};\n";
+	new_string += "module.exports = { initMod : initMod, map : map, hQuery : hQuery};\n";
 
 	//remove the output file if it exists. 
-	if(fs.existsSync("./tmp/megafile.js")){
-		fs.unlinkSync("./tmp/megafile.js"); 
+	if(fs.existsSync(TEST_DIR+"tmp/megafile.js")){
+		fs.unlinkSync(TEST_DIR+"tmp/megafile.js"); 
 	}
-	fs.writeFileSync("./tmp/megafile.js", new_string); 
+	fs.writeFileSync(TEST_DIR+"tmp/megafile.js", new_string); 
 
-	return "./tmp/megafile.js"; 
+	return TEST_DIR+"tmp/megafile.js"; 
 }
 
 
@@ -112,14 +118,16 @@ function runQueryTest(queryMapPath, dataPath, verifierPath){
 	var megaModulePath = createMapFunction(queryMapPath, TEST_DIR+"resources/patient.js"); 
 
 	//open the single file with all of code for the query. 
-	var megaModule = require(megaModulePath); 
+	var megaModule = require("./tmp/megafile.js");  //needs to be WRT the test/ directory....this is a hack.
 
 	//load the specified test data. 
 	var testData = JSON.parse(fs.readFileSync(dataPath, "utf8")); 
+	fs.writeFileSync("./test/tmp/data.json", JSON.stringify(testData,null)); 
+	var testData = JSON.parse(fs.readFileSync("./test/tmp/data.json", "utf8")); 
 
 	//get the verifier module. 
 	//require(...) is relative to the location of the script, not where you run from...
-	var verifier = require("./verify/"+verifierPath+".js"); 
+	var verifier = require(verifierPath); 
 
 	var patients = []; 
 
@@ -134,7 +142,6 @@ function runQueryTest(queryMapPath, dataPath, verifierPath){
 	//create a blank Mongoose Schema for the MockReduce to operate on.
 	var schema = mongoose.Schema({
 		id: Number,
-		patient: String
 	});
 
 
@@ -142,6 +149,7 @@ function runQueryTest(queryMapPath, dataPath, verifierPath){
 	schema.statics.callsMapReduce = function() {
 		var mapReduce = {
 			map: function(){
+				megaModule.initMod(this); 
 				megaModule.map(this); 
 			}, 
 			reduce: function(key, values) {
@@ -162,6 +170,7 @@ function runQueryTest(queryMapPath, dataPath, verifierPath){
 
 	//call the map reduce using mock-reduce. 
 	var result = model.callsMapReduce(); 
+	console.log(result); 
 
 	//verify results using the user's defined 
 	//verify function. 
@@ -173,6 +182,7 @@ function runQueryTest(queryMapPath, dataPath, verifierPath){
 		console.log("Test \""+queryMapPath+"\": FAILED"); 
 	}	
 
+	mockReduce.uninstall(); 
 	return accepted;  
 }
 
@@ -202,9 +212,12 @@ function cleanup(){
 * @return a object containing the paths to the files in question. 
 */
 function lookUpFiles(queryName){
+
 	var paths = {}; 
 
+	//remove any trailing whitespace. 
 	queryName =	queryName.trim(); 
+
 	//check that they have not entered a path with .js at the end. 
 	if(queryName.match(/(\d|[a-zA-z]).js/i) != null){
 		//remove the .js and use that. 
@@ -213,6 +226,7 @@ function lookUpFiles(queryName){
 
 	//check that the query exists: 
 	if(fs.existsSync(QUERY_DIR+queryName+".js")){
+		//relative to directory the test is executed from. (PROJECT_ROOT) dir.  
 		paths.queryMap = QUERY_DIR+queryName+".js"
 	}else{
 		throw new exceptions.FileNotFoundException("ERROR: Could not find a query file in PROJECT_ROOT/"+QUERY_DIR+" with name: "+queryName+".js"); 
@@ -221,6 +235,7 @@ function lookUpFiles(queryName){
 
 	//check that the data exists: 
 	if(fs.existsSync(DATA_DIR+queryName+".json")){
+		//this path needs to be specified relative to the directory the test was executed from.
 		paths.data = DATA_DIR+queryName+".json"
 	}else{
 		throw new exceptions.FileNotFoundException("ERROR: Could not find a test data file in PROJECT_ROOT/"+DATA_DIR+" with name: "+queryName+".json"); 
@@ -229,7 +244,9 @@ function lookUpFiles(queryName){
 
 	//check that the verifier exists: 
 	if(fs.existsSync(VERIFY_DIR+queryName+".js")){
-		paths.verify = VERIFY_DIR+queryName+".js"
+		//since this looks things up via require we need to specify a path relative to 
+		//THIS index.js file, not the dir it is executed from...
+		paths.verify = "./verify/"+queryName+".js" 
 	}else{
 		throw new exceptions.FileNotFoundException("ERROR: Could not find a verify function file in PROJECT_ROOT/"+VERIFY_DIR+" with name: "+queryName+".js"); 
 		process.exit(); 
@@ -260,14 +277,19 @@ function processArguments(){
 		console.log("---------------------------"); 
 		console.log("Correct Usage:  "); 
 		console.log("	js test.js --query <path to query> --data <path to data> --verify <path to verify>\n"); 
+		console.log("	OR:  "); 
+		console.log("	js test.js --run <query name>\n"); 
 		console.log("Arguments: "); 
 		console.log("	-q (--query)	Specify the path to the query you want to execute."); 
 		console.log("	-d (--data)		Specify the path to the test data"); 
 		console.log("	-v (--verify)	Specify the path to the verifier function for this query."); 
+		console.log("	-r (--run)		Specify the name of a query, will cause the test framework to look"); 
+		console.log("					in PROJECT_HOME/queries for a query to run."); 
 		console.log("\nNotes: "); 
 		console.log("	- If you are receving error messages about JavaScript not being "); 
 		console.log("		able to open files try changing paths to:  './<path>'"); 
 		console.log("==========================="); 
+		process.exit(); 
 	}
 
 	//this is case where they give the name of the query
@@ -305,7 +327,6 @@ function processArguments(){
 		console.log("Run: 'js test.js -h' for help message."); 
 	}
 
-
 	return actions; 
 }
 
@@ -321,7 +342,7 @@ function main(){
 	//--------IF WE GET HERE WE HAVE FINISHED PARSING CMD LINE -------
 
 	//Run the test for the given inputs. 
-	runQueryTest(actions.queryMap, actions.data, actions.name); 
+	runQueryTest(actions.queryMap, actions.data, actions.verify); 
 
 	//clean up the environment. 
 	cleanup(); 
