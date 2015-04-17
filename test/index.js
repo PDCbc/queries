@@ -324,75 +324,103 @@ function lookUpFiles(queryName){
 	return paths; 
 }
 
+function showHelpMessage(){
+	//print the help log. 
+	console.log("==========================="); 
+	console.log("Help Message: "); 
+	console.log("---------------------------"); 
+	console.log("Correct Usage:  "); 
+	console.log("	js test.js --query <path to query> --data <path to data> --verify <path to verify>\n"); 
+	console.log("	OR:  "); 
+	console.log("	js test.js --run <query name>\n"); 
+	console.log("Arguments: "); 
+	console.log("	-q (--query)	Specify the path to the query you want to execute."); 
+	console.log("	-d (--data)		Specify the path to the test data"); 
+	console.log("	-v (--verify)	Specify the path to the verifier function for this query. This must be relative to the test/ directory!"); 
+	console.log("	-r (--run)		Specify the name of a query, will cause the test framework to look"); 
+	console.log("					in PROJECT_HOME/queries for a query to run."); 
+	console.log("\nNotes: "); 
+	console.log("	- If you are receving error messages about JavaScript not being "); 
+	console.log("		able to open files try changing paths to:  './<path>'"); 
+	console.log("==========================="); 
+	process.exit(); 
+}
+
 
 /*
 * Reads the cmd line arguments and returns an object 
 * with paths to the  query, data, and verifier for the test. 
 *
-* @return an object containing paths to the query, data, and verifier. 
+* @return an the action to take (all, run, null) based on the args. 
+*		also writes paths to files from the arguments into the actions parameter that is passed in. 
 */
 function processArguments(actions){
 	
+	var tmp_actions = {}; 
+	var return_action = null; 
+
 	var argv = parseArgs(process.argv); 
 
 	if(argv.help != null || argv.h != null){
-		//print the help log. 
-		console.log("==========================="); 
-		console.log("Help Message: "); 
-		console.log("---------------------------"); 
-		console.log("Correct Usage:  "); 
-		console.log("	js test.js --query <path to query> --data <path to data> --verify <path to verify>\n"); 
-		console.log("	OR:  "); 
-		console.log("	js test.js --run <query name>\n"); 
-		console.log("Arguments: "); 
-		console.log("	-q (--query)	Specify the path to the query you want to execute."); 
-		console.log("	-d (--data)		Specify the path to the test data"); 
-		console.log("	-v (--verify)	Specify the path to the verifier function for this query. This must be relative to the test/ directory!"); 
-		console.log("	-r (--run)		Specify the name of a query, will cause the test framework to look"); 
-		console.log("					in PROJECT_HOME/queries for a query to run."); 
-		console.log("\nNotes: "); 
-		console.log("	- If you are receving error messages about JavaScript not being "); 
-		console.log("		able to open files try changing paths to:  './<path>'"); 
-		console.log("==========================="); 
-		process.exit(); 
+		showHelpMessage(); 	
 	}
 
 	//this is case where they give the name of the query
 	// we need to search for the queries in the respective directories. 
-	if(argv.run != null){
-		return lookUpFiles(argv.run); 
+	if (argv.a != null || argv.all != null){
+		if(argv.a != null){
+			tmp_actions.pattern = argv.a; 
+		}else if(argv.all != null){
+			tmp_actions.pattern = argv.all;
+		}else{
+			tmp_actions.pattern = null; 
+		}
+		return_action = 'all'; 
+	}else if(argv.run != null){
+		tmp_actions = lookUpFiles(argv.run); 
+		return_action = 'run'; 
 	}else if(argv.r != null){
-		return lookUpFiles(argv.r); 
-	}
-
-	if(argv.query != null){
-		actions.queryMap = argv.query; 
-	}else if(argv.q != null){
-		actions.queryMap = argv.q; 
+		tmp_actions = lookUpFiles(argv.r); 
+		return_action = 'run'; 
 	}else{
-		console.log("No query was specified, use --query <path to query> or -q <path to query> "); 
-		console.log("Run: 'js test.js -h' for help message."); 
+		if(argv.query != null){
+			tmp_actions.queryMap = argv.query; 
+		}else if(argv.q != null){
+			tmp_actions.queryMap = argv.q; 
+		}else{
+			console.log("No query was specified, use --query <path to query> or -q <path to query> "); 
+			console.log("Run: 'js test.js -h' for help message."); 
+			return null; 
+		}
+
+		if(argv.data != null){
+			tmp_action = actions.data = argv.data; 
+		}else if (argv.d != null){
+			tmp_actions.data = argv.d; 
+		}else{
+			console.log("No input data was specified, use --data <path to data> or -q <path to data> "); 
+			console.log("Run: 'js test.js -h' for help message."); 
+			return null; 
+		}
+
+		if(argv.verify != null){
+			tmp_actions.verify = argv.verify; 
+		}else if (argv.d != null){
+			tmp_actions.verify = argv.v; 
+		}else{
+			console.log("No verifier function was specified, use --verify <path to verifier> or -v <path to verifier> "); 
+			console.log("Run: 'js test.js -h' for help message."); 
+			return null; 
+		}
+		return_action = 'run'; 
 	}
 
-	if(argv.data != null){
-		actions.data = argv.data; 
-	}else if (argv.d != null){
-		actions.data = argv.d; 
-	}else{
-		console.log("No input data was specified, use --data <path to data> or -q <path to data> "); 
-		console.log("Run: 'js test.js -h' for help message."); 
-	}
-
-	if(argv.verify != null){
-		actions.verify = argv.verify; 
-	}else if (argv.d != null){
-		actions.verify = argv.v; 
-	}else{
-		console.log("No verifier function was specified, use --verify <path to verifier> or -v <path to verifier> "); 
-		console.log("Run: 'js test.js -h' for help message."); 
-	}
-
-	return actions; 
+	
+	actions.queryMap = tmp_actions.queryMap; 
+	actions.data = tmp_actions.data; 
+	actions.verify = tmp_actions.verify; 
+	actions.pattern = tmp_actions.pattern; 
+	return return_action; 
 }
 
 
@@ -491,12 +519,26 @@ function main(){
 
 	//executeBatch(); 
 
-	var actions = processArguments(); 
+	var paths = {}; 
+
+	var action = processArguments(paths); 
+
+	switch(action){
+		case 'all':
+			executeBatch(paths.pattern)
+			break; 
+		case 'run':
+			//Run the test for the given inputs. 
+			runQueryTest(paths.queryMap, paths.data, paths.verify); 
+			break; 
+		default:
+			showHelpMessage(); 
+			break; 
+	}
 
 	//--------IF WE GET HERE WE HAVE FINISHED PARSING CMD LINE -------
 
-	//Run the test for the given inputs. 
-	runQueryTest(actions.queryMap, actions.data, actions.verify); 
+	
 
 	//clean up the environment. 
 	cleanup(); 

@@ -14,7 +14,6 @@
 * @return true if the results are as expected, false otherwise. 
 */
 function verify(results){
-	console.log(results); 
 	return false; 	//change this to fail (return false)
 }
 
