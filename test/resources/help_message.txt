@@ -1,0 +1,29 @@
+===========================
+Help Message:
+---------------------------
+A utility for running queries and unit tests on queries. This must be executed
+from the root directory of the queries repository.
+
+Correct Usage:
+    js test --query <path to query> --data <path to data> --verify <path to verify>
+
+    OR:
+    js test --run <query name>
+
+    OR:
+    js test --all <regex> 
+
+
+Arguments:
+    -q (--query)        Specify the path to the query you want to execute.
+    -d (--data)         Specify the path to the test data
+    -v (--verify)       Specify the path to the verifier function for this query. 
+                            This must be relative to the test/ directory!
+    -r (--run)          Specify the name of a query, will cause the test framework to look
+                            in PROJECT_HOME/queries for a query to run.
+    -a (--all) [regex]  Runs all the queries that are in the queries/ directory and match the regex patrern.
+                            If the [regex] argument is not specified it will run all queries in queries/ 
+
+Notes:
+    - If you are receving error messages about JavaScript not being
+        able to open files try changing paths to:  './<path>'

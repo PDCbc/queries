@@ -324,26 +324,24 @@ function lookUpFiles(queryName){
 	return paths; 
 }
 
+/*
+* Shows the help message in resources/help_message.txt
+* then terminates the process. 
+*/
 function showHelpMessage(){
 	//print the help log. 
-	console.log("==========================="); 
-	console.log("Help Message: "); 
-	console.log("---------------------------"); 
-	console.log("Correct Usage:  "); 
-	console.log("	js test.js --query <path to query> --data <path to data> --verify <path to verify>\n"); 
-	console.log("	OR:  "); 
-	console.log("	js test.js --run <query name>\n"); 
-	console.log("Arguments: "); 
-	console.log("	-q (--query)	Specify the path to the query you want to execute."); 
-	console.log("	-d (--data)		Specify the path to the test data"); 
-	console.log("	-v (--verify)	Specify the path to the verifier function for this query. This must be relative to the test/ directory!"); 
-	console.log("	-r (--run)		Specify the name of a query, will cause the test framework to look"); 
-	console.log("					in PROJECT_HOME/queries for a query to run."); 
-	console.log("\nNotes: "); 
-	console.log("	- If you are receving error messages about JavaScript not being "); 
-	console.log("		able to open files try changing paths to:  './<path>'"); 
-	console.log("==========================="); 
-	process.exit(); 
+	try{
+		console.log(fs.readFileSync('./test/resources/help_message.txt', 'utf8'));
+	}catch(e){
+		try{
+			console.log(fs.readFileSync('./resources/help_message.txt', 'utf8'));
+		}catch(e){
+			console.log("Failed, please ensure all dependencies are in place."); 
+		}
+	}finally{
+		process.exit(); 
+	}
+
 }
 
 
@@ -383,7 +381,10 @@ function processArguments(actions){
 		tmp_actions = lookUpFiles(argv.r); 
 		return_action = 'run'; 
 	}else{
-		if(argv.query != null){
+		if(argv.query == null || argv.q == null){
+			return null; 
+		}
+		if(argv.query){
 			tmp_actions.queryMap = argv.query; 
 		}else if(argv.q != null){
 			tmp_actions.queryMap = argv.q; 
@@ -506,12 +507,57 @@ function executeBatch(name_pattern){
 	process.exit(); 
 }
 
+/*
+* Validate the the folder structure is correct
+* for running tests. Relative to the project root.
+*
+* Returns false if the folder structure is not correct, 
+* true otherwise. 
+*/
+function checkFolderStructure(){
+	if(!fs.existsSync("queries")){
+		console.log("No queries/ directory was found!");
+		return false; 
+	}
+	if(!fs.existsSync("test")){
+		console.log("No test/ directory was found!");
+		return false; 
+	}
+	if(!fs.existsSync("functions")){
+		console.log("No functions/ directory was found!");
+		return false; 
+
+	}
+	if(!fs.existsSync("test/resources")){
+		console.log("No test/resources/ directory was found!");
+		return false; 
+	}
+	if(!fs.existsSync("test/data")){
+		console.log("No test/data/ directory was found!");
+		return false; 
+	}
+	if(!fs.existsSync("test/verify")){
+		console.log("No test/verify/ directory was found!");
+		return false; 
+	}
+	if(!fs.existsSync("./test/exception.js")){
+		console.log("No test/exceptions.js/ directory was found!");
+		return false; 
+	}
+	return true;
+}
+
 //main function, everything starts here.
 function main(){
 
 	console.log("----------------------------"); 
 	console.log("Starting....");
 	console.log("----------------------------"); 
+
+	//check that the folder structure is setup. 
+	if(!checkFolderStructure()){
+		process.exit(); 
+	}
 
 	//pull in helper functions.
 
@@ -532,13 +578,9 @@ function main(){
 			runQueryTest(paths.queryMap, paths.data, paths.verify); 
 			break; 
 		default:
-			showHelpMessage(); 
+			executeBatch(); 	
 			break; 
 	}
-
-	//--------IF WE GET HERE WE HAVE FINISHED PARSING CMD LINE -------
-
-	
 
 	//clean up the environment. 
 	cleanup(); 
