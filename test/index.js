@@ -116,7 +116,7 @@ function createMapFunction(map_path, api_path, functions_path){
 
 	//get the text in the map_path file. 
 	var map = fs.readFileSync(map_path);
-
+	
 	//get the text in the api_path file.
 	var api = fs.readFileSync(api_path);
 
@@ -176,6 +176,8 @@ function runQueryTest(queryMapPath, dataPath, verifierPath){
 	//combine the patient api and query in a single file. 
 	var megaModulePath = createMapFunction(queryMapPath, TEST_DIR+"resources/patient.js", 'test/tmp/functions.js'); 
 	
+	//need to delete the megafile.js from the cache as require() caches it. 
+	delete require.cache[require.resolve("./tmp/megafile.js")]; 
 	//open the single file with all of code for the query. 
 	var megaModule = require("./tmp/megafile.js");  //needs to be WRT the test/ directory....this is a hack.
 
@@ -230,7 +232,6 @@ function runQueryTest(queryMapPath, dataPath, verifierPath){
 
 	//call the map reduce using mock-reduce. 
 	var result = model.callsMapReduce(); 
-	console.log(result); 
 
 	//verify results using the user's defined 
 	//verify function. 
@@ -242,8 +243,14 @@ function runQueryTest(queryMapPath, dataPath, verifierPath){
 		console.log("Test \""+queryMapPath+"\": FAILED"); 
 	}	
 
+	//uninstall and delete records related to this test. 
 	mockReduce.uninstall(); 
+	delete mongoose.connection.models['model']; 
 	return accepted;  
+}
+
+function setUpMockReduce(){
+	mockReduce.install(mongoose);
 }
 
 /*
@@ -324,10 +331,8 @@ function lookUpFiles(queryName){
 *
 * @return an object containing paths to the query, data, and verifier. 
 */
-function processArguments(){
+function processArguments(actions){
 	
-	var actions = {}; 
-
 	var argv = parseArgs(process.argv); 
 
 	if(argv.help != null || argv.h != null){
@@ -387,9 +392,90 @@ function processArguments(){
 		console.log("Run: 'js test.js -h' for help message."); 
 	}
 
-
-
 	return actions; 
+}
+
+
+/*
+* Executes a batch of queries and tests.
+* 
+* Looks in queries/ for any files that match the names that match
+* 	the pattern described by the name_pattern parameter. 
+*
+ See 
+*
+* @param {string} name_pattern  the regular expression pattern for the file names. 
+									not passing this parameter results in all queries being matched. 
+*/
+function executeBatch(name_pattern){
+	
+	// 1. Get names of queries in queries/ dir. 
+	// 2. Filter out queries that do not match the name_pattern.
+	// 3. Strip off the ".js" so we can use it more flexibly. 
+	// 4. Get paths to test data and verifer for each.
+	// 5. Pass objects with specification to the executeQuery function.  
+
+
+	//1. Get names of functions in queries/  dir 
+	var names = fs.readdirSync(QUERY_DIR); 
+	var tmp_name; 
+	var paths = []; 
+	var i = 0; 
+
+	//2, 3, 4. 
+
+	// If the pattern was undefined or empty string find all. 
+	if(name_pattern == null || name_pattern == "" || 
+			typeof(name_pattern) == 'undefined'){
+		name_pattern = ".*"; 	
+	}
+
+	for(i = 0; i < names.length; i++){
+		if(names[i].match(name_pattern)){
+			if(fs.lstatSync(QUERY_DIR+names[i]).isDirectory()){
+				console.log("WARNING: Ignoring "+QUERY_DIR+names[i]+" since it is a directory"); 
+				continue; 
+			}
+			//filter out files that are not .js
+			if(names[i].substring(names[i].length - 3, names[i].length) == ".js"){
+				//get just query name, not the extension.
+				tmp_name = names[i].substring(0, names[i].length - 3); 
+
+				//look up the file names
+				try{
+					paths.push(lookUpFiles(tmp_name)); 
+				}catch(e){
+					console.log("WARNING: Could not file verifier or data for "+QUERY_DIR+names[i]); 
+					continue; 
+				}
+			}else{
+				console.log("WARNING: Ignoring "+QUERY_DIR+names[i]+" since it is not a javascript file."); 
+			}
+		} 
+	}
+
+	//when we get to here the paths array contains objects that have valid paths. 
+
+	console.log("====================================");
+	console.log("Beginning Execution of Tests"); 
+	console.log("====================================");
+	var result = false; 
+	var passed = 0; 
+	//loop through and execute each query 
+	for(i = 0; i < paths.length ; i++){
+		result = runQueryTest(paths[i].queryMap, paths[i].data, paths[i].verify); 
+		if(result){
+			passed+= 1; 
+		}
+	}
+
+	console.log("====================================");
+	console.log("Finished Tests..."); 
+	console.log(paths.length+" test were run."); 
+	console.log(passed+" passed."); 
+	console.log("====================================");
+
+	process.exit(); 
 }
 
 //main function, everything starts here.
@@ -399,12 +485,15 @@ function main(){
 	console.log("Starting....");
 	console.log("----------------------------"); 
 
+	//pull in helper functions.
+
+	getSupportFunctions();  
+
+	//executeBatch(); 
+
 	var actions = processArguments(); 
 
 	//--------IF WE GET HERE WE HAVE FINISHED PARSING CMD LINE -------
-
-	//get functions and put them into test/tmp/functions.js 
-	getSupportFunctions();  
 
 	//Run the test for the given inputs. 
 	runQueryTest(actions.queryMap, actions.data, actions.verify); 

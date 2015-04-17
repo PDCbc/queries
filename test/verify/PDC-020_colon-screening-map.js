@@ -14,7 +14,8 @@
 * @return true if the results are as expected, false otherwise. 
 */
 function verify(results){
-	return true; 	//change this to fail (return false)
+	console.log(results); 
+	return false; 	//change this to fail (return false)
 }
 
 module.exports = {
