@@ -33,6 +33,58 @@ var TEST_DIR = "test/";
 var VERIFY_DIR = TEST_DIR+"verify/"; 
 var DATA_DIR = TEST_DIR+"data/"; 
 var QUERY_DIR = "queries/"
+var FUNCTION_DIR = "functions/"
+var TMP_DIR = TEST_DIR+"tmp/"
+
+
+/*
+* Gets supporting functions from the functions/ directory.
+* 
+* See: https://nodejs.org/api/fs.html for file system commands 
+*
+* Also writes the resulting string to a file in test/tmp/functions.js
+*
+* @return a string that is all of functions combined. 
+*/
+function getSupportFunctions(){
+
+	//check that the functions/ directory exists
+	if(!fs.existsSync(FUNCTION_DIR)){
+		//error here. 	
+		throw new exceptions.FileNotFoundException("functions/ directory not found."); 
+	}
+
+	//If we get here we know that the functions/ directory exists. 
+	//Now we need to load: 
+	// 1. Get the paths to all functions in functions/
+	// 2. Get the strings from the files 
+	// 3. Combine all of the strings. 
+	// 4. Write to a file in test/tmp/
+
+	//1. Read the functions/ dir
+	var names = fs.readdirSync(FUNCTION_DIR); 
+
+	//2. and 3. together. 
+	var new_string = ""; 
+	var i = 0; 
+	for(i=0; i < names.length; i++){
+		new_string += "\n"; 
+		new_string += "// -------------------------------\n" ; 
+		new_string += "//  BEGIN "+FUNCTION_DIR+names[i]+"\n"; 
+		new_string += "// -------------------------------\n\n" ; 
+		new_string += fs.readFileSync(FUNCTION_DIR+names[i], "utf8"); 
+		new_string += "\n"; 
+		new_string += "// -------------------------------\n"; 
+		new_string += "//  END "+FUNCTION_DIR+names[i]+"\n"; 
+		new_string += "// -------------------------------\n"; 
+		new_string += "\n"; 
+	}
+
+	// 4. Write to new_string to a file so that we can use it many times. 
+	fs.writeFileSync(TMP_DIR+"functions.js", new_string); 
+
+	return new_string; 
+}
 
 /*
 * This is a stupid fix for executing queries.....ugh
@@ -43,6 +95,7 @@ var QUERY_DIR = "queries/"
 * 
 * @param {string} map_path - the path the query map function to use
 * @param {string} api_path - the path to the patient api
+* @param {string} functions_path - path to the functions that the query depends on.
 *
 * @returns {string} the file path to the new test
 *
@@ -54,7 +107,7 @@ var QUERY_DIR = "queries/"
 *	5. return the path to the new js file that can be used be
 *	 	by the map reduce. 
 */
-function createMapFunction(map_path, api_path){
+function createMapFunction(map_path, api_path, functions_path){
 
 	//make a new directory to work in. 
 	if (!fs.existsSync(TEST_DIR+"tmp")){
@@ -67,6 +120,8 @@ function createMapFunction(map_path, api_path){
 	//get the text in the api_path file.
 	var api = fs.readFileSync(api_path);
 
+	var functions = fs.readFileSync(functions_path); 
+
 	var new_string = "";
 
 
@@ -77,6 +132,10 @@ function createMapFunction(map_path, api_path){
 	//now add the code the patient api. 
 	new_string += api; 
 	new_string += "//===============END OF PATIENT API \n\n\n"; 
+
+	//now add the code for the helper functions 
+	new_string += functions; 
+	new_string += "//===============END OF FUNCTIONS \n\n\n"; 
 
 	//now add the code for the query map function
 	new_string += map; 
@@ -114,16 +173,8 @@ function createMapFunction(map_path, api_path){
 */
 function runQueryTest(queryMapPath, dataPath, verifierPath){
 	
-	try{
-		//combine the patient api and query in a single file. 
-		var megaModulePath = createMapFunction(queryMapPath, TEST_DIR+"resources/patient.js"); 
-	}catch(e){
-		console.log("-------------------------"); 
-		console.log("Exiting due to error ..."); 
-		console.log("-------------------------"); 
-		throw new exceptions.FileNotFoundException("Patient API not found in test/resources/patient.js"); 
-
-	}
+	//combine the patient api and query in a single file. 
+	var megaModulePath = createMapFunction(queryMapPath, TEST_DIR+"resources/patient.js", 'test/tmp/functions.js'); 
 	
 	//open the single file with all of code for the query. 
 	var megaModule = require("./tmp/megafile.js");  //needs to be WRT the test/ directory....this is a hack.
@@ -351,6 +402,9 @@ function main(){
 	var actions = processArguments(); 
 
 	//--------IF WE GET HERE WE HAVE FINISHED PARSING CMD LINE -------
+
+	//get functions and put them into test/tmp/functions.js 
+	getSupportFunctions();  
 
 	//Run the test for the given inputs. 
 	runQueryTest(actions.queryMap, actions.data, actions.verify); 
