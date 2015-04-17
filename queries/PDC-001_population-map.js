@@ -1,7 +1,7 @@
 /**
  * Query Title: PDC-001
  * Query Type:  Pyramid
- * Description: Population Profile: Age and Gender
+ * Description: Population Pyramid
  */
 function map( patient ){
   //constants
