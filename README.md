@@ -93,6 +93,8 @@ The test utility allows one to do the following:
 
 Run all of the tests within the `queries/` directory with: `js test`
 
+Before running tests install dependencies using: `npm install minimist mock-reduce mongoose fs bson`
+
 See the help message for more options:  
 
 Correct Usage:
@@ -117,6 +119,24 @@ Arguments:
     -a (--all) [regex]  Runs all the queries that are in the queries/ directory and match the regex patrern.
                             If the [regex] argument is not specified it will run all queries in queries/
 
-Notes:
-    - If you are receving error messages about JavaScript not being
-        able to open files try changing paths to:  './<path>'
+### Dependencies
+
+The test utility relies on several node packages (installed via [node package manager](https://www.npmjs.com/)): 
+
+Before running tests install dependencies using: `npm install minimist mock-reduce mongoose fs bson`
+
+* MockReduce 
+    - Used to manage spoof the MapReduce
+    - https://github.com/djungowski/MockReduce
+    - https://www.npmjs.com/package/mock-reduce
+* Minimist 
+    - used to parsing command line args
+    - https://github.com/substack/minimist
+    - https://www.npmjs.com/package/minimist
+* Mongoose
+    - Required by MockReduce
+* BSON 
+    - Required by Mongoose for managing binary version of json. 
+    - Installing this will likey throw errors however they can be ignored. The errors are about being unable to build a binary (from C++) of the BSON library. Instead, it will run using a pure JavaScript version. This would matter if we were creating a large scale web app, but this is a test framework...so a bit of performance loss is OK.   
+
+### Notes
