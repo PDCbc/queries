@@ -17,6 +17,7 @@ The structure of the repository is as follows:
     ├── README.md
     ├── Research/    # Contains queries related to various research projects. 
     ├── Resources/   # A few templates and samples to help direct writing queries. 
+    ├── functions/   # Contains helper functions that are injected into the query when it is run. 
     ├── queries/     # Unless otherwise specified, put queries in here. Follow naming "PDC-XXX_name-of-this-query.js"
     │   ├── PDC-001_population-map.js
     └── test/        # Contains the test framework for unit testing queries.
@@ -83,8 +84,39 @@ people:
 * hQuery
 * Specifics:
 
-## Test Framework
+## Test Utility
 
-TODO: Finish me. 
+The test utility allows one to do the following: 
+
+* Run a single query 
+* Run several queries from within the queries/ directory whose names match a regular expression.
+
+Run all of the tests within the `queries/` directory with: `js test`
+
+See the help message for more options:  
+
+Correct Usage:
+
+    js test --query <path to query> --data <path to data> --verify <path to verify>
+
+    OR:
+    js test --run <query name>
+
+    OR:
+    js test --all <regex>
 
 
+Arguments:
+
+    -q (--query)        Specify the path to the query you want to execute.
+    -d (--data)         Specify the path to the test data
+    -v (--verify)       Specify the path to the verifier function for this query.
+                            This must be relative to the test/ directory!
+    -r (--run)          Specify the name of a query, will cause the test framework to look
+                            in PROJECT_HOME/queries for a query to run.
+    -a (--all) [regex]  Runs all the queries that are in the queries/ directory and match the regex patrern.
+                            If the [regex] argument is not specified it will run all queries in queries/
+
+Notes:
+    - If you are receving error messages about JavaScript not being
+        able to open files try changing paths to:  './<path>'
