@@ -114,13 +114,22 @@ function createMapFunction(map_path, api_path){
 */
 function runQueryTest(queryMapPath, dataPath, verifierPath){
 	
-	//combine the patient api and query in a single file. 
-	var megaModulePath = createMapFunction(queryMapPath, TEST_DIR+"resources/patient.js"); 
+	try{
+		//combine the patient api and query in a single file. 
+		var megaModulePath = createMapFunction(queryMapPath, TEST_DIR+"resources/patient.js"); 
+	}catch(e){
+		console.log("-------------------------"); 
+		console.log("Exiting due to error ..."); 
+		console.log("-------------------------"); 
+		throw new exceptions.FileNotFoundException("Patient API not found in test/resources/patient.js"); 
 
+	}
+	
 	//open the single file with all of code for the query. 
 	var megaModule = require("./tmp/megafile.js");  //needs to be WRT the test/ directory....this is a hack.
 
 	//load the specified test data. 
+
 	var testData = JSON.parse(fs.readFileSync(dataPath, "utf8")); 
 	fs.writeFileSync("./test/tmp/data.json", JSON.stringify(testData,null)); 
 	var testData = JSON.parse(fs.readFileSync("./test/tmp/data.json", "utf8")); 
@@ -282,7 +291,7 @@ function processArguments(){
 		console.log("Arguments: "); 
 		console.log("	-q (--query)	Specify the path to the query you want to execute."); 
 		console.log("	-d (--data)		Specify the path to the test data"); 
-		console.log("	-v (--verify)	Specify the path to the verifier function for this query."); 
+		console.log("	-v (--verify)	Specify the path to the verifier function for this query. This must be relative to the test/ directory!"); 
 		console.log("	-r (--run)		Specify the name of a query, will cause the test framework to look"); 
 		console.log("					in PROJECT_HOME/queries for a query to run."); 
 		console.log("\nNotes: "); 
@@ -297,7 +306,7 @@ function processArguments(){
 	if(argv.run != null){
 		return lookUpFiles(argv.run); 
 	}else if(argv.r != null){
-		return lookUpFiles(argv.run); 
+		return lookUpFiles(argv.r); 
 	}
 
 	if(argv.query != null){
@@ -312,7 +321,7 @@ function processArguments(){
 	if(argv.data != null){
 		actions.data = argv.data; 
 	}else if (argv.d != null){
-		actions.d = argv.d; 
+		actions.data = argv.d; 
 	}else{
 		console.log("No input data was specified, use --data <path to data> or -q <path to data> "); 
 		console.log("Run: 'js test.js -h' for help message."); 
@@ -326,6 +335,8 @@ function processArguments(){
 		console.log("No verifier function was specified, use --verify <path to verifier> or -v <path to verifier> "); 
 		console.log("Run: 'js test.js -h' for help message."); 
 	}
+
+
 
 	return actions; 
 }
