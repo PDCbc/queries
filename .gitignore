@@ -1,0 +1,6 @@
+test/tmp/
+test/tmp/*
+test/node_modules/
+.DS_Store
+tmp/
+tmp/*

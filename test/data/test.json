@@ -1,0 +1,110 @@
+[
+  {
+    "birthdate": -223262033,
+    "conditions": [
+      {
+        "codes": {
+          "SNOMED-CT": [
+            "109838007"
+          ]
+        },
+        "time": 1263167138,
+        "description": "Colorectal Cancer",
+        "ageAtOnset": 20,
+        "priority": 1,
+        "ordinality": {
+          "code": "8319008",
+          "codeSystem": "SNOMED-CT"
+        },
+        "severity": {
+          "code": "371924009",
+          "codeSystem": "SNOMED-CT"
+        },
+        "problemStatus": {
+          "code": "55561003",
+          "codeSystem": "SNOMED-CT"
+        }
+      }
+    ], 
+    "procedures": [
+      {
+        "codes": {
+          "CPT": [
+            "44388"
+          ]
+        },
+        "site": {
+          "code": "71854001",
+          "codeSystem": "SNOMED-CT"
+        },
+        "time": 1073238725,
+        "performer": {
+          "person": {
+            "first": "Bobby",
+            "last": "Tables"
+          }
+        },
+        "description": "Colonscopy",
+        "source": {
+          "code": "158967008",
+          "codeSystem": "SNOMED-CT"
+        },
+        "incisionTime": 1073238725
+      }
+    ]
+  }, 
+  {
+    "birthdate": 223262033,
+    "conditions": [
+      {
+        "codes": {
+          "SNOMED-CT": [
+            "109838007"
+          ]
+        },
+        "time": 1263167138,
+        "description": "Colorectal Cancer",
+        "ageAtOnset": 20,
+        "priority": 1,
+        "ordinality": {
+          "code": "8319008",
+          "codeSystem": "SNOMED-CT"
+        },
+        "severity": {
+          "code": "371924009",
+          "codeSystem": "SNOMED-CT"
+        },
+        "problemStatus": {
+          "code": "55561003",
+          "codeSystem": "SNOMED-CT"
+        }
+      }
+    ], 
+    "procedures": [
+      {
+        "codes": {
+          "CPT": [
+            "44388"
+          ]
+        },
+        "site": {
+          "code": "71854001",
+          "codeSystem": "SNOMED-CT"
+        },
+        "time": 1073238725,
+        "performer": {
+          "person": {
+            "first": "Bobby",
+            "last": "Tables"
+          }
+        },
+        "description": "Colonscopy",
+        "source": {
+          "code": "158967008",
+          "codeSystem": "SNOMED-CT"
+        },
+        "incisionTime": 1073238725
+      }
+    ]
+  }
+]
