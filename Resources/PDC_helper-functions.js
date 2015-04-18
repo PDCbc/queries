@@ -72,6 +72,7 @@ function filter_general( list, codes, p3, p4, p5, p6 ){
 /**
  * Filters a list of medications:
  *   - active status only (20% pad on time interval)
+ *   - optionally, provide an active date
  */
 function filter_activeMeds( matches, asOfDate ){
   var now      = asOfDate || new Date(),
@@ -87,6 +88,39 @@ function filter_activeMeds( matches, asOfDate ){
       toReturn.push( drug );
   }
   return toReturn;
+}
+
+
+/**
+ * Emits a list of medication codes and code types
+ *   - proper names handled by DCLAPI module
+ */
+function emit_medications( codedEntryList ){
+  // Physician ID, for emit
+  var physicianID = "_" + patient.json.primary_care_provider_id,
+
+  // How many characters to use in ATC codes
+      atcCutoff = 3;
+
+  for( var i = 0, L = codedEntryList.length; i < L; i++ ){
+    var med = codedEntryList[ i ].medicationInformation().codedProduct();
+
+    for( var j = 0; M = med.length, j < M; j++ ){
+      var m = med[ j ],
+          type = m.codeSystemName(),
+          code = m.code();
+
+      if( type.toLowerCase() === null ){
+        return;
+      }
+
+      if( type.toLowerCase() === 'whoatc'){
+        code = code.substring( 0, atcCutoff );
+      }
+
+      emit( code + '_' + type + physicianID, 1 );
+    }
+  }
 }
 
 
