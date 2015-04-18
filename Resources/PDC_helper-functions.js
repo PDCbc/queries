@@ -73,8 +73,8 @@ function filter_general( list, codes, p3, p4, p5, p6 ){
  * Filters a list of medications:
  *   - active status only (20% pad on time interval)
  */
-function filter_activeMeds( matches ){
-  var now      = new Date(),
+function filter_activeMeds( matches, asOfDate ){
+  var now      = asOfDate || new Date(),
       toReturn = new hQuery.CodedEntryList();
 
   for( var i = 0, L = matches.length; i < L; i++ ){
