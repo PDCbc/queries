@@ -237,10 +237,10 @@ function runQueryTest(queryMapPath, dataPath, verifierPath){
 	//verify function. 
 	var accepted =  verifier.verify(result);	
 
-	if(accepted == true){
-		console.log("Test \""+queryMapPath+"\": PASSED"); 
+	if(accepted.result == true){
+		console.log("Test \""+queryMapPath+"\"\t: PASSED"); 
 	}else{
-		console.log("Test \""+queryMapPath+"\": FAILED"); 
+		console.log("Test \""+queryMapPath+"\"\t: FAILED, "+ "Message: "+ accepted.message); 
 	}	
 
 	//uninstall and delete records related to this test. 
