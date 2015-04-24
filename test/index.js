@@ -2,15 +2,10 @@
 * Testing tool for Query development 
 *
 * @author: Simon Diemert
-* @date: 2015-04-15
+* @date: 2015-04-24
 *
 * This tool is used to run tests for the queries that are meant to run 
-* on the PDC's network. It takes as input: 
-* 	- A query map function (and any helper functions).
-*	- A json file of the patients (conformant to patient api) to run the query on
-*	- A file containing a single function that should be run to check the results. 
-*		- This function should be called verify(results) and take a single parameter
-*			which is the array of results from the map/reduce on the patient data. 
+* on the PDC's network. 
 */
 
 
@@ -141,11 +136,12 @@ function cleanup(){
 }
 
 /*
-* Reads the cmd line arguments and returns an object 
-* with paths to the  query, data, and verifier for the test. 
+* Read in command line args and determine how to proceed. 
+* Store any relevant information in an object that is passed to into the function.
 *
-* @return an the action to take (all, run, null) based on the args. 
-*		also writes paths to files from the arguments into the actions parameter that is passed in. 
+* This function can be extended to support more behaviours based on commandline args. 
+*
+* @return an the action to take (batch or null) based on the args. 
 */
 function processArguments(actions){
 	
@@ -167,13 +163,24 @@ function processArguments(actions){
 		return_action = null; 
 	}
 
+	if(argv.q != null && argv.q != undefined){
+		globals.quiet = true; 
+	}else{
+		globals.quiet - false; 
+	}
+
 	actions.pattern = tmp_actions.pattern; 
 
 	return return_action; 
 }
 
 /*
+* Execute all queries as per directives in the directives/ dir. 
+* 
+* @param pattern (string) - a string to match on file names of the directives.
+* 							defaults to all directives if null or undefined. 
 *
+* @return (boolean) - true if all of the tests passed. false otherwise. 
 */
 function executeBatch(pattern){
 
@@ -208,7 +215,7 @@ function executeBatch(pattern){
 		try{
 			directive = JSON.parse(fs.readFileSync(globals.DIRECTIVE_DIR+files[i], "utf8"));
 		}catch(e){
-			console.log("WARNING:\tdirective in "+files[i]+" contains invalid json, ignoring this directive.");
+			if(!globals.quiet) console.log("WARNING:\tdirective in "+files[i]+" contains invalid json, ignoring this directive.");
 			continue; 
 		}
 
@@ -220,7 +227,7 @@ function executeBatch(pattern){
 			directive.qualified_by === undefined ||
 			directive.tests === undefined 
 		){
-			console.log("WARNING:\tdirective in "+files[i]+" does not all of the fields required for a complete directive, ignoring this directive."); 
+			if(!globals.quiet) console.log("WARNING:\tdirective in "+files[i]+" does not all of the fields required for a complete directive, ignoring this directive."); 
 			continue; 
 		}
 
@@ -229,12 +236,12 @@ function executeBatch(pattern){
 
 		//check that the query file exists: 
 		if(!fs.existsSync(directive.map)){
-			console.log("WARNING:\tdirective in "+files[i]+" indicates that a map function is at: "+directive.map+" but none was found, ignoring this directive.")
+			if(!globals.quiet) console.log("WARNING:\tdirective in "+files[i]+" indicates that a map function is at: "+directive.map+" but none was found, ignoring this directive.")
 			continue; 
 		}
 
 		if(!fs.existsSync(directive.reduce)){
-			console.log("WARNING:\tdirective in "+files[i]+" indicates that a reduce function is at: "+directive.reduce+" but none was found, ignoring this directive.")
+			if(!globals.quiet) console.log("WARNING:\tdirective in "+files[i]+" indicates that a reduce function is at: "+directive.reduce+" but none was found, ignoring this directive.")
 			continue; 
 		}
 
@@ -242,12 +249,12 @@ function executeBatch(pattern){
 
 			//check that each file required for the test exists: 
 			if(!fs.existsSync(directive.tests[t].data)){
-				console.log("WARNING:\ttest '"+directive.tests[t].name+"' for '"+directive.name+"' indicates that test data is in '"+directive.tests[t].data+"' but this file was not found. Ignoring this test."); 
+				if(!globals.quiet) console.log("WARNING:\ttest '"+directive.tests[t].name+"' for '"+directive.name+"' indicates that test data is in '"+directive.tests[t].data+"' but this file was not found. Ignoring this test."); 
 				continue testLoop; 
 			}
 
 			if(!fs.existsSync("test/"+directive.tests[t].verifier)){
-				console.log("WARNING:\ttest '"+directive.tests[t].name+"' for '"+directive.name+"' indicates that verifier is in '"+directive.tests[t].verifier+"' but this file was not found. Ignoring this test."); 
+				if(!globals.quiet) console.log("WARNING:\ttest '"+directive.tests[t].name+"' for '"+directive.name+"' indicates that verifier is in '"+directive.tests[t].verifier+"' but this file was not found. Ignoring this test."); 
 				continue testLoop; 
 			}
 
@@ -255,33 +262,47 @@ function executeBatch(pattern){
 			result = runQueryTest(directive.map, directive.reduce, directive.tests[t].data, directive.tests[t].verifier); 
 
 			if(result == null){
-				console.log("ERROR:\t test '"+directive.tests[t].name+"' for '"+directive.name+"' failed to complete.");
+				if(!globals.quiet) console.log("ERROR:\t test '"+directive.tests[t].name+"' for '"+directive.name+"' failed to complete.");
 				error_count += 1; 
 			}else{
 				if(result.result == true){
-					console.log(directive.name.substring(0,23)+"\t"+directive.tests[t].name.substring(0, 25)+"\tPASSED");
+					if(!globals.quiet) console.log(directive.name.substring(0,23)+"\t"+directive.tests[t].name.substring(0, 25)+"\tPASSED");
 					pass_count += 1; 
 				}else{
-					console.log(directive.name.substring(0,23)+"\t"+directive.tests[t].name.substring(0, 25)+"\tFAILED\t message: "+result.message);
+					if(!globals.quiet) console.log(directive.name.substring(0,23)+"\t"+directive.tests[t].name.substring(0, 25)+"\tFAILED\t message: "+result.message);
 					fail_count += 1; 
 				}
 			}
 			test_count += 1; 
 		}
 	}
-	console.log("----------------------------"); 
-	console.log(test_count+" tests were run"); 
-	console.log(pass_count+" passed"); 
-	console.log(error_count+" errors"); 
+	if(!globals.quiet){
+		console.log("----------------------------"); 
+		console.log(test_count+" tests were run"); 
+		console.log(pass_count+" passed"); 
+		console.log(error_count+" errors");
+	}
+	 
+	if(test_count == pass_count){
+		return true; 
+	}else{
+		return false; 
+	}
 }
 
 
 //main function, everything starts here.
 function main(){
 
-	console.log("----------------------------"); 
-	console.log("Starting....");
-	console.log("----------------------------"); 
+	var paths = {}; 
+	var action = processArguments(paths); 
+
+	if(!globals.quiet){
+		console.log("----------------------------"); 
+		console.log("Tests Starting....");
+		console.log("----------------------------"); 
+	}
+	
 
 	//check that the folder structure is setup. 
 	if(!util.checkFolderStructure()){
@@ -289,35 +310,35 @@ function main(){
 	}
 
 	//pull in helper functions.
-
 	util.getSupportFunctions();  
 
-	//executeBatch(); 
-
-	var paths = {}; 
-
-	var action = processArguments(paths); 
+	var result = false; 
 
 	switch(action){
 		case 'batch':
-			executeBatch(paths.pattern)
-			break; 
-		case 'run':
-			//Run the test for the given inputs. 
-			var result = runQueryTest(paths.queryMap, null, paths.data, paths.verify); 
+			result = executeBatch(paths.pattern)
 			break; 
 		default:
-			executeBatch(); 	
+			result = executeBatch(); 	
 			break; 
 	}
 
 	//clean up the environment. 
 	cleanup(); 
 
-	//print finished message
-	console.log("----------------------------"); 
-	console.log("Finished.");
-	console.log("----------------------------"); 
+	if(!globals.quiet){
+		//print finished message
+		console.log("----------------------------"); 
+		console.log("Tests Finished.");
+		console.log("----------------------------"); 
+
+	}
+	
+	if(result){
+		process.exit(0);  //the result was true, so return 0 "success" to the OS.
+	}else{
+		process.exit(1);  //a failure code.
+	}
 }
 
 //first action in the script, call main. 

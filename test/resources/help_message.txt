@@ -1,29 +1,30 @@
 ===========================
 Help Message:
 ---------------------------
-A utility for running queries and unit tests on queries. This must be executed
-from the root directory of the queries repository.
+A utility for running queries and unit tests on queries. Returns with exit code 0 if all tests passed, code 1 otherwise. 
 
-Correct Usage:
-    js test --query <path to query> --data <path to data> --verify <path to verify>
+See more detailed documentation at: https://github.com/PhysiciansDataCollaborative/queries
+
+**This must be executed from the root directory of the queries repository.**
+
+Usage: 
+    js test [-q] [PATTERN] 
+
+Example Usage:
+    js test
 
     OR:
-    js test --run <query name>
+    js test -q  //for suppressing output. 
 
     OR:
-    js test --all <regex> 
+    js test <regex>  //matches against directive file names and only run those. 
 
 
 Arguments:
-    -q (--query)        Specify the path to the query you want to execute.
-    -d (--data)         Specify the path to the test data
-    -v (--verify)       Specify the path to the verifier function for this query. 
-                            This must be relative to the test/ directory!
-    -r (--run)          Specify the name of a query, will cause the test framework to look
-                            in PROJECT_HOME/queries for a query to run.
-    -a (--all) [regex]  Runs all the queries that are in the queries/ directory and match the regex patrern.
-                            If the [regex] argument is not specified it will run all queries in queries/ 
+    
+    -q      Suppress output, useful if running this as part of a build process.
 
 Notes:
     - If you are receving error messages about JavaScript not being
         able to open files try changing paths to:  './<path>'
+    - Ignore errors regarding bson import, these are related to a C++ binary version of BSON being unavailable, the JS version is sufficient for this test utility. 
