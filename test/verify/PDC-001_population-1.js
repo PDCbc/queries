@@ -20,7 +20,6 @@ function verify(results){
 	//test for undefined providers: 
 	for(i in results){
 		if(results[i]._id.match(".*_[0-9]*-[0-9]*_undefined")){
-			console.log("Undefined provider detected"); 
 			return {result: false, message: "undefined provider"}; 
 		}
 	}
