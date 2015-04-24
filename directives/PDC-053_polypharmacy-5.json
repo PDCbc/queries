@@ -1,0 +1,39 @@
+{
+    "name" : "PDC-053_polypharmacy-5",
+    "description" : "The percentage of elderly patients, 65 and older, that are active patients and are on 5 or more current medications.", 
+    "map": "queries/PDC-053_polypharmacy-map-5.js",
+    "reduce" : "Resources/PDC_general-reduce.js",
+    "functions" : [""],
+    "qualified_by":[""],
+    "tests" : [
+        {
+            "name" : "TC1",
+            "data" : "test/data/empty_dataset.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc1.js"
+        },
+        {
+            "name" : "TC2",
+            "data" : "test/data/PDC-053_polypharmacy-5_data_2.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc2.js"
+        },
+        {
+        	"name" : "TC3",
+        	"data" : "test/data/PDC-053_polypharmacy-5_data_3.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc3.js"
+        },
+        {
+            "name" : "TC4",
+            "data" : "test/data/PDC-053_polypharmacy-5_data_4.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc4.js"
+        },
+        {
+        	"name" : "TC5",
+        	"data" : "test/data/PDC-053_polypharmacy-5_data_5.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc5.js"
+        },{
+        	"name" : "TC6",
+        	"data" : "test/data/PDC-053_polypharmacy-5_data_6.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc6.js"
+        }
+    ]
+}
