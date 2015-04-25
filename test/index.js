@@ -50,7 +50,6 @@ function runQueryTest(queryMapPath, queryReducePath, dataPath, verifierPath, pro
 	}
 	
 
-
 	//load the specified test data. 
 	try{
 		var testData = JSON.parse(fs.readFileSync(dataPath, "utf8")); 

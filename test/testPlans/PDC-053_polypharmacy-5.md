@@ -71,16 +71,40 @@
     - **Note:** 
         + This test uses the same pre-processor as the TC3, as they share the same changes to the patient structure. 
 
-* TC6:
-    - **Description:** test patients with no meds
-    - **Input:** 2 patients, one age < 65, one age >= 65, both without medications
+* TC6: 
+    - **Description:** Test active medication that has start time in past and end time in future 
+    - **Input:** 1 patient with age = 70, 5 medications all like:
+        + 1 medication with: start = current - 1, end = current + 1
     - **Output:** 
-        + `[ { _id: 'denominator_PROVIDER1', value: 1 }, { _id: 'numerator_PROVIDER1', value: 0 } ]` 
+        + `[ { _id: 'denominator_PROVIDER1', value: 0 }, { _id: 'numerator_PROVIDER1', value: 1 } ]`
+    - **Note:** 
+        + This test uses the same pre-processor as the TC3, as they share the same changes to the patient structure. 
+
+* TC7: 
+    - **Description:** Test active medication that has start time in future and end time in more future
+    - **Input:** 1 patient with age = 70, 5 medications all like:
+        + 1 medication with: start = current + 1, end = current + 2
+    - **Output:** 
+        + `[ { _id: 'denominator_PROVIDER1', value: 0 }, { _id: 'numerator_PROVIDER1', value: 1 } ]`
+    - **Note:** 
+        + This test uses the same pre-processor as the TC3, as they share the same changes to the patient structure. 
+
+* TC9: 
+    - **Description:** Test active medication that has start time in the future and end time in the past 
+    - **Input:** 1 patient with age = 70, 5 medications all like:
+        + 1 medication with: start = current + 2, end = current - 2
+    - **Output:** 
+        + `[ { _id: 'denominator_PROVIDER1', value: 0 }, { _id: 'numerator_PROVIDER1', value: 1 } ]`
+    - **Note:** 
+        + This test uses the same pre-processor as the TC3, as they share the same changes to the patient structure. 
 
 
-* TC7: different codes -> valid
-* TC8: patient with medication without code for a med -> count
+### Notes 
+
+* time windows on prescriptions
+* different codes -> valid
+* patient with medication without code for a med -> count
     - Not implemented due to limitation of patient API
-* TC9: code with code system -> should fail -> count this med
-* TC10: Duplicate meds? 
-* TC11: Long term flags 
+* code with code system -> should fail -> count this med
+* Duplicate meds? 
+* Long term flags 

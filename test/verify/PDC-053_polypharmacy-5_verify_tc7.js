@@ -1,6 +1,6 @@
 /**
 * @author: Simon Diemert
-* @date: 2015-04-25 
+* @date: 2015-04-22 
 */
 
 /*
@@ -31,8 +31,8 @@ function verify(results){
 				valid_d += 1; 
 			}
 		}else if(results[i]._id == "numerator_PROVIDER1"){
-			if(results[i].value != 1){
-				return {result : false, message : "numerator was: "+results[i].value+" expected 1"}; 
+			if(results[i].value != 0){
+				return {result : false, message : "numerator was: "+results[i].value+" expected 0"}; 
 			}else{
 				valid_n += 1; 
 			}
