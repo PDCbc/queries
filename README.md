@@ -23,6 +23,7 @@ The structure of the repository is as follows:
     |-- directives/  # contains directives for each query
         |-- PDC-001_population.json 
     └── test/        # Contains the test framework for unit testing queries.
+	|-- data_processor # contains functions to be used by the test framework to pre-process the data, useful for managing date offsets.
         ├── data/    # Contains test data (json) for a unit test, names of test files should match query name.  
         │   ├── PDC-001_population-1.json
         ├── exception.js
@@ -54,14 +55,15 @@ Each query **must** have a *directive* (found in the directives/ directory) that
         {
             "name" : "TEST CASE NAME",
             "data" : "PATH TO TEST DATA",
-            "verifier" : "PATH TO VERIFIER FUNCTION"
+            "verifier" : "PATH TO VERIFIER FUNCTION", 
+	    "data_processor" : "PATH TO DATA PROCESSOR FUNCTION"
         },
         ...
     ]
 }
 ```
 
-**NOTE:** All paths in the directive must be with respect to the root of queries repo (queries/), *EXCEPT FOR THE VERIFIER PATH IN TEST CASES*....this must be with respect to the queries/test/ directory. This is a consequence of JavaScript's `require()` behavior being w.r.t the location of the file rather than the location of execution...this is a bug that needs to be fixed at some point.
+**NOTE:** All paths in the directive must be with respect to the root of queries repo (queries/), *EXCEPT FOR THE VERIFIER AND DATA_PROCESSOR PATHS IN TEST CASE DIRECTIVES*....these must be with respect to the queries/test/ directory. This is a consequence of JavaScript's `require()` behavior being w.r.t the location of the file rather than the location of execution...this is a bug that needs to be fixed at some point.
 
 #### Code
 Queries are executed as Map/Reduce tasks by the MongoDB on the endpoint. To this end, a map function `map(patient)` and reduce function `reduce(key, values)` is required.
