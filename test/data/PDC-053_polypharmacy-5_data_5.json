@@ -1,114 +1,114 @@
 [
   {	"primary_care_provider_id" : "PROVIDER1", 
-  	"birthdate": 1420135178, 
+  	"birthdate": 1, 
   	"medications" : [
   		{
-  			"_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+  			"_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
   		}
   	]
   },{ "primary_care_provider_id" : "PROVIDER1", 
-    "birthdate": -1735624822, 
+    "birthdate": -70, 
     "medications" : [
       {
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       }
     ]
   },{ "primary_care_provider_id" : "PROVIDER1", 
-    "birthdate": 1420135178, 
+    "birthdate": 1, 
     "medications" : [
       {
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       }
     ]
   },{ "primary_care_provider_id" : "PROVIDER1", 
-    "birthdate": -1735624822, 
+    "birthdate": -70, 
     "medications" : [
       {
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       }
     ]
   },{ "primary_care_provider_id" : "PROVIDER2", 
-    "birthdate": 1420135178, 
+    "birthdate": 1, 
     "medications" : [
       {
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       }
     ]
   },{ "primary_care_provider_id" : "PROVIDER2", 
-    "birthdate": -1735624822, 
+    "birthdate": -70, 
     "medications" : [
       {
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       }
     ]
   },{ "primary_care_provider_id" : "PROVIDER2", 
-    "birthdate": 1420135178, 
+    "birthdate": 1, 
     "medications" : [
       {
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       }
     ]
   },{ "primary_care_provider_id" : "PROVIDER2", 
-    "birthdate": -1735624822, 
+    "birthdate": -70, 
     "medications" : [
       {
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       },{
-        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : 1380240000,
-        "start_time" : 1380240000, "end_time" : 4102509578
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " E2E_PRN_FLAG E2E_LONG_TERM_FLAG", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       }
     ]
   }

@@ -26,12 +26,14 @@
         {
             "name" : "TC4",
             "data" : "test/data/PDC-053_polypharmacy-5_data_4.json",
-            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc4.js"
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc4.js", 
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-3.js"
         },
         {
         	"name" : "TC5",
         	"data" : "test/data/PDC-053_polypharmacy-5_data_5.json",
-            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc5.js"
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc5.js", 
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-3.js"
         },{
         	"name" : "TC6",
         	"data" : "test/data/PDC-053_polypharmacy-5_data_6.json",

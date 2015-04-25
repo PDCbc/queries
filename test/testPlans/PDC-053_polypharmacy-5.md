@@ -47,22 +47,29 @@
     - **Description:** Test 4 records with patients all above age 65, with between 5 and 15 medications.
     - **Input:** 4 patients, ages >= 65, 1 of each:
         + 5 medications, 6 medications, 10 medications, 15 medications
+        + medications are active: 
+            * start_time = current_time - 1 year
+            * end_time = current_time + 1 year
     - **Output:** 
         + `[ { _id: 'denominator_PROVIDER1', value: 4 }, { _id: 'numerator_PROVIDER1', value: 4 } ]`
+    - **Note:** 
+        + This test uses the same pre-processor as the TC3, as they share the same changes to the patient structure. 
 
 * TC5:
     - **Description:** Test multiple providers
-    - **Input:** 8 patients:
-        1. (provider1, age < 65, 1 medication) (done)
-        2. (provider1, age >= 65, 1 medication) (done)
-        3. (provider1, age < 65, 5 medications) (done)
-        4. (provider1, age >= 65, 5 medications) (done)
+    - **Input:** 8 patients, on varying levels of medications (all are active, start = current - 1, end = current + 1)
+        1. (provider1, age < 65, 1 medication) 
+        2. (provider1, age >= 65, 1 medication) 
+        3. (provider1, age < 65, 5 medications) 
+        4. (provider1, age >= 65, 5 medications) 
         5. (provider2, age < 65, 1 medication)
         6. (provider2, age >= 65, 1 medication)
         7. (provider2, age < 65, 5 medications)
         8. (provider2, age >= 65, 5 medications)
     - **Output:** 
         + `[ { _id: 'denominator_PROVIDER1', value: 1 }, { _id: 'numerator_PROVIDER1', value: 4 }, { _id: 'numerator_PROVIDER2', value: 1 }, { _id: 'numerator_PROVIDER2', value: 4 } ]`
+    - **Note:** 
+        + This test uses the same pre-processor as the TC3, as they share the same changes to the patient structure. 
 
 * TC6:
     - **Description:** test patients with no meds
