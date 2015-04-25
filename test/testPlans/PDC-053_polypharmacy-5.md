@@ -98,6 +98,23 @@
     - **Note:** 
         + This test uses the same pre-processor as the TC3, as they share the same changes to the patient structure. 
 
+* TC10: 
+    - **Description:** Test active medication that has a length that is within the duration+20% window. 
+    - **Input:** 1 patient age 70, with 5 medications:
+        + start = current - 1 year
+        + end = current - 66 days (within the 20%, approximately 18% of a year). 
+    - **Output:** 
+        + `[ { _id: 'denominator_PROVIDER1', value: 1 }, { _id: 'numerator_PROVIDER1', value: 1 } ]`
+
+* TC11: 
+    - **Description:** Test active medication that has a length that is just outside the duration+20% window. 
+    - **Input:** 1 patient age 70, with 5 medications:
+        + start = current - 1 year
+        + end = current - 77 days (outside the 20%, approximately 21% of a year). 
+    - **Output:** 
+        + `[ { _id: 'denominator_PROVIDER1', value: 0 }, { _id: 'numerator_PROVIDER1', value: 1 } ]`
+    - **Note:** 
+        + This test uses the same pre-processor as the TC10, as they share a similar pre-processor requirement. 
 
 ### Notes 
 

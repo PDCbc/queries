@@ -54,6 +54,21 @@
             "data" : "test/data/PDC-053_polypharmacy-5_data_9.json",
             "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc9.js", 
             "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-3.js"
+        },{
+            "name" : "TC10",
+            "data" : "test/data/PDC-053_polypharmacy-5_data_10.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc10.js", 
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js"
+        },{
+            "name" : "TC11",
+            "data" : "test/data/PDC-053_polypharmacy-5_data_11.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc11.js", 
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js"
+        },{
+            "name" : "TC12",
+            "data" : "test/data/PDC-053_polypharmacy-5_data_12.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc12.js", 
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js"
         }
     ]
 }
