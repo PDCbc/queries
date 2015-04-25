@@ -20,7 +20,8 @@
         {
         	"name" : "TC3",
         	"data" : "test/data/PDC-053_polypharmacy-5_data_3.json",
-            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc3.js"
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc3.js", 
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-3.js"
         },
         {
             "name" : "TC4",

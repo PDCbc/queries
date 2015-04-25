@@ -12,8 +12,6 @@
 */
 function verify(results){
 	
-	console.log(results);
-
 	if(results.length != 2){
 		return {result: false, message : "size of result array is not 2."}; 
 	}

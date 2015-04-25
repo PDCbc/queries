@@ -30,14 +30,16 @@
 * TC2: 
     - **Description:** test age brackets, should reject people under age 65.
     - **Input:** 5 patients, ages 0, 1, 64, 65, 66, 100
-    - **Output:** numerator of zero, denominator of 2. 
+    - **Output:** numerator of zero, denominator of 3. 
         +   `[ { _id: 'denominator_PROVIDER1', value: 3 }, { _id: 'numerator_PROVIDER1', value: 0 } ]`
 
 * TC3: 
     - **Description:** Test patients all above 65, with less than 5 medications, all medications are active.
     - **Input:** 5 patients, ages >= 65, 1 of each:  
         + 0 medications, 1 medication, 2 medications, 3 medications, 4 medications.
-        + All medications after active medications, with an end date in 2100. 
+        + All medications after active medications
+            * start dates are current time - 1 year
+            * end dates are current time + 1 years
     - **Output:** numerator of zero, denominator of 5. 
         +   `[ { _id: 'denominator_PROVIDER1', value: 5 }, { _id: 'numerator_PROVIDER1', value: 0 } ]`
 
