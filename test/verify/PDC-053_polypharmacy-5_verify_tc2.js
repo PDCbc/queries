@@ -12,6 +12,8 @@
 */
 function verify(results){
 	
+	console.log(results);
+
 	if(results.length != 2){
 		return {result: false, message : "size of result array is not 2."}; 
 	}
@@ -21,8 +23,8 @@ function verify(results){
 
 	for(i in results){
 		if(results[i]._id == "denominator_PROVIDER1"){
-			if(results[i].value != 2){
-				return {result: false, message : "denominator was not 2 as expected for this input, NOTE: if the current date is 2016-xx-xx this may fail, consider fixing test data."};  
+			if(results[i].value != 3){
+				return {result: false, message : "denominator was not 3 as expected for this input, NOTE: if the current date is 2016-xx-xx this may fail, consider fixing test data."};  
 			}else{
 				valid_denom = true; 
 			}

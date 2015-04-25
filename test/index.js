@@ -29,11 +29,13 @@ var mongoose 		= require('mongoose');
 * Runs the query with test data and verifier specified by 
 * the parameters. 
 *
-* @param queryMapPath - the path to the query file
+* @param queryMapPath - the path to the file that contains the map function. 
+* @param queryReducePath - the path to the file that contains the reduce function
 * @param dataPath - the path to the data file for the query.
-* @param verifierpath - path to the verifier function for the query. 
+* @param verifierpath - path to the verifier function for the query. (must be relative to test/ directory)
+* @param processorPath - path to the data pre-processor file for this data set (must be relative to test/ directory) 
 */
-function runQueryTest(queryMapPath, queryReducePath, dataPath, verifierPath){
+function runQueryTest(queryMapPath, queryReducePath, dataPath, verifierPath, processorPath){
 	
 	//combine the patient api and query in a single file. 
 	var megaModulePath = util.createMapFunction(queryMapPath, globals.TEST_DIR+"resources/patient.js", globals.TMP_DIR+'functions.js'); 
@@ -48,17 +50,24 @@ function runQueryTest(queryMapPath, queryReducePath, dataPath, verifierPath){
 	}
 	
 
-	//load the specified test data. 
 
+	//load the specified test data. 
 	try{
 		var testData = JSON.parse(fs.readFileSync(dataPath, "utf8")); 
 	}catch(e){
 		return null; 
 	}
-	/*
-	fs.writeFileSync(globals.TMP_DIR+"data.json", JSON.stringify(testData,null)); 
-	var testData = JSON.parse(fs.readFileSync(globals.TMP_DIR+"data.json", "utf8")); 
-	*/
+
+	//load the data pre-processor and execute the pre-processor
+	try{
+		if(processorPath != null && processorPath != undefined){
+			//this will massage the data in place. 
+			testData = require(processorPath).preProcess(testData); 
+		}
+		 
+	}catch(e){
+		return null; 	
+	}
 
 	//get the verifier module. 
 	//require(...) is relative to the location of the script, not where you run from...
@@ -253,13 +262,20 @@ function executeBatch(pattern){
 				continue testLoop; 
 			}
 
-			if(!fs.existsSync("test/"+directive.tests[t].verifier)){
+			if(!fs.existsSync(globals.TEST_DIR+directive.tests[t].verifier)){
 				if(!globals.quiet) console.log("WARNING:\ttest '"+directive.tests[t].name+"' for '"+directive.name+"' indicates that verifier is in '"+directive.tests[t].verifier+"' but this file was not found. Ignoring this test."); 
 				continue testLoop; 
 			}
 
+			if(directive.tests[t].data_processor != undefined && directive.tests[t].data_processor != null ){
+				if(!fs.existsSync("test/"+directive.tests[t].data_processor)){
+					if(!globals.quiet) console.log("WARNING:\ttest '"+directive.tests[t].name+"' for '"+directive.name+"' indicates that data_processor is in '"+globals.TEST_DIR+directive.tests[t].data_processor+"' but this file was not found. Ignoring this test."); 
+					continue testLoop; 
+				}
+			}
+
 			//if we get to here, we know that all files exist.
-			result = runQueryTest(directive.map, directive.reduce, directive.tests[t].data, directive.tests[t].verifier); 
+			result = runQueryTest(directive.map, directive.reduce, directive.tests[t].data, directive.tests[t].verifier, directive.tests[t].data_processor); 
 
 			if(result == null){
 				if(!globals.quiet) console.log("ERROR:\t test '"+directive.tests[t].name+"' for '"+directive.name+"' failed to complete.");

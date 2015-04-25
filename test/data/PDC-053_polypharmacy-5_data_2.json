@@ -1,7 +1,8 @@
 [
-  {"primary_care_provider_id" : "PROVIDER1", "birthdate": 1429898389},
-  {"primary_care_provider_id" : "PROVIDER1", "birthdate": 1398362378},
-  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -589788022},
-  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -631087222},
-  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -1725861622}
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": 0},
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -1},
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -64},
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -65},
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -66},
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -100}
 ]
