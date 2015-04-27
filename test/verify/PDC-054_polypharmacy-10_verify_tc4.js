@@ -1,6 +1,6 @@
 /**
 * @author: Simon Diemert
-* @date: 2015-04-27
+* @date: 2015-04-22 
 */
 
 /*
@@ -21,16 +21,16 @@ function verify(results){
 
 	for(i in results){
 		if(results[i]._id == "denominator_PROVIDER1"){
-			if(results[i].value == 5){
+			if(results[i].value == 4){
 				valid_den += 1; 
 			}else{
 				return {result : false, message : "denominator was "+results[i].value+", expected 5."}; 
 			}
 		}else if(results[i]._id == "numerator_PROVIDER1"){
-			if(results[i].value == 0){
+			if(results[i].value == 2){
 				valid_num += 1; 
 			}else{
-				return {result : false, message : "numerator was "+results[i].value+", not 0 as expected."}; 
+				return {result : false, message : "numerator was "+results[i].value+", not 2 as expected."}; 
 			}
 		}else{
 			return {result: false, message : "unexpected tuple in results : "+results[i]._id}; 

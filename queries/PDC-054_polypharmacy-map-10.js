@@ -14,7 +14,6 @@ function map( patient ){
     return isAge( ageMin );
   }
 
-
   /**
    * Numerator:
    *   - 10+ medications

@@ -56,7 +56,7 @@ Each query **must** have a *directive* (found in the directives/ directory) that
             "name" : "TEST CASE NAME",
             "data" : "PATH TO TEST DATA",
             "verifier" : "PATH TO VERIFIER FUNCTION", 
-	    "data_processor" : "PATH TO DATA PROCESSOR FUNCTION"
+	         "data_processor" : "PATH TO DATA PROCESSOR FUNCTION"
         },
         ...
     ]

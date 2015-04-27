@@ -1,8 +1,8 @@
-## PDC-053_polypharmacy-5 Test Plan
+## PDC-053_polypharmacy-10 Test Plan
 
 ### Query Description 
 
-*  The percentage of elderly patients, 65 and older, that are active patients and are on 5 or more current medications.
+*  The percentage of elderly patients, 65 and older, that are active patients and are on 10 or more current medications.
 *  A current medication is defined as: 
     - Prescribed and, by date, is still current (use 1.2 multiplier for duration estimate for regular medications
         +  eg. 10 day Rx is still “current” at day 12).    
@@ -22,6 +22,8 @@
 
 ### Test Cases
 
+**NOTE:** These test cases are very similar to the tests for PDC-053_polypharmacy-5, they share a significant amount of code. 
+
 * TC1:
     - **Description:** Test on an empty dataset.
     - **Input:** An empty set of patients.
@@ -36,7 +38,7 @@
 * TC3: 
     - **Description:** Test patients all above 65, with less than 5 medications, all medications are active.
     - **Input:** 5 patients, ages >= 65, 1 of each:  
-        + 0 medications, 1 medication, 2 medications, 3 medications, 4 medications.
+        + 0 medications, 1 medication, 5 medications, 8 medications, 9 medications.
         + All medications after active medications
             * start dates are current time - 1 year
             * end dates are current time + 1 years
@@ -60,12 +62,12 @@
     - **Input:** 8 patients, on varying levels of medications (all are active, start = current - 1, end = current + 1)
         1. (provider1, age < 65, 1 medication) 
         2. (provider1, age >= 65, 1 medication) 
-        3. (provider1, age < 65, 5 medications) 
-        4. (provider1, age >= 65, 5 medications) 
+        3. (provider1, age < 65, 10 medications) 
+        4. (provider1, age >= 65, 10 medications) 
         5. (provider2, age < 65, 1 medication)
         6. (provider2, age >= 65, 1 medication)
-        7. (provider2, age < 65, 5 medications)
-        8. (provider2, age >= 65, 5 medications)
+        7. (provider2, age < 65, 10 medications)
+        8. (provider2, age >= 65, 10 medications)
     - **Output:** 
         + `[ { _id: 'denominator_PROVIDER1', value: 1 }, { _id: 'numerator_PROVIDER1', value: 4 }, { _id: 'numerator_PROVIDER2', value: 1 }, { _id: 'numerator_PROVIDER2', value: 4 } ]`
     - **Note:** 
@@ -73,34 +75,43 @@
 
 * TC6: 
     - **Description:** Test active medication that has start time in past and end time in future 
-    - **Input:** 1 patient with age = 70, 5 medications all like:
+    - **Input:** 1 patient with age = 70, 11 medications all like:
         + 1 medication with: start = current - 1, end = current + 1
     - **Output:** 
-        + `[ { _id: 'denominator_PROVIDER1', value: 0 }, { _id: 'numerator_PROVIDER1', value: 1 } ]`
+        + `[ { _id: 'denominator_PROVIDER1', value: 1 }, { _id: 'numerator_PROVIDER1', value: 1 } ]`
     - **Note:** 
         + This test uses the same pre-processor as the TC3, as they share the same changes to the patient structure. 
 
 * TC7: 
     - **Description:** Test active medication that has start time in future and end time in more future
-    - **Input:** 1 patient with age = 70, 5 medications all like:
+    - **Input:** 1 patient with age = 70, 10 medications all like:
         + 1 medication with: start = current + 1, end = current + 2
     - **Output:** 
-        + `[ { _id: 'denominator_PROVIDER1', value: 0 }, { _id: 'numerator_PROVIDER1', value: 1 } ]`
+        + `[ { _id: 'denominator_PROVIDER1', value: 1 }, { _id: 'numerator_PROVIDER1', value: 0 } ]`
     - **Note:** 
         + This test uses the same pre-processor as the TC3, as they share the same changes to the patient structure. 
 
+* TC8: 
+    - **Description:** Test active medication that has start time in the past and end time less in the pass    
+    - **Input:** 1 patient with age = 70, 10 medications all like:
+        + 1 medication with: start = current -3 , end = current - 2
+    - **Output:** 
+        + `[ { _id: 'denominator_PROVIDER1', value: 1 }, { _id: 'numerator_PROVIDER1', value: 0 } ]`
+    - **Note:** 
+        + This test uses the same pre-processor as the TC3, as they share the same changes to the patient
+
 * TC9: 
     - **Description:** Test active medication that has start time in the future and end time in the past 
-    - **Input:** 1 patient with age = 70, 5 medications all like:
+    - **Input:** 1 patient with age = 70, 10 medications all like:
         + 1 medication with: start = current + 2, end = current - 2
     - **Output:** 
-        + `[ { _id: 'denominator_PROVIDER1', value: 0 }, { _id: 'numerator_PROVIDER1', value: 1 } ]`
+        + `[ { _id: 'denominator_PROVIDER1', value: 1 }, { _id: 'numerator_PROVIDER1', value: 1 } ]`
     - **Note:** 
         + This test uses the same pre-processor as the TC3, as they share the same changes to the patient structure. 
 
 * TC10: 
     - **Description:** Test active medication that has a length that is within the duration+20% window. 
-    - **Input:** 1 patient age 70, with 5 medications:
+    - **Input:** 1 patient age 70, with 10 medications:
         + start = current - 1 year
         + end = current - 66 days (within the 20%, approximately 18% of a year). 
     - **Output:** 
@@ -108,7 +119,7 @@
 
 * TC11: 
     - **Description:** Test active medication that has a length that is just outside the duration+20% window. 
-    - **Input:** 1 patient age 70, with 5 medications:
+    - **Input:** 1 patient age 70, with 10 medications:
         + start = current - 1 year
         + end = current - 77 days (outside the 20%, approximately 21% of a year). 
     - **Output:** 
