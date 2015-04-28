@@ -1,4 +1,6 @@
 function testFunction(val){
-    console.log("testFunction("+val+")"); 
+
+	var toReturn = new hQuery.CodedEntryList();
+
     return true; 
 }
