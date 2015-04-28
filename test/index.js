@@ -328,9 +328,23 @@ function executeBatch(pattern){
 	}
 }
 
-function runFunctionTests(functionPath, testPath){
 
-	if(functionPath === undefined || testPath === undefined){
+/*
+* Runs the tests for a particular library_function. Reports the number of tests, passed tests, and errors.
+* Executes only functions within the module that being with "test", for example: "testFooBar" would be executed.
+* 	"fooBarTest" would not be executed.  
+*
+* @param testPath (string) - the path to the module that contains the series of unit tests to execute. 
+*
+* @return (object) - an object with the following fields: 
+* 	- result (boolean) - true if all tests passed, false otherwise.
+* 	- count (int) - the total number of tests executed (or attempted to execute, includes failed tests).
+* 	- passed (int) - the number of tests that passed.
+* 	- error (int) - the number of errors that were thrown or created during the tests (not the same as a failed test.)
+*/
+function runFunctionTests(testPath){
+
+	if(testPath === undefined){
 		return null; 
 	}
 
@@ -344,24 +358,34 @@ function runFunctionTests(functionPath, testPath){
 	try{
 		//combine the patient api and query in a single file. 
 		var megaModulePath = util.createFunctionTestModule(globals.TEST_DIR+testPath, globals.TMP_DIR+'functions.js');
-		var megaMod = require(megaModulePath);
-
+		//need to delete the megafile.js from the cache as require() caches it. 
+		delete require.cache[require.resolve("./tmp/megafile.js")]; 
+		//open the single file with all of code for the query. 
+		var megaMod = require("./tmp/megafile.js");  //needs to be WRT the test/ directory....this is a hack.
 	}catch(e){
 		return null; 
 	}
 
+	//loop through the publicly available functions and run them, these should only 
+	// be the tests unless something else has been made public. 
 	for(f in megaMod){
+		//check if the 
+		if(!f.match("test.*")){
+			continue; 
+		} 
 		try{
 			tmp = megaMod[f](); 
 			if(tmp.result){
-				console.log(f+":\t\t PASSED")
+				if(!globals.quiet) console.log(f+":\t\t PASSED"); 
 				result.passed += 1; 
 			}else{
-				console.log(f+":\t\t FAILED, message:"+tmp.message); 
+				if(!globals.quiet) console.log(f+":\t\t FAILED, message:"+tmp.message); 
 				result.result = false; 
 			} 
 		}catch(e){
-			console.log(f+"from "+testPath+" caused an error! Ignoring this test result."); 
+			if(!globals.quiet) {
+				console.log(f+"from "+testPath+" caused an error! Ignoring this test result."); 
+			}
 			result.error+= 1; 	
 			result.result = false; 
 		}
@@ -371,6 +395,19 @@ function runFunctionTests(functionPath, testPath){
 	return result; 
 }
 
+/*
+* Tests all library_functions that have directives in the directives/ directory 
+*	that file names that match the pattern provided as a parameter. 
+* Filters out incomplete directives or those that aren't valid json. 
+* 
+* @param pattern (string) - a regex string to match against function names. If null or undefined defaults to all functions.
+*
+* @return (object) - an object contain the results of running the, fields include: 
+* 	- result (boolean) - true if ALL tests passed, false otherwise
+* 	- total (int) - the number of tests that were executed.
+*	- passed (int) - the number of tests that passed. 
+*	- error_count (int) - the number of tests the generated errors and did not complete (not the same as a failed test.)
+*/
 function testFunctions(pattern){
 
 	pattern = pattern || ".*"; 
@@ -413,7 +450,7 @@ function testFunctions(pattern){
 			continue; 
 		}
 
-	 	functionResult = runFunctionTests(directive.path, directive.test); 
+	 	functionResult = runFunctionTests(directive.test); 
 
 	 	if(result === null){
 
@@ -459,7 +496,7 @@ function main(){
 
 	switch(action){
 		case 'batch':
-			console.log("testing queries and functions...")
+			console.log("batch testing queries and functions...")
 			var r1 = executeBatch(paths.pattern); 	
 			var r2 = testFunctions(); 
 			result.passed = r1.passed + r2.passed; 

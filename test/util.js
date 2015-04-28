@@ -130,8 +130,15 @@ module.exports = {
 	},
 
 	/*
+	* Creates a single file to aggregate all of the functions and APIs.
+	* 
+	* @param (string) - path to the test module, these will be included and made public to the tests.
+	* 
+	* @return (string) - a path to the file that contains the module that was generated. Path 
+	* 						is relative to the test/ directory, not the queries/ root. 
 	*
-	*
+	* @throws exceptions if the files at the specified paths cannot be found. These should be handled 
+	* 		by the calling function. 
 	*/
 	createFunctionTestModule : function(testPath, functionsPath){
 
@@ -143,8 +150,17 @@ module.exports = {
 		//can read these in without checking as exceptions should be caught up one level. 
 		var testFile = fs.readFileSync(testPath, "utf8"); 
 		var functionsFile = fs.readFileSync(functionsPath, "utf8"); 
+		var api = fs.readFileSync("test/resources/patient.js", "utf8");
 
 		var new_string = ""; 
+
+		//need this for making the hQuery api visible globally. 
+		new_string += "this.hQuery || (this.hQuery = {});\n"
+		new_string += "var hQuery = this.hQuery\n"
+
+		new_string += api; 
+
+		new_string += "\n\n\n"
 
 		new_string += functionsFile; 
 
