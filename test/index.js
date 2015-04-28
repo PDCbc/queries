@@ -335,6 +335,7 @@ function executeBatch(pattern){
 * 	"fooBarTest" would not be executed.  
 *
 * @param testPath (string) - the path to the module that contains the series of unit tests to execute. 
+* @param testName (string) - the name of the test for displaying in console output. 
 *
 * @return (object) - an object with the following fields: 
 * 	- result (boolean) - true if all tests passed, false otherwise.
@@ -342,7 +343,7 @@ function executeBatch(pattern){
 * 	- passed (int) - the number of tests that passed.
 * 	- error (int) - the number of errors that were thrown or created during the tests (not the same as a failed test.)
 */
-function runFunctionTests(testPath){
+function runFunctionTests(testPath, testName){
 
 	if(testPath === undefined){
 		return null; 
@@ -376,10 +377,10 @@ function runFunctionTests(testPath){
 		try{
 			tmp = megaMod[f](); 
 			if(tmp.result){
-				if(!globals.quiet) console.log(f+":\t\t PASSED"); 
+				if(!globals.quiet) console.log(testName.substring(0,25)+" "+f.substring(0, 25)+":\t PASSED"); 
 				result.passed += 1; 
 			}else{
-				if(!globals.quiet) console.log(f+":\t\t FAILED, message:"+tmp.message); 
+				if(!globals.quiet) console.log(testName.substring(0, 25)+" "+f.substring(0, 25)+":\t FAILED, message:"+tmp.message); 
 				result.result = false; 
 			} 
 		}catch(e){
@@ -450,7 +451,7 @@ function testFunctions(pattern){
 			continue; 
 		}
 
-	 	functionResult = runFunctionTests(directive.test); 
+	 	functionResult = runFunctionTests(directive.test, directive.name); 
 
 	 	if(result === null){
 

@@ -11,7 +11,7 @@ function map( patient ){
   function checkDenominator(){
     var ageMin = 65;
 
-    return isAge( ageMin );
+    return isAge( patient, ageMin );
   }
 
 
