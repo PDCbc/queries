@@ -1,24 +1,28 @@
 ===========================
 Help Message:
 ---------------------------
-A utility for running queries and unit tests on queries. Returns with exit code 0 if all tests passed, code 1 otherwise. 
+A utility for running queries and unit tests on queries and functions. Returns with exit code 0 if all tests passed, code 1 otherwise. 
 
 See more detailed documentation at: https://github.com/PhysiciansDataCollaborative/queries
 
 **This must be executed from the root directory of the queries repository.**
 
 Usage: 
-    js test [-q] [PATTERN] 
+    js test [type] [-q] [PATTERN] 
+
+    Where [type] is one of "queries", "functions", or "".
 
 Example Usage:
-    js test
+    js test  //runs tests for queries and functions
 
     OR:
     js test -q  //for suppressing output. 
 
     OR:
-    js test <regex>  //matches against directive file names and only run those. 
+    js test queries <pattern>  //matches against directives of type QUERY and runs those that have names that match the pattern.. 
 
+    OR:
+    js test functions <pattern>  //finds directives that are for functions, only run those that match pattern.
 
 Arguments:
     
