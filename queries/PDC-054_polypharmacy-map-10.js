@@ -159,11 +159,3 @@ function filter_values( list, min, max ){
   }
   return toReturn;
 }
-
-
-/**
- * T/F: Does a filtered list contain matches (/is not empty)?
- */
-function isMatch( list ) {
-  return 0 < list.length;
-}
