@@ -1,5 +1,5 @@
 {
-    "type" : "FUNCTION", 
+    "type" : "DONT RUN ME", 
     "name" : "testFunction",
     "path" : "functions/test_function.js",
     "description" : "A test function for the testing framework.", 
