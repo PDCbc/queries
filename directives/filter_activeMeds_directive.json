@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "filter_activeMeds",
+    "path" : "functions/filter_activeMeds.js",
+    "description" : "Removes medications that are not active.", 
+    "test" : "./functions/test_filter_activeMeds.js"
+}

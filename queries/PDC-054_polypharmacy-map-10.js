@@ -114,28 +114,6 @@ function filter_general( list, codes, p3, p4, p5, p6 ){
   return filteredList;
 }
 
-
-/**
- * Filters a list of medications:
- *   - active status only (20% pad on time interval)
- */
-function filter_activeMeds( matches ){
-  var now      = new Date(),
-      toReturn = new hQuery.CodedEntryList();
-
-  for( var i = 0, L = matches.length; i < L; i++ ){
-    var drug  = matches[ i ],
-        start = drug.indicateMedicationStart().getTime(),
-        pad   =( drug.indicateMedicationStop().getTime() - start )* 1.2,
-        end   = start + pad;
-
-    if( start <= now && now <= end )
-      toReturn.push( drug );
-  }
-  return toReturn;
-}
-
-
 /**
  * Used by filter_general() and filter_general()
  *   - inclusive range, boundary cases are counted
