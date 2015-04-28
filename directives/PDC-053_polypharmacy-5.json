@@ -1,4 +1,5 @@
 {
+    "type": "QUERY",
     "name" : "PDC-053_polypharmacy-5",
     "description" : "The percentage of elderly patients, 65 and older, that are active patients and are on 10 or more current medications.", 
     "map": "queries/PDC-053_polypharmacy-map-5.js",

@@ -130,6 +130,39 @@ module.exports = {
 	},
 
 	/*
+	*
+	*
+	*/
+	createFunctionTestModule : function(testPath, functionsPath){
+
+		//make a new directory to work in. 
+		if (!fs.existsSync(globals.TEST_DIR+"tmp")){
+			fs.mkdirSync(globals.TEST_DIR+"tmp"); 
+		}
+
+		//can read these in without checking as exceptions should be caught up one level. 
+		var testFile = fs.readFileSync(testPath, "utf8"); 
+		var functionsFile = fs.readFileSync(functionsPath, "utf8"); 
+
+		var new_string = ""; 
+
+		new_string += functionsFile; 
+
+		new_string += "\n\n\n"
+
+		new_string += testFile; 
+
+		//remove the output file if it exists. 
+		if(fs.existsSync(globals.TEST_DIR+"tmp/megafile.js")){
+			fs.unlinkSync(globals.TEST_DIR+"tmp/megafile.js"); 
+		}
+		fs.writeFileSync(globals.TEST_DIR+"tmp/megafile.js", new_string); 
+
+		return "./tmp/megafile.js";
+
+	},
+
+	/*
 	* Shows the help message in resources/help_message.txt
 	* then terminates the process. 
 	*/
