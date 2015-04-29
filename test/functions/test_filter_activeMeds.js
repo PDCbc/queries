@@ -1,3 +1,27 @@
+/*
+*  Unit tests for the filter_activeMed function. 
+* 
+*  These tests leverage the definition provided in the data dictionary on polarian
+* 
+*  The testing matrix for cases is: 
+*
+*    flagged_as_active | long_term| time_frame | RESULT
+*    ---------------------------------------------------
+*    1                   1           1           1
+*    1                   1           0           1
+*    1                   0           1           1
+*    1                   0           0           0
+*    0                   1           1           0
+*    0                   1           0           0
+*    0                   0           1           0
+*    0                   0           0           0
+*
+*  The above matrix defines several of our tests, others are used to test
+*   time frames.
+*/
+
+
+
 var obj = {
     "primary_care_provider_id" : "PROVIDER1", 
     "birthdate": -70, 
@@ -51,6 +75,12 @@ module.exports = {
         obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
         obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
 
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "active";
+
      	try{
 	     	var p  = new hQuery.Patient(obj); 
 	     	var result = filter_activeMeds(p.medications()); 
@@ -85,6 +115,12 @@ module.exports = {
         obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
         obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
 
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "active";
+
      	try{
 	     	var p  = new hQuery.Patient(obj); 
 	     	var result = filter_activeMeds(p.medications()); 
@@ -117,6 +153,12 @@ module.exports = {
 
         obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
         obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
+
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "active";
 
      	try{
 	     	var p  = new hQuery.Patient(obj); 
@@ -152,6 +194,13 @@ module.exports = {
         obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
         obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
 
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "active";
+
+
      	try{
 	     	var p  = new hQuery.Patient(obj); 
 	     	var result = filter_activeMeds(p.medications()); 
@@ -184,6 +233,12 @@ module.exports = {
 
         obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
         obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
+
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "active";
 
      	try{
 	     	var p  = new hQuery.Patient(obj); 
@@ -225,8 +280,14 @@ module.exports = {
 
         obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
         obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
+        
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "";
 
-     	try{
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "active";
+     	
+        try{
 	     	var p  = new hQuery.Patient(obj); 
 	     	var result = filter_activeMeds(p.medications()); 
      	}catch(e){
@@ -265,6 +326,13 @@ module.exports = {
 
         obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
         obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
+
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "active";
+
      	try{
 	     	var p  = new hQuery.Patient(obj); 
 	     	var result = filter_activeMeds(p.medications()); 
@@ -306,6 +374,12 @@ module.exports = {
         obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
         obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
 
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "active";
+
      	try{
 	     	var p  = new hQuery.Patient(obj); 
 	     	var result = filter_activeMeds(p.medications()); 
@@ -325,4 +399,279 @@ module.exports = {
     *
     * Expected: Medication is in results.
     */
+    testActiveFlagAndLongTermFlagAndInTimeFrame : function(){
+
+        //set up dates.
+        var start = new Date(); 
+        var stop = new Date(); 
+
+        start.setFullYear( start.getFullYear() - 1 ); 
+        stop.setFullYear( stop.getFullYear() + 1 ); 
+
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
+
+        //set up long term flag: 
+        obj.medications[0].freeTextSig += "E2E_LONG_TERM_FLAG";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "active";
+
+        try{
+            var p  = new hQuery.Patient(obj); 
+            var result = filter_activeMeds(p.medications()); 
+        }catch(e){
+
+        }
+
+        if( result.length == 1 ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not 1 as expected."}; 
+        }
+    },
+
+
+    /*
+    * Test case where medication is flagged_as_active, long_term_flag, and NOT in time_frame
+    *
+    * stop < current AND start << current
+    *
+    * Expected: Medication is in results.
+    */
+    testActiveFlagAndLongTermFlagAndNotInTimeFrame : function(){
+
+        //set up dates.
+        var start = new Date(); 
+        var stop = new Date(); 
+
+        start.setFullYear( start.getFullYear() - 2 ); 
+        stop.setFullYear( stop.getFullYear() - 1 ); 
+
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
+
+        //set up long term flag: 
+        obj.medications[0].freeTextSig += "E2E_LONG_TERM_FLAG";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "active";
+
+        try{
+            var p  = new hQuery.Patient(obj); 
+            var result = filter_activeMeds(p.medications()); 
+        }catch(e){
+
+        }
+
+        if( result.length == 1 ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not 1 as expected."}; 
+        }
+    },
+
+    /*
+    * Test case where medication is flagged_as_active, NOT long_term_flag, and in time_frame
+    *
+    * stop > current AND start << current
+    *
+    * Expected: Medication is in results.
+    */
+    testActiveFlagAndNoTLongTermFlagAndInTimeFrame : function(){
+
+        //set up dates.
+        var start = new Date(); 
+        var stop = new Date(); 
+
+        start.setFullYear( start.getFullYear() - 2 ); 
+        stop.setFullYear( stop.getFullYear() + 1 ); 
+
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
+
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "active";
+
+        try{
+            var p  = new hQuery.Patient(obj); 
+            var result = filter_activeMeds(p.medications()); 
+        }catch(e){
+
+        }
+
+        if( result.length == 1 ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not 1 as expected."}; 
+        }
+    },
+
+    /*
+    * Test case where medication is flagged_as_active, NOT long_term_flag, and NOT in time_frame
+    *
+    * stop < current AND start << current
+    *
+    * Expected: Medication is not in results.
+    */
+    testActiveFlagAndNoTLongTermFlagAndNotTimeFrame : function(){
+
+        var expected = 0; 
+
+        //set up dates.
+        var start = new Date(); 
+        var stop = new Date(); 
+
+        start.setFullYear( start.getFullYear() - 2 ); 
+        stop.setFullYear( stop.getFullYear() - 1 ); 
+
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
+
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "active";
+
+        try{
+            var p  = new hQuery.Patient(obj); 
+            var result = filter_activeMeds(p.medications()); 
+        }catch(e){
+
+        }
+
+        if( result.length === expected ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
+        }
+    },
+
+    /*
+    * Test case where medication is NOT flagged_as_active, long_term_flag, and in time_frame
+    *
+    * stop > current AND start << current
+    *
+    * Expected: Medication is not in results.
+    */
+    testNotActiveFlagAndNotLongTermFlagAndTimeFrame : function(){
+
+        var expected = 0; 
+
+        //set up dates.
+        var start = new Date(); 
+        var stop = new Date(); 
+
+        start.setFullYear( start.getFullYear() - 2 ); 
+        stop.setFullYear( stop.getFullYear() - 1 ); 
+
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
+
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "completed";
+
+        try{
+            var p  = new hQuery.Patient(obj); 
+            var result = filter_activeMeds(p.medications()); 
+        }catch(e){
+
+        }
+
+        if( result.length === expected ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
+        }
+    },
+
+
+    /*
+    * Test case where medication is NOT flagged_as_active, NOT long_term_flag, and in time_frame
+    *
+    * stop > current AND start << current
+    *
+    * Expected: Medication is not in results.
+    */
+    testNotActiveFlagAndNotLongTermFlagAndTimeFrame : function(){
+
+        var expected = 0; 
+
+        //set up dates.
+        var start = new Date(); 
+        var stop = new Date(); 
+
+        start.setFullYear( start.getFullYear() - 2 ); 
+        stop.setFullYear( stop.getFullYear() + 1 ); 
+
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
+
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "completed";
+
+        try{
+            var p  = new hQuery.Patient(obj); 
+            var result = filter_activeMeds(p.medications()); 
+        }catch(e){
+
+        }
+
+        if( result.length === expected ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
+        }
+    },
+
+    /*
+    * Test case where medication is NOT flagged_as_active, long_term_flag, and NOT in time_frame
+    *
+    * stop > current AND start << current
+    *
+    * Expected: Medication is not in results.
+    */
+    testNotActiveFlagAndLongTermFlagAndTimeFrame : function(){
+
+        var expected = 0; 
+
+        //set up dates.
+        var start = new Date(); 
+        var stop = new Date(); 
+
+        start.setFullYear( start.getFullYear() - 2 ); 
+        stop.setFullYear( stop.getFullYear() - 1 ); 
+
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
+
+        //set up long term flag: 
+        obj.medications[0].freeTextSig = "E2E_LONG_TERM_FLAG";
+
+        //set up the active flag: 
+        obj.medications[0].statusOfMedication.value = "completed";
+
+        try{
+            var p  = new hQuery.Patient(obj); 
+            var result = filter_activeMeds(p.medications()); 
+        }catch(e){
+
+        }
+
+        if( result.length === expected ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
+        }
+    },
 }
