@@ -32,7 +32,15 @@ function setUpTest(){
 }
 
 module.exports = {
+
+    /*
+    * Test a single encounter that should be picked up as valid
+    *
+    * Expected: activePatient returns true. 
+    */
 	testSingleEncounter : function(){
+
+        var expected = true; 
 
         var testpt = setUpTest(); 
 
@@ -42,14 +50,21 @@ module.exports = {
 
         var result = activePatient(testpt); 
 
-        if(result){
-            return {result : true, message : "intended to pass"}; 
+        if(result === expected){
+            return {result : true, message : "test passed!"}; 
         }else{
-            return {result : false, message : "failed"}; 
+            return {result : false, message : "Result was: "+result+" not "+expected+" as expected. "}; 
         }
 	},
 
+    /*
+    * Test a single medication that should be valid. 
+    * 
+    * Expected: activePatient returns true. 
+    */
     testSingleMedication : function(){
+
+        var expected = true; 
 
         var testpt = setUpTest(); 
 
@@ -60,11 +75,83 @@ module.exports = {
 
         var result = activePatient(testpt); 
 
-        if(result){
-            return {result : true, message : "intended to pass"}; 
+        if(result === expected){
+            return {result : true, message : "test passed!"}; 
         }else{
-            return {result : false, message : "failed"}; 
+            return {result : false, message : "Result was: "+result+" not "+expected+" as expected. "}; 
         }
+    },	
 
-    }	
+    /*
+    * Test case where patient is undefined.
+    * 
+    * Expected: activePatient returns true. 
+    */
+    testUndefinedPatient : function(){
+
+        var expected = false;  
+
+        var result = activePatient(); 
+
+        if(result === expected){
+            return {result : true, message : "test passed!"}; 
+        }else{
+            return {result : false, message : "Result was: "+result+" not "+expected+" as expected. "}; 
+        }
+    },  
+
+    /*
+    * Test case where patient is defined by reference date and frame are not given.
+    *   Use input encounter and medications that should both be rejected if the date defaults 
+    *   to "now" and the frame is 2 years. 
+    * 
+    * Expected: activePatient returns false. 
+    */
+    testUndefinedTimeValuesNegatively : function(){
+
+        var expected = false; 
+
+        var testpt = setUpTest(); 
+
+        testpt.json.encounters[0].start_time    = Math.floor((new Date()).getTime()/1000 - 153792000 );  //shift by 5 years.
+
+        testpt.json.medications[0].start_time   = Math.floor((new Date()).getTime()/1000 - 153792000 );  //shift down by 5 years.
+        testpt.json.medications[0].end_time     = Math.floor((new Date()).getTime()/1000 - 153793000 ); 
+
+        var result = activePatient(testpt)
+
+        if(result === expected){
+            return {result : true, message : "test passed!"}; 
+        }else{
+            return {result : false, message : "Result was: "+result+" not "+expected+" as expected. "}; 
+        }
+    }, 
+
+    /*
+    * Test case where patient is defined by reference date and frame are not given.
+    *   Use input encounter and medications that should both be accepted if the date defaults 
+    *   to "now" and the frame is 2 years. 
+    * 
+    * Expected: activePatient returns true. 
+    */
+    testUndefinedTimeValuesPostively : function(){
+
+        var expected = true; 
+
+        var testpt = setUpTest(); 
+
+        testpt.json.encounters[0].start_time    = Math.floor((new Date()).getTime()/1000 - 31536000 );  //shift by 1 year.
+
+        testpt.json.medications[0].start_time   = Math.floor((new Date()).getTime()/1000 - 31536000 );  //shift down by 1 year.
+        testpt.json.medications[0].end_time     = Math.floor((new Date()).getTime()/1000 - 31537000  ); 
+
+        var result = activePatient(testpt)
+
+        if(result === expected){
+            return {result : true, message : "test passed!"}; 
+        }else{
+            return {result : false, message : "Result was: "+result+" not "+expected+" as expected. "}; 
+        }
+    }, 
+
 }
