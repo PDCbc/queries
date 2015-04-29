@@ -1704,6 +1704,7 @@ hQuery.Medication = (function(_super) {
 
   Medication.prototype.statusOfMedication = function() {
     var _ref, _ref1;
+    console.log(this.json["statusOfMedication"]); 
     return new hQuery.StatusOfMedication((_ref = this.json['statusOfMedication']) != null ? _ref['code'] : void 0, (_ref1 = this.json['statusOfMedication']) != null ? _ref1['codeSystem'] : void 0);
   };
 

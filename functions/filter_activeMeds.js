@@ -1,6 +1,8 @@
 /**
- * Filters a list of medications:
- *   - active status only (20% pad on time interval)
+ * Filters a list of medications for only active medications.
+ * An active medication is defined as: 
+ * 
+ * (flagged_as_active AND flagged_as_longterm) || (flagged_as_active AND (start < current) AND (stop < current + 20%))
  *
  * @param (Array) matches -  a list of medications to handle
  * 
@@ -9,21 +11,37 @@
  */
 function filter_activeMeds( matches ){
 
-  var now      = new Date(),
-      toReturn = new hQuery.CodedEntryList();
+    var now = new Date(); 
+    var toReturn = new hQuery.CodedEntryList();
 
-  if(matches === undefined || matches === null){
-    return toReturn; 
-  }
+    if( matches === undefined || matches === null ){
+        return toReturn; 
+    }
 
-  for( var i = 0, L = matches.length; i < L; i++ ){
-    var drug  = matches[ i ],
-        start = drug.indicateMedicationStart().getTime(),
-        pad   =( drug.indicateMedicationStop().getTime() - start )* 1.2,
-        end   = start + pad;
+    var med     = null; 
+    var start   = null; 
+    var pad     = null; 
+    var end     = null; 
 
-    if( start <= now && now <= end )
-      toReturn.push( drug );
-  }
-  return toReturn;
+    for( var i = 0; i < matches.length; i++ ){
+
+        med  = matches[ i ]; 
+
+        //check that this med is recorded as active. 
+        if(med.json.statusOfMedication.value === "active"){
+            if(med.isLongTerm()){
+                toReturn.push( med ); 
+            }else if(med.indicateMedicationStart() && med.indicateMedicationStop){
+                start = med.indicateMedicationStart().getTime(); 
+                pad   = ( med.indicateMedicationStop().getTime() - start )* 1.2;
+                end   = start + pad;
+
+                if( start <= now && now <= end ){
+                    toReturn.push( med );
+                }
+            }
+        }
+    }
+    
+    return toReturn;
 }

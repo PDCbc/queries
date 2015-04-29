@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "activePatient",
+    "path" : "functions/activePatient.js",
+    "description" : "Returns true if the patient is considered active, false otherwise", 
+    "test" : "./functions/test_activePatient.js"
+}

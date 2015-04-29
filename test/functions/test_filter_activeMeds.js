@@ -1,3 +1,17 @@
+var obj = {
+    "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "medications" : [
+        { 
+            "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",   "time" : -1,
+            "start_time" : new Date(), "end_time" : new Date, 
+            "statusOfMedication" : { "value" : "active" },
+            "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }, 
+            "freeTextSig" : ""
+        } 
+    ]
+}; 
+
 module.exports = {
 	
 	testUndefinedParam : function(){
@@ -17,10 +31,6 @@ module.exports = {
 		}
 	}, 
 
-
-
-
-
 	/*
 	* Test the case where the start is in the past and the stop date also in the past.  
 	* This is case must also be clearly outside the 120% time window.
@@ -38,19 +48,8 @@ module.exports = {
 		start.setFullYear(start.getFullYear() - 2); 
 		stop.setFullYear(stop.getFullYear() - 1 ); 
 
-		var obj = {
-			"primary_care_provider_id" : "PROVIDER1", 
-			"birthdate": -70, 
-			"medications" : [
-  				{ 
-	  				"_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",   "time" : -1,
-	    			"start_time" : Math.floor(start.getTime()/1000), "end_time" : Math.floor(stop.getTime()/1000), 
-	    			"statusOfMedication" : { "value" : "active" },
-	     			"codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }, 
-	     			"freeTextSig" : ""
-     			} 
-     		]
-     	}
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
 
      	try{
 	     	var p  = new hQuery.Patient(obj); 
@@ -83,19 +82,8 @@ module.exports = {
 		start.setFullYear(start.getFullYear() - 2); 
 		stop.setFullYear(stop.getFullYear() + 1 ); 
 
-		var obj = {
-			"primary_care_provider_id" : "PROVIDER1", 
-			"birthdate": -70, 
-			"medications" : [
-  				{ 
-	  				"_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",   "time" : -1,
-	    			"start_time" : Math.floor(start.getTime()/1000), "end_time" : Math.floor(stop.getTime()/1000), 
-	    			"statusOfMedication" : { "value" : "active" },
-	     			"codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }, 
-	     			"freeTextSig" : ""
-     			} 
-     		]
-     	}
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
 
      	try{
 	     	var p  = new hQuery.Patient(obj); 
@@ -127,19 +115,8 @@ module.exports = {
 		start.setFullYear( start.getFullYear() - 2 ); 
 		stop.setFullYear( stop.getFullYear() - 3 ); 
 
-		var obj = {
-			"primary_care_provider_id" : "PROVIDER1", 
-			"birthdate": -70, 
-			"medications" : [
-  				{ 
-	  				"_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",   "time" : -1,
-	    			"start_time" : Math.floor(start.getTime()/1000), "end_time" : Math.floor(stop.getTime()/1000), 
-	    			"statusOfMedication" : { "value" : "active" },
-	     			"codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }, 
-	     			"freeTextSig" : ""
-     			} 
-     		]
-     	}
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
 
      	try{
 	     	var p  = new hQuery.Patient(obj); 
@@ -172,19 +149,8 @@ module.exports = {
 		start.setFullYear( start.getFullYear() + 2 ); 
 		stop.setFullYear( stop.getFullYear() + 3 ); 
 
-		var obj = {
-			"primary_care_provider_id" : "PROVIDER1", 
-			"birthdate": -70, 
-			"medications" : [
-  				{ 
-	  				"_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",   "time" : -1,
-	    			"start_time" : Math.floor(start.getTime()/1000), "end_time" : Math.floor(stop.getTime()/1000), 
-	    			"statusOfMedication" : { "value" : "active" },
-	     			"codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }, 
-	     			"freeTextSig" : ""
-     			} 
-     		]
-     	}
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
 
      	try{
 	     	var p  = new hQuery.Patient(obj); 
@@ -216,19 +182,8 @@ module.exports = {
 		start.setFullYear( start.getFullYear() + 3 ); 
 		stop.setFullYear( stop.getFullYear() + 2 ); 
 
-		var obj = {
-			"primary_care_provider_id" : "PROVIDER1", 
-			"birthdate": -70, 
-			"medications" : [
-  				{ 
-	  				"_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",   "time" : -1,
-	    			"start_time" : Math.floor(start.getTime()/1000), "end_time" : Math.floor(stop.getTime()/1000), 
-	    			"statusOfMedication" : { "value" : "active" },
-	     			"codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }, 
-	     			"freeTextSig" : ""
-     			} 
-     		]
-     	}
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
 
      	try{
 	     	var p  = new hQuery.Patient(obj); 
@@ -268,19 +223,8 @@ module.exports = {
 
 		stop.setDate( stop.getDate() - 55 ); 
 
-		var obj = {
-			"primary_care_provider_id" : "PROVIDER1", 
-			"birthdate": -70, 
-			"medications" : [
-  				{ 
-	  				"_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",   "time" : -1,
-	    			"start_time" : Math.floor(start.getTime()/1000), "end_time" : Math.floor(stop.getTime()/1000), 
-	    			"statusOfMedication" : { "value" : "active" },
-	     			"codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }, 
-	     			"freeTextSig" : ""
-     			} 
-     		]
-     	}
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
 
      	try{
 	     	var p  = new hQuery.Patient(obj); 
@@ -317,23 +261,10 @@ module.exports = {
 		start.setFullYear( start.getFullYear() - 1 ); 
 
 		start.setDate( start.getDate() - 72 ); //add in the extra 55 days
-
 		stop.setDate( stop.getDate() - 72 ); 
 
-		var obj = {
-			"primary_care_provider_id" : "PROVIDER1", 
-			"birthdate": -70, 
-			"medications" : [
-  				{ 
-	  				"_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",   "time" : -1,
-	    			"start_time" : Math.floor(start.getTime()/1000), "end_time" : Math.floor(stop.getTime()/1000), 
-	    			"statusOfMedication" : { "value" : "active" },
-	     			"codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }, 
-	     			"freeTextSig" : ""
-     			} 
-     		]
-     	}
-
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
      	try{
 	     	var p  = new hQuery.Patient(obj); 
 	     	var result = filter_activeMeds(p.medications()); 
@@ -372,19 +303,8 @@ module.exports = {
 
 		stop.setDate( stop.getDate() - 91 ); 
 
-		var obj = {
-			"primary_care_provider_id" : "PROVIDER1", 
-			"birthdate": -70, 
-			"medications" : [
-  				{ 
-	  				"_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",   "time" : -1,
-	    			"start_time" : Math.floor(start.getTime()/1000), "end_time" : Math.floor(stop.getTime()/1000), 
-	    			"statusOfMedication" : { "value" : "active" },
-	     			"codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }, 
-	     			"freeTextSig" : ""
-     			} 
-     		]
-     	}
+        obj.medications[0].start_time = Math.floor(start.getTime()/1000); 
+        obj.medications[0].end_time = Math.floor(stop.getTime()/1000); 
 
      	try{
 	     	var p  = new hQuery.Patient(obj); 
@@ -398,5 +318,11 @@ module.exports = {
      	}else{
      		return {result : false, message : "number of active meds was "+result.length+" not 0 as expected."}; 
      	}
-	}
+	},
+
+    /*
+    * Test case where medication is flagged_as_active, long_term_flag, and in_time_fram
+    *
+    * Expected: Medication is in results.
+    */
 }
