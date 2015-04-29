@@ -118,7 +118,7 @@ module.exports = {
         testpt.json.medications[0].start_time   = Math.floor((new Date()).getTime()/1000 - 153792000 );  //shift down by 5 years.
         testpt.json.medications[0].end_time     = Math.floor((new Date()).getTime()/1000 - 153793000 ); 
 
-        var result = activePatient(testpt)
+        var result = activePatient(testpt); 
 
         if(result === expected){
             return {result : true, message : "test passed!"}; 
@@ -145,7 +145,7 @@ module.exports = {
         testpt.json.medications[0].start_time   = Math.floor((new Date()).getTime()/1000 - 31536000 );  //shift down by 1 year.
         testpt.json.medications[0].end_time     = Math.floor((new Date()).getTime()/1000 - 31537000  ); 
 
-        var result = activePatient(testpt)
+        var result = activePatient(testpt); 
 
         if(result === expected){
             return {result : true, message : "test passed!"}; 
@@ -153,5 +153,159 @@ module.exports = {
             return {result : false, message : "Result was: "+result+" not "+expected+" as expected. "}; 
         }
     }, 
+
+    //----------START OF TESTING ENCOUNTER TIMING: uses the following test cases: 
+    //
+    // These test cases use only encounters and no valid medications. 
+    //
+    //  1   2          3              4  5
+    //      |-------------------------|
+    //      A                         B   
+    //
+    //    5 Test Cases: 
+    //
+    //    1. time < A             -> exclude
+    //    2. time == A            -> include
+    //    3. time > A && time < B -> include 
+    //    4. time == B            -> include
+    //    5. time > B             -> exclude
+
+    /*
+    * Test Encounter Timing 1, time < beginning of valid range 
+    *
+    * Reference Date : Jan 1st 1970.
+    * Time frame     : 1 year
+    * Encounter Date : Jan 1st 1968, 1 year before time frame.
+    * 
+    * Expected: activePatient returns false. 
+    */
+    testEnounterTiming1 : function(){
+
+        var expected = false; 
+
+        var testpt = setUpTest(); 
+
+        testpt.json.encounters[0].start_time = Math.floor((new Date(0)).getTime()/1000 - 63072000 );  //shift by 2 years, gives 1968
+
+        testpt.json.medications = []; //clear medications so that they aren't used. 
+
+        var result = activePatient(testpt, new Date(0), 31536000 );
+
+        if(result === expected){
+            return {result : true, message : "test passed!"}; 
+        }else{
+            return {result : false, message : "Result was: "+result+" not "+expected+" as expected. "}; 
+        }
+    }, 
+
+    /* Test Encounter Timing 2, time = beginning of valid range 
+    *
+    * Reference Date : Jan 1st 1970.
+    * Time frame     : 1 year
+    * Encounter Date : Jan 1st 1969, 1 year before reference date.
+    * 
+    * Expected: activePatient returns true. 
+    */
+    testEnounterTiming2 : function(){
+
+        var expected = true; 
+
+        var testpt = setUpTest(); 
+
+        testpt.json.encounters[0].start_time = Math.floor((new Date(0)).getTime()/1000 - 31536000 );  //shift by 1 year, gives 1969
+
+        testpt.json.medications = []; //clear medications so that they aren't used. 
+
+        var result = activePatient(testpt, new Date(0), 31536000 );
+
+        if(result === expected){
+            return {result : true, message : "test passed!"}; 
+        }else{
+            return {result : false, message : "Result was: "+result+" not "+expected+" as expected. "}; 
+        }
+    }, 
+
+    /* Test Encounter Timing 3, time > beginning  AND time < end of valid range 
+    *
+    * Reference Date : Jan 1st 1970.
+    * Time frame     : 2 years
+    * Encounter Date : Jan 1st 1969, 1 year before reference date.
+    * 
+    * Expected: activePatient returns true. 
+    */
+    testEnounterTiming3 : function(){
+
+        var expected = true; 
+
+        var testpt = setUpTest(); 
+
+        testpt.json.encounters[0].start_time = Math.floor((new Date(0)).getTime()/1000 - 31536000 );  //shift by 1 years, gives 1969
+
+        testpt.json.medications = []; //clear medications so that they aren't used. 
+
+        var result = activePatient(testpt, new Date(0), 63072000 );
+
+        if(result === expected){
+            return {result : true, message : "test passed!"}; 
+        }else{
+            return {result : false, message : "Result was: "+result+" not "+expected+" as expected. "}; 
+        }
+    }, 
+
+    /* Test Encounter Timing 4, time = end of valid range 
+    *
+    * Reference Date : Jan 1st 1970.
+    * Time frame     : 2 years
+    * Encounter Date : Jan 1st 1970
+    * 
+    * Expected: activePatient returns true. 
+    */
+    testEnounterTiming4 : function(){
+
+        var expected = true; 
+
+        var testpt = setUpTest(); 
+
+        testpt.json.encounters[0].start_time = Math.floor((new Date(0)).getTime()/1000 - 1);  //almost exact time, unfortunately a broken patient API prevents this from working.
+
+        console.log(testpt.json.encounters); 
+
+        testpt.json.medications = []; //clear medications so that they aren't used. 
+
+        var result = activePatient(testpt, new Date(0), 63072000 );
+
+        if(result === expected){
+            return {result : true, message : "test passed!"}; 
+        }else{
+            return {result : false, message : "Result was: "+result+" not "+expected+" as expected. "}; 
+        }
+    }, 
+
+    /* Test Encounter Timing 5, time > end of valid range 
+    *
+    * Reference Date : Jan 1st 1970.
+    * Time frame     : 2 years
+    * Encounter Date : Jan 1st 1971
+    * 
+    * Expected: activePatient returns false. 
+    */
+    testEnounterTiming5 : function(){
+
+        var expected = false; 
+
+        var testpt = setUpTest(); 
+
+        testpt.json.encounters[0].start_time = Math.floor((new Date(0)).getTime()/1000 + 31536000);  //shift by 1 year, gives 1971
+
+        testpt.json.medications = []; //clear medications so that they aren't used. 
+
+        var result = activePatient(testpt, new Date(0), 63072000 );
+
+        if(result === expected){
+            return {result : true, message : "test passed!"}; 
+        }else{
+            return {result : false, message : "Result was: "+result+" not "+expected+" as expected. "}; 
+        }
+    },  
 
 }

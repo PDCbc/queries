@@ -377,10 +377,10 @@ function runFunctionTests(testPath, testName){
 		try{
 			tmp = megaMod[f](); 
 			if(tmp.result){
-				if(!globals.quiet) console.log(testName.substring(0,25)+" "+f.substring(0, 25)+":\t PASSED"); 
+				if(!globals.quiet) console.log(testName.substring(0,25)+" "+f.substring(0, 25)+":\t\t PASSED"); 
 				result.passed += 1; 
 			}else{
-				if(!globals.quiet) console.log(testName.substring(0, 25)+" "+f.substring(0, 25)+":\t FAILED, message:"+tmp.message); 
+				if(!globals.quiet) console.log(testName.substring(0, 25)+" "+f.substring(0, 25)+":\t\t FAILED, message:"+tmp.message); 
 				result.result = false; 
 			} 
 		}catch(e){

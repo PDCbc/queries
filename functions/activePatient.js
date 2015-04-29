@@ -20,8 +20,6 @@ function activePatient( pt, refDate, frame ){
 
     if( !pt ){
 
-        console.log("no patient"); 
-
         return false; 
     }
 
@@ -38,7 +36,7 @@ function activePatient( pt, refDate, frame ){
         tmpTime = eList[e].json.start_time; 
 
         //check that the time was defined
-        if( tmpTime ){ 
+        if( tmpTime !== undefined && tmpTime !== null ){ 
             try{
 
                 //check if the date of the counter falls within our range. 
@@ -49,7 +47,7 @@ function activePatient( pt, refDate, frame ){
                 }
 
             }catch( e ){ //catch any date parsing errors here. 
-                console.log(e); 
+                //catch error and continue
             }
         }
     }
@@ -66,8 +64,6 @@ function activePatient( pt, refDate, frame ){
 
         start = Math.floor(mList[m].indicateMedicationStart().getTime()/1000); //returns in number of seconds.
         stop = Math.floor(mList[m].indicateMedicationStop().getTime()/1000); //returns in number of seconds.
-
-        console.log(start, stop, A, B); 
 
         // Cases: 
         //
