@@ -2,7 +2,17 @@
  * Filters a list of medications for only active medications.
  * An active medication is defined as: 
  * 
- * (flagged_as_active AND flagged_as_longterm) || (flagged_as_active AND (start < current) AND (stop < current + 20%))
+ *  status == ACTIVE:
+ *
+ *      medication is considered active.
+ *
+ *  status == COMPLETED:
+ *
+ *      start < current && stop + 20% >= current: medication is considered active
+ *
+ *      start < current && stop is null flavour: ???
+ *      
+ *      long term flag: active  
  *
  * @param (Array) matches -  a list of medications to handle
  * 
