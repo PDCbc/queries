@@ -9,6 +9,7 @@ function map( patient ){
    *   - 65+ years old
    */
   function checkDenominator(){
+
     var ageMin = 65;
 
     return isAge( patient, ageMin );
@@ -20,25 +21,27 @@ function map( patient ){
    *   - medications are active
    */
   function checkNumerator(){
-    var medMin    = 10,
+    var medMin    = 10;
 
     // List of medications
-        medList   = patient.medications(),
+    var medList   = patient.medications();
 
     // Filters
-        medActive = filter_activeMeds( medList );
+    var medActive = filter_activeMeds( medList );
 
     return isMatch( medActive )&&( medMin <= medActive.length );
+
   }
 
+   //Emit Numerator and Denominator, tagged with physician ID
+  try{
+    var denominator = checkDenominator();
+    var numerator   = denominator && checkNumerator(); 
+    var physicianID = "_" + patient.json.primary_care_provider_id; 
 
-  /**
-   * Emit Numerator and Denominator, tagged with physician ID
-   */
-  var denominator = checkDenominator(),
-      numerator   = denominator && checkNumerator(),
-      physicianID = "_" + patient.json.primary_care_provider_id;
-
-  emit( "denominator" + physicianID, +denominator );
-  emit( "numerator"   + physicianID, +numerator   );
+    emit( "denominator" + physicianID, +denominator );
+    emit( "numerator"   + physicianID, +numerator   );
+  }catch(e){
+     emit("FAILURE_"+e); 
+  } 
 }

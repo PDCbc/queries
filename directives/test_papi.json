@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "Test PAPI",
+    "path" : "functions/test_function.js",
+    "description" : "A test function for the testing framework.", 
+    "test" : "./functions/test_papi.js"
+}

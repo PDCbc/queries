@@ -206,6 +206,50 @@ module.exports = {
 			return {result : false, message : "should have returned 'true' if ageMax was undefined, since ageMax defaults to 200"}; 
 		}
 	},
+
+	/*
+	* Test case where the birthdate is undefined.
+	* 
+	* Expected: isAge() returns false
+	*/
+
+	testUndefinedBirthdate : function(){
+
+		var p = new hQuery.Patient({}); 
+
+		if ( isAge(p, 0) === false){
+
+			return {result : true, message: "test passed!"}; 
+
+		}else{
+
+			return {result: false, message: "should have returned false for isAge if birthdate was undefined in patient object"}; 
+
+		}
+	}, 
+
+	/*
+	* Test case where the birthdate is not an integer. 
+	*
+	* Expected: isAge() returns false. 
+	*/
+	testBirthdateNotANumber : function(){
+		var p = new hQuery.Patient(
+			{
+				birthdate: "SOME STRING THAT IS NOT A BIRTHDATE" 
+			}
+		);  
+
+		if ( isAge(p, 0) === false){
+
+			return {result : true, message: "test passed!"}; 
+
+		}else{
+
+			return {result: false, message: "should have returned false for isAge if birthdate was an invalid value"}; 
+
+		}
+	}
 }
 
 

@@ -12,17 +12,32 @@
 function isAge( pt, ageMin, ageMax ) {
 
 	// Default values
-	ageMax = ageMax || 200;
+	ageMax = ageMax || Number.MAX_VALUE;
 
 	if(ageMin === undefined || ageMin === null){
+
 		return false; 
+
 	}
 
 	if(pt === undefined || pt === null){
+
 		return false; 
+
 	}
 
 	ageNow = pt.age( new Date() );
 
-	return ( ageMin <= ageNow && ageNow <= ageMax );
+
+	//check that the ageNow value is defined.
+	if(ageNow){
+
+		return ( ageMin <= ageNow && ageNow <= ageMax );
+
+	}else{
+
+		return false; 
+
+	}
+
 }

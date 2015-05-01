@@ -23,25 +23,49 @@ function filter_activeMeds( matches ){
     var pad     = null; 
     var end     = null; 
 
-    for( var i = 0; i < matches.length; i++ ){
+    try{
 
-        med  = matches[ i ]; 
+        for( var i = 0; i < matches.length; i++ ){
 
-        //check that this med is recorded as active. 
-        if(med.json.statusOfMedication.value === "active"){
-            if(med.isLongTerm()){
-                toReturn.push( med ); 
-            }else if(med.indicateMedicationStart() && med.indicateMedicationStop){
-                start = med.indicateMedicationStart().getTime(); 
-                pad   = ( med.indicateMedicationStop().getTime() - start )* 1.2;
-                end   = start + pad;
+            med  = matches[ i ]; 
 
-                if( start <= now && now <= end ){
-                    toReturn.push( med );
+            if(med === undefined || med === null || med.json === undefined || 
+                med.json === undefined || med.json === null
+            ){
+
+               continue;  
+
+            }
+
+            //check that this med is recorded as active. 
+            if(med.json.statusOfMedication.value === "active"){
+
+                if(med.isLongTerm()){
+
+                    toReturn.push( med ); 
+
+                }else if(med.indicateMedicationStart() && med.indicateMedicationStop){
+
+                    start = med.indicateMedicationStart().getTime(); 
+
+                    pad   = ( med.indicateMedicationStop().getTime() - start )* 1.2;
+
+                    end   = start + pad;
+
+                    if( start <= now && now <= end ){
+
+                        toReturn.push( med );
+
+                    }
                 }
             }
         }
+
+        return toReturn;
+
+    }catch(e){
+
+        return new hQuery.CodedEntryList(); 
+
     }
-    
-    return toReturn;
 }

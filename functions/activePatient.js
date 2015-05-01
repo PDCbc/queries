@@ -21,6 +21,7 @@ function activePatient( pt, refDate, frame ){
     if( !pt ){
 
         return false; 
+
     }
 
     refDate = refDate || new Date(); 
@@ -62,8 +63,37 @@ function activePatient( pt, refDate, frame ){
 
     for( var m = 0; m < mList.length; m ++ ){
 
-        start = Math.floor(mList[m].indicateMedicationStart().getTime()/1000); //returns in number of seconds.
-        stop = Math.floor(mList[m].indicateMedicationStop().getTime()/1000); //returns in number of seconds.
+
+        try{
+
+            start = mList[m].json.start_time; 
+            stop = mList[m].json.end_time; 
+
+
+            if ( isNaN(start) || start === undefined || start === null ){
+
+                continue; 
+
+            }
+
+             //if stop is not defined we assume it goes to infinity
+            if ( isNaN(stop) || stop === undefined || start === null ){
+
+                stop = 7258118400;  //Jan 1st 2200
+
+            }
+
+            start = Math.floor( (new Date( start*1000) ).getTime()/1000 ); //returns in number of seconds.
+            stop = Math.floor( ( new Date(stop*1000) ).getTime()/1000 ); //returns in number of seconds.
+
+        }catch(e){
+
+            continue; 
+
+        }
+        
+
+        //check that we have valid start and stop dates
 
         // Cases: 
         //
