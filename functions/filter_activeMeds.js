@@ -14,7 +14,10 @@ function filter_activeMeds( matches ){
     var now = new Date(); 
     var toReturn = new hQuery.CodedEntryList();
 
-    if( matches === undefined || matches === null ){
+    if( matches === undefined || matches === null || 
+        matches.length === undefined || matches.length === 0 
+    ){
+
         return toReturn; 
     }
 
@@ -24,6 +27,8 @@ function filter_activeMeds( matches ){
     var end     = null; 
 
     try{
+
+        now = Math.floor(now.getTime()/1000); 
 
         for( var i = 0; i < matches.length; i++ ){
 
@@ -38,19 +43,34 @@ function filter_activeMeds( matches ){
             }
 
             //check that this med is recorded as active. 
-            if(med.json.statusOfMedication.value === "active"){
+            if( med.json.statusOfMedication !== undefined && 
+                med.json.statusOfMedication !== null &&
+                med.json.statusOfMedication.value === "active" 
+            ){
+
+                start = med.json.start_time;
+
+                end = med.json.end_time; 
+
 
                 if(med.isLongTerm()){
 
                     toReturn.push( med ); 
 
-                }else if(med.indicateMedicationStart() && med.indicateMedicationStop){
+                }else if( !isNaN(start) && start !== undefined && start !== null ){
 
-                    start = med.indicateMedicationStart().getTime(); 
 
-                    pad   = ( med.indicateMedicationStop().getTime() - start )* 1.2;
+                    //determine if end is a valid input, if not set it to a long time in the future. 
+                    if( isNaN(end) || end === undefined || end === null ){
 
-                    end   = start + pad;
+                        end = 7258118400; //Jan 1st 2200 (in seconds from EPOCH)
+
+                    }
+
+                    //compute the amount to add to the duration for an active medication
+                    pad = ( end - start ) * 1.2;
+
+                    end = start + pad;
 
                     if( start <= now && now <= end ){
 

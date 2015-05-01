@@ -20,21 +20,23 @@
 *   time frames.
 */
 
+function setUp() {
+    var obj = {
+        "primary_care_provider_id" : "PROVIDER1", 
+        "birthdate": -70, 
+        "medications" : [
+            { 
+                "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",   "time" : -1,
+                "start_time" : new Date(), "end_time" : new Date, 
+                "statusOfMedication" : { "value" : "active" },
+                "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }, 
+                "freeTextSig" : ""
+            } 
+        ]
+    };   
 
-
-var obj = {
-    "primary_care_provider_id" : "PROVIDER1", 
-    "birthdate": -70, 
-    "medications" : [
-        { 
-            "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",   "time" : -1,
-            "start_time" : new Date(), "end_time" : new Date, 
-            "statusOfMedication" : { "value" : "active" },
-            "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }, 
-            "freeTextSig" : ""
-        } 
-    ]
-}; 
+    return obj; 
+}
 
 module.exports = {
 	
@@ -66,8 +68,9 @@ module.exports = {
 	testStartLessThanCurrentAndStopLessThanCurrent : function(){
 
 
-		var start = new Date(); 
-		var stop = new Date(); 
+		var start     = new Date(); 
+		var stop      = new Date(); 
+        var obj       = setUp(); 
 
 		start.setFullYear(start.getFullYear() - 2); 
 		stop.setFullYear(stop.getFullYear() - 1 ); 
@@ -106,8 +109,9 @@ module.exports = {
 	testStartLessThanCurrentAndStopAfterThanCurrent : function(){
 
 
-		var start = new Date(); 
-		var stop = new Date(); 
+		var start     = new Date(); 
+		var stop      = new Date(); 
+        var obj       = setUp(); 
 
 		start.setFullYear(start.getFullYear() - 2); 
 		stop.setFullYear(stop.getFullYear() + 1 ); 
@@ -145,8 +149,9 @@ module.exports = {
 	*/
 	testStartLessThanCurrentAndStopMuchLessThanCurrent : function(){
 
-		var start = new Date(); 
-		var stop = new Date(); 
+		var start     = new Date(); 
+		var stop      = new Date(); 
+        var obj       = setUp(); 
 
 		start.setFullYear( start.getFullYear() - 2 ); 
 		stop.setFullYear( stop.getFullYear() - 3 ); 
@@ -185,8 +190,9 @@ module.exports = {
 	*/
 	testStartAfterCurrentAndStopAfterCurrent : function(){
 
-		var start = new Date(); 
-		var stop = new Date(); 
+		var start     = new Date(); 
+		var stop      = new Date(); 
+        var obj       = setUp(); 
 
 		start.setFullYear( start.getFullYear() + 2 ); 
 		stop.setFullYear( stop.getFullYear() + 3 ); 
@@ -225,8 +231,9 @@ module.exports = {
 	*/
 	testStopAfterCurrendAndStartAfterCurrent : function(){
 
-		var start = new Date(); 
-		var stop = new Date(); 
+		var start     = new Date(); 
+		var stop      = new Date(); 
+        var obj       = setUp(); 
 
 		start.setFullYear( start.getFullYear() + 3 ); 
 		stop.setFullYear( stop.getFullYear() + 2 ); 
@@ -269,8 +276,9 @@ module.exports = {
 	*/
 	testWithin20PercentWindow: function(){
 
-		var start = new Date(); 
-		var stop = new Date(); 
+		var start     = new Date(); 
+		var stop      = new Date(); 
+        var obj       = setUp(); 
 
 		start.setFullYear( start.getFullYear() - 1 ); 
 
@@ -316,8 +324,9 @@ module.exports = {
 	*/
 	testOn20PercentWindow : function(){
 
-		var start = new Date(); 
-		var stop = new Date(); 
+		var start     = new Date(); 
+		var stop      = new Date(); 
+        var obj       = setUp(); 
 
 		start.setFullYear( start.getFullYear() - 1 ); 
 
@@ -362,8 +371,9 @@ module.exports = {
 	*/
 	testOn20PercentWindow : function(){
 
-		var start = new Date(); 
-		var stop = new Date(); 
+		var start     = new Date(); 
+		var stop      = new Date(); 
+        var obj       = setUp(); 
 
 		start.setFullYear( start.getFullYear() - 1 ); 
 
@@ -402,8 +412,9 @@ module.exports = {
     testActiveFlagAndLongTermFlagAndInTimeFrame : function(){
 
         //set up dates.
-        var start = new Date(); 
-        var stop = new Date(); 
+        var start     = new Date(); 
+        var stop      = new Date(); 
+        var obj       = setUp(); 
 
         start.setFullYear( start.getFullYear() - 1 ); 
         stop.setFullYear( stop.getFullYear() + 1 ); 
@@ -442,8 +453,9 @@ module.exports = {
     testActiveFlagAndLongTermFlagAndNotInTimeFrame : function(){
 
         //set up dates.
-        var start = new Date(); 
-        var stop = new Date(); 
+        var start   = new Date(); 
+        var stop    = new Date(); 
+        var obj     = setUp(); 
 
         start.setFullYear( start.getFullYear() - 2 ); 
         stop.setFullYear( stop.getFullYear() - 1 ); 
@@ -481,8 +493,9 @@ module.exports = {
     testActiveFlagAndNoTLongTermFlagAndInTimeFrame : function(){
 
         //set up dates.
-        var start = new Date(); 
-        var stop = new Date(); 
+        var start   = new Date(); 
+        var stop    = new Date(); 
+        var obj     = setUp(); 
 
         start.setFullYear( start.getFullYear() - 2 ); 
         stop.setFullYear( stop.getFullYear() + 1 ); 
@@ -522,8 +535,9 @@ module.exports = {
         var expected = 0; 
 
         //set up dates.
-        var start = new Date(); 
-        var stop = new Date(); 
+        var start   = new Date(); 
+        var stop    = new Date(); 
+        var obj     = setUp(); 
 
         start.setFullYear( start.getFullYear() - 2 ); 
         stop.setFullYear( stop.getFullYear() - 1 ); 
@@ -563,8 +577,9 @@ module.exports = {
         var expected = 0; 
 
         //set up dates.
-        var start = new Date(); 
-        var stop = new Date(); 
+        var start   = new Date(); 
+        var stop    = new Date(); 
+        var obj     = setUp(); 
 
         start.setFullYear( start.getFullYear() - 2 ); 
         stop.setFullYear( stop.getFullYear() - 1 ); 
@@ -605,8 +620,9 @@ module.exports = {
         var expected = 0; 
 
         //set up dates.
-        var start = new Date(); 
-        var stop = new Date(); 
+        var start   = new Date(); 
+        var stop    = new Date(); 
+        var obj     = setUp(); 
 
         start.setFullYear( start.getFullYear() - 2 ); 
         stop.setFullYear( stop.getFullYear() + 1 ); 
@@ -646,8 +662,9 @@ module.exports = {
         var expected = 0; 
 
         //set up dates.
-        var start = new Date(); 
-        var stop = new Date(); 
+        var start   = new Date(); 
+        var stop    = new Date(); 
+        var obj     = setUp(); 
 
         start.setFullYear( start.getFullYear() - 2 ); 
         stop.setFullYear( stop.getFullYear() - 1 ); 
@@ -674,4 +691,222 @@ module.exports = {
             return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
         }
     },
-}
+
+    /*
+    * Test case where the medication list is undefined
+    *
+    * Expected: Result has length 0.  
+    */  
+
+    testUndefinedMedicationList : function(){
+
+        var expected = 0; 
+
+        var obj = setUp(); 
+
+        delete obj.medications; 
+
+        try{
+            var p = new hQuery.Patient(obj);
+            var result = filter_activeMeds(p.medications());
+        }catch(e){
+            return {result : false, message : "Undefined medication list caused an error: "+e}; 
+        }
+
+        if( result.length === expected ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
+        }
+    },
+
+    /*
+    * Test case where the medication list is null
+    *
+    * Expected: Result has length 0.  
+    */  
+    testNullMedicationList : function(){
+
+        var expected = 0; 
+
+        var obj = setUp(); 
+
+        obj.medications = null; 
+
+        try{
+            var p = new hQuery.Patient(obj);
+            var result = filter_activeMeds(p.medications());
+        }catch(e){
+            return {result : false, message : "NULL medication list caused an error: "+e}; 
+        }
+
+        if( result.length === expected ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
+        }
+    },
+
+    /*
+    * Test case where the medication list is a string
+    *
+    * Expected: Result has length 0.  
+    */  
+    testStringMedicationList : function(){
+
+        var expected = 0; 
+
+        var obj = setUp(); 
+
+        obj.medications = "SOME STRING THAT IS NOT A LIST"; 
+
+        try{
+            var p = new hQuery.Patient(obj);
+            var result = filter_activeMeds(p.medications());
+        }catch(e){
+            return {result : false, message : "String medication list caused an error: "+e}; 
+        }
+
+        if( result.length === expected ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
+        }
+    },
+
+    /*
+    * Test case where the medication list empty 
+    *
+    * Expected: Result has length 0.  
+    */  
+    testEmptyMedicationList : function(){
+
+        var expected = 0; 
+
+        var obj = setUp(); 
+
+        obj.medications = []; 
+
+        try{
+            var p = new hQuery.Patient(obj);
+            var result = filter_activeMeds(p.medications());
+        }catch(e){
+            return {result : false, message : "Empty medication list caused an error: "+e}; 
+        }
+
+        if( result.length === expected ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
+        }
+    },
+
+    /*
+    * Test case where the medication list contains an invalid object.
+    *
+    * Expected: Result has length 0.  
+    */  
+    testInvalidMedicationFormat : function(){
+
+        var expected = 0; 
+
+        var obj = setUp(); 
+
+        obj.medications = [{"some_property" : "some_value_that_is_invalid"}]; 
+
+        try{
+            var p = new hQuery.Patient(obj);
+            var result = filter_activeMeds(p.medications());
+        }catch(e){
+            return {result : false, message : "Invalid medication list caused an error: "+e}; 
+        }
+
+        if( result.length === expected ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
+        }
+    },
+
+    /*
+    * Test case where the medication list contains a medication without statusOfMedication defined. 
+    *
+    * Expected: Result has length 0.  
+    */  
+    testMedicationWithoutStatusField : function(){
+
+        var expected = 0; 
+
+        var obj = setUp(); 
+
+        delete obj.medications[0].statusOfMedication; 
+
+        try{
+            var p = new hQuery.Patient(obj);
+            var result = filter_activeMeds(p.medications());
+        }catch(e){
+            return {result : false, message : "Medication without statusOfMedication caused an error: "+e}; 
+        }
+
+        if( result.length === expected ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
+        }
+    },
+
+
+    /*
+    * Test case where the medication list contains a medication with a status flag that is completed, not active.
+    *
+    * Expected: Result has length 0.  
+    */  
+    testMedicationWithCompletedStatus : function(){
+
+        var expected = 0; 
+
+        var obj = setUp(); 
+
+        obj.medications[0].statusOfMedication.value = "completed"; 
+
+        try{
+            var p = new hQuery.Patient(obj);
+            var result = filter_activeMeds(p.medications());
+        }catch(e){
+            return {result : false, message : "Medication without statusOfMedication caused an error: "+e}; 
+        }
+
+        if( result.length === expected ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
+        }
+    },
+
+    /*
+    * Test case where the medication list contains a medication with a status flag that is completed, not active.
+    *
+    * Expected: Result has length 0.  
+    */  
+    testMedicationWithCompletedStatusField : function(){
+
+        var expected = 0; 
+
+        var obj = setUp(); 
+
+        obj.medications[0].statusOfMedication.value = "completed"; 
+
+        try{
+            var p = new hQuery.Patient(obj);
+            var result = filter_activeMeds(p.medications());
+        }catch(e){
+            return {result : false, message : "Medication without statusOfMedication caused an error: "+e}; 
+        }
+
+        if( result.length === expected ){
+            return {result : true, message : "test passed"}; 
+        }else{
+            return {result : false, message : "number of active meds was "+result.length+" not "+expected+" as expected."}; 
+        }
+    },
+}   
