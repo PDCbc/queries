@@ -1,0 +1,23 @@
+[
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "medications" : [],
+    "conditions" : [
+      { "codes": { "ICD9": ["428.0", "428.1", "428.20"]}, "time": 1263167138, "description": "Congestive Heart Failure"}
+    ]
+  },
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "medications" : [],
+    "conditions" : [
+      { "codes": { "ICD9": ["429.0"]}, "time": 1263167138, "description": "Congestive Heart Failure"}
+    ]
+  },
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -20, 
+    "medications" : [],
+    "conditions" : [
+      { "codes": { "ICD9": []}, "time": 1263167138, "description": "Congestive Heart Failure"}
+    ]
+  }
+]

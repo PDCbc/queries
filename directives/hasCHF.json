@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "filter_values",
+    "path" : "functions/filter_values.js",
+    "description" : "Filters values based on a min and max.", 
+    "test" : "./functions/test_filter_values.js"
+}

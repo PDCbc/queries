@@ -26,6 +26,7 @@ function isAge( pt, ageMin, ageMax ) {
 
 	}
 
+	
 	ageNow = pt.age( new Date() );
 
 
