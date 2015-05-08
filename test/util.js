@@ -48,6 +48,11 @@ module.exports = {
 		}
 
 		// 4. Write to new_string to a file so that we can use it many times. 
+
+		if( !fs.existsSync(globals.TMP_DIR)){
+			fs.mkdirSync(globals.TMP_DIR);
+		}
+
 		fs.writeFileSync(globals.TMP_DIR+"functions.js", new_string); 
 
 		return new_string; 
