@@ -1,7 +1,7 @@
 {
     "type" : "FUNCTION", 
-    "name" : "hasCHF",
-    "path" : "functions/hasCHF.js",
-    "description" : "Determines whether a patient has CHF or not.", 
-    "test" : "./functions/test_hasCHF.js"
+    "name" : "filter_values",
+    "path" : "functions/filter_values.js",
+    "description" : "Filters values based on a min and max.", 
+    "test" : "./functions/test_filter_values.js"
 }
