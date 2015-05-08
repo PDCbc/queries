@@ -8,7 +8,7 @@ function map( patient ){
 
   var denominator = isAge( patient, 20, 120 ); 
 
-  var numerator   = isAge( patient, 20, 120 )  &&  hasCHF(patient); 
+  var numerator   =  denominator &&  hasCHF(patient); 
 
   emit( "denominator_" + patient.json.primary_care_provider_id,  + denominator );
 

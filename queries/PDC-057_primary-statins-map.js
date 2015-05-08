@@ -185,14 +185,3 @@ function isMatch( list ) {
 }
 
 
-/**
- * T/F: Does the patient fall in this age range?
- *   - inclusive range, boundary cases are counted
- */
-function isAge( ageMin, ageMax ) {
-  // Default values
-  ageMax = ageMax || 200;
-
-  ageNow = patient.age( new Date() );
-  return ( ageMin <= ageNow && ageNow <= ageMax );
-}
