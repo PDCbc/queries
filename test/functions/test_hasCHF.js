@@ -111,12 +111,194 @@ module.exports = {
 
             return {result : true, message : "test passed"};  
 
-        }else {
+        }else{
 
             return {result : false, message : "expected true for patient with CHF"};
 
         }
-    }
+    }, 
 
+    testPatientWithUndefinedConditions : function() {
+
+        var p = setUp(); 
+
+        delete p.conditions; 
+
+        p = new hQuery.Patient(p); 
+
+        var result = hasCHF(p);
+
+        if ( result === false ) {
+
+            return {result : true, message : "test passed"};  
+
+        }else{
+
+            return {result : false, message : "expected false for patient with undefined conditions"};
+
+        }
+
+    },
+
+    testPatientWithNullConditions : function() {
+
+        var p = setUp(); 
+
+        p.conditions = null; 
+
+        p = new hQuery.Patient(p); 
+
+        var result = hasCHF(p);
+
+        if ( result === false ) {
+
+            return {result : true, message : "test passed"};  
+
+        }else{
+
+            return {result : false, message : "expected false for patient with null conditions"};
+
+        }
+
+    },
+
+    testPatientMultipleConditions : function (){
+
+        var p = setUp(); 
+
+        p.conditions = []; 
+        p.conditions[0] = { "codes": { "ICD9": ["429.0"]}, "time": 1263167138, "description": "NOT CHF"};
+        p.conditions[1] = { "codes": { "ICD9": ["430.0"]}, "time": 1263167138, "description": "NOT CHF"};
+        p.conditions[2] = { "codes": { "ICD9": ["428.0"]}, "time": 1263167138, "description": "CHF"};
+
+        p = new hQuery.Patient(p); 
+
+        var result = hasCHF(p);
+
+        if ( result === true ) {
+
+            return {result : true, message : "test passed"};  
+
+        }else{
+
+            return {result : false, message : "expected true for patient with CHF in condition list."};
+
+        }
+
+    },
+
+    testPatientNonICD9Code : function (){
+
+        var p = setUp(); 
+
+        p.conditions = []; 
+        p.conditions[0] = { "codes": { "SNOMED-CT": ["123455"]}, "time": 1263167138, "description": "NOT CHF"};
+
+        p = new hQuery.Patient(p); 
+
+        var result = hasCHF(p);
+
+        if ( result === false ) {
+
+            return {result : true, message : "test passed"};  
+
+        }else{
+
+            return {result : false, message : "expected SNOMED-CT"};
+
+        }
+
+    },
+
+    testPatientNonICD9Code : function (){
+
+        var p = setUp(); 
+
+        p.conditions = []; 
+        p.conditions[0] = { "codes": { "SNOMED-CT": ["123455"]}, "time": 1263167138, "description": "NOT CHF"};
+
+        p = new hQuery.Patient(p); 
+
+        var result = hasCHF(p);
+
+        if ( result === false ) {
+
+            return {result : true, message : "test passed"};  
+
+        }else{
+
+            return {result : false, message : "expected false if given a SNOMED-CT code"};
+
+        }
+
+    },
+
+    testPatientWithCombinedCodeSystems : function (){
+
+        var p = setUp(); 
+
+        p.conditions = []; 
+        p.conditions[0] = { "codes": { "SNOMED-CT": ["123455"], "ICD9" : ["428.9"]}, "time": 1263167138, "description": "NOT CHF"};
+
+        p = new hQuery.Patient(p); 
+
+        var result = hasCHF(p);
+
+        if ( result === true ) {
+
+            return {result : true, message : "test passed"};  
+
+        }else{
+
+            return {result : false, message : "expected true given ICD9 code 428.9 "};
+
+        }
+
+    }, 
+
+    testPatientWithUndefinedCodes : function (){
+
+        var p = setUp(); 
+
+        delete p.conditions[0].codes
+
+        p = new hQuery.Patient(p); 
+
+        var result = hasCHF(p);
+
+        if ( result === false ) {
+
+            return {result : true, message : "test passed"};  
+
+        }else{
+
+            return {result : false, message : "expected false given a patient with conditions but no codes"};
+
+        }
+
+    }, 
+
+    testPatientEmptyCodes : function (){
+
+        var p = setUp(); 
+
+        p.conditions = []; 
+        p.conditions[0] = { "codes": {}, "time": 1263167138, "description": "NOT CHF"};
+
+        p = new hQuery.Patient(p); 
+
+        var result = hasCHF(p);
+
+        if ( result === false ) {
+
+            return {result : true, message : "test passed"};  
+
+        }else{
+
+            return {result : false, message : "expected false since no codes were given "};
+
+        }
+
+    }, 
 }
 
