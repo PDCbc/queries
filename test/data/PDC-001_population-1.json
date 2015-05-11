@@ -1,0 +1,22 @@
+[
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": "someString"},
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": 32513350556},
+  {"birthdate": 956441756, "gender":"M"},
+  {"primary_care_provider_id" : 1234, "gender": "M" ,"birthdate": 956441756},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "M" ,"birthdate": 1072918861},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "F" ,"birthdate": 1072918861},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "UN" ,"birthdate": 1072918861},
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": 1072918861},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "INVALIDGENDER" ,"birthdate": 1072918861},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": 1234 ,"birthdate": 1072918861},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "M" ,"birthdate": -2208985139},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "M" ,"birthdate": 1388538061},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "F" ,"birthdate": 757386061},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "F" ,"birthdate": 441766861},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "M" ,"birthdate": 126234061},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "F" ,"birthdate": -189385139},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "M" ,"birthdate": -504917939},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "F" ,"birthdate": -820537139},
+  {"primary_care_provider_id" : "PROVIDER1", "gender": "F" ,"birthdate": -1136069939},
+  {"primary_care_provider_id" : "PROVIDER2", "gender": "F" ,"birthdate": -189385139}
+]

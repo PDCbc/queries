@@ -1,0 +1,2398 @@
+{
+  "_id": "1",
+  "emr_demographics_primary_key": "1",
+  "primary_care_provider_id": "cpsid",
+  "effective_time": 1410533220,
+  "first": "s/Q1SdAMY/S6mlao6erGW8sO1N0Z5XYXsSd2Ug==",
+  "last": "7ETUHfZcSQduD+JS3qauh9vPmWUp1xbe56I3Bw==",
+  "birthdate": -923616000,
+  "gender": "M",
+  "medical_record_number": "m59ceyj+C/6mnU2V32L/0G5XHZ3folWFlz8NTg==",
+  "languages": [
+    "EN"
+  ],
+  "hash_id": "oqG3YBB7rJvxeUAmPu2Mv2Q/cUji905I9IoJ4w==",
+  "allergies": [
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000b0"
+      },
+      "codes": {
+        "Unknown": [
+          "NI"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Allergy",
+      "start_time": 1362441600,
+      "description": "PENICILLINS, COMBINATIONS WITH OTHER ANTIBACTERIAL",
+      "status_code": {
+        "SNOMED-CT": [
+          "410605003"
+        ]
+      },
+      "type": {
+        "code": "MED",
+        "displayName": "Medication",
+        "codeSystem": "2.16.840.1.113883.5.4",
+        "codeSystemName": "HL7 ActCode"
+      },
+      "reaction": {
+        "text": "",
+        "value": null
+      },
+      "severity": null
+    }
+  ],
+  "conditions": [
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000b1"
+      },
+      "codes": {
+        "ICD9": [
+          "428"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Condition",
+      "description": "HEART FAILURE*",
+      "type": null,
+      "start_time": 1380153600,
+      "status_code": {
+        "SNOMED-CT": [
+          "55561003"
+        ],
+        "HL7 ActStatus": [
+          "active"
+        ]
+      },
+      "time": null,
+      "treating_provider": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000a8"
+          },
+          "title": "",
+          "given_name": "",
+          "family_name": "0UoCjCo6K8lHYQK7KII0xBWisB+CjqYqxbPkLw==",
+          "specialty": "",
+          "npi": "",
+          "start": null,
+          "end": null,
+          "organization": {
+            "_id": {
+              "$oid": "551cce86c58406644d0000a9"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000b2"
+      },
+      "codes": {
+        "ICD9": [
+          "401"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Condition",
+      "description": "ESSENTIAL HYPERTENSION*",
+      "type": null,
+      "start_time": 1380153600,
+      "status_code": {
+        "SNOMED-CT": [
+          "55561003"
+        ],
+        "HL7 ActStatus": [
+          "active"
+        ]
+      },
+      "time": null,
+      "treating_provider": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000aa"
+          },
+          "title": "",
+          "given_name": "",
+          "family_name": "0UoCjCo6K8lHYQK7KII0xBWisB+CjqYqxbPkLw==",
+          "specialty": "",
+          "npi": "",
+          "start": null,
+          "end": null,
+          "organization": {
+            "_id": {
+              "$oid": "551cce86c58406644d0000ab"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000b3"
+      },
+      "codes": {
+        "ICD9": [
+          "250"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Condition",
+      "description": "DIABETES MELLITUS*",
+      "type": null,
+      "start_time": 1380153600,
+      "status_code": {
+        "SNOMED-CT": [
+          "55561003"
+        ],
+        "HL7 ActStatus": [
+          "active"
+        ]
+      },
+      "time": null,
+      "treating_provider": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000ac"
+          },
+          "title": "",
+          "given_name": "",
+          "family_name": "0UoCjCo6K8lHYQK7KII0xBWisB+CjqYqxbPkLw==",
+          "specialty": "",
+          "npi": "",
+          "start": null,
+          "end": null,
+          "organization": {
+            "_id": {
+              "$oid": "551cce86c58406644d0000ad"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000b4"
+      },
+      "codes": {
+        "ICD9": [
+          "491"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Condition",
+      "description": "CHRONIC BRONCHITIS*",
+      "type": null,
+      "start_time": 1380153600,
+      "status_code": {
+        "SNOMED-CT": [
+          "55561003"
+        ],
+        "HL7 ActStatus": [
+          "active"
+        ]
+      },
+      "time": null,
+      "treating_provider": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000ae"
+          },
+          "title": "",
+          "given_name": "",
+          "family_name": "0UoCjCo6K8lHYQK7KII0xBWisB+CjqYqxbPkLw==",
+          "specialty": "",
+          "npi": "",
+          "start": null,
+          "end": null,
+          "organization": {
+            "_id": {
+              "$oid": "551cce86c58406644d0000af"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "encounters": [
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000b5"
+      },
+      "codes": {
+        "code": [
+          "REASON"
+        ],
+        "codeSystem": [
+          "ObservationType-CA-Pending"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Encounter",
+      "start_time": 1380124200,
+      "description": "[25-Sep-2013 .: Tel-Progress Notes]\nBP    130/85 sitting position \nHT    187 in cm \nHR    85 in bpm (nnn) Range:40-180 \nTEMP    37 degrees celcius \nWAIS    92 Waist Circum in cm \nWT    95 in kg",
+      "reason": {
+        "_id": {
+          "$oid": "551cce86c58406644d0000b6"
+        },
+        "codes": {
+          "ObservationType-CA-Pending": [
+            "REASON"
+          ],
+          "Unknown": [
+            "NI"
+          ]
+        },
+        "mood_code": "EVN",
+        "description": "[25-Sep-2013 .: Tel-Progress Notes]\nBP    130/85 sitting position \nHT    187 in cm \nHR    85 in bpm (nnn) Range:40-180 \nTEMP    37 degrees celcius \nWAIS    92 Waist Circum in cm \nWT    95 in kg",
+        "start_time": 1380124200
+      },
+      "performer": {
+        "_id": {
+          "$oid": "551cce86c58406644d00008a"
+        },
+        "title": "",
+        "given_name": "",
+        "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+        "specialty": "",
+        "npi": "",
+        "start": 1380124200,
+        "end": null,
+        "organization": {
+          "_id": {
+            "$oid": "551cce86c58406644d00008b"
+          }
+        }
+      }
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000b7"
+      },
+      "codes": {
+        "code": [
+          "REASON"
+        ],
+        "codeSystem": [
+          "ObservationType-CA-Pending"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Encounter",
+      "start_time": 1380212303,
+      "description": "Situational Crisis",
+      "reason": {
+        "_id": {
+          "$oid": "551cce86c58406644d0000b8"
+        },
+        "codes": {
+          "ObservationType-CA-Pending": [
+            "REASON"
+          ],
+          "Unknown": [
+            "NI"
+          ]
+        },
+        "mood_code": "EVN",
+        "description": "Situational Crisis",
+        "start_time": 1380212303
+      },
+      "performer": {
+        "_id": {
+          "$oid": "551cce86c58406644d00008c"
+        },
+        "title": "",
+        "given_name": "",
+        "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+        "specialty": "",
+        "npi": "",
+        "start": 1380212303,
+        "end": null,
+        "organization": {
+          "_id": {
+            "$oid": "551cce86c58406644d00008d"
+          }
+        }
+      }
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000b9"
+      },
+      "codes": {
+        "code": [
+          "REASON"
+        ],
+        "codeSystem": [
+          "ObservationType-CA-Pending"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Encounter",
+      "start_time": 1380212341,
+      "description": "Vitamin D3",
+      "reason": {
+        "_id": {
+          "$oid": "551cce86c58406644d0000ba"
+        },
+        "codes": {
+          "ObservationType-CA-Pending": [
+            "REASON"
+          ],
+          "Unknown": [
+            "NI"
+          ]
+        },
+        "mood_code": "EVN",
+        "description": "Vitamin D3",
+        "start_time": 1380212341
+      },
+      "performer": {
+        "_id": {
+          "$oid": "551cce86c58406644d00008e"
+        },
+        "title": "",
+        "given_name": "",
+        "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+        "specialty": "",
+        "npi": "",
+        "start": 1380212341,
+        "end": null,
+        "organization": {
+          "_id": {
+            "$oid": "551cce86c58406644d00008f"
+          }
+        }
+      }
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000bb"
+      },
+      "codes": {
+        "code": [
+          "REASON"
+        ],
+        "codeSystem": [
+          "ObservationType-CA-Pending"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Encounter",
+      "start_time": 1380212399,
+      "description": "Vitamin C",
+      "reason": {
+        "_id": {
+          "$oid": "551cce86c58406644d0000bc"
+        },
+        "codes": {
+          "ObservationType-CA-Pending": [
+            "REASON"
+          ],
+          "Unknown": [
+            "NI"
+          ]
+        },
+        "mood_code": "EVN",
+        "description": "Vitamin C",
+        "start_time": 1380212399
+      },
+      "performer": {
+        "_id": {
+          "$oid": "551cce86c58406644d000090"
+        },
+        "title": "",
+        "given_name": "",
+        "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+        "specialty": "",
+        "npi": "",
+        "start": 1380212399,
+        "end": null,
+        "organization": {
+          "_id": {
+            "$oid": "551cce86c58406644d000091"
+          }
+        }
+      }
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000bd"
+      },
+      "codes": {
+        "code": [
+          "REASON"
+        ],
+        "codeSystem": [
+          "ObservationType-CA-Pending"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Encounter",
+      "start_time": 1380212410,
+      "description": "Ginseng Tincture",
+      "reason": {
+        "_id": {
+          "$oid": "551cce86c58406644d0000be"
+        },
+        "codes": {
+          "ObservationType-CA-Pending": [
+            "REASON"
+          ],
+          "Unknown": [
+            "NI"
+          ]
+        },
+        "mood_code": "EVN",
+        "description": "Ginseng Tincture",
+        "start_time": 1380212410
+      },
+      "performer": {
+        "_id": {
+          "$oid": "551cce86c58406644d000092"
+        },
+        "title": "",
+        "given_name": "",
+        "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+        "specialty": "",
+        "npi": "",
+        "start": 1380212410,
+        "end": null,
+        "organization": {
+          "_id": {
+            "$oid": "551cce86c58406644d000093"
+          }
+        }
+      }
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000bf"
+      },
+      "codes": {
+        "code": [
+          "REASON"
+        ],
+        "codeSystem": [
+          "ObservationType-CA-Pending"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Encounter",
+      "start_time": 1380212435,
+      "description": "Heart Attack",
+      "reason": {
+        "_id": {
+          "$oid": "551cce86c58406644d0000c0"
+        },
+        "codes": {
+          "ObservationType-CA-Pending": [
+            "REASON"
+          ],
+          "Unknown": [
+            "NI"
+          ]
+        },
+        "mood_code": "EVN",
+        "description": "Heart Attack",
+        "start_time": 1380212435
+      },
+      "performer": {
+        "_id": {
+          "$oid": "551cce86c58406644d000094"
+        },
+        "title": "",
+        "given_name": "",
+        "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+        "specialty": "",
+        "npi": "",
+        "start": 1380212435,
+        "end": null,
+        "organization": {
+          "_id": {
+            "$oid": "551cce86c58406644d000095"
+          }
+        }
+      }
+    }
+  ],
+  "immunizations": [
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000c1"
+      },
+      "codes": {
+        "whoATC": [
+          "J07CA01"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Immunization",
+      "start_time": 1346457600,
+      "description": "Td"
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000c2"
+      },
+      "codes": {
+        "whoATC": [
+          "J07BB01"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Immunization",
+      "start_time": 1233446400,
+      "description": "Flu"
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000c3"
+      },
+      "codes": {
+        "whoATC": [
+          "J07AL02"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Immunization",
+      "start_time": 1351641600,
+      "description": "Pneumovax"
+    }
+  ],
+  "medications": [
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000c4"
+      },
+      "codes": {
+        "HC-DIN": [
+          "00559407"
+        ],
+        "whoATC": [
+          "N02BE01"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Medication",
+      "administrationTiming": {
+        "frequency": {
+          "numerator": {
+            "unit": null,
+            "value": 4
+          },
+          "denominator": {
+            "unit": "d",
+            "value": 1
+          }
+        },
+        "text": "25 D"
+      },
+      "freeTextSig": " E2E_PRN_FLAG E2E_LONG_TERM_FLAG",
+      "dose": {
+        "low": "1.0",
+        "high": "2.0"
+      },
+      "statusOfMedication": {
+        "value": "active"
+      },
+      "route": {
+        "code": "PO",
+        "codeSystem": "2.16.840.1.113883.5.112",
+        "codeSystemName": "RouteOfAdministration",
+        "displayName": "PO"
+      },
+      "productForm": {
+        "code": "TAB",
+        "codeSystem": "2.16.840.1.113883.1.11.14570",
+        "displayName": "TABLET"
+      },
+      "description": "TYLENOL EXTRA STRENGTH TAB 500MG",
+      "start_time": 1380240000,
+      "end_time": 1384560000,
+      "time": 1380240000,
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000c5"
+          },
+          "scalar": "500.0",
+          "units": "MG",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ],
+      "orderInformation": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000c6"
+          },
+          "orderDateTime": 1380240000,
+          "performer": {
+            "_id": {
+              "$oid": "551cce86c58406644d000096"
+            },
+            "title": "",
+            "given_name": "",
+            "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+            "specialty": "",
+            "npi": "",
+            "start": 1380240000,
+            "end": null,
+            "organization": {
+              "_id": {
+                "$oid": "551cce86c58406644d000097"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000c7"
+      },
+      "codes": {
+        "HC-DIN": [
+          "00613215"
+        ],
+        "whoATC": [
+          "C03DA01"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Medication",
+      "administrationTiming": {
+        "frequency": {
+          "numerator": {
+            "unit": null,
+            "value": 1
+          },
+          "denominator": {
+            "unit": "d",
+            "value": 1
+          }
+        },
+        "text": "28 D"
+      },
+      "freeTextSig": " E2E_LONG_TERM_FLAG",
+      "dose": {
+        "low": "1.0",
+        "high": "1.0"
+      },
+      "statusOfMedication": {
+        "value": "active"
+      },
+      "route": {
+        "code": "PO",
+        "codeSystem": "2.16.840.1.113883.5.112",
+        "codeSystemName": "RouteOfAdministration",
+        "displayName": "PO"
+      },
+      "productForm": {
+        "code": "TAB",
+        "codeSystem": "2.16.840.1.113883.1.11.14570",
+        "displayName": "TABLET"
+      },
+      "description": "SPIRONOLACTONE 25MG TABLET",
+      "start_time": 1380240000,
+      "end_time": 1385078400,
+      "time": 1380240000,
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000c8"
+          },
+          "scalar": "25.0",
+          "units": "MG",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ],
+      "orderInformation": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000c9"
+          },
+          "orderDateTime": 1380240000,
+          "performer": {
+            "_id": {
+              "$oid": "551cce86c58406644d000098"
+            },
+            "title": "",
+            "given_name": "",
+            "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+            "specialty": "",
+            "npi": "",
+            "start": 1380240000,
+            "end": null,
+            "organization": {
+              "_id": {
+                "$oid": "551cce86c58406644d000099"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000ca"
+      },
+      "codes": {
+        "HC-DIN": [
+          "00636533"
+        ],
+        "whoATC": [
+          "M01AE01"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Medication",
+      "administrationTiming": {
+        "frequency": {
+          "numerator": {
+            "unit": null,
+            "value": 3
+          },
+          "denominator": {
+            "unit": "d",
+            "value": 1
+          }
+        },
+        "text": "28 D"
+      },
+      "freeTextSig": " E2E_PRN_FLAG E2E_LONG_TERM_FLAG",
+      "dose": {
+        "low": "1.0",
+        "high": "1.0"
+      },
+      "statusOfMedication": {
+        "value": "active"
+      },
+      "route": {
+        "code": "PO",
+        "codeSystem": "2.16.840.1.113883.5.112",
+        "codeSystemName": "RouteOfAdministration",
+        "displayName": "PO"
+      },
+      "productForm": {
+        "code": "TAB",
+        "codeSystem": "2.16.840.1.113883.1.11.14570",
+        "displayName": "TABLET"
+      },
+      "description": "IBUPROFEN TAB 400MG",
+      "start_time": 1380240000,
+      "end_time": 1385078400,
+      "time": 1380240000,
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000cb"
+          },
+          "scalar": "400.0",
+          "units": "MG",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ],
+      "orderInformation": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000cc"
+          },
+          "orderDateTime": 1380240000,
+          "performer": {
+            "_id": {
+              "$oid": "551cce86c58406644d00009a"
+            },
+            "title": "",
+            "given_name": "",
+            "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+            "specialty": "",
+            "npi": "",
+            "start": 1380240000,
+            "end": null,
+            "organization": {
+              "_id": {
+                "$oid": "551cce86c58406644d00009b"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000cd"
+      },
+      "codes": {
+        "HC-DIN": [
+          "02041421"
+        ],
+        "whoATC": [
+          "N05BA06"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Medication",
+      "administrationTiming": {
+        "frequency": {
+          "numerator": {
+            "unit": null,
+            "value": 2
+          },
+          "denominator": {
+            "unit": "d",
+            "value": 1
+          }
+        },
+        "text": "20 D"
+      },
+      "freeTextSig": " E2E_PRN_FLAG E2E_LONG_TERM_FLAG",
+      "dose": {
+        "low": "1.0",
+        "high": "1.0"
+      },
+      "statusOfMedication": {
+        "value": "active"
+      },
+      "route": {
+        "code": "SL",
+        "codeSystem": "2.16.840.1.113883.5.112",
+        "codeSystemName": "RouteOfAdministration",
+        "displayName": "SL"
+      },
+      "productForm": {
+        "code": "TAB",
+        "codeSystem": "2.16.840.1.113883.1.11.14570",
+        "displayName": "TABLET"
+      },
+      "description": "ATIVAN 1MG",
+      "start_time": 1380240000,
+      "end_time": 1383696000,
+      "time": 1380240000,
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000ce"
+          },
+          "scalar": "1.0",
+          "units": "MG",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ],
+      "orderInformation": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000cf"
+          },
+          "orderDateTime": 1380240000,
+          "performer": {
+            "_id": {
+              "$oid": "551cce86c58406644d00009c"
+            },
+            "title": "",
+            "given_name": "",
+            "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+            "specialty": "",
+            "npi": "",
+            "start": 1380240000,
+            "end": null,
+            "organization": {
+              "_id": {
+                "$oid": "551cce86c58406644d00009d"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000d0"
+      },
+      "codes": {
+        "HC-DIN": [
+          "02244993"
+        ],
+        "whoATC": [
+          "B01AC06"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Medication",
+      "administrationTiming": {
+        "frequency": {
+          "numerator": {
+            "unit": null,
+            "value": 1
+          },
+          "denominator": {
+            "unit": "d",
+            "value": 1
+          }
+        },
+        "text": "28 D"
+      },
+      "freeTextSig": " E2E_LONG_TERM_FLAG",
+      "dose": {
+        "low": "1.0",
+        "high": "1.0"
+      },
+      "statusOfMedication": {
+        "value": "active"
+      },
+      "route": {
+        "code": "PO",
+        "codeSystem": "2.16.840.1.113883.5.112",
+        "codeSystemName": "RouteOfAdministration",
+        "displayName": "PO"
+      },
+      "productForm": {
+        "code": "ECTAB",
+        "codeSystem": "2.16.840.1.113883.1.11.14570",
+        "displayName": "TABLET (ENTERIC-COATED)"
+      },
+      "description": "ASA 81 MG",
+      "start_time": 1380240000,
+      "end_time": 1385078400,
+      "time": 1380240000,
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000d1"
+          },
+          "scalar": "81.0",
+          "units": "MG",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ],
+      "orderInformation": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000d2"
+          },
+          "orderDateTime": 1380240000,
+          "performer": {
+            "_id": {
+              "$oid": "551cce86c58406644d00009e"
+            },
+            "title": "",
+            "given_name": "",
+            "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+            "specialty": "",
+            "npi": "",
+            "start": 1380240000,
+            "end": null,
+            "organization": {
+              "_id": {
+                "$oid": "551cce86c58406644d00009f"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000d3"
+      },
+      "codes": {
+        "HC-DIN": [
+          "02351420"
+        ],
+        "whoATC": [
+          "C03CA01"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Medication",
+      "administrationTiming": {
+        "frequency": {
+          "numerator": {
+            "unit": null,
+            "value": 1
+          },
+          "denominator": {
+            "unit": "d",
+            "value": 1
+          }
+        },
+        "text": "56 D"
+      },
+      "freeTextSig": " E2E_LONG_TERM_FLAG",
+      "dose": {
+        "low": "1.0",
+        "high": "1.0"
+      },
+      "statusOfMedication": {
+        "value": "active"
+      },
+      "route": {
+        "code": "PO",
+        "codeSystem": "2.16.840.1.113883.5.112",
+        "codeSystemName": "RouteOfAdministration",
+        "displayName": "PO"
+      },
+      "productForm": {
+        "code": "TAB",
+        "codeSystem": "2.16.840.1.113883.1.11.14570",
+        "displayName": "TABLET"
+      },
+      "description": "FUROSEMIDE 20MG",
+      "start_time": 1380240000,
+      "end_time": 1389916800,
+      "time": 1380240000,
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000d4"
+          },
+          "scalar": "20.0",
+          "units": "MG",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ],
+      "orderInformation": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000d5"
+          },
+          "orderDateTime": 1380240000,
+          "performer": {
+            "_id": {
+              "$oid": "551cce86c58406644d0000a0"
+            },
+            "title": "",
+            "given_name": "",
+            "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+            "specialty": "",
+            "npi": "",
+            "start": 1380240000,
+            "end": null,
+            "organization": {
+              "_id": {
+                "$oid": "551cce86c58406644d0000a1"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000d6"
+      },
+      "codes": {
+        "HC-DIN": [
+          "02363283"
+        ],
+        "whoATC": [
+          "C09AA05"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Medication",
+      "administrationTiming": {
+        "frequency": {
+          "numerator": {
+            "unit": null,
+            "value": 1
+          },
+          "denominator": {
+            "unit": "d",
+            "value": 1
+          }
+        },
+        "text": "28 D"
+      },
+      "freeTextSig": " E2E_LONG_TERM_FLAG",
+      "dose": {
+        "low": "1.0",
+        "high": "1.0"
+      },
+      "statusOfMedication": {
+        "value": "active"
+      },
+      "route": {
+        "code": "PO",
+        "codeSystem": "2.16.840.1.113883.5.112",
+        "codeSystemName": "RouteOfAdministration",
+        "displayName": "PO"
+      },
+      "productForm": {
+        "code": "TAB",
+        "codeSystem": "2.16.840.1.113883.1.11.14570",
+        "displayName": "TABLET"
+      },
+      "description": "AVA-RAMIPRIL 5MG",
+      "start_time": 1380240000,
+      "end_time": 1385078400,
+      "time": 1380240000,
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000d7"
+          },
+          "scalar": "5.0",
+          "units": "MG",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ],
+      "orderInformation": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000d8"
+          },
+          "orderDateTime": 1380240000,
+          "performer": {
+            "_id": {
+              "$oid": "551cce86c58406644d0000a2"
+            },
+            "title": "",
+            "given_name": "",
+            "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+            "specialty": "",
+            "npi": "",
+            "start": 1380240000,
+            "end": null,
+            "organization": {
+              "_id": {
+                "$oid": "551cce86c58406644d0000a3"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000d9"
+      },
+      "codes": {
+        "HC-DIN": [
+          "02364948"
+        ],
+        "whoATC": [
+          "C07AG02"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Medication",
+      "administrationTiming": {
+        "frequency": {
+          "numerator": {
+            "unit": null,
+            "value": 1
+          },
+          "denominator": {
+            "unit": "d",
+            "value": 1
+          }
+        },
+        "text": "28 D"
+      },
+      "freeTextSig": " E2E_LONG_TERM_FLAG",
+      "dose": {
+        "low": "1.0",
+        "high": "1.0"
+      },
+      "statusOfMedication": {
+        "value": "active"
+      },
+      "route": {
+        "code": "PO",
+        "codeSystem": "2.16.840.1.113883.5.112",
+        "codeSystemName": "RouteOfAdministration",
+        "displayName": "PO"
+      },
+      "productForm": {
+        "code": "TAB",
+        "codeSystem": "2.16.840.1.113883.1.11.14570",
+        "displayName": "TABLET"
+      },
+      "description": "CARVEDILOL 12.5MG",
+      "start_time": 1380240000,
+      "end_time": 1385078400,
+      "time": 1380240000,
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000da"
+          },
+          "scalar": "12.5",
+          "units": "MG",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ],
+      "orderInformation": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000db"
+          },
+          "orderDateTime": 1380240000,
+          "performer": {
+            "_id": {
+              "$oid": "551cce86c58406644d0000a4"
+            },
+            "title": "",
+            "given_name": "",
+            "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+            "specialty": "",
+            "npi": "",
+            "start": 1380240000,
+            "end": null,
+            "organization": {
+              "_id": {
+                "$oid": "551cce86c58406644d0000a5"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000dc"
+      },
+      "codes": {
+        "HC-DIN": [
+          "02387913"
+        ],
+        "whoATC": [
+          "C10AA05"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "Medication",
+      "administrationTiming": {
+        "frequency": {
+          "numerator": {
+            "unit": null,
+            "value": 1
+          },
+          "denominator": {
+            "unit": "d",
+            "value": 1
+          }
+        },
+        "text": "28 D"
+      },
+      "freeTextSig": " E2E_LONG_TERM_FLAG",
+      "dose": {
+        "low": "1.0",
+        "high": "1.0"
+      },
+      "statusOfMedication": {
+        "value": "active"
+      },
+      "route": {
+        "code": "PO",
+        "codeSystem": "2.16.840.1.113883.5.112",
+        "codeSystemName": "RouteOfAdministration",
+        "displayName": "PO"
+      },
+      "productForm": {
+        "code": "TAB",
+        "codeSystem": "2.16.840.1.113883.1.11.14570",
+        "displayName": "TABLET"
+      },
+      "description": "ATORVASTATIN 40MG",
+      "start_time": 1380240000,
+      "end_time": 1385078400,
+      "time": 1380240000,
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000dd"
+          },
+          "scalar": "40.0",
+          "units": "MG",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ],
+      "orderInformation": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000de"
+          },
+          "orderDateTime": 1380240000,
+          "performer": {
+            "_id": {
+              "$oid": "551cce86c58406644d0000a6"
+            },
+            "title": "",
+            "given_name": "",
+            "family_name": "qbGJGxVjhsCx/JR42Bd7tX4nbBYNgR/TehN7gQ==",
+            "specialty": "",
+            "npi": "",
+            "start": 1380240000,
+            "end": null,
+            "organization": {
+              "_id": {
+                "$oid": "551cce86c58406644d0000a7"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000df"
+      },
+      "codes": {
+        "pCLOCD": [
+          "6690-2"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "WBC",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 4.0",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000e0"
+          },
+          "scalar": "8.0",
+          "units": "giga/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000e1"
+      },
+      "codes": {
+        "pCLOCD": [
+          "789-8"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "RBC",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 4.20",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000e2"
+          },
+          "scalar": "4.71",
+          "units": "tera/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000e3"
+      },
+      "codes": {
+        "pCLOCD": [
+          "718-7"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Hemoglobin",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 133",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000e4"
+          },
+          "scalar": "158",
+          "units": "g/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000e5"
+      },
+      "codes": {
+        "pCLOCD": [
+          "4544-3"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "free_text": "0.46",
+      "description": "Hematocrit",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 0.38"
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000e6"
+      },
+      "codes": {
+        "pCLOCD": [
+          "787-2"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "A",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "MCV",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 82",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000e7"
+          },
+          "scalar": "99",
+          "units": "fl",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000e8"
+      },
+      "codes": {
+        "pCLOCD": [
+          "785-6"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "MCH",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 27.5",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000e9"
+          },
+          "scalar": "33.5",
+          "units": "pg",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000ea"
+      },
+      "codes": {
+        "pCLOCD": [
+          "786-4"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "MCHC",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 305",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000eb"
+          },
+          "scalar": "341",
+          "units": "g/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000ec"
+      },
+      "codes": {
+        "pCLOCD": [
+          "788-0"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "RDW",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 11.5",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000ed"
+          },
+          "scalar": "12.6",
+          "units": "%",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000ee"
+      },
+      "codes": {
+        "pCLOCD": [
+          "777-3"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Platelet Count",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 150",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000ef"
+          },
+          "scalar": "295",
+          "units": "giga/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000f0"
+      },
+      "codes": {
+        "pCLOCD": [
+          "751-8"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Neutrophils",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 2.0",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000f1"
+          },
+          "scalar": "6.0",
+          "units": "giga/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000f2"
+      },
+      "codes": {
+        "pCLOCD": [
+          "731-0"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Lymphocytes",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 1.0",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000f3"
+          },
+          "scalar": "1.6",
+          "units": "giga/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000f4"
+      },
+      "codes": {
+        "pCLOCD": [
+          "742-7"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Monocytes",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 0.1",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000f5"
+          },
+          "scalar": "0.4",
+          "units": "giga/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000f6"
+      },
+      "codes": {
+        "pCLOCD": [
+          "711-2"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Eosinophils",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 0.0",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000f7"
+          },
+          "scalar": "0.1",
+          "units": "giga/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000f8"
+      },
+      "codes": {
+        "pCLOCD": [
+          "704-7"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Basophils",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 0.0",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000f9"
+          },
+          "scalar": "0.0",
+          "units": "giga/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000fa"
+      },
+      "codes": {
+        "pCLOCD": [
+          "6301-6"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "free_text": "1.0",
+      "description": "INR",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 0.8"
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000fb"
+      },
+      "codes": {
+        "pCLOCD": [
+          "14749-6"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Glucose Random",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 3.3",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000fc"
+          },
+          "scalar": "5.2",
+          "units": "mmol/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000fd"
+      },
+      "codes": {
+        "pCLOCD": [
+          "14682-9"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "A",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Creatinine",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 70",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d0000fe"
+          },
+          "scalar": "68",
+          "units": "umol/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d0000ff"
+      },
+      "codes": {
+        "pCLOCD": [
+          "33914-3"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Estimated GFR",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "&gt;=60",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d000100"
+          },
+          "scalar": "113",
+          "units": "mL/min",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d000101"
+      },
+      "codes": {
+        "pCLOCD": [
+          "14933-6"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Uric Acid",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 234",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d000102"
+          },
+          "scalar": "317",
+          "units": "umol/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d000103"
+      },
+      "codes": {
+        "pCLOCD": [
+          "1751-7"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Albumin",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 35",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d000104"
+          },
+          "scalar": "45",
+          "units": "g/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d000105"
+      },
+      "codes": {
+        "pCLOCD": [
+          "14631-6"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Total Bilirubin",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "unspecified",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d000106"
+          },
+          "scalar": "16",
+          "units": "umol/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d000107"
+      },
+      "codes": {
+        "pCLOCD": [
+          "14629-0"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Direct Bilirubin",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "unspecified",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d000108"
+          },
+          "scalar": "5",
+          "units": "umol/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d000109"
+      },
+      "codes": {
+        "pCLOCD": [
+          "6768-6"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Alkaline Phosphatase",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 48",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d00010a"
+          },
+          "scalar": "74",
+          "units": "U/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d00010b"
+      },
+      "codes": {
+        "pCLOCD": [
+          "2324-2"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Gamma GT",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 10",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d00010c"
+          },
+          "scalar": "10",
+          "units": "U/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d00010d"
+      },
+      "codes": {
+        "pCLOCD": [
+          "1742-6"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "ALT",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "unspecified",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d00010e"
+          },
+          "scalar": "19",
+          "units": "U/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d00010f"
+      },
+      "codes": {
+        "pCLOCD": [
+          "1920-8"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "AST",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "unspecified",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d000110"
+          },
+          "scalar": "25",
+          "units": "U/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d000111"
+      },
+      "codes": {
+        "pCLOCD": [
+          "2524-7"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "N",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "description": "Lactic Acid",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "Normal Reference range is greater than 0.7",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d000112"
+          },
+          "scalar": "1.0",
+          "units": "mmol/L",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d000113"
+      },
+      "codes": {
+        "pCLOCD": [
+          "46425-5"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": {
+        "code": "A",
+        "codeSystem": "ObservationInterpretation"
+      },
+      "start_time": 1369995612,
+      "free_text": "Slight",
+      "description": "Lipemia",
+      "status_code": {
+        "value": "complete"
+      },
+      "referenceRange": "unspecified"
+    }
+  ],
+  "vital_signs": [
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d000114"
+      },
+      "codes": {
+        "LOINC": [
+          "8480-6"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": null,
+      "start_time": 1380067200,
+      "description": "Systolic Blood Pressure (sitting position)",
+      "free_text": "",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d000115"
+          },
+          "scalar": "130",
+          "units": "mm[Hg]",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d000116"
+      },
+      "codes": {
+        "LOINC": [
+          "8462-4"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": null,
+      "start_time": 1380067200,
+      "description": "Diastolic Blood Pressure (sitting position)",
+      "free_text": "",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d000117"
+          },
+          "scalar": "85",
+          "units": "mm[Hg]",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d000118"
+      },
+      "codes": {
+        "LOINC": [
+          "8302-2"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": null,
+      "start_time": 1380067200,
+      "description": "Height (in cm)",
+      "free_text": "",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d000119"
+          },
+          "scalar": "187",
+          "units": "cm",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d00011a"
+      },
+      "codes": {
+        "LOINC": [
+          "8867-4"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": null,
+      "start_time": 1380067200,
+      "description": "Heart Rate (in bpm (nnn) Range:40-180)",
+      "free_text": "",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d00011b"
+          },
+          "scalar": "85",
+          "units": "beats/min",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d00011c"
+      },
+      "codes": {
+        "LOINC": [
+          "8310-5"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": null,
+      "start_time": 1380067200,
+      "description": "Temperature (degrees celcius)",
+      "free_text": "",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d00011d"
+          },
+          "scalar": "37",
+          "units": "C",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d00011e"
+      },
+      "codes": {
+        "LOINC": [
+          "56115-9"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": null,
+      "start_time": 1380067200,
+      "description": "Waist (Waist Circum in cm)",
+      "free_text": "",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d00011f"
+          },
+          "scalar": "92",
+          "units": "cm",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "551cce86c58406644d000120"
+      },
+      "codes": {
+        "LOINC": [
+          "3141-9"
+        ]
+      },
+      "mood_code": "EVN",
+      "_type": "LabResult",
+      "interpretation": null,
+      "start_time": 1380067200,
+      "description": "Weight (in kg)",
+      "free_text": "",
+      "values": [
+        {
+          "_id": {
+            "$oid": "551cce86c58406644d000121"
+          },
+          "scalar": "95",
+          "units": "kg",
+          "_type": "PhysicalQuantityResultValue"
+        }
+      ]
+    }
+  ]
+}

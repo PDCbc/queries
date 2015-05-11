@@ -1,0 +1,8 @@
+[
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": 0},
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -1},
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -64},
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -65},
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -66},
+  {"primary_care_provider_id" : "PROVIDER1", "birthdate": -100}
+]

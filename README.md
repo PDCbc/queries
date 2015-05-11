@@ -9,7 +9,7 @@ To run the queries locally, for either running unit tests or for running during 
 
 This repository does not execute queries on endpoints! At most it is able to execute queries locally using mock data. 
 
-This repository should NOT ever contain real patient data!. 
+**This repository should NOT ever contain real patient data!.** 
 
 The structure of the repository is as follows: 
 
@@ -19,16 +19,20 @@ The structure of the repository is as follows:
     ├── Resources/   # A few templates and samples to help direct writing queries. 
     ├── functions/   # Contains helper functions that are injected into the query when it is run. 
     ├── queries/     # Unless otherwise specified, put queries in here. Follow naming "PDC-XXX_name-of-this-query.js"
-    │   ├── PDC-001_population-map.js
-    └── test/        # Contains the test framework for unit testing queries.
-        ├── data/    # Contains test data (json) for a unit test, names of test files should match query name.  
-        │   ├── PDC-001_population-map.json
+        ├── PDC-001_population-map.js
+    |-- directives/     # contains directives for each query
+        |-- PDC-001_population.json 
+    └── test/              # Contains the test framework for unit testing queries.
+	    |-- data_processor # Contains functions to be used by the test framework to pre-process the data, useful for managing date offsets.
+        ├── data/       # Contains test data (json) for a unit test, names of test files should match query name.  
+            ├── PDC-001_population-1.json
+        |-- functions   # Contain unit tests for a particular helper function. 
         ├── exception.js
         ├── index.js # The main test framework. 
         ├── node_modules/ # Contains dependancies for test framework
         ├── resources/    # Useful things/templates for test framework. 
         └── verify/       # Contains verify function query unit tests, name should match query name.
-            ├── PDC-001_population-map.js
+            ├── PDC-001_population-1.js
 
 ##Query Structure
 
@@ -36,27 +40,149 @@ The structure of the repository is as follows:
 
 From an hQuery/PDC hub, use the following query.  It will return a list of keys for people records.  At the moment all queries use the same reduce function.
 
-Map:
+#### Directives
+
+Each query and library function **must** have a *directive* (found in the directives/ directory) that indicates its dependencies and how it should be tested. Without a directive other tooling (tests, importers etc..) will not know how to handle the query or function. The directive must be a single JSON file (preferably name with the name of query: `PDC-XXX_some-interesting-name`). 
+
+
+**A directive for a query:** 
+
+```JSON
+{
+    "name" : "QUERY NAME",
+    "type" : "QUERY", 
+    "description" : "SOME DESCRIPTION", 
+    "map": "PATH TO MAP FUNCTION", 
+    "reduce" : "PATH TO REDUCE FUNCTION",
+    "functions" : ["PATH TO HELPER FUNCTION 1", ...],  
+    "qualified_by":["PATH TO QUALITY PROBE 1", ... ],
+    "tests" : [
+        {
+            "name" : "TEST CASE NAME",
+            "data" : "PATH TO TEST DATA",
+            "verifier" : "PATH TO VERIFIER FUNCTION", 
+	         "data_processor" : "PATH TO DATA PROCESSOR FUNCTION"
+        },
+        ...
+    ]
+}
+```
+
+for example: 
+
+```JSON
+{
+    "type": "QUERY",
+    "name" : "PDC-053_polypharmacy-5",
+    "description" : "The percentage of elderly patients, 65 and older, that are active patients and are on 10 or more current medications.", 
+    "map": "queries/PDC-053_polypharmacy-map-5.js",
+    "reduce" : "Resources/PDC_general-reduce.js",
+    "functions" : [""],
+    "qualified_by":[""],
+    "tests" : [
+        {
+            "name" : "TC1",
+            "data" : "test/data/empty_dataset.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc1.js" 
+        },
+        {
+            "name" : "TC2",
+            "data" : "test/data/PDC-053_polypharmacy-5_data_2.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc2.js", 
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-2.js"
+        },
+        {
+            "name" : "TC3",
+            "data" : "test/data/PDC-053_polypharmacy-5_data_3.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc3.js", 
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-3.js"
+        },
+        {
+            "name" : "TC4",
+            "data" : "test/data/PDC-053_polypharmacy-5_data_4.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc4.js", 
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-3.js"
+        }
+    ]
+}
+```
+
+**A directive for a function:**
+
+
+```JSON
+{
+    "name" : "FUNCTION NAME",
+    "type" : "FUNCTION", 
+    "description" : "SOME DESCRIPTION", 
+    "path" : "PATH TO FUNCTION w.r.t. to project root.",
+    "test" : "PATH TO TEST FILE w.r.t test/ directory"
+}
+```
+
+for example: 
+
+```JSON
+{
+    "type" : "FUNCTION", 
+    "name" : "testFunction",
+    "path" : "functions/test_function.js",
+    "description" : "A test function for the testing framework.", 
+    "test" : "./functions/test_test_function.js"
+}
+```
+
+**NOTE:** All paths in the directive must be with respect to the root of queries repo (queries/), *EXCEPT FOR THE VERIFIER, DATA_PROCESSOR PATHS IN QUERY DIRECTIVE AND TEST IN THE FUNCTION DIRECTIVE*....these must be with respect to the queries/test/ directory. This is a consequence of JavaScript's `require()` behavior being w.r.t the location of the file rather than the location of execution...this is a bug that needs to be fixed at some point.
+
+#### Functions
+
+Functions, or library_functions, are used to support the queries. They should be written and tested independently of queries. Unit testing has been built into the test utility for functions, these test actions can be specified with a directive. A function must exist in a single file in the `functions/` directory of the project. Any tests for that function must be in `test/functions`. 
+
+The following is a template for creating a function, this exists in the `functions/test_function.js` file: 
+
+```Javascript
+    function testFunction(val){ //change this to take as many args as you want. 
+        //DO SOME STUFF HERE! 
+        return true; //or whatever else you need to return. 
+    }
+```
+
+Here is an example of a test for testing the file above, the use of `module.exports` is mandatory. 
+
+```javascript
+    module.exports = {
+        testReturnValue : function(){
+            var result = testFunction(); 
+            return {result : result, message : "test passed"};  
+        },
+        testReturnFalse : function(){
+            return {result : false, message : "I failed!"}; 
+        }
+    }
+```
+
+#### Queries
+Queries are executed as Map/Reduce tasks by the MongoDB on the endpoint. To this end, a map function `map(patient)` and reduce function `reduce(key, values)` is required.
+
+##### Map:
 
 ```Javascript
 // Reference Number: PDC-???                        // Varies by request
 // Query Title: List of keys in people              // Varies by request
 function map(patient) {
-
-    var keys = Object.keys(patient.json);           // For each patient (JSON)
-                                                    // ...find keys (an object)
-    emit("Keys used: " + keys, 1);                  // Emit keys, labeled "Keys used:"
+var keys = Object.keys(patient.json);           // For each patient (JSON)
+                                                // ...find keys (an object)
+emit("Keys used: " + keys, 1);                  // Emit keys, labeled "Keys used:"
 }
 ```
 
-Reduce:
+##### Reduce:
 
 ```Javascript
 function reduce(key, values) {
   return Array.sum(values);                         // Tally up results
 }
 ```
-
 
 ### Record Structure
 
@@ -86,38 +212,42 @@ people:
 
 ## Test Utility
 
-The test utility allows one to do the following: 
+The test utility allows one to run a set of queries and/or functions who's directives (in the directives/ directory) match the input regex pattern. See the directive section of this README for details on how to create a directive. 
 
-* Run a single query 
-* Run several queries from within the queries/ directory whose names match a regular expression.
+Run all tests for queries and functions by running `js test` (null pattern).
 
-Run all of the tests within the `queries/` directory with: `js test`
+Run *only* query tests using `js test queries <pattern>`
+
+Run *only* function unit tests using `js test functions <pattern`
+
+Tests must be executed from the project root directory, not the test directory. 
 
 Before running tests install dependencies using: `npm install minimist mock-reduce mongoose fs bson`
 
-See the help message for more options:  
+#### Usage: 
+    js test [type] [-q] [PATTERN] 
 
-Correct Usage:
-
-    js test --query <path to query> --data <path to data> --verify <path to verify>
-
-    OR:
-    js test --run <query name>
+#### Example Usage:
+    js test
 
     OR:
-    js test --all <regex>
+    js test queries -q  //for suppressing output. 
 
+    OR:
+    js test queries <regex>  //matches against directive file names and only run those. 
 
-Arguments:
+    OR:
+    js test functions -q <regex>  //matches against directive file names and only run those. 
 
-    -q (--query)        Specify the path to the query you want to execute.
-    -d (--data)         Specify the path to the test data
-    -v (--verify)       Specify the path to the verifier function for this query.
-                            This must be relative to the test/ directory!
-    -r (--run)          Specify the name of a query, will cause the test framework to look
-                            in PROJECT_HOME/queries for a query to run.
-    -a (--all) [regex]  Runs all the queries that are in the queries/ directory and match the regex patrern.
-                            If the [regex] argument is not specified it will run all queries in queries/
+#### Arguments:
+     
+    -q      Suppress output, useful if running this as part of a build process.
+
+#### Notes:
+    - If you are receving error messages about JavaScript not being
+        able to open files try changing paths to:  './<path>'
+    - Ignore errors regarding bson import, these are related to a C++ binary version of BSON being unavailable, the JS version is sufficient for this test utility. 
+
 
 ### Dependencies
 
@@ -138,5 +268,3 @@ Before running tests install dependencies using: `npm install minimist mock-redu
 * BSON 
     - Required by Mongoose for managing binary version of json. 
     - Installing this will likey throw errors however they can be ignored. The errors are about being unable to build a binary (from C++) of the BSON library. Instead, it will run using a pure JavaScript version. This would matter if we were creating a large scale web app, but this is a test framework...so a bit of performance loss is OK.   
-
-### Notes

@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "hasCKD",
+    "path" : "functions/hasCKD.js",
+    "description" : "Determines whether a patient has Chronic Kidney Disease or not.", 
+    "test" : "./functions/test_hasCKD.js"
+}

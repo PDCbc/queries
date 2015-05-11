@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "hasCHF",
+    "path" : "functions/hasCHF.js",
+    "description" : "Determines whether a patient has CHF or not.", 
+    "test" : "./functions/test_hasCHF.js"
+}
