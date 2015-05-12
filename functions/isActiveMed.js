@@ -68,7 +68,7 @@ function isActiveMed(med, referenceTime){
 
             var start = med.json.start_time;
 
-            var end = med.json.end_time; 
+            var stop = med.json.end_time; 
 
             var extend = (stop - start)*1.2; //get the amount of padding required
 

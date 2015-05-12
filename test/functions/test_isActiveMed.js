@@ -204,13 +204,71 @@ module.exports = {
     }, 
 
     /*
-    * Test case where both the start and stop of the medication are undefined.
+    * Test case where medication is marked as completed and 
+    *    both the start and stop of the medication are undefined.
     * 
     * Expected: false. 
     */
     testMedCompleteAndUndefinedStartStop : function(){
 
+        var m = setUp();
 
-    }
+        m.json.statusOfMedication.value = "completed"; 
+
+        delete m.json.start_time;  
+        delete m.json.end_time; 
+
+
+        try{
+            var result = isActiveMed(m); 
+        }catch(e){
+            return null; 
+        }
+
+        if(result === false){
+
+            return {result: true, message: "test passed!"}
+
+        }else{
+
+            return {result: false, message: "expected false when medication is completed and has undefined start_time and end_tim"}
+
+        } 
+
+    },
+
+    /*
+    * Test case where medication is marked as completed and 
+    *    both the start and stop of the medication are undefined.
+    * 
+    * Expected: false. 
+    */
+    testMedCompleteAndUndefinedStartStop : function(){
+
+        var m = setUp();
+
+        m.json.statusOfMedication.value = "completed"; 
+
+        delete m.json.start_time;  
+        delete m.json.end_time; 
+
+
+        try{
+            var result = isActiveMed(m); 
+        }catch(e){
+            return null; 
+        }
+
+        if(result === false){
+
+            return {result: true, message: "test passed!"}
+
+        }else{
+
+            return {result: false, message: "expected false when medication is completed and has undefined start_time and end_tim"}
+
+        } 
+
+    },
 
 }
