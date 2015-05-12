@@ -4,6 +4,7 @@
  * Desctiption: PolyRx:  5+ meds, 65+
  */
 function map( patient ){
+
   /**
    * Denominator:
    *   - 65+ years old
@@ -36,7 +37,7 @@ function map( patient ){
   /**
    * Emit Numerator and Denominator, tagged with physician ID
    */
-  var denominator = checkDenominator(),
+  var denominator = activePatient(patient) && checkDenominator(),
       numerator   = denominator && checkNumerator(),
       physicianID = "_" + patient.json.primary_care_provider_id;
 
