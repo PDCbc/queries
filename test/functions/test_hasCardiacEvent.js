@@ -147,7 +147,7 @@ module.exports = {
     *
     * Expected: false.
     */
-    testEmptyConditionList : function(){
+    testNullConditionList : function(){
 
         var c = setUp(); 
 
