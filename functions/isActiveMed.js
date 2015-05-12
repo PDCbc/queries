@@ -39,8 +39,7 @@ function isActiveMed(med, referenceTime){
 
     if ( referenceTime !== undefined && referenceTime !==  null && !isNaN(referenceTime) ) {
 
-        now = new Date(referenceTime);
-
+        now = new Date(referenceTime*1000);
 
     }else{
 
@@ -82,7 +81,7 @@ function isActiveMed(med, referenceTime){
 
             } else if ( 
                 ( start === null || start === undefined ) && 
-                ( stop !== undefined && start !== null )  &&
+                ( stop !== undefined && stop !== null )  &&
                 ( stop > now )
             ){
 
@@ -92,7 +91,7 @@ function isActiveMed(med, referenceTime){
                 ( start !== undefined && start !== null )   &&
                 ( stop !== undefined  || stop !== null )    && 
                 ( start < now && stop < now )               &&
-                ( !isNaN(extend) && extend > now )
+                ( !isNaN(extend) && (start+extend) > now )
             ){
 
                 return true; 
