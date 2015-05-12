@@ -386,7 +386,7 @@ function runFunctionTests(testPath, testName){
 			} 
 		}catch(e){
 			if(!globals.quiet) {
-				console.log(f+"from "+testPath+" caused an error! Ignoring this test result."); 
+				console.log(f+" from "+testPath+" caused an error! Ignoring this test result."); 
 			}
 			result.error+= 1; 	
 			result.result = false; 
