@@ -1,0 +1,10 @@
+{
+    "type" : "QUERY", 
+    "name" : "PDC-057_primary-statins",
+    "description" : "Prevalence of cardiopulmonary events for active patients who are prescribed a statin.", 
+    "map": "queries/PDC-057_primary-statins-map.js",
+    "reduce" : "Resources/PDC_general-reduce.js",
+    "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "functions/activePatient.js", "functions/isActiveMed.js"],
+    "qualified_by":[""],
+    "tests" : []
+}
