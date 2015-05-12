@@ -1,7 +1,7 @@
 /**
  * Query Title: PDC-057
  * Query Type:  Ratio
- * Desctiption: Statin: Primary prev
+ * Desctiption: Statin: Primary prevention.
  */
 function map( patient ){
   /**
@@ -129,59 +129,4 @@ function filter_general( list, codes, p3, p4, p5, p6 ){
 
   return filteredList;
 }
-
-
-/**
- * Filters a list of medications:
- *   - active status only (20% pad on time interval)
- */
-function filter_activeMeds( matches ){
-  var now      = new Date(),
-      toReturn = new hQuery.CodedEntryList();
-
-  for( var i = 0, L = matches.length; i < L; i++ ){
-    var drug  = matches[ i ],
-        start = drug.indicateMedicationStart().getTime(),
-        pad   =( drug.indicateMedicationStop().getTime() - start )* 1.2,
-        end   = start + pad;
-
-    if( start <= now && now <= end )
-      toReturn.push( drug );
-  }
-  return toReturn;
-}
-
-
-/**
- * Used by filter_general() and filter_general()
- *   - inclusive range, boundary cases are counted
- */
-function filter_values( list, min, max ){
-  // Default value
-  max = max || 1000000000;
-
-  var toReturn = new hQuery.CodedEntryList();
-  for( var i = 0, L = list.length; i < L; i++ ){
-    // Try-catch for missing value field in lab results
-    try {
-      var entry  = list[ i ],
-          scalar = entry.values()[ 0 ].scalar();
-      if( min <= scalar && scalar <= max )
-        toReturn.push( entry );
-    }
-    catch( err ){
-      emit( "Values key is missing! " + err, 1 );
-    }
-  }
-  return toReturn;
-}
-
-
-/**
- * T/F: Does a filtered list contain matches (/is not empty)?
- */
-function isMatch( list ) {
-  return 0 < list.length;
-}
-
 
