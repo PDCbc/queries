@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "isActiveMed",
+    "path" : "functions/isActiveMed.js",
+    "description" : "Determines whether a medication is active", 
+    "test" : "./functions/test_isActiveMed.js"
+}

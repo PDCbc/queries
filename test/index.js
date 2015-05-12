@@ -364,6 +364,7 @@ function runFunctionTests(testPath, testName){
 		//open the single file with all of code for the query. 
 		var megaMod = require("./tmp/megafile.js");  //needs to be WRT the test/ directory....this is a hack.
 	}catch(e){
+		console.log(e)
 		return null; 
 	}
 
@@ -453,7 +454,7 @@ function testFunctions(pattern){
 
 	 	functionResult = runFunctionTests(directive.test, directive.name); 
 
-	 	if(result === null){
+	 	if( functionResult === null){
 
 	 	}else{
 	 		result.total += functionResult.count; 	
