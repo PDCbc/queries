@@ -27,7 +27,7 @@ function filter_activeMeds( matches ){
 
             med  = matches[ i ]; 
 
-            if ( isACtiveMed(med) ){
+            if ( isActiveMed(med) ){
 
                 toReturn.push(med)
 
