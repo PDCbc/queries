@@ -38,6 +38,7 @@ function hasActiveDigoxin( pt, minDose){
 
     for ( var i = 0; i < meds.length; i++ ){
 
+
         if ( isActiveMed(meds[i])   && 
              meds[i].json.codes          &&
              meds[i].json.codes["whoATC"] 
@@ -45,7 +46,8 @@ function hasActiveDigoxin( pt, minDose){
 
             for (var j = 0; j < meds[i].json.codes["whoATC"].length; j++ ){
 
-                if (meds[i].json.codes["whoATC"][j].match("^C01AA.*") ){
+
+                if ( meds[i].json.codes["whoATC"][j].match("^C01AA.*") ){
 
                     if (
                         meds[i].json.values      && 
@@ -62,6 +64,8 @@ function hasActiveDigoxin( pt, minDose){
 
                             }
                         }catch(e){
+
+                            console.log(e);
 
                         }
 
