@@ -17,13 +17,10 @@ function hasActiveStatin( pt ){
         pt.json === undefined || 
         pt.json ===  null 
     ){
-
         return false; 
-
     }
 
     var meds = pt.medications(); 
-
 
     if ( 
         meds === undefined  || 

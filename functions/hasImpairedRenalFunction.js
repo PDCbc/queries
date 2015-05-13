@@ -31,15 +31,15 @@ function hasImpairedRenalFunction( pt ){
     for ( var i = 0; i < cons.length; i++ ){
 
         if(
-            cons[i].codes !== undefined && 
-            cons[i].codes !== null      && 
-            cons[i].codes.length !== 0  &&
-            cons[i].codes["ICD9"] !== undefined &&
-            cons[i].codes["ICD9"].length !== 0 
+            cons[i].json.codes !== undefined && 
+            cons[i].json.codes !== null      && 
+            cons[i].json.codes.length !== 0  &&
+            cons[i].json.codes["ICD9"] !== undefined &&
+            cons[i].json.codes["ICD9"].length !== 0 
 
         ){
 
-            var codes = cons[i].codes["ICD9"]; 
+            var codes = cons[i].json.codes["ICD9"]; 
 
             for ( var j=0; j < codes.length; j++ ){
 
