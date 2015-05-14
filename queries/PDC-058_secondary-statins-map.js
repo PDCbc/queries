@@ -5,11 +5,20 @@
  */
 function map( patient ){
 
-  var denominator = activePatient( patient ) && hasActiveStatin( patient ); 
+    try{
+        if ( filterProviders(patient.json.primary_care_provider_id, "PPh") ){
+            var denominator = activePatient( patient ) && hasActiveStatin( patient ); 
 
-  var numerator   = denominator && hasCardiacEvent( patient ); 
+            var numerator   = denominator && hasCardiacEvent( patient ); 
 
-  emit( "denominator_"+patient.json.primary_care_provider_id, +denominator );
-  emit( "numerator_"+patient.json.primary_care_provider_id, +numerator );
+            emit( "denominator_"+patient.json.primary_care_provider_id, +denominator );
+            emit( "numerator_"+patient.json.primary_care_provider_id, +numerator );
+        }
+    }catch(e){
+
+        emit("FAILURE_"+e); 
+
+    }
+
   
 }
