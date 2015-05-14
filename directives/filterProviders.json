@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "filterProviders",
+    "path" : "functions/filterProviders.js",
+    "description" : "Determines whether a provider is within a given initiative.", 
+    "test" : "./functions/test_filterProviders.js"
+}
