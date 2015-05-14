@@ -12,7 +12,31 @@ function setUp(){
                 "time": 1263167138, 
                 "description": "IMPAIRED RENAL FUNCTION"
             } 
+        ],
+        "results":[
+            {
+            "_id": {"$oid": "551cce86c58406644d0000df"},
+              "codes": {
+                "pCLOCD": ["14682-9"]
+              },
+              "mood_code": "EVN",
+              "_type": "LabResult",
+              "start_time": 1369995612,
+              "description": "WBC",
+              "status_code": {
+                "value": "complete"
+              },
+              "values": [
+                {
+                  "_id": {"$oid": "551cce86c58406644d0000e0"},
+                  "scalar": "151",
+                  "units": "umol/L",
+                  "_type": "PhysicalQuantityResultValue"
+                }
+              ]
+            }
         ]
+
     }; 
     return obj; 
 }
@@ -61,7 +85,7 @@ module.exports = {
     },
 
     /*
-    * Test normal behavior with ICD9: 410
+    * Test normal behavior with ICD9: 586 
     * 
     * Expected: true.
     */
@@ -87,6 +111,42 @@ module.exports = {
     }, 
 
     /*
+    * Test normal behavior with lab values that are in range
+    * 
+    * Expected: true.
+    */
+    testNormal2 : function(){
+
+        var c = setUp(); 
+
+        c.conditions = []; 
+
+        c = new hQuery.Patient(c);
+
+        try{
+
+            var result = hasImpairedRenalFunction(c); 
+
+        }catch(e){
+
+            console.log(e);
+        }
+
+
+
+        if (result === true ){
+
+            return {result : true, message:"test passed!"}
+
+        }else{
+
+            return {result:false, message:"expected true for patient with lab value 150 umol/L for LOINC:14682-9"}
+
+        }
+
+    }, 
+
+    /*
     * Test behavior with empty conditions list
     *
     * Expected: false.
@@ -96,6 +156,7 @@ module.exports = {
         var c = setUp(); 
 
         c.conditions = []; 
+        delete c.results; 
 
         c = new hQuery.Patient(c);
 
@@ -124,6 +185,7 @@ module.exports = {
         var c = setUp(); 
 
         delete c.conditions; 
+        c.results = []; 
 
         c = new hQuery.Patient(c);
 
@@ -152,6 +214,7 @@ module.exports = {
         var c = setUp(); 
 
         c.conditions = null; 
+        c.results = []; 
 
         c = new hQuery.Patient(c);
 
