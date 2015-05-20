@@ -17,7 +17,7 @@
             "name" : "TC2",
             "data" : "test/data/PDC-955_CHF_data_2.json",
             "verifier" : "./verify/PDC-955_CHF_verify_tc2.js",
-            "data_processor" : "./data_processor/PDC-955_CHF_processor-1.js" 
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-2.js" 
         }
     ]
 }
