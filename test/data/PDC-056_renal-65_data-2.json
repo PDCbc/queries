@@ -1,0 +1,98 @@
+[
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "conditions" : [
+       { "codes": { "ICD9": ["586"]}, "time": 1263167138, "description": "Renal Impairment!"}     
+    ],
+    "medications" : [
+      {
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",
+        "statusOfMedication" : { "value" : "active" }, 
+        "codes" : {"whoATC" : [ "C01AA"]},
+        "start_time" : -1, "end_time" : 1,
+        "values":[
+          {
+            "scalar":"500.0",
+            "units":"mcg"
+          }
+        ]
+      }    
+    ]
+  },{ "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "conditions" : [
+       { "codes": { "ICD9": []}, "time": 1263167138, "description": "Renal Impairment!"}     
+    ],
+    "medications" : [
+      {
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",
+        "statusOfMedication" : { "value" : "active" }, 
+        "codes" : {"whoATC" : [ "NOT DIGOXIN"]},
+        "start_time" : -1, "end_time" : 1,
+        "values":[
+          {
+            "scalar":"500.0",
+            "units":"mcg"
+          }
+        ]
+      }    
+    ]
+  }, { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "conditions" : [
+       { "codes": { "ICD9": []}, "time": 1263167138, "description": "Renal Impairment!"}     
+    ],
+    "medications" : [
+      {
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",
+        "statusOfMedication" : { "value" : "active" }, 
+        "codes" : {"whoATC" : [ "C01AA"]},
+        "start_time" : -1, "end_time" : 1,
+        "values":[
+          {
+            "scalar":"500.0",
+            "units":"mcg"
+          }
+        ]
+      }    
+    ]
+  },{ "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "conditions" : [
+       { "codes": { "ICD9": ["586"]}, "time": 1263167138, "description": "Renal Impairment!"}     
+    ],
+    "medications" : [
+      {
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",
+        "statusOfMedication" : { "value" : "active" }, 
+        "codes" : {"whoATC" : [ "NOT DIGOXIN"]},
+        "start_time" : -1, "end_time" : 1,
+        "values":[
+          {
+            "scalar":"500.0",
+            "units":"mcg"
+          }
+        ]
+      }    
+    ]
+  },{ "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -64, 
+    "conditions" : [
+       { "codes": { "ICD9": ["586"]}, "time": 1263167138, "description": "Renal Impairment!"}     
+    ],
+    "medications" : [
+      {
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",
+        "statusOfMedication" : { "value" : "active" }, 
+        "codes" : {"whoATC" : [ "C01AA"]},
+        "start_time" : -1, "end_time" : 1,
+        "values":[
+          {
+            "scalar":"500.0",
+            "units":"mcg"
+          }
+        ]
+      }    
+    ]
+  }    
+]

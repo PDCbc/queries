@@ -1,0 +1,23 @@
+{
+    "type" : "QUERY", 
+    "name" : "PDC-057_primary-statins",
+    "description" : "Prevalence of cardiopulmonary events for active patients who are prescribed a statin.", 
+    "map": "queries/PDC-057_primary-statins-map.js",
+    "reduce" : "Resources/PDC_general-reduce.js",
+    "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "functions/activePatient.js", "functions/isActiveMed.js"],
+    "qualified_by":[""],
+    "tests" : [
+        {
+            "name" : "TC1",
+            "data" : "test/data/empty_dataset.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc1.js",
+            "comment": "test the case where there are no patients, similar to other tests."
+        },{
+            "name" : "TC2",
+            "data" : "test/data/PDC-057_primary-statins_data-2.json",
+            "verifier" : "./verify/PDC-057_primary-statins_verify_tc2.js", 
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js",
+            "comment": "test normal case with 5 patients, 4 on statins, 3 have cardiac events"
+        }
+    ]
+}

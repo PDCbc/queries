@@ -41,29 +41,14 @@
             "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc6.js", 
             "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-3.js"
         },{
-            "name" : "TC7",
-            "data" : "test/data/PDC-054_polypharmacy-10_data_7.json",
-            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc7.js", 
-            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-3.js"
-        },{
             "name" : "TC8",
             "data" : "test/data/PDC-053_polypharmacy-5_data_8.json",
             "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc8.js", 
             "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-3.js"
         },{
-            "name" : "TC9",
-            "data" : "test/data/PDC-054_polypharmacy-10_data_9.json",
-            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc9.js", 
-            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-3.js"
-        },{
             "name" : "TC10",
             "data" : "test/data/PDC-054_polypharmacy-10_data_10.json",
             "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc10.js", 
-            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js"
-        },{
-            "name" : "TC11",
-            "data" : "test/data/PDC-054_polypharmacy-10_data_11.json",
-            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc11.js", 
             "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js"
         }
     ]

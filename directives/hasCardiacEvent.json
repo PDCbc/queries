@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "hasCardiacEvent",
+    "path" : "functions/hasCardiacEvent.js",
+    "description" : "Determines if a patient has a cardiac event (MI, Stroke) in the condition list", 
+    "test" : "./functions/test_hasCardiacEvent.js"
+}

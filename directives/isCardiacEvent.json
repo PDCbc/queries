@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "isCardiacEvent",
+    "path" : "functions/isCardiacEvent.js",
+    "description" : "Determines if a condition is a cardiac event.", 
+    "test" : "./functions/test_isCardiacEvent.js"
+}

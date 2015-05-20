@@ -1,0 +1,65 @@
+[
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "conditions" : [
+      
+    ],
+    "medications" : [
+      {
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",
+        "statusOfMedication" : { "value" : "active" }, 
+        "codes" : {"whoATC" : [ "C10AA","C10BX" ]},
+        "start_time" : -1, "end_time" : 1
+      }    
+    ]
+  },{ 
+    "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "conditions" : [
+      
+    ],
+    "medications" : [
+      {
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",
+        "statusOfMedication" : { "value" : "active" }, 
+        "codes" : {"whoATC" : [ "C10AA","C10BX" ]},
+        "start_time" : -1, "end_time" : 1
+      }    
+    ]
+  },{ 
+    "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "conditions" : [
+      
+    ],
+    "medications" : [
+      {
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",
+        "statusOfMedication" : { "value" : "active" }, 
+        "codes" : {"whoATC" : [ "C10AA","C10BX" ]},
+        "start_time" : -1, "end_time" : 1
+      }    
+    ]
+  },{ 
+    "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "conditions" : [
+      { "codes": { "ICD9": ["410.2"]}, "time": 1263167138, "description": "Some Cardiac Event"}
+    ],
+    "medications" : [
+      {
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",
+        "statusOfMedication" : { "value" : "active" }, 
+        "codes" : {"whoATC" : [ "C10AA","C10BX" ]},
+        "start_time" : -1, "end_time" : 1
+      }    
+    ]
+  },{ 
+    "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "conditions" : [
+      { "codes": { "ICD9": ["410.2"]}, "time": 1263167138, "description": "Some Cardiac Event"}
+    ],
+    "medications" : [] 
+  }
+]

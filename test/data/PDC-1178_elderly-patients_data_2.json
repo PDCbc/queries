@@ -1,0 +1,17 @@
+[
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "medications" : [],
+    "conditions" : []
+  },
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "medications" : [],
+    "conditions" : []
+  },
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -20, 
+    "medications" : [],
+    "conditions" : []
+  }
+]

@@ -4,6 +4,7 @@ function preProcess(data){
 	// time by number of years. We need to adjust these to be absolute times.
 
 	var now = null; //get the current time. 
+	var x = null;
 	for(i in data){
 		//set the birthdates.
 		now = new Date();
@@ -19,6 +20,24 @@ function preProcess(data){
 			now = new Date();
 			data[i].medications[m].end_time = Math.floor(now.setFullYear(now.getFullYear()+data[i].medications[m].end_time)/1000); 
 		}
+
+		x = new Date();  Math.floor((new Date()).getTime()/1000) - 1000;
+
+		x = Math.floor(x.getTime()/1000 - 1000); 
+
+		data[i].encounters = [{
+			"_id": { "$oid": "551cce86c58406644d0000b5"},
+	        "_type": "Encounter",
+          	"codes": {
+		        "code": [
+		          "REASON"
+		        ],
+		        "codeSystem": [
+		          "ObservationType-CA-Pending"
+		        ]
+		    },
+      		"start_time": x //make a recent encounter to force them as active.
+		}];
 	}
 	return data; 
 }; 

@@ -30,6 +30,7 @@ function activePatient( pt, refDate, frame ){
     // check if they have an encounter in the last 24 months
 
     var eList = pt.encounters(); 
+
     var tmpTime = null; 
 
     for( var e = 0; e < eList.length; e++ ){

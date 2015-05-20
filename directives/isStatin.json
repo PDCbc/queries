@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "isStatin",
+    "path" : "functions/isStatin.js",
+    "description" : "Determines if a medication is a statin or not", 
+    "test" : "./functions/test_isStatin.js"
+}

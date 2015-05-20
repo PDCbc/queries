@@ -47,6 +47,23 @@ module.exports = {
 			new_string += "\n"; 
 		}
 
+
+		if( fs.existsSync(globals.TEST_DIR+"test_utils.js") ){
+			var test_utils = fs.readFileSync(globals.TEST_DIR+"test_utils.js");
+			new_string += "\n\n"; 
+			new_string += "// -------------------------------------------\n"; 
+			new_string += "// 	BEGIN TEST UTIL FUNCTIONS\n"; 
+			new_string += "// -------------------------------------------\n"; 
+			new_string += "\n\n"; 
+			new_string += test_utils;
+			new_string += "\n\n"; 
+			new_string += "// -------------------------------------------\n"; 
+			new_string += "// 	END TEST UTIL FUNCTIONS \n"; 
+			new_string += "// -------------------------------------------\n"; 
+			new_string += "\n\n"; 
+		} 
+
+
 		// 4. Write to new_string to a file so that we can use it many times. 
 
 		if( !fs.existsSync(globals.TMP_DIR)){

@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "hasActiveStatin",
+    "path" : "functions/hasActiveStatin.js",
+    "description" : "Determines if a patient has an active statin type medication", 
+    "test" : "./functions/test_hasActiveStatin.js"
+}

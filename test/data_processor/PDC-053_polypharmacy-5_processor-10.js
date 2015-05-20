@@ -6,6 +6,7 @@ function preProcess(data){
 	var tmp_end  	= null; 
 	var tmp_start  	= null; 
 	var now 		= null; //get the current time. 
+	var x 			= null;
 
 	for(i in data){
 		//set the birthdates.
@@ -26,6 +27,24 @@ function preProcess(data){
 			tmp_end.setDate(now.getDate() + data[i].medications[m].end_time); //adjust by 50 days, puts us at 15% of a year, within the 20% window.
 			data[i].medications[m].end_time = Math.floor(tmp_end.getTime()/1000); 
 		}
+
+		x = new Date();
+
+		x = Math.floor(x.getTime()/1000 - 1000); 
+
+		data[i].encounters = [{
+			"_id": { "$oid": "551cce86c58406644d0000b5"},
+	        "_type": "Encounter",
+          	"codes": {
+		        "code": [
+		          "REASON"
+		        ],
+		        "codeSystem": [
+		          "ObservationType-CA-Pending"
+		        ]
+		    },
+      		"start_time": x //make a recent encounter to force them as active.
+		}];
 	}
 	return data; 
 }; 
