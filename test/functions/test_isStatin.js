@@ -267,15 +267,40 @@ module.exports = {
     },
 
     /*
+    * Test behavior with statin whoATC 
+    * 
+    * Expected: true.
+    */
+    testMedStatinWhoATCCode3 : function(){
+
+        var m = setUp(); 
+
+        m.json.codes = {"whoATC":["C10BA"] };
+
+        var result = isStatin(m); 
+
+        if (result === true ){
+
+            return {result : true, message:"test passed!"}
+
+        }else{
+
+            return {result:false, message:"expected true for a medication with whoATC: C10BX"}
+
+        }
+    },
+
+
+    /*
     * Test behavior with 2 statin whoATC codes
     * 
     * Expected: true.
     */
-    testMedStatinWhoATCCode2 : function(){
+    testMedStatinWhoATCCodeAll : function(){
 
         var m = setUp(); 
 
-        m.json.codes = {"whoATC":["C10BX", "C10AA"] };
+        m.json.codes = {"whoATC":["C10BX", "C10AA", "C10BA"] };
 
         var result = isStatin(m); 
 

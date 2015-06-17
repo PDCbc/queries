@@ -4,3 +4,4 @@ test/node_modules/
 .DS_Store
 tmp/
 tmp/*
+node_modules/

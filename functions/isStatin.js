@@ -49,7 +49,7 @@ function isStatin( med ){
 
         if( typeof codes[i] === 'string' ){
 
-            if ( codes[i].match("^C10AA") || codes[i].match("^C10BX") ){
+            if ( codes[i].match("^C10AA") || codes[i].match("^C10BX") || codes[i].match("^C10BA")){
 
                 return true; 
 

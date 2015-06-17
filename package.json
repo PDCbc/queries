@@ -1,0 +1,29 @@
+{
+  "name": "queries",
+  "version": "1.0.0",
+  "description": "=======",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PhyDaC/queries.git"
+  },
+  "author": "sdiemert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PhyDaC/queries/issues"
+  },
+  "homepage": "https://github.com/PhyDaC/queries",
+  "dependencies": {
+    "bson": "^0.4.5",
+    "fs": "0.0.2",
+    "minimist": "^1.1.1",
+    "mock-reduce": "0.0.5",
+    "mongoose": "^4.0.5"
+  }
+}

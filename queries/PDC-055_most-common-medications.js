@@ -9,14 +9,18 @@ function map( patient ){
 
     if( filterProviders(patient.json.primary_care_provider_id, "PPh") ){
 
-      // Coded entry lists
-      var medList  = patient.medications(),
+      if( activePatient( patient ) ){
 
-      // Filter for active meds
-      medications = filter_activeMeds( medList );
+        // Coded entry lists
+        var medList  = patient.medications(),
 
-      // Emit results, top will be handled by Visualizer
-      emit_medications( medications );
+        // Filter for active meds
+        medications = filter_activeMeds( medList );
+
+        // Emit results, top will be handled by Visualizer
+        emit_medications( medications );
+
+      }
 
     }
     
