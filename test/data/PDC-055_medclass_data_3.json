@@ -1,0 +1,6 @@
+[
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "medications" : []
+  }
+]

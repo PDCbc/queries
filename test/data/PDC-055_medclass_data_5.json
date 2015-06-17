@@ -1,0 +1,11 @@
+[
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "medications" : [
+        {
+            "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "statusOfMedication" : { "value" : "active" }, "codes" : { "" : [ "CODE2" ]}, "time" : -1,
+            "start_time" : -1, "end_time" : 1
+        }
+    ]
+  }
+]

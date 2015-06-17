@@ -1,0 +1,16 @@
+ [
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -15, 
+    "medications" : [
+        {
+            "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "statusOfMedication" : { "value" : "active" }, "codes" : { "whoATC" : [ "123456" ]}, "time" : -1,
+            "start_time" : -1, "end_time" : 1
+        },
+        {
+            "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "statusOfMedication" : { "value" : "completed" }, "codes" : { "whoATC" : [ "123456" ]}, "time" : -1,
+            "start_time" : -500, "end_time" :-400
+        }
+
+    ]
+  }
+]

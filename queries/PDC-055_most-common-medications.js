@@ -29,7 +29,7 @@ function map( patient ){
     emit("FAILURE"+e); 
 
   }
-  
+
 }
 
 /**
@@ -37,29 +37,39 @@ function map( patient ){
  *   - proper names handled by DCLAPI module
  */
 function emit_medications( codedEntryList ){
-  // Physician ID, for emit
-  var physicianID = "_" + patient.json.primary_care_provider_id,
 
-  // How many characters to use in ATC codes
-  atcCutoff = 3;
+    // Physician ID, for emit
+    var physicianID = "_" + patient.json.primary_care_provider_id,
 
-  for( var i = 0, L = codedEntryList.length; i < L; i++ ){
-    var med = codedEntryList[ i ].medicationInformation().codedProduct();
+    // How many characters to use in ATC codes
+    atcCutoff = 3;
 
-    for( var j = 0; M = med.length, j < M; j++ ){
-      var m = med[ j ],
-      type = m.codeSystemName(),
-      code = m.code();
+    for( var i = 0, L = codedEntryList.length; i < L; i++ ){
 
-      if( type.toLowerCase() === null ){
-        return;
-      }
+        var med = codedEntryList[ i ].medicationInformation().codedProduct();
 
-      if( type.toLowerCase() === 'whoatc'){
-        code = code.substring( 0, atcCutoff );
-      }
+        for( var j = 0; M = med.length, j < M; j++ ){
 
-      emit( code + '_' + type + physicianID, 1 );
+            var m = med[ j ],
+            type = m.codeSystemName(),
+            code = m.code();
+
+            if( !type || !code || !type.toLowerCase() ){
+
+                break;
+
+            }
+
+            if( type.toLowerCase() === 'whoatc'){
+
+                code = code.substring( 0, atcCutoff );
+
+            }
+
+            emit( code + '_' + type + physicianID, 1 );
+
+        }
+
     }
-  }
+
 }

@@ -27,7 +27,7 @@ function setUp() {
         "medications" : [
             { 
                 "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication",   "time" : -1,
-                "start_time" : new Date(), "end_time" : new Date, 
+                "start_time" : new Date(), "end_time" : new Date(), 
                 "statusOfMedication" : { "value" : "active" },
                 "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }, 
                 "freeTextSig" : ""

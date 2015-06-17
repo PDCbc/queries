@@ -1,0 +1,52 @@
+{
+    "type" : "QUERY", 
+    "name" : "PDC-055_medclass",
+    "description" : "Emits the medication classes for all active medications prescribed to active patients.", 
+    "map": "queries/PDC-055_most-common-medications.js",
+    "reduce" : "Resources/PDC_general-reduce.js",
+    "functions" : ["functions/filter_activeMeds.js", "functions/activePatient.js"],
+    "qualified_by":[""],
+    "tests" : [
+        {
+            "name" : "TC1",
+            "data" : "test/data/empty_dataset.json",
+            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc1.js" 
+        },
+        {
+            "name" : "TC2",
+            "data" : "test/data/PDC-055_medclass_data_1.json",
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js",
+            "verifier" : "./verify/PDC-055_medclass_verify_tc2.js" 
+        },
+        {
+            "name" : "TC3",
+            "data" : "test/data/PDC-055_medclass_data_3.json",
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js",
+            "verifier" : "./verify/PDC-055_medclass_verify_tc3.js" 
+        }, 
+        {
+            "name" : "TC4",
+            "data" : "test/data/PDC-055_medclass_data_4.json",
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js",
+            "verifier" : "./verify/PDC-055_medclass_verify_tc4.js" 
+        },
+        {
+            "name" : "TC5",
+            "data" : "test/data/PDC-055_medclass_data_5.json",
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js",
+            "verifier" : "./verify/PDC-055_medclass_verify_tc5.js" 
+        },
+        {
+            "name" : "TC6",
+            "data" : "test/data/PDC-055_medclass_data_6.json",
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js",
+            "verifier" : "./verify/PDC-055_medclass_verify_tc6.js" 
+        },
+        {
+            "name" : "TC7",
+            "data" : "test/data/PDC-055_medclass_data_7.json",
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js",
+            "verifier" : "./verify/PDC-055_medclass_verify_tc7.js" 
+        }
+    ]
+}
