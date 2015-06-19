@@ -78,6 +78,50 @@ module.exports = {
 
         
 
-	}
+	},
+
+    testValidTimes : function(){
+
+        var p = setUpTest(); 
+
+        var d = Math.floor((new Date()).getTime()/1000);
+
+        var ms = p.medications();
+
+        ms[0].json.start_time = d;
+        ms[0].json.end_time = d; 
+
+
+        if ( ms[0].indicateMedicationStart().getTime()/1000 === d && ms[0].indicateMedicationStop().getTime()/1000 === d){
+
+            return {result : true}
+
+        }else{
+            return {result : false, message : "Start or stop date of medication was not as expected."}
+        }
+
+    }, 
+
+    testInvalidTimes : function(){
+
+        var p = setUpTest(); 
+        var ms = p.medications();
+
+        ms[0].json.start_time = null; 
+        ms[0].json.end_time = null; 
+
+        console.log(ms[0].indicateMedicationStart());
+
+        if ( ms[0].indicateMedicationStart() === null && ms[0].indicateMedicationStop() === null ){
+
+            return {result : true, message : ""}; 
+
+        }else{
+                
+            return {result : false,  message : "medication start and stop were not null."}; 
+
+        }
+
+    }
 
 }

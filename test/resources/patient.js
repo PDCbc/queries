@@ -18,7 +18,11 @@ Converts a a number in UTC Seconds since the epoch to a date.
 
 
 hQuery.dateFromUtcSeconds = function(utcSeconds) {
-  return new Date(utcSeconds * 1000);
+  if (utcSeconds === null) {
+    return null;
+  } else {
+    return new Date(utcSeconds * 1000);
+  }
 };
 
 /**

@@ -214,7 +214,7 @@ module.exports = {
 
         var s = m[0].indicateMedicationStart(); 
 
-        if(isNaN(s.getDate())){
+        if(s === null || isNaN(s.getDate())){
             return {result : true, message : "test passed"};
         }else{
             return {result : false, message : "test failed!"};
@@ -232,7 +232,7 @@ module.exports = {
 
         var s = m[0].indicateMedicationStart(); 
 
-        if(isNaN(s.getDate())){
+        if(s === null || isNaN(s.getDate())){
             return {result : true, message : "test passed"};
         }else{
             return {result : false, message : "test failed!"};
@@ -250,7 +250,7 @@ module.exports = {
 
         var s = m[0].indicateMedicationStart(); 
 
-        if(s.getTime() === 0){
+        if(s === null || s.getTime() === 0){
             return {result : true, message : "test passed"};
         }else{
             return {result : false, message : "test failed!"};
@@ -268,7 +268,7 @@ module.exports = {
 
         var s = m[0].indicateMedicationStop(); 
 
-        if(isNaN(s.getDate())){
+        if(s === null || isNaN(s.getDate())){
             return {result : true, message : "test passed"};
         }else{
             return {result : false, message : "test failed!"};
@@ -286,14 +286,14 @@ module.exports = {
 
         var s = m[0].indicateMedicationStop(); 
 
-        if(isNaN(s.getDate())){
+        if(s === null || isNaN(s.getDate())){
             return {result : true, message : "test passed"};
         }else{
             return {result : false, message : "test failed!"};
         }
     },
 
-    testMedicationInvalidStopTime : function(){
+    testMedicationNullStopTime : function(){
         var pt = setUpTest(); 
        
         pt.medications[0].end_time = null; 
@@ -304,7 +304,7 @@ module.exports = {
 
         var s = m[0].indicateMedicationStop(); 
 
-        if(s.getTime() === 0){
+        if(s === null || s.getTime() === 0){
             return {result : true, message : "test passed"};
         }else{
             return {result : false, message : "test failed!"};
