@@ -27,7 +27,16 @@ function isAge( pt, ageMin, ageMax ) {
 	}
 
 	
-	ageNow = pt.age( new Date() );
+
+    try{ //enclosed in try/catch b/c the patient api may behave unexpectedly. 
+
+        ageNow = pt.age( new Date() );
+
+    }catch(e){
+
+        return false; 
+
+    }
 
 
 	//check that the ageNow value is defined.
