@@ -110,8 +110,6 @@ module.exports = {
         ms[0].json.start_time = null; 
         ms[0].json.end_time = null; 
 
-        console.log(ms[0].indicateMedicationStart());
-
         if ( ms[0].indicateMedicationStart() === null && ms[0].indicateMedicationStop() === null ){
 
             return {result : true, message : ""}; 
