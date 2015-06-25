@@ -6,7 +6,7 @@
 function map( patient ){
     
     try{
-        if (filterProviders(patient.json.primary_care_provider_id, "PPh")){
+        if (filterProviders(patient.json.primary_care_provider_id, "PPhRR")){
 
             var denominator = isAge(patient, 65) && hasImpairedRenalFunction(patient); 
 

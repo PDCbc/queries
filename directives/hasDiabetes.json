@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "hasDiabetes",
+    "path" : "functions/hasDiabetes.js",
+    "description" : "Determines whether a patient has Diabetes or not.", 
+    "test" : "./functions/test_hasDiabetes.js"
+}

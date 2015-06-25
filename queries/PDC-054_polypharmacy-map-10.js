@@ -36,7 +36,7 @@ function map( patient ){
    //Emit Numerator and Denominator, tagged with physician ID
   try{
 
-    if (filterProviders(patient.json.primary_care_provider_id, "PPh")){
+    if (filterProviders(patient.json.primary_care_provider_id, "PPhRR")){
 
       var denominator = activePatient(patient) && checkDenominator();
       var numerator   = denominator && checkNumerator(); 

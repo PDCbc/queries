@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION",
+    "name" : "hasWC",
+    "path" : "functions/hasWC.js",
+    "description" : "Determines whether a patient has a documented WC or not.",
+    "test" : "./functions/test_hasWC.js"
+}

@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION",
+    "name" : "hasWeight",
+    "path" : "functions/hasWeight.js",
+    "description" : "Determines whether a patient has a documented Weight or not.",
+    "test" : "./functions/test_hasWeight.js"
+}

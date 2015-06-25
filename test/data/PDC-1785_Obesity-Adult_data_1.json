@@ -1,0 +1,22 @@
+[
+  { "primary_care_provider_id" : "PROVIDER1",
+    "birthdate": -50,
+    "gender": "F",
+    "medications" : [],
+    "vital_signs" : [
+      {
+        "codes": { "LOINC": ["56115-9"]},
+        "start_time": 1263167138,
+        "values":
+          [
+            {
+              "scalar": "105",
+              "units": "cm",
+              "_type": "PhysicalQuantityResultValue"
+            }
+          ],
+        "description": "WC"
+      }
+    ]
+  }
+]

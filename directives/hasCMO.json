@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION",
+    "name" : "hasCMO",
+    "path" : "functions/hasCMO.js",
+    "description" : "Determines whether a patient has a documented cmo or not.",
+    "test" : "./functions/test_hasCMO.js"
+}
