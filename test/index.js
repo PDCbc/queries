@@ -15,8 +15,7 @@
 var exceptions 		= require("./exception.js"); 
 var util 			= require("./util.js"); 
 var globals			= require("./globals.js")
-
-var parseArgs 		= require('minimist'); 
+var parseArgs 		= require('minimist');
 var fs 				= require('fs'); 
 
 //these will throw an error on start up...something due to BSON
