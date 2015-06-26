@@ -1,5 +1,5 @@
 /**
-* Tests for activePatient
+* Tests for $$FUNCTIONNAME$$
 */
 
 function setUp (){
