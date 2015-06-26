@@ -156,7 +156,7 @@ function writeFunctionFiles(name, desc) {
     code = code.replace("$$FUNCTIONNAME$$", name);
 
     if (
-        !fs.existsSync(fun_path) || !fs.existsSync(dir_path) || !fs.existsSync(test_path)
+        !fs.existsSync(fun_path) && !fs.existsSync(dir_path) && !fs.existsSync(test_path)
     ){
 
         fs.writeFileSync(fun_path, code);
