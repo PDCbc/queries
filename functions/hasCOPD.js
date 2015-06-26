@@ -3,9 +3,9 @@
 * 
 * @return - true if the patient has the condition documented, false otherwise. 
 */
-function hasCHF( pt ){
+function hasCOPD( pt ){
     var system = "ICD9";
-    var condition = "^428.*";
+    var condition = "^496.*";
 
     return hasCondition(pt, system, condition);
 }

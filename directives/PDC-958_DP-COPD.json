@@ -1,0 +1,18 @@
+{
+    "type": "QUERY",
+    "name" : "PDC-958_DP-COPD",
+    "description" : "Active patients who have COPD in the problem list. Population includes active patients ages 20 through 120.",
+    "map": "queries/PDC-958_DP-COPD.js",
+    "reduce" : "Resources/PDC_general-reduce.js",
+    "functions" : ["functions/activePatient.js", "functions/isAge.js", "functions/hasHypertension.js"],
+    "qualified_by":[""],
+    "tests" : [
+        {
+            "name" : "TC1",
+            "data" : "test/data/PDC-958_COPD_data_1.json",
+            "verifier" : "./verify/PDC-958_COPD_verify_tc1.js",
+            "data_processor" : "./data_processor/PDC_processor-2.js",
+            "comments":"without current encounter (active patient)"
+        }
+    ]
+}

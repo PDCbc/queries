@@ -4,26 +4,26 @@
 
 function setUp() {
     var obj = {
-        "primary_care_provider_id" : "PROVIDER1", 
-    };   
+        "primary_care_provider_id" : "PROVIDER1",
+    };
 
-    return obj; 
+    return obj;
 }
 
 module.exports = {
-	
+
     /*
-    * Test the case where no providerId or initiative is given. 
-    * 
+    * Test the case where no providerId or initiative is given.
+    *
     * Expected: false.
     */
 	testUndefinedParams : function(){
 
-        var r = filterProviders(); 
+        var r = filterProviders();
 
         if ( r === false ) {
 
-            return {result : true, message: 'test passed!'}; 
+            return {result : true, message: 'test passed!'};
 
         }else{
 
@@ -31,20 +31,20 @@ module.exports = {
 
         }
 
-    }, 
+    },
 
     /*
     * Test case where providerId is given, but no initiative.
-    * 
+    *
     * expected: false.
     */
     testUndefinedInitiative : function(){
 
-        var r = filterProviders("cpsid"); 
+        var r = filterProviders("cpsid");
 
         if ( r === false ) {
 
-            return {result : true, message: 'test passed!'}; 
+            return {result : true, message: 'test passed!'};
 
         }else{
 
@@ -56,16 +56,16 @@ module.exports = {
 
     /*
     * Test case where initiative is given, but providerId is null
-    * 
+    *
     * expected: false.
     */
-    testUndefinedInitiative : function(){
+    testNullProvider : function(){
 
-        var r = filterProviders(null, "PPh");
+        var r = filterProviders(null, "PPhRR");
 
         if ( r === false ) {
 
-            return {result : true, message: 'test passed!'}; 
+            return {result : true, message: 'test passed!'};
 
         }else{
 
@@ -73,42 +73,42 @@ module.exports = {
 
         }
 
-    }, 
+    },
 
-    /* 
+    /*
     * Test case normal case
     *
-    * expected: false. 
+    * expected: false.
     */
 
     testNormal : function(){
 
-        var r = filterProviders("cpsid", "PPh"); 
+        var r = filterProviders("cpsid", "PPhRR");
 
         if ( r === true ){
 
-            return {result : true, message : "test passed!"}; 
+            return {result : true, message : "test passed!"};
 
         }else{
 
             return {result : false, message : "expected true for a normal provider input."}
         }
 
-    }, 
+    },
 
-    /* 
+    /*
     * Test case normal case
     *
-    * expected: false. 
+    * expected: false.
     */
 
     testRejectProvider : function(){
 
-        var r = filterProviders("NOT A CPSID", "PPh"); 
+        var r = filterProviders("NOT A CPSID", "PPh");
 
         if ( r === false ){
 
-            return {result : true, message : "test passed!"}; 
+            return {result : true, message : "test passed!"};
 
         }else{
 

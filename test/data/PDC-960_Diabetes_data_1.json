@@ -1,0 +1,43 @@
+[
+
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -70, 
+    "medications" : [],
+    "conditions" : [
+      { "codes": { "ICD9": ["250.0"]}, "time": 1263167138, "description": "Diabetes"}
+    ]
+  },
+
+
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -19, 
+    "medications" : [],
+    "conditions" : [
+      { "codes": { "ICD9": ["250.0"]}, "time": 1263167138, "description": "Diabetes"}
+    ]
+  },
+
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -18, 
+    "medications" : [],
+    "conditions" : [
+      { "codes": { "ICD9": ["250.0"]}, "time": 1263167138, "description": "Diabetes"}
+    ]
+  },
+
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -100, 
+    "medications" : [],
+    "conditions" : [
+      { "codes": { "ICD9": ["250.0"]}, "time": 1263167138, "description": "Diabetes"}
+    ]
+  },
+
+  { "primary_care_provider_id" : "PROVIDER1", 
+    "birthdate": -99, 
+    "medications" : [],
+    "conditions" : [
+      { "codes": { "ICD9": ["250.0"]}, "time": 1263167138, "description": "Diabetes"}
+    ]
+  }
+]

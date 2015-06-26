@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION",
+    "name" : "hasHypertension",
+    "path" : "functions/hasHypertension.js",
+    "description" : "Determines whether a patient has Hypertension or not.", 
+    "test" : "./functions/test_hasHypertension.js"
+}

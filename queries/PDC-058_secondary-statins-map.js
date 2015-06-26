@@ -6,7 +6,7 @@
 function map( patient ){
 
     try{
-        if ( filterProviders(patient.json.primary_care_provider_id, "PPh") ){
+        if ( filterProviders(patient.json.primary_care_provider_id, "PPhRR") ){
             var denominator = activePatient( patient ) && hasActiveStatin( patient ); 
 
             var numerator   = denominator && hasCardiacEvent( patient ); 

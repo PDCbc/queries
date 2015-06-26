@@ -7,7 +7,7 @@ function map( patient ){
 
   try{
 
-    if( filterProviders(patient.json.primary_care_provider_id, "PPh") ){
+    if( filterProviders(patient.json.primary_care_provider_id, "PPhRR") ){
 
       if( activePatient( patient ) ){
 
