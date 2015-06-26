@@ -27,7 +27,7 @@ function isAge( pt, ageMin, ageMax ) {
 	}
 
 	
-	ageNow = pt.age( new Date() );
+	var ageNow = pt.age( new Date() );
 
 
 	//check that the ageNow value is defined.

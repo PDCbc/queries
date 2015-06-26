@@ -5,3 +5,4 @@ test/node_modules/
 tmp/
 tmp/*
 node_modules/
+.idea/
