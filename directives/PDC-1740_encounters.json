@@ -1,0 +1,13 @@
+{
+	"type": "QUERY",
+	"name": "PDC-1740_encounters",
+	"description": "Counts the number of encounters within a given time period",
+	"map": "queries/PDC-1740_encounters.js",
+	"reduce": "Resources/PDC_general-reduce.js",
+	"functions": [],
+	"qualified_by": [
+		""
+	],
+	"tests": [],
+	"title": "PDC-1740"
+}
