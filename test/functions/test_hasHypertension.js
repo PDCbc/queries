@@ -6,7 +6,7 @@ function setUp (){
         "primary_care_provider_id": "cpsid",
         "birthdate": -923616000,
         "conditions" : [
-            { "codes": { "ICD9": ["401.0"]}, "time": 1263167138, "description": "Diabetes"}
+            { "codes": { "ICD9": ["401.0"]}, "time": 1263167138, "description": "Hypertension"}
         ]
     };
     return obj;
@@ -51,7 +51,7 @@ module.exports = {
 
         p = new hQuery.Patient(p);
 
-        var result = hasHypertension(p, "ICD9", "^401.*"); 
+        var result = hasHypertension(p);
 
         if( result === true) {
 

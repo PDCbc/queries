@@ -12,7 +12,7 @@
 function isAge( pt, ageMin, ageMax ) {
 
 	// Default values
-	ageMax = ageMax || Number.MAX_VALUE;
+	ageMax = ageMax || Number.POSITIVE_INFINITY;
 
 	if(ageMin === undefined || ageMin === null){
 

@@ -6,7 +6,7 @@ function setUp (){
         "primary_care_provider_id": "cpsid",
         "birthdate": -923616000,
         "conditions" : [
-            { "codes": { "ICD9": ["496.0"]}, "time": 1263167138, "description": "Diabetes"}
+            { "codes": { "ICD9": ["496"]}, "time": 1263167138, "description": "COPD"}
         ]
     };
     return obj;
@@ -17,7 +17,7 @@ module.exports = {
     testNullPatient : function(){
 
 
-        var result = hasHypertension(null);
+        var result = hasCOPD(null);
 
         if ( result === false){
 
@@ -32,7 +32,7 @@ module.exports = {
 
     testUndefinedPatient : function(){
 
-        var result = hasHypertension();
+        var result = hasCOPD();
 
         if ( result === false){
 
@@ -51,7 +51,7 @@ module.exports = {
 
         p = new hQuery.Patient(p);
 
-        var result = hasCOPD(p, "ICD9", "^496.*"); 
+        var result = hasCOPD(p);
 
         if( result === true) {
 

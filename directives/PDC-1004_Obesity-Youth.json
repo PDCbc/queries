@@ -1,7 +1,7 @@
 {
     "type": "QUERY",
     "name" : "PDC-1004_Obesity-Youth",
-    "description" : "Active patients who have Obesity documented in CMOs. Population includes active patients ages 12 through 19.",
+    "description" : "Active patients who have the issue documented in CMOs. Population includes active patients ages 12 through 19.",
     "map": "queries/PDC-1004_Obesity-Youth.js",
     "reduce" : "Resources/PDC_general-reduce.js",
     "functions" : ["functions/activePatient.js", "functions/isAge.js", "functions/hasWC.js", "functions/hasBMI.js", "functions/hasHeight.js", "functions/hasWeight.js"],
@@ -10,9 +10,9 @@
         {
             "name" : "TC1",
             "data" : "test/data/PDC-1004_Obesity-Youth_data_1.json",
-            "verifier" : "./verify/PDC-1004_Obesity-Youth_verify_tc1.js",
+            "verifier" : "./verify/PDC_verify_tc1.js",
             "data_processor" : "./data_processor/PDC_processor-2.js",
-            "comments":"without current encounter (active patient)"
+            "comments":"with current encounter (active patient)"
         }
     ]
 }

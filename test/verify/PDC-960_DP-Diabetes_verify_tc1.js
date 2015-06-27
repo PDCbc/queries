@@ -1,5 +1,5 @@
 /**
-* A verifier function for the query: PDC-1004_Obesity-Youth
+* A verifier function for the query: PDC-960_DP-Diabetes
 *
 * @author: Simon Diemert
 * @date: 2015-05-07
@@ -22,15 +22,15 @@ function verify(results){
 
 		}
 
-		if( results[0]["_id"] !== 'denominator_PROVIDER1' || results[0].value !== 1 ){
+		if( results[0]["_id"] !== 'denominator_PROVIDER1' || results[0].value !== 0 ){
 
-			return {result : false, message: "denominator was "+results[0].value+" not 1 as expected"};
+			return {result : false, message: "denominator was "+results[0].value+" not 0 as expected"};
 
 		}
 
-		else if( results[1]["_id"] !== 'numerator_PROVIDER1' || results[1].value !== 1 ){
+		else if( results[1]["_id"] !== 'numerator_PROVIDER1' || results[1].value !== 0 ){
 
-			return {result : false, message: "numerator was "+results[1].value+" not 1 as expected"};
+			return {result : false, message: "numerator was "+results[1].value+" not 0s as expected"};
 
 		}else{
 

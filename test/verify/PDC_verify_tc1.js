@@ -1,6 +1,5 @@
 /**
-* A verifier function for the query: PDC-1004_Obesity-Youth
-*
+* A generic verifier function for PDC queries
 * @author: Simon Diemert
 * @date: 2015-05-07
 */

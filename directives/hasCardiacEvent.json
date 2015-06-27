@@ -1,7 +1,7 @@
 {
-    "type" : "FUNCTION", 
+    "type" : "FUNCTION",
     "name" : "hasCardiacEvent",
     "path" : "functions/hasCardiacEvent.js",
-    "description" : "Determines if a patient has a cardiac event (MI, Stroke) in the condition list", 
+    "description" : "Determines if a patient has condition or not", 
     "test" : "./functions/test_hasCardiacEvent.js"
 }

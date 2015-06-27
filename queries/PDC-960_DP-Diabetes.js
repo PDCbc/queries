@@ -1,10 +1,9 @@
 /**
- * Query Title: PDC-960
+ * Query Title: PDC-960_DP-Diabetes
  * Query Type:  Ratio
- *                (population is 20 - 120 years of age)
  */
 function map( patient ){
-  
+
     var providerId = patient.json.primary_care_provider_id;
 
     var initiative = "PopulationHealth";
@@ -14,14 +13,14 @@ function map( patient ){
         return;
     }
 
-    var ap = activePatient( patient );  
+    var ap = activePatient( patient );
 
     var ia = isAge( patient, 20, 120 );
 
     var hc = hasDiabetes(patient);
 
     var denominator = ia && ap;
-  
+
     var numerator   =  ap && ia && hc;
 
     emit( "denominator_" + patient.json.primary_care_provider_id,  + denominator );

@@ -36,13 +36,11 @@ function hasCMO( pt, system, cmo, minDate, maxDate, complement )
 
     var measurements = pt.json.vital_signs;
 
-    console.log('measure date: ' + new Date(measurements[0].start_time));
     //check that we actually have conditions.
     if( measurements === undefined || measurements === null || measurements.length === 0 )
     {
         return false;
     }
-
 
     //filter out cmos that don't have the right code
     measurements = measurements.filter(
@@ -79,7 +77,6 @@ function hasCMO( pt, system, cmo, minDate, maxDate, complement )
     );
 
     //filter out cmos without a start_date
-
     measurements = measurements.filter(
         function(measurement)
         {

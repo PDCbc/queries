@@ -1,0 +1,17 @@
+{
+    "type": "QUERY",
+    "name" : "PDC-1787_DP-CD",
+    "description" : "Active patients who have the condition in the problem list. Population includes active patients of any age",
+    "map": "queries/PDC-1787_DP-CD.js",
+    "reduce" : "Resources/PDC_general-reduce.js",
+    "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "hasCD.js"],
+    "qualified_by":[""],
+    "tests" : [
+        {
+            "name" : "TC1",
+            "data" : "test/data/PDC-1787_DP-CD_data_1.json",
+            "verifier" : "./verify/PDC_verify_tc1.js",
+            "data_processor" : "./data_processor/PDC_processor-2.js"
+        }
+    ]
+}

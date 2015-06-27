@@ -1,12 +1,3 @@
-/**
-* Test the hasDiabetes function.
-*
-* The definition of Diabetes is as per the data dictionary on polarian.
-*  - has ICD9 250.*
-*
-*/
-
-
 function setUp (){
 
     var obj = {
@@ -212,7 +203,7 @@ module.exports = {
         var p = setUp();
 
         p.conditions = [];
-        p.conditions[0] = { "codes": { "SNOMED-CT": ["123456"], "ICD9" : ["250.0"]}, "time": 1263167138, "description": "DiabestesICD9"};
+        p.conditions[0] = { "codes": { "SNOMED-CT": ["123456"], "ICD9" : ["250.0"]}, "time": 1263167138, "description": "Diabestes"};
 
         p = new hQuery.Patient(p);
 
@@ -274,4 +265,4 @@ module.exports = {
         }
 
     },
-}
+};

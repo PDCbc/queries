@@ -1,7 +1,7 @@
 {
-    "type" : "FUNCTION", 
+    "type" : "FUNCTION",
     "name" : "hasImpairedRenalFunction",
     "path" : "functions/hasImpairedRenalFunction.js",
-    "description" : "Determines if a patient has a impaired renal function based on their conditions.", 
+    "description" : "Determines if a patient has this condition documented or not.", 
     "test" : "./functions/test_hasImpairedRenalFunction.js"
 }

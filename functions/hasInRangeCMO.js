@@ -10,7 +10,6 @@
 */
 function hasInRangeCMO( pt, system, cmo, mostRecent, minVal, maxVal, units, minDate, maxDate, complement )
 {
-
     var maxMillisFromEpoch = 8640000000000000;
 
     mostRecent = typeof mostRecent !== 'undefined' && mostRecent !== null ? mostRecent : false;

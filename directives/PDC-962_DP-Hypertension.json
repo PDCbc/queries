@@ -1,7 +1,7 @@
 {
     "type": "QUERY",
     "name" : "PDC-962_DP-Hypertension",
-    "description" : "Active patients who have Hypertension in the problem list. Population includes active patients ages 20 through 120.",
+    "description" : "Active patients who have the condition in the problem list. Population includes active patients ages 20 through 120.",
     "map": "queries/PDC-962_DP-Hypertension.js",
     "reduce" : "Resources/PDC_general-reduce.js",
     "functions" : ["functions/activePatient.js", "functions/isAge.js", "functions/hasHypertension.js"],
@@ -9,10 +9,10 @@
     "tests" : [
         {
             "name" : "TC1",
-            "data" : "test/data/PDC-962_Hypertension_data_1.json",
-            "verifier" : "./verify/PDC-962_Hypertension_verify_tc1.js",
+            "data" : "test/data/PDC-962_DP-Hypertension_data_1.json",
+            "verifier" : "./verify/PDC_verify_tc1.js",
             "data_processor" : "./data_processor/PDC_processor-2.js",
-            "comments":"without current encounter (active patient)"
+            "comments":"with current encounter (active patient)"
         }
     ]
 }

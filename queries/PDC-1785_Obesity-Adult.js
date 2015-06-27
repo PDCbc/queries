@@ -1,7 +1,6 @@
 /**
- * Query Title: PDC-1004
+ * Query Title: PDC-1785_Obesity-Adult
  * Query Type:  Ratio
- * Description: BMI-WC Check
  */
 function map( patient ){
 
