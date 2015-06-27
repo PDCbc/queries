@@ -4,6 +4,15 @@
  */
 function map( patient ){
 
+  var providerId = patient.json.primary_care_provider_id;
+
+  var initiative = "PopulationHealth";
+
+  if(!filterProviders(providerId, initiative))
+  {
+      return;
+  }
+  
   var ap = activePatient( patient );
 
   var ia = isAge(  patient, 20, 120  );

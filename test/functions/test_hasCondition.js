@@ -1,12 +1,3 @@
-/**
-* Test the hasCHF function.
-* 
-* The definition of CHF is as per the data dictionary on polarian. 
-*  - has ICD9 428.* 
-*
-*/
-
-
 function setUp (){
 
     var obj = {
@@ -14,11 +5,11 @@ function setUp (){
         "emr_demographics_primary_key": "1",
         "primary_care_provider_id": "cpsid",
         "birthdate": -923616000,
-        "conditions" : [ 
-            { "codes": { "ICD9": ["428.0"]}, "time": 1263167138, "description": "Congestive Heart Failure"} 
+        "conditions" : [
+            { "codes": { "ICD9": ["428.0"]}, "time": 1263167138, "description": "condition"}
         ]
-    }; 
-    return obj; 
+    };
+    return obj;
 }
 
 module.exports = {
@@ -26,45 +17,45 @@ module.exports = {
     testNullPatient : function(){
 
 
-        var result = hasCondition(null); 
+        var result = hasCondition(null);
 
         if ( result === false){
 
-            return {result : true, message : "test passed"};  
+            return {result : true, message : "test passed"};
 
         }else{
 
             return {result : false, message : "expected false for a null patient"};
         }
 
-    }, 
+    },
 
     testUndefinedPatient : function(){
 
-        var result = hasCondition(); 
+        var result = hasCondition();
 
         if ( result === false){
 
-            return {result : true, message : "test passed"};  
+            return {result : true, message : "test passed"};
 
         }else{
 
             return {result : false, message : "expected false for a undefined patient"};
-       } 
+       }
 
-    }, 
+    },
 
     testRegularPatient : function () {
 
-        var p = setUp(); 
+        var p = setUp();
 
-        p = new hQuery.Patient(p); 
+        p = new hQuery.Patient(p);
 
-        var result = hasCondition(p, "ICD9", "^428.*"); 
+        var result = hasCondition(p, "ICD9", "^428.*");
 
         if( result === true) {
 
-            return {result : true, message : "test passed"};  
+            return {result : true, message : "test passed"};
 
         }else {
 
@@ -76,61 +67,61 @@ module.exports = {
 
     testRegularWithoutConditionPatient : function () {
 
-        var p = setUp(); 
+        var p = setUp();
 
-        p.conditions[0].codes['ICD9'][0] = "500.0"; 
+        p.conditions[0].codes['ICD9'][0] = "500.0";
 
-        p = new hQuery.Patient(p); 
+        p = new hQuery.Patient(p);
 
-        var result = hasCondition(p, "ICD9", "^428.*"); 
+        var result = hasCondition(p, "ICD9", "^428.*");
 
         if( result === false) {
 
-            return {result : true, message : "test passed"};  
+            return {result : true, message : "test passed"};
 
         }else {
 
-            return {result : false, message : "expected false for patient without CHF"};
+            return {result : false, message : "expected false for patient without condition"};
 
         }
     },
 
     testMultipleCodes : function () {
 
-        var p = setUp(); 
+        var p = setUp();
 
-        p.conditions[0].codes['ICD9'][0] = "500.0"; 
-        p.conditions[0].codes['ICD9'][1] = "400.0"; 
-        p.conditions[0].codes['ICD9'][2] = "428.42"; 
+        p.conditions[0].codes['ICD9'][0] = "500.0";
+        p.conditions[0].codes['ICD9'][1] = "400.0";
+        p.conditions[0].codes['ICD9'][2] = "428.42";
 
-        p = new hQuery.Patient(p); 
+        p = new hQuery.Patient(p);
 
-        var result = hasCondition(p, "ICD9", "^428.*"); 
+        var result = hasCondition(p, "ICD9", "^428.*");
 
         if( result === true) {
 
-            return {result : true, message : "test passed"};  
+            return {result : true, message : "test passed"};
 
         }else{
 
-            return {result : false, message : "expected true for patient with CHF"};
+            return {result : false, message : "expected true for patient with condition"};
 
         }
-    }, 
+    },
 
     testPatientWithUndefinedConditions : function() {
 
-        var p = setUp(); 
+        var p = setUp();
 
-        delete p.conditions; 
+        delete p.conditions;
 
-        p = new hQuery.Patient(p); 
+        p = new hQuery.Patient(p);
 
         var result = hasCondition(p, "ICD9", "^428.*");
 
         if ( result === false ) {
 
-            return {result : true, message : "test passed"};  
+            return {result : true, message : "test passed"};
 
         }else{
 
@@ -142,17 +133,17 @@ module.exports = {
 
     testPatientWithNullConditions : function() {
 
-        var p = setUp(); 
+        var p = setUp();
 
-        p.conditions = null; 
+        p.conditions = null;
 
-        p = new hQuery.Patient(p); 
+        p = new hQuery.Patient(p);
 
         var result = hasCondition(p, "ICD9", "^428.*");
 
         if ( result === false ) {
 
-            return {result : true, message : "test passed"};  
+            return {result : true, message : "test passed"};
 
         }else{
 
@@ -164,24 +155,24 @@ module.exports = {
 
     testPatientMultipleConditions : function (){
 
-        var p = setUp(); 
+        var p = setUp();
 
-        p.conditions = []; 
-        p.conditions[0] = { "codes": { "ICD9": ["429.0"]}, "time": 1263167138, "description": "NOT CHF"};
-        p.conditions[1] = { "codes": { "ICD9": ["430.0"]}, "time": 1263167138, "description": "NOT CHF"};
-        p.conditions[2] = { "codes": { "ICD9": ["428.0"]}, "time": 1263167138, "description": "CHF"};
+        p.conditions = [];
+        p.conditions[0] = { "codes": { "ICD9": ["429.0"]}, "time": 1263167138, "description": "NOT condition"};
+        p.conditions[1] = { "codes": { "ICD9": ["430.0"]}, "time": 1263167138, "description": "NOT condition"};
+        p.conditions[2] = { "codes": { "ICD9": ["428.0"]}, "time": 1263167138, "description": "condition"};
 
-        p = new hQuery.Patient(p); 
+        p = new hQuery.Patient(p);
 
         var result = hasCondition(p, "ICD9", "^428.*");
 
         if ( result === true ) {
 
-            return {result : true, message : "test passed"};  
+            return {result : true, message : "test passed"};
 
         }else{
 
-            return {result : false, message : "expected true for patient with CHF in condition list."};
+            return {result : false, message : "expected true for patient with condition in condition list."};
 
         }
 
@@ -189,40 +180,40 @@ module.exports = {
 
     testPatientWithCombinedCodeSystems : function (){
 
-        var p = setUp(); 
+        var p = setUp();
 
-        p.conditions = []; 
-        p.conditions[0] = { "codes": { "SNOMED-CT": ["123455"], "ICD9" : ["428.9"]}, "time": 1263167138, "description": "NOT CHF"};
+        p.conditions = [];
+        p.conditions[0] = { "codes": { "SNOMED-CT": ["123455"], "ICD9" : ["428.9"]}, "time": 1263167138, "description": "NOT condition"};
 
-        p = new hQuery.Patient(p); 
+        p = new hQuery.Patient(p);
 
         var result = hasCondition(p, "ICD9", "^428.*");
 
         if ( result === true ) {
 
-            return {result : true, message : "test passed"};  
+            return {result : true, message : "test passed"};
 
         }else{
 
-            return {result : false, message : "expected true given ICD9 code 428.9 "};
+            return {result : false, message : "expected true given ICD9 code for condition"};
 
         }
 
-    }, 
+    },
 
     testPatientWithUndefinedCodes : function (){
 
-        var p = setUp(); 
+        var p = setUp();
 
         delete p.conditions[0].codes
 
-        p = new hQuery.Patient(p); 
+        p = new hQuery.Patient(p);
 
         var result = hasCondition(p, "ICD9", "");
 
         if ( result === false ) {
 
-            return {result : true, message : "test passed"};  
+            return {result : true, message : "test passed"};
 
         }else{
 
@@ -230,22 +221,22 @@ module.exports = {
 
         }
 
-    }, 
+    },
 
     testPatientEmptyCodes : function (){
 
-        var p = setUp(); 
+        var p = setUp();
 
-        p.conditions = []; 
-        p.conditions[0] = { "codes": {}, "time": 1263167138, "description": "NOT CHF"};
+        p.conditions = [];
+        p.conditions[0] = { "codes": {}, "time": 1263167138, "description": "NOT condition"};
 
-        p = new hQuery.Patient(p); 
+        p = new hQuery.Patient(p);
 
         var result = hasCondition(p, "ICD9", "^428.*");
 
         if ( result === false ) {
 
-            return {result : true, message : "test passed"};  
+            return {result : true, message : "test passed"};
 
         }else{
 
@@ -253,6 +244,5 @@ module.exports = {
 
         }
 
-    }, 
-}
-
+    },
+};
