@@ -13,7 +13,7 @@
  */
 function countEncounters(pt, months) {
 
-    if (!pt || months === null || months === undefined) {
+    if (!pt || isNaN(months) || months === null || months === undefined) {
 
         return null;
 
@@ -22,7 +22,7 @@ function countEncounters(pt, months) {
     var now       = new Date();
     var timeFrame = new Date();
 
-    timeFrame.setMonth(timeFrame.getMonth() - months);
+    timeFrame.setMonth(timeFrame.getMonth() - Math.floor(months));
 
     now       = Math.floor(now.getTime() / 1000);
     timeFrame = Math.floor(timeFrame.getTime() / 1000);
@@ -41,20 +41,12 @@ function countEncounters(pt, months) {
 
     for (var i = 0; i < encounters.length; i++) {
 
-        console.log(encounters[i].start_time+ " "+now + " " +timeFrame);
-
-        console.log(encounters[i].start_time <= now);
-        console.log(encounters[i].start_time >= timeFrame);
-        //console.log(new Date(encounters[i].start_time*1000));
-
         if (!encounters[i].start_time) {
-
-            console.log('ereh');
 
             continue;
         }
 
-        if (encounters.start_time <= now && encounters.start_time >= timeFrame) {
+        if (encounters[i].start_time <= now && encounters[i].start_time >= timeFrame) {
 
             total += 1;
 
