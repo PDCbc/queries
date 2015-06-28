@@ -22,6 +22,12 @@
 function getAgeRange(pt, ranges) {
 
 
+    if(!pt){
+
+        return null;
+
+    }
+
     ageRanges = ranges || {
 
             '0-9'  : {lower: 0, upper: 9},

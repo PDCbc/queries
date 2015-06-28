@@ -5,7 +5,8 @@
 
 function map(patient) {
 
+    
 
     emit("SOME KEY", 1);
 
-};
+}
