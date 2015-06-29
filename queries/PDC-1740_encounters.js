@@ -19,7 +19,7 @@ function map(patient) {
 
             if (encounters !== null && ageRange !== null && gender !== null){
 
-                emit(gender+"_"+ageRange+"_"+patient.json.primary_care_provider_id, 1);
+                emit(gender+"_"+ageRange+"_"+patient.json.primary_care_provider_id, encounters);
 
             }
 
