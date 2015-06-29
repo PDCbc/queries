@@ -1,5 +1,5 @@
 /*
-* Unit tests for the isAge function 
+* Unit tests for the isEol function
 */
 
 function setUp() {

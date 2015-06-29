@@ -16,7 +16,7 @@ function verify(results){
     console.log(results);
     if ( 
         results[0]._id === "PROVIDER1"  &&
-        results[1].value === 0
+        results[0].value === 1
     ){
        return {result: true}; 
     }else{

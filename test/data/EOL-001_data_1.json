@@ -5,12 +5,31 @@
     "conditions" : []
   },
   { "primary_care_provider_id" : "PROVIDER1", 
-    "birthdate": -70, 
+    "birthdate": -56,
     "medications" : [],
-    "conditions" : []
+    "conditions" : [
+      { "codes": { "ICD9": ["V66.7"]}, "time": 1263167138, "description": "Encounter for palliative care"}
+    ]
   },
   { "primary_care_provider_id" : "PROVIDER1", 
     "birthdate": -20, 
+    "medications" : [],
+    "conditions" : []
+  },
+  { "primary_care_provider_id" : "PROVIDER1",
+    "birthdate": -10,
+    "medications" : [],
+    "conditions" : [
+      { "codes": { "ICD9": ["V66.7"]}, "time": 1263167138, "description": "Encounter for palliative care"}
+    ]
+  },
+  { "primary_care_provider_id" : "PROVIDER1",
+    "birthdate": -80,
+    "medications" : [],
+    "conditions" : []
+  },
+  { "primary_care_provider_id" : "PROVIDER1",
+    "birthdate": -90,
     "medications" : [],
     "conditions" : []
   }
