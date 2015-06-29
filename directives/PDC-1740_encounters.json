@@ -8,6 +8,13 @@
 	"qualified_by": [
 		""
 	],
-	"tests": [],
-	"title": "PDC-1740"
+    "title": "PDC-1740",
+	"tests": [
+      {
+        "name": "TC1",
+        "data": "test/data/PDC-1740_data_1.json",
+        "verifier": "./verify/PDC-1740_verify_tc1.js",
+        "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js"
+      }
+    ]
 }
