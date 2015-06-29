@@ -5,8 +5,23 @@
 
 function map(patient) {
 
-    
+    try {
+        if (filterProviders(patient.json.primary_care_provider_id, "PPh")) {
 
-    emit("SOME KEY", 1);
+            //get the number of encounters in the last month.
+            var encounters = countEncounters(patient, 1);
 
-}
+            var ageRange = getAgeRange(patient);
+
+            var gender = getGender(patient);
+
+            emit(physicianID, 1);
+
+        }
+
+    } catch (e) {
+
+        emit("FAILURE_" + e);
+
+    }
+};
