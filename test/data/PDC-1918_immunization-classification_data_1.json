@@ -1,0 +1,42 @@
+[
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "birthdate": -70,
+    "immunizations": [
+      {
+        "_id": {
+          "$oid": "551cce87c5840611e2000180"
+        },
+        "codes": {
+          "whoATC": [
+            "J07AL02"
+          ]
+        },
+        "mood_code": "EVN",
+        "_type": "Immunization",
+        "start_time": 1350259200,
+        "description": "Pneumovax"
+      }
+    ]
+  },
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "birthdate": -70,
+    "immunizations": [
+      {
+        "_id": {
+          "$oid": "551cce87c5840611e2000180"
+        },
+        "codes": {
+          "HC-DIN": [
+            "12345"
+          ]
+        },
+        "mood_code": "EVN",
+        "_type": "Immunization",
+        "start_time": 1350259200,
+        "description": "Pneumovax"
+      }
+    ]
+  }
+]
