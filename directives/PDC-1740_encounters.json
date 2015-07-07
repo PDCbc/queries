@@ -1,0 +1,20 @@
+{
+	"type": "QUERY",
+	"name": "PDC-1740_encounters",
+	"description": "Counts the number of encounters within a given time period",
+	"map": "queries/PDC-1740_encounters.js",
+	"reduce": "Resources/PDC_general-reduce.js",
+	"functions": [],
+	"qualified_by": [
+		""
+	],
+    "title": "PDC-1740",
+	"tests": [
+      {
+        "name": "TC1",
+        "data": "test/data/PDC-1740_data_1.json",
+        "verifier": "./verify/PDC-1740_verify_tc1.js",
+        "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js"
+      }
+    ]
+}
