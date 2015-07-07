@@ -61,12 +61,6 @@ function emit_medications(codedEntryList, provider) {
 
             }
 
-            if (type.toLowerCase() === 'whoatc') {
-
-                code = code.substring(0, atcCutoff);
-
-            }
-
             emit(code + '_' + type + "_" + provider, 1);
 
         }
