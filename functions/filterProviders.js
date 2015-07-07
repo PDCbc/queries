@@ -17,6 +17,7 @@ function filterProviders(providerId, initiative){
 
     }
 
+
     var inits = {
 
         "PPhRR" : [

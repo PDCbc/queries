@@ -6,7 +6,5 @@
 function hasCD( pt ){
     var system = "ICD9";
     var condition = "^43[0-4]$|^43[6-8]$";
-
-    console.log('hasCD');
     return hasCondition(pt, system, condition);
 }
