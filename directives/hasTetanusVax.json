@@ -1,0 +1,7 @@
+{
+  "type": "FUNCTION",
+  "name": "hasTetanusVax",
+  "path": "functions/hasTetanusVax.js",
+  "description": "Determines whether the patient has a tetanus vaccination on file.",
+  "test": "./functions/test_hasTetanusVax.js"
+}
