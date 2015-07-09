@@ -25,7 +25,7 @@ function activePatient( pt, refDate, frame ){
     }
 
     refDate = refDate || new Date(); 
-    frame   = frame || 63072000; //2 years in seconds: 60*60*24*365*2
+    frame   = frame || 94608000 ; //3 years in seconds: 60*60*24*365*3
 
     // check if they have an encounter in the last 24 months
 
