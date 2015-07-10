@@ -1,12 +1,3 @@
-/**
-* Test the hasCHF function.
-*
-* The definition of CHF is as per the data dictionary on polarian.
-*  - has ICD9 428.*
-*
-*/
-
-
 function setUp (){
 
     var obj = {
@@ -177,7 +168,7 @@ module.exports = {
 
         }else{
 
-            return {result : false, message : "expected false for patient with undefined conditions"};
+            return {result : false, message : "expected false for patient with undefined vital signs"};
 
         }
 
@@ -211,7 +202,7 @@ module.exports = {
         var p = setUp();
 
         p.vital_signs = [];
-        p.vital_signs[0] = { "codes": { "LOINC": ["39156-5"], "SNOMEDCT": ['60621009']}, "start_time": 1263167138, "description": "BMI"};
+        p.vital_signs[0] = { "codes": { "LOINC": ["39156-5"], "SNOMEDCT": ['60621009']}, "start_time": 1263167138, "description": "vital sign"};
 
         p = new hQuery.Patient(p);
 
@@ -223,7 +214,7 @@ module.exports = {
 
         }else{
 
-            return {result : false, message : "expected true given ICD9 code 428.9 "};
+            return {result : false, message : "expected true given ICD9 code"};
 
         }
 
@@ -245,7 +236,7 @@ module.exports = {
 
         }else{
 
-            return {result : false, message : "expected false given a patient with conditions but no codes"};
+            return {result : false, message : "expected false given a patient with vital signs but no codes"};
 
         }
 

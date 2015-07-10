@@ -1,0 +1,17 @@
+{
+    "type": "QUERY",
+    "name" : "PDC-1905_Lab-A1C>=7wDiabetes.json",
+    "description" : "Active patients who have had the lab in the time period and are the specified age.",
+    "map": "queries/PDC-1905_Lab-A1C>=7wDiabetes.js",
+    "reduce" : "Resources/PDC_general-reduce.js",
+    "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "hasA1C.js"],
+    "qualified_by":[""],
+    "tests" : [
+        {
+            "name" : "TC1",
+            "data" : "test/data/PDC-1905_Lab-A1C>=7wDiabetes_data_1.json",
+            "verifier" : "./verify/PDC_verify_tc1.js",
+            "data_processor" : "./data_processor/PDC_processor-2.js"
+        }
+    ]
+}
