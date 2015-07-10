@@ -1,14 +1,14 @@
 /**
 * @param pt - the patient object that contains the hQuery patient API.
-* @param system - the code system for the specified cmo
-* @param cmo - a regular expression for the cmo. e.g., ^56115-9$
-* @param minVal - the low value of the range for a positive result for the cmo
-* @param maxVal - the high value of the range for a positive result for the cmo
-* @param minDate - the low date value of the date range for a positive result for the cmo
-* @param maxDate - the high date value of the date range for a positive result for the cmo
+* @param system - the code system for the specified lab
+* @param lab - a regular expression for the lab. e.g., ^56115-9$
+* @param minVal - the low value of the range for a positive result for the lab
+* @param maxVal - the high value of the range for a positive result for the lab
+* @param minDate - the low date value of the date range for a positive result for the lab
+* @param maxDate - the high date value of the date range for a positive result for the lab
 * @return - true if the patient has the specified condition, false otherwise.
 */
-function hasInRangeCMO( pt, system, cmo, mostRecent, minVal, maxVal, units, minDate, maxDate, complement )
+function hasInRangeLab( pt, system, lab, mostRecent, minVal, maxVal, units, minDate, maxDate, complement )
 {
     var maxMillisFromEpoch = 8640000000000000;
 
@@ -27,13 +27,13 @@ function hasInRangeCMO( pt, system, cmo, mostRecent, minVal, maxVal, units, minD
         pt.json === null ||
         system === undefined ||
         system === null ||
-        cmo === undefined ||
-        cmo === null)
+        lab === undefined ||
+        lab === null)
     {
         return false;
     }
 
-    var measurements = pt.json.vital_signs;
+    var measurements = pt.json.results;
 
     //check that we actually have conditions.
     if( measurements === undefined || measurements === null || measurements.length === 0 )
@@ -41,7 +41,7 @@ function hasInRangeCMO( pt, system, cmo, mostRecent, minVal, maxVal, units, minD
         return false;
     }
 
-    //filter out cmos that don't have the right code
+    //filter out labs that don't have the right code
     measurements = measurements.filter(
         function(measurement)
         {
@@ -65,7 +65,7 @@ function hasInRangeCMO( pt, system, cmo, mostRecent, minVal, maxVal, units, minD
 
             for(var i=0; i<codes.length; i++)
             {
-                if(codes[i].match(cmo))
+                if(codes[i].match(lab))
                 {
                     return true;
                 }
@@ -75,7 +75,7 @@ function hasInRangeCMO( pt, system, cmo, mostRecent, minVal, maxVal, units, minD
         }
     );
 
-    //filter out cmos without a start_date
+    //filter out labs without a start_date
     measurements = measurements.filter(
         function(measurement)
         {
@@ -134,7 +134,6 @@ function hasInRangeCMO( pt, system, cmo, mostRecent, minVal, maxVal, units, minD
           measurement.values !== undefined &&
           measurement.values.length > 0 )
       {
-
         measurement.values = filterOnUnits(measurement.values, units);
 
         for(var j=0; j<measurement.values.length; j++)
@@ -145,10 +144,7 @@ function hasInRangeCMO( pt, system, cmo, mostRecent, minVal, maxVal, units, minD
           {
             if(!complement)
             {
-              console.log('value.scalar: ' + value.scalar);
-              console.log('minVal: ' + minVal);
-              console.log('maxVal: ' + maxVal);
-
+              console.log();
               if(value.scalar >= minVal && value.scalar <= maxVal)
               {
                 return true;

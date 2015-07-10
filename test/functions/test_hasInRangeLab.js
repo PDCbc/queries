@@ -7,23 +7,23 @@ function setUp ()
                 "gender":"M",
                 "primary_care_provider_id": "cpsid",
                 "birthdate": -923616000,
-                "vital_signs":
+                "results":
                     [
                         {
                             "codes":
                             {
                                 "LOINC":
                                 [
-                                    "8480-6"
+                                    "4548-4"
                                 ]
                             },
                             "start_time": 1380153600,
-                            "description": "WC",
+                            "description": "HGBA1C",
                             "values":
                             [
                                 {
-                                    "scalar": "105",
-                                    "units": "cm",
+                                    "scalar": "8.0",
+                                    "units": "%",
                                     "_type": "PhysicalQuantityResultValue"
                                 }
                             ]
@@ -38,8 +38,7 @@ module.exports = {
 
     testNullPatient : function(){
 
-
-        var result = hasInRangeCMO(null);
+        var result = hasInRangeLab(null);
 
         if ( result === false)
         {
@@ -49,12 +48,11 @@ module.exports = {
         {
             return {result : false, message : "expected false for a null patient"};
         }
-
     },
 
     testUndefinedPatient : function(){
 
-        var result = hasInRangeCMO();
+        var result = hasInRangeLab();
 
         if ( result === false)
         {
@@ -67,10 +65,10 @@ module.exports = {
 
     },
 
-    testPatientWithCMOOutsideOfRange: function(){
+    testPatientWithLabOutsideOfRange: function(){
         var patient = new hQuery.Patient( setUp() );
 
-        var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+        var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
         if(result === false)
         {
@@ -82,12 +80,12 @@ module.exports = {
         }
     },
 
-    testPatientWithCMOInsideOfRange: function(){
+    testPatientWithLabInsideOfRange: function(){
         var patient = new hQuery.Patient( setUp() );
 
-        patient.json.vital_signs[0].values[0].scalar = 100;//put patients CMO in Range
+        patient.json.results[0].values[0].scalar = 5;//put patients result in Range
 
-        var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+        var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
         if(result === true)
         {
@@ -99,22 +97,22 @@ module.exports = {
         }
     },
 
-    testPatientWithTwoVitalSignReadingsOnDifferentDatesBadOneLate: function(){
+    testPatientWithTwoLabReadingsOnDifferentDatesBadOneLate: function(){
       var newReading = {
           "codes":
           {
               "LOINC":
               [
-                  "8480-6"
+                  "4548-4"
               ]
           },
           "start_time": 1280153600,
-          "description": "WC",
+          "description": "HGBA1C",
           "values":
           [
               {
-                  "scalar": "80",
-                  "units": "cm",
+                  "scalar": "6",
+                  "units": "%",
                   "_type": "PhysicalQuantityResultValue"
               }
           ]
@@ -122,16 +120,9 @@ module.exports = {
 
       var patient = new hQuery.Patient( setUp() );
 
-      try
-      {
-        patient.json.vital_signs.push(newReading);
-      }
-      catch(e)
-      {
-        console.log('error: ' + e);
-      }
+      patient.json.results.push(newReading);
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === false)
       {
@@ -143,22 +134,22 @@ module.exports = {
       }
     },
 
-    testPatientWithTwoVitalSignReadingsOnDifferentDatesBadOneEarly: function(){
+    testPatientWithTwoResultsOnDifferentDatesBadOneEarly: function(){
       var newReading = {
           "codes":
           {
               "LOINC":
               [
-                  "8480-6"
+                  "4548-4"
               ]
           },
           "start_time": 1480153600,
-          "description": "WC",
+          "description": "HGBA1C",
           "values":
           [
               {
-                  "scalar": "80",
-                  "units": "cm",
+                  "scalar": "6",
+                  "units": "%",
                   "_type": "PhysicalQuantityResultValue"
               }
           ]
@@ -166,9 +157,9 @@ module.exports = {
 
       var patient = new hQuery.Patient( setUp() );
 
-      patient.json.vital_signs.push(newReading);
+      patient.json.results.push(newReading);
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === true)
       {
@@ -180,13 +171,13 @@ module.exports = {
       }
     },
 
-    testPatientWithNullVitalSigns: function(){
+    testPatientWithNullResults: function(){
 
       var patient = new hQuery.Patient( setUp() );
 
-      patient.json.vital_signs = null;
+      patient.json.results = null;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === false)
       {
@@ -198,13 +189,13 @@ module.exports = {
       }
     },
 
-    testPatientWithUndefinedVitalSigns: function(){
+    testPatientWithUndefinedResults: function(){
 
       var patient = new hQuery.Patient( setUp() );
 
-      patient.json.vital_signs = undefined;
+      patient.json.results = undefined;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === false)
       {
@@ -216,22 +207,22 @@ module.exports = {
       }
     },
 
-    testPatientWithUndefinedStartTimesForCMOs: function(){
+    testPatientWithUndefinedStartTimesForResults: function(){
       var newReading = {
           "codes":
           {
               "LOINC":
               [
-                  "8480-6"
+                  "4548-4"
               ]
           },
           "start_time": 1480153600,
-          "description": "WC",
+          "description": "HGBA1C",
           "values":
           [
               {
-                  "scalar": "80",
-                  "units": "cm",
+                  "scalar": "9",
+                  "units": "%",
                   "_type": "PhysicalQuantityResultValue"
               }
           ]
@@ -241,12 +232,12 @@ module.exports = {
 
       patient = new hQuery.Patient( setUp() );
 
-      patient.json.vital_signs.push(newReading);
+      patient.json.results.push(newReading);
 
-      patient.json.vital_signs[0].start_time = undefined;
-      patient.json.vital_signs[1].start_time = undefined;
+      patient.json.results[0].start_time = undefined;
+      patient.json.results[1].start_time = undefined;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === false)
       {
@@ -258,22 +249,23 @@ module.exports = {
       }
     },
 
-    testPatientWithNullStartTimesForCMOs: function(){
+    testPatientWithNullStartTimesForResults: function(){
+
       var newReading = {
           "codes":
           {
               "LOINC":
               [
-                  "8480-6"
+                  "4548-4"
               ]
           },
           "start_time": 1480153600,
-          "description": "WC",
+          "description": "HGBA1C",
           "values":
           [
               {
-                  "scalar": "80",
-                  "units": "cm",
+                  "scalar": "6",
+                  "units": "%",
                   "_type": "PhysicalQuantityResultValue"
               }
           ]
@@ -283,12 +275,33 @@ module.exports = {
 
       patient = new hQuery.Patient( setUp() );
 
-      patient.json.vital_signs.push(newReading);
+      patient.json.results.push(newReading);
 
-      patient.json.vital_signs[0].start_time = null;
-      patient.json.vital_signs[1].start_time = null;
+      patient.json.results[0].start_time = null;
+      patient.json.results[1].start_time = null;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', false, Number.NEGATIVE_INFINITY, 7, '%');
+
+      if(result === false)
+      {
+          return {result : true, message: "test passed"};
+      }
+      else
+      {
+          return {result : false, message: "test failed: expected a negative result with a lab that has no start time"};
+      }
+    },
+
+    testPatientWithResultWithNullCodes: function(){
+
+      var patient;
+
+      patient = new hQuery.Patient( setUp() );
+
+
+      patient.json.results[0].codes = null;
+
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === false)
       {
@@ -300,16 +313,16 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithNullCodes: function(){
+    testPatientWithResultWithNUndefinedCodes: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
 
 
-      patient.json.vital_signs[0].codes = null;
+      patient.json.results[0].codes = undefined;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === false)
       {
@@ -321,16 +334,16 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithNUndefinedCodes: function(){
+    testPatientWithResultWithNWrongCodes: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
 
 
-      patient.json.vital_signs[0].codes = undefined;
+      patient.json.results[0].codes = undefined;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === false)
       {
@@ -342,16 +355,16 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithNWrongCodes: function(){
+    testPatientWithResultWithNNoCodes: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
 
 
-      patient.json.vital_signs[0].codes = undefined;
+      patient.json.results[0].codes = {};
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-8$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === false)
       {
@@ -363,16 +376,14 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithNNoCodes: function(){
+    testPatientWithResultWithWrongUnitsSpecified: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
+      patient.json.results[0].values[0].scalar = 6;
 
-
-      patient.json.vital_signs[0].codes = {};
-
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 7, 'm');
 
       if(result === false)
       {
@@ -384,14 +395,14 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithWrongUnitsSpecified: function(){
+    testPatientWithResultWithWrongUnitsRecorded: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
-      patient.json.vital_signs[0].values[0].scalar = 80;
+      patient.json.results[0].values[0].units = 'm';
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === false)
       {
@@ -403,14 +414,14 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithWrongUnitsRecorded: function(){
+    testPatientWithResultWithNullUnitsSpecified: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
-      patient.json.vital_signs[0].values[0].units = 'm';
+      patient.json.results[0].values[0].scalar = 6;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, null);
 
       if(result === false)
       {
@@ -422,14 +433,15 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithNullUnitsSpecified: function(){
+    testPatientWithResultWithNullUnitsRecorded: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
-      patient.json.vital_signs[0].values[0].scalar = 80;
+      patient.json.results[0].values[0].scalar = 6;
+      patient.json.results[0].values[0].units = null;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, null);
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === false)
       {
@@ -441,15 +453,15 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithNullUnitsRecorded: function(){
+    testPatientWithResultWithUndefinedUnitsSpecified: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
-      patient.json.vital_signs[0].values[0].scalar = 80;
-      patient.json.vital_signs[0].values[0].units = null;
+      patient.json.results[0].values[0].scalar = 6;
+      patient.json.results[0].values[0].units = '%';
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, undefined);
 
       if(result === false)
       {
@@ -461,15 +473,15 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithUndefinedUnitsSpecified: function(){
+    testPatientWithResultWithUndefinedUnitsRecorded: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
-      patient.json.vital_signs[0].values[0].scalar = 80;
-      patient.json.vital_signs[0].values[0].units = 'cm';
+      patient.json.results[0].values[0].scalar = 6;
+      patient.json.results[0].values[0].units = undefined;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, undefined);
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === false)
       {
@@ -481,15 +493,14 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithUndefinedUnitsRecorded: function(){
+    testPatientWithResultWithUndefinedScalarRecorded: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
-      patient.json.vital_signs[0].values[0].scalar = 80;
-      patient.json.vital_signs[0].values[0].units = undefined;
+      patient.json.results[0].values[0].scalar = undefined;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 6, '%');
 
       if(result === false)
       {
@@ -501,33 +512,14 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithUndefinedScalarRecorded: function(){
+    testPatientWithResultWithUndefinedScalarSpecified: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
-      patient.json.vital_signs[0].values[0].scalar = undefined;
+      patient.json.results[0].values[0].scalar = 6;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
-
-      if(result === false)
-      {
-          return {result : true, message: "test passed"};
-      }
-      else
-      {
-          return {result : false, message: "test failed: expected a negative result with an out of range value"};
-      }
-    },
-
-    testPatientWithMeasurementWithUndefinedScalarSpecified: function(){
-
-      var patient;
-
-      patient = new hQuery.Patient( setUp() );
-      patient.json.vital_signs[0].values[0].scalar = 80;
-
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, undefined, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, undefined, '%');
 
       if(result === true)
       {
@@ -539,14 +531,14 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithNullScalarRecorded: function(){
+    testPatientWithResultWithNullScalarRecorded: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
-      patient.json.vital_signs[0].values[0].scalar = null;
+      patient.json.results[0].values[0].scalar = null;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, 7, '%');
 
       if(result === false)
       {
@@ -558,14 +550,14 @@ module.exports = {
       }
     },
 
-    testPatientWithMeasurementWithNullScalarSpecified: function(){
+    testPatientWithResultWithNullScalarSpecified: function(){
 
       var patient;
 
       patient = new hQuery.Patient( setUp() );
-      patient.json.vital_signs[0].values[0].scalar = 80;
+      patient.json.results[0].values[0].scalar = 6;
 
-      var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, null, 'cm');
+      var result = hasInRangeLab( patient, 'LOINC', '^4548-4$', true, Number.NEGATIVE_INFINITY, null, '%');
 
       if(result === true)
       {

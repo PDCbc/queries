@@ -1,0 +1,18 @@
+{
+    "type": "QUERY",
+    "name" : "PDC-1134_warfarin_wo_INR",
+    "description" : "Active patients who have the issue documented in the clinically measured observations. Population includes active patients of all ages.",
+    "map": "queries/PDC-1134_warfarin_wo_INR.js",
+    "reduce" : "Resources/PDC_general-reduce.js",
+    "functions" : ["functions/activePatient.js", "functions/isAge.js", "functions/hasBMI.js", "functions/hasWC.js","functions/hasHeight.js","functions/hasWeight.js"],
+    "qualified_by":[""],
+    "tests" : [
+        {
+            "name" : "TC1",
+            "data" : "test/data/PDC-1134_warfarin_wo_INR_data_1.json",
+            "verifier" : "./verify/PDC_verify_tc1.js",
+            "data_processor" : "./data_processor/PDC_processor-2.js",
+            "comments":"with current encounter (active patient)"
+        }
+    ]
+}

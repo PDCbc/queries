@@ -1,0 +1,44 @@
+[
+  { "primary_care_provider_id" : "PROVIDER1",
+    "birthdate": -70,
+    "medications" : [],
+    "conditions":
+    [
+      { "codes": { "ICD9": ["250.0"]}, "time": 1263167138, "description": "Diabetes"}
+    ],
+    "results":
+    [
+      {
+        "_id": {
+          "$oid": "551cce86c58406644d0000df"
+        },
+        "codes": {
+          "LOINC": [
+            "39469-2"
+          ]
+        },
+        "_type": "LabResult",
+        "interpretation": {
+          "code": "N",
+          "codeSystem": "ObservationInterpretation"
+        },
+        "start_time": 1369995612,
+        "description": "LDL",
+        "status_code": {
+          "value": "complete"
+        },
+        "referenceRange": "Normal Reference range is greater than 4.0",
+        "values": [
+          {
+            "_id": {
+              "$oid": "551cce86c58406644d0000e0"
+            },
+            "scalar": "3.0",
+            "units": "mmol/L",
+            "_type": "PhysicalQuantityResultValue"
+          }
+        ]
+      }
+    ]
+  }
+]
