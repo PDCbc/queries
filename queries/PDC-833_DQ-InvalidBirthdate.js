@@ -34,8 +34,6 @@ function map( patient ){
   // Everyone is counted towards the denominator.
   emit( "denominator_" + patient.json.primary_care_provider_id, 1 );
 
-  console.log('age: ' + age);
-
   // Numerator = 1 for fail, 0 for pass, since we're counting fails.
   if( invalidDateFinder( bd ) || age > 120 ){
     emit( "numerator_" + patient.json.primary_care_provider_id, 1 );
