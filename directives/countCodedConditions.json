@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "countCodedConditions",
+	"path": "functions/countCodedConditions.js",
+	"description": "Counts the number of coded conditions",
+	"test": "functions/test_countCodedConditions.js"
+}
