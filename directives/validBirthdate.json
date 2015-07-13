@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "validBirthdate",
+	"path": "functions/validBirthdate.js",
+	"description": "Determines if the birthdate is valid",
+	"test": "functions/test_validBirthdate.js"
+}
