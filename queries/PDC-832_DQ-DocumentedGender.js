@@ -11,5 +11,5 @@ function map( patient ){
   emit( "denominator_" + patient.json.primary_care_provider_id, 1 );
 
   // Does the patient have a documented gender?
-  emit("numerator_" + patient.json.primary_care_provider_id, ( genders.indexOf(gender) > -1 ) ? 1 : 0 );
+  emit("numerator_" + patient.json.primary_care_provider_id, ( genders.indexOf(gender) === -1 ) ? 1 : 0 );
 }
