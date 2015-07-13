@@ -1,0 +1,20 @@
+{
+	"type": "QUERY",
+	"name": "PDC-833_DQ-InvalidBirthdate",
+	"description": "Invalid Birthdate",
+	"map": "queries/PDC-833_DQ-InvalidBirthdate.js",
+	"reduce": "Resources/PDC_general-reduce.js",
+	"functions": [],
+	"qualified_by": [
+		""
+	],
+	"tests": [
+      {
+        "name": "TC1",
+        "data": "test/data/PDC-833_DQ-InvalidBirthdate_data_1.json",
+        "data_processor": "./data_processor/PDC_processor-2.js",
+        "verifier" : "./verify/PDC_verify2_tc1.js"
+	  }
+	],
+	"title": "PDC-833"
+}

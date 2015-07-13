@@ -16,5 +16,5 @@
         "verifier" : "./verify/PDC_verify_tc1.js"
 	  }
 	],
-	"title": "PDC-831"
+	"title": "PDC-832"
 }
