@@ -14,7 +14,8 @@ function isEol(pt) {
 
     if (isAge(pt, 55) && (activePatient(pt))) {
 
-        if((hasCondition(pt, system, condition)))
+        // Does the patient have a code for palliative care or any of the SPICT clinical indicators
+        if((hasCondition(pt, system, condition)) || hasEoLCondition(pt))
             return true;
     }
 

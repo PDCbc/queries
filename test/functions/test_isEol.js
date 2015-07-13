@@ -37,7 +37,7 @@ module.exports = {
 
 	},
 
-	/* test function by Anita*/
+	/* test function for isEoL*/
 	testEolPatient: function(){
 
         try {

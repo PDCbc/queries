@@ -37,7 +37,7 @@ function hasEoLCondition( pt ){
             conditions[c].codes["ICD9"].length > 0
         ){
 
-            //loop through the codes for this condition and check if any of them match CHF
+            //loop through the codes for this condition and check if any of them match the SPICT ones
             for( var s = 0; s < conditions[c].codes["ICD9"].length; s++ ){
 
                 if(
