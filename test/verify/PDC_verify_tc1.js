@@ -21,18 +21,24 @@ function verify(results){
 
 		}
 
-		if( results[0]["_id"] !== 'denominator_PROVIDER1' || results[0].value !== 1 ){
-
-			return {result : false, message: "denominator was "+results[0].value+" not 1 as expected"};
-
+		if( results[0]["_id"] !== 'denominator_PROVIDER1' )
+		{
+			return {result : false, message: "id was " + results[0]["_id"] + " not denominator_PROVIDER1 as expected"};
 		}
+		else if( results[0].value !== 1 ){
 
-		else if( results[1]["_id"] !== 'numerator_PROVIDER1' || results[1].value !== 1 ){
-
-			return {result : false, message: "numerator was "+results[1].value+" not 1 as expected"};
-
-		}else{
-
+			return {result : false, message: "denominator was " + results[0].value + " not 1 as expected"};
+		}
+		else if( results[1]["_id"] !== 'numerator_PROVIDER1' )
+		{
+			return {result : false, message: "id was " + results[1]["_id"] + " not numerator_PROVIDER1 as expected"};
+		}
+		else if( results[1].value !== 1 )
+		{
+			return {result : false, message: "numerator was " + results[1].value + " not 1 as expected"};
+		}
+		else
+		{
 			return {result : true, message: "test passed"};
 		}
 
