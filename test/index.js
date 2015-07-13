@@ -9,8 +9,8 @@
  */
 
 
-//node_modules required for the test framework. 
-//the are found in the test/node_modules dir. 
+//node_modules required for the test framework.
+//the are found in the test/node_modules dir.
 
 var exceptions = require("./exception.js");
 var util       = require("./util.js");
@@ -53,6 +53,8 @@ function runQueryTest(queryMapPath, queryReducePath, dataPath, verifierPath, pro
     try {
         var testData = JSON.parse(fs.readFileSync(dataPath, "utf8"));
     } catch (e) {
+        console.log(e);
+        console.log('error parsing data - check your json syntax');
         return null;
     }
 
@@ -549,5 +551,5 @@ function main() {
     }
 }
 
-//first action in the script, call main. 
-main(); 
+//first action in the script, call main.
+main();
