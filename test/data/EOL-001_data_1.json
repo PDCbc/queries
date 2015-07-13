@@ -1,37 +1,42 @@
-[ //Appropriate age, no condition
+[
   { "primary_care_provider_id" : "PROVIDER1", 
     "birthdate": -70, 
     "medications" : [],
+    "comment": "Appropriate age, no condition",
     "conditions" : []
   },
-  //Inappropriate age, has condition
+
   { "primary_care_provider_id" : "PROVIDER1",
     "birthdate": -10,
     "medications" : [],
+    "comment": "Inappropriate age, has condition",
     "conditions" : [
       { "codes": { "ICD9": ["585.5"]}, "time": 1263167138, "description": "Chronic kidney disease, stage 5"}
     ]
   },
-  //Appropriate age, has condition but it's not Eol
+
   { "primary_care_provider_id" : "PROVIDER1",
     "birthdate": -73,
     "medications" : [],
+    "comment" : "Appropriate age, has condition but it's not Eol",
     "conditions" : [
       { "codes": { "ICD9": ["488"]}, "time": 1263167138, "description": "Influenza: identified avian influenza virus"}
     ]
   },
-  //Appropriate age, has EoL condition
+
   { "primary_care_provider_id" : "PROVIDER1", 
     "birthdate": -96,
     "medications" : [],
+    "comment" : "Appropriate age, has EoL condition",
     "conditions" : [
       { "codes": { "ICD9": ["V66.7"]}, "time": 1263167138, "description": "Encounter for palliative care"}
     ]
   },
-  //Appropriate age and condition. Testing boundary i.e. 55
+
   { "primary_care_provider_id" : "PROVIDER1",
     "birthdate": -55,
     "medications" : [],
+    "comment" : "Appropriate age and condition. Testing boundary i.e. 55",
     "conditions" : [
       { "codes": { "ICD9": ["585.4"]}, "time": 1263167138, "description": "Chronic kidney disease, stage 4"}
     ]

@@ -13,7 +13,7 @@
 *   the message field contains a message which is displayed if the test fails
 */
 function verify(results){
-    console.log(results);
+    console.log(results); //***remove me before merge***
     if ( 
         results[0]._id === "PROVIDER1"  &&
         results[0].value === 2
