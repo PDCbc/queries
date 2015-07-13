@@ -15,6 +15,8 @@ function map( patient ){
 
     var ap = activePatient( patient );
 
+    var f = patient.gender() === 'F';
+
     var ia = isAge( patient, 21, 69 );
 
     var minDate = new Date();
@@ -22,9 +24,9 @@ function map( patient ){
 
     var hm = hasCervicalScreen( patient, minDate );
 
-    var denominator = ap && ia;
+    var denominator = ap && ia && f;
 
-    var numerator = ap && hm && ia;//still need to cut hystorectomy patients
+    var numerator = ap && hm && ia && f;//still need to cut hystorectomy patients
 
     emit( "denominator_" + patient.json.primary_care_provider_id,  + denominator );
 
