@@ -1,4 +1,4 @@
-function codedMedications(pt)
+function countCodedMedications(pt)
 {
   if(!pt || !pt.json || !pt.json.medications)
   {

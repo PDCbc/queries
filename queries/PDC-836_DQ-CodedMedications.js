@@ -8,7 +8,7 @@ function map( patient ){
 
   var denominator = obj.medications.length;
 
-  var numerator = codedMedications( patient );
+  var numerator = countCodedMedications( patient );
 
   emit( "denominator_" + patient.json.primary_care_provider_id, denominator );
 

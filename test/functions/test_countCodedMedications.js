@@ -37,7 +37,7 @@ module.exports = {
 
         var pt = setUp();
 
-        var cm = codedMedications(pt);
+        var cm = countCodedMedications(pt);
 
         if ( cm === 1) {
 
@@ -53,7 +53,7 @@ module.exports = {
 
     testNullPatient: function () {
 
-        var r = codedMedications(null);
+        var r = countCodedMedications(null);
 
         if (r === null) {
 
@@ -72,7 +72,7 @@ module.exports = {
 
         delete pt.json;
 
-        var r = codedMedications(pt);
+        var r = countCodedMedications(pt);
 
         if (r === null) {
 
@@ -91,7 +91,7 @@ module.exports = {
 
         delete pt.json.medications;
 
-        var r = codedMedications(pt);
+        var r = countCodedMedications(pt);
 
         if (r === null) {
 
@@ -109,7 +109,7 @@ module.exports = {
 
         pt.json.medications = [];
 
-        var r = codedMedications(pt);
+        var r = countCodedMedications(pt);
 
         if (r === 0) {
 
