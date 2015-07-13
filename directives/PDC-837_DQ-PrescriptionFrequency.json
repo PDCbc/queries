@@ -1,0 +1,20 @@
+{
+	"type": "QUERY",
+	"name": "PDC-837_DQ-PrescriptionFrequency",
+	"description": "Prescription Frequency",
+	"map": "queries/PDC-837_DQ-PrescriptionFrequency.js",
+	"reduce": "Resources/PDC_general-reduce.js",
+	"functions": [],
+	"qualified_by": [
+		""
+	],
+	"tests": [
+      {
+        "name": "TC1",
+        "data": "test/data/PDC-837_DQ-PrescriptionFrequency_data_1.json",
+        "data_processor": "./data_processor/PDC_processor-2.js",
+        "verifier" : "./verify/PDC_verify_tc1.js"
+	  }
+	],
+	"title": "PDC-837"
+}

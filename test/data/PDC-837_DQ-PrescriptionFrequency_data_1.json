@@ -1,0 +1,21 @@
+[
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "medications":
+    [
+      {
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" },
+        "_type" : "Medication",
+        "freeTextSig" : "77",
+        "statusOfMedication" : { "value" : "active" },
+        "start_time" : -1,
+      "end_time" : 1,
+      "time" : -1,
+      "codes" : {
+        "HC-DIN" : [ "00559407" ],
+        "whoATC" : [ "N02BE01" ]
+        }
+      }
+    ]
+  }
+]
