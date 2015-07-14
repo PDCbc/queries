@@ -12,12 +12,6 @@ function hasActivePPI( pt ){
 
     var code = "^A02BC*";
 
-    /*
-    var code1 = "^C10BAA";
-    var code2 = "^C10BX";
-    var codes3 = "^C10BA";
-    */
-
     return hasActiveMed(pt, code, false);
 
 }
