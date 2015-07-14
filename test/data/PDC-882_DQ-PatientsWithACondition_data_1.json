@@ -1,0 +1,8 @@
+[
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "conditions" : [
+        { "codes": { "ICD9": ["496"]}, "time": 1263167138, "description": "COPD"}
+    ]
+  }
+]
