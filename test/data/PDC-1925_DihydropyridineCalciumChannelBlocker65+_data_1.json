@@ -1,0 +1,18 @@
+[
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "birthdate": -70,
+    "medications": [
+      {
+        "_type": "Medication",
+        "start_time" : -1,
+        "statusOfMedication" : { "value" : "active" },
+        "codes": {
+          "whoATC": [
+            "C08CA"
+          ]
+        }
+      }
+    ]
+  }
+]
