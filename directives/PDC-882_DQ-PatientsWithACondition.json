@@ -1,7 +1,7 @@
 {
 	"type": "QUERY",
 	"name": "PDC-882_DQ-PatientsWithACondition",
-	"description": "Coded Conditions",
+	"description": "Patients with a condition",
 	"map": "queries/PDC-882_DQ-PatientsWithACondition.js",
 	"reduce": "Resources/PDC_general-reduce.js",
 	"functions": [],
