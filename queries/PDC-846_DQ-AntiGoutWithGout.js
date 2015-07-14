@@ -8,15 +8,9 @@ function map( patient ){
 
   var ap = activePatient(patient);
 
-  console.log("ap: " + ap);
-
   var hc = hasGout(patient);
 
-  console.log("hc: " + hc);
-
   var hm = hasActiveAntiGout(patient);
-
-  console.log("hm: " + hm);
 
   var denominator = ap && hm;
   var numerator = ap && hm && hc;
