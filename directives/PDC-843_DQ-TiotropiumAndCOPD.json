@@ -1,0 +1,20 @@
+{
+	"type": "QUERY",
+	"name": "PDC-843_DQ-TiotropiumAndCOPD",
+	"description": "TiotropiumAndCOPD",
+	"map": "queries/PDC-843_DQ-TiotropiumAndCOPD.js",
+	"reduce": "Resources/PDC_general-reduce.js",
+	"functions": [],
+	"qualified_by": [
+		""
+	],
+	"tests": [
+      {
+        "name": "TC1",
+        "data": "test/data/PDC-843_DQ-TiotropiumAndCOPD_data_1.json",
+        "data_processor": "./data_processor/PDC_processor-2.js",
+        "verifier" : "./verify/PDC_verify_tc1.js"
+	  }
+	],
+	"title": "PDC-843"
+}

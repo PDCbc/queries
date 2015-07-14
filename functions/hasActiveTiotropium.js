@@ -8,9 +8,9 @@
 * @return - true if the patient has an active statin medication
 *               false otherwise.
 */
-function hasActiveStatin( pt ){
+function hasActiveTiotropium( pt ){
 
-    var code = "^C10((A|B)A)|(BX)";
+    var code = "^R03BB04";
 
     /*
     var code1 = "^C10BAA";

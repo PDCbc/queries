@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION",
+    "name" : "hasActiveMed",
+    "path" : "functions/hasActiveMed.js",
+    "description" : "Determines if a patient has an active inctance of this type of medication",
+    "test" : "./functions/test_hasActiveMed.js"
+}

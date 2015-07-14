@@ -1,4 +1,4 @@
-function setUp() {
+function setUpStatin() {
     var obj = {
         "_id": "1",
         "emr_demographics_primary_key": "1",
@@ -31,7 +31,7 @@ module.exports = {
 
         try{
 
-            result = hasActiveStatin();
+            result = hasActiveMed();
 
         }catch(e){
             console.log(e);
@@ -55,7 +55,7 @@ module.exports = {
     */
     testNullPatient : function(){
 
-        var result = hasActiveStatin(null);
+        var result = hasActiveMed(null);
 
         if (result === false ){
 
@@ -76,13 +76,14 @@ module.exports = {
     */
     testNormal : function(){
 
-        var c = setUp();
+        var pt = setUpStatin();
 
-        c.medications[0].codes.whoATC = ["C10AA", "C10AB", "C10BX"];
+        pt.medications[0].codes.whoATC = ["C10AA"];
 
-        c = new hQuery.Patient(c);
+        pt = new hQuery.Patient(pt);
 
-        var result = hasActiveStatin(c);
+        //pt, med, doseLimit, minDose, maxDose
+        var result = hasActiveMed(pt, "^C10AA$", false);
 
 
         if (result === true ){
@@ -104,22 +105,23 @@ module.exports = {
     */
     testEmptyMedicationList : function(){
 
-        var c = setUp();
+        var c = setUpStatin();
 
         c.medications = [];
 
         c = new hQuery.Patient(c);
 
+        //pt, med, doseLimit, minDose, maxDose
         var result = hasActiveStatin(c);
 
 
         if (result === false ){
 
-            return {result : true, message:"test passed!"}
+            return {result : true, message:"test passed!"};
 
         }else{
 
-            return {result:false, message:"expected false for patient with empty medication list"}
+            return {result:false, message:"expected false for patient with empty medication list"};
 
         }
 
@@ -132,7 +134,7 @@ module.exports = {
     */
     testUndefinedMedicationList : function(){
 
-        var c = setUp();
+        var c = setUpStatin();
 
         delete c.medications;
 
@@ -143,11 +145,11 @@ module.exports = {
 
         if (result === false ){
 
-            return {result : true, message:"test passed!"}
+            return {result : true, message:"test passed!"};
 
         }else{
 
-            return {result:false, message:"expected false for patient with undefined medication list"}
+            return {result:false, message:"expected false for patient with undefined medication list"};
 
         }
 
@@ -160,7 +162,7 @@ module.exports = {
     */
     testNullMedicationList : function(){
 
-        var c = setUp();
+        var c = setUpStatin();
 
         c.medications = null;
 
@@ -171,11 +173,11 @@ module.exports = {
 
         if (result === false ){
 
-            return {result : true, message:"test passed!"}
+            return {result : true, message:"test passed!"};
 
         }else{
 
-            return {result:false, message:"expected false for patient with null medication list"}
+            return {result:false, message:"expected false for patient with null medication list"};
 
         }
 
@@ -188,28 +190,29 @@ module.exports = {
     */
     testInactiveStatinInList : function(){
 
-        var c = setUp();
+        var pt = setUpStatin();
 
-        c.medications[0].codes["whoATC"] = ["C10AA"];
-        c.medications[0].statusOfMedication = "completed";
-        c.medications[0].start_time = 0; //some time around Jan 1st 1970
-        c.medications[0].end_time = 1000;
+        pt.medications[0].codes.whoATC = ["C10AA"];
+        pt.medications[0].statusOfMedication = "completed";
+        pt.medications[0].start_time = 0; //some time around Jan 1st 1970
+        pt.medications[0].end_time = 1000;
 
 
-        c = new hQuery.Patient(c);
+        pt = new hQuery.Patient(pt);
 
-        var result = hasActiveStatin(c);
+        ////pt, med, doseLimit, minDose, maxDose
+        var result = hasActiveMed(pt, "^C10AA$", false);
 
 
         if (result === false ){
 
-            return {result : true, message:"test passed!"}
+            return {result : true, message:"test passed!"};
 
         }else{
 
-            return {result:false, message:"expected false for patient with inactive statin"}
+            return {result:false, message:"expected false for patient with inactive statin"};
 
         }
     }
 
-}
+};
