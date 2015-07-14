@@ -9,12 +9,12 @@
         "freeTextSig" : "77",
         "statusOfMedication" : { "value" : "active" },
         "start_time" : -1,
-      "end_time" : 1,
-      "time" : -1,
-      "codes" : {
-        "HC-DIN" : [ "00559407" ],
-        "whoATC" : [ "N02BE01" ]
-        }
+        "end_time" : 1,
+        "time" : -1,
+        "codes" : {
+            "HC-DIN" : [ "00559407" ],
+            "whoATC" : [ "N02BE01" ]
+          }
       }
     ]
   }
