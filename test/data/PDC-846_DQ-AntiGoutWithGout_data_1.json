@@ -1,0 +1,18 @@
+[
+
+  { "primary_care_provider_id" : "PROVIDER1",
+    "birthdate": -13,
+    "medications" : [
+      {
+        "_type" : "Medication",
+        "freeTextSig" : "77",
+        "statusOfMedication" : { "value" : "active" },
+        "start_time" : -1,
+        "end_time" : 1,
+        "codes":{"whoATC": ["M04A"]}, "time": 1263167138, "description": "Anti Gout"}
+    ],
+    "conditions" : [
+      { "codes": { "ICD9": ["274"]}, "time": 1263167138, "description": "Gout"}
+    ]
+  }
+]
