@@ -17,9 +17,9 @@ function hasBloodPressure( pt, mostRecent, systolicMinVal, systolicMaxVal, diast
     var code4 = "^271650006$";
 
     var ls = hasInRangeCMO(pt, system1, code1, mostRecent, systolicMinVal, systolicMaxVal, "", minDate, maxDate, complement);
-    var ld = hasInRangeCMO(pt, system3, code3, mostRecent, systolicMinVal, systolicMaxVal, "", minDate, maxDate, complement);
+    var ld = hasInRangeCMO(pt, system3, code3, mostRecent, diastolicMinVal, diastolicMaxVal, "", minDate, maxDate, complement);
     var ss = hasInRangeCMO(pt, system2, code2, mostRecent, systolicMinVal, systolicMaxVal, "", minDate, maxDate, complement);
-    var sd = hasInRangeCMO(pt, system4, code4, mostRecent, systolicMinVal, systolicMaxVal, "", minDate, maxDate, complement);
+    var sd = hasInRangeCMO(pt, system4, code4, mostRecent, diastolicMinVal, diastolicMaxVal, "", minDate, maxDate, complement);
 
     return (ls && ld) || (ss && sd);
 }
