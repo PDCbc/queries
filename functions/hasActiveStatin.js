@@ -10,7 +10,7 @@
 */
 function hasActiveStatin( pt ){
 
-    var code = "^C10((A|B)A)|(BX)";
+    var code = "^C10(AA|BX|BA)";
 
     /*
     var code1 = "^C10BAA";
