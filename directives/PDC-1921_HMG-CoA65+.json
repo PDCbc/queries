@@ -1,8 +1,8 @@
 {
 	"type": "QUERY",
-	"name": "PDC-1921_HNG-CoA65+",
-	"description": "HNG-CoA65+",
-	"map": "queries/PDC-1921_HNG-CoA65+.js",
+	"name": "PDC-1921_HMG-CoA65+",
+	"description": "HMG-CoA65+",
+	"map": "queries/PDC-1921_HMG-CoA65+.js",
 	"reduce": "Resources/PDC_general-reduce.js",
 	"functions": [],
 	"qualified_by": [
@@ -11,10 +11,10 @@
 	"tests": [
       {
         "name": "TC1",
-        "data": "test/data/PDC-1921_HNG-CoA65+_data_1.json",
+        "data": "test/data/PDC-1921_HMG-CoA65+_data_1.json",
         "data_processor": "./data_processor/PDC_processor-2.js",
         "verifier" : "./verify/PDC_verify_tc1.js"
 	  }
 	],
-	"title": "PDC-1921"
+	"title": "PDC-1921_HMG-CoA65+"
 }

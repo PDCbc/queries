@@ -1,5 +1,5 @@
 /**
- * Query Title: PDC-1921_HNG-CoA65+
+ * Query Title: PDC-1921_HMG-CoA65+
  */
 function map( patient ){
 
