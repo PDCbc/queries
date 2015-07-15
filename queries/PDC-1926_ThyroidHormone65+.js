@@ -1,5 +1,5 @@
 /**
- * Query Title: PDC-1924_BetaBlocker65+
+ * Query Title: PDC-1926_ThyroidHormone65+
  */
 function map( patient ){
 
