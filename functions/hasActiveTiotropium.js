@@ -10,7 +10,7 @@
 */
 function hasActiveTiotropium( pt ){
 
-    var code = "^R03BB04";
+    var code = "^R03BB04.*";
 
     return hasActiveMed(pt, code, false);
 

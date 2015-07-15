@@ -7,7 +7,7 @@
 */
 function hasActiveThiazide( pt ){
 
-    var code = "^C03AA*";
+    var code = "^C03AA.*";
 
     return hasActiveMed(pt, code, false);
 

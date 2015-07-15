@@ -7,7 +7,7 @@
 */
 function hasActiveThyroidHormone( pt ){
 
-    var code = "^H03AA*";
+    var code = "^H03AA.*";
 
     return hasActiveMed(pt, code, false);
 

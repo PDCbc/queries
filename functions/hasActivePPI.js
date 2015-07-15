@@ -6,7 +6,7 @@
 */
 function hasActivePPI( pt ){
 
-    var code = "^A02BC*";
+    var code = "^A02BC.*";
 
     return hasActiveMed(pt, code, false);
 

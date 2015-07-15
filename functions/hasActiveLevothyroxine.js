@@ -10,7 +10,7 @@
 *               false otherwise.
 */
 function hasActiveLevothyroxine( pt ){
-    var med = "^H03AA*";
+    var med = "^H03AA.*";
 
     return hasActiveMed(pt, med, false);
 }

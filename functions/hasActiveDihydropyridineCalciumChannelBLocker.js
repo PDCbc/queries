@@ -7,7 +7,7 @@
 */
 function hasActiveDihydropyridineCalciumChannelBLocker( pt ){
 
-    var code = "^C08[CG]A*";
+    var code = "^C08[CG]A.*";
 
     return hasActiveMed(pt, code, false);
 
