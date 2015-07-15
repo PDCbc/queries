@@ -6,7 +6,7 @@
 */
 function hasActiveBetaBlocker( pt ){
 
-    var code = "^C07[ABCDEF]B*";
+    var code = "^C07[ABCDEF]B.*";
 
     return hasActiveMed(pt, code, false);
 

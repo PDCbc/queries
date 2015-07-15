@@ -5,7 +5,7 @@
 */
 function hasActiveAngeotensin2Antagonist( pt ){
 
-    var code = "^C09CA*";
+    var code = "^C09CA.*";
 
     return hasActiveMed(pt, code, false);
 

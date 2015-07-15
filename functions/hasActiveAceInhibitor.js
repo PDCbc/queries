@@ -5,7 +5,7 @@
 */
 function hasActiveAceInhibitor( pt ){
 
-    var code = "^C09A*";
+    var code = "^C09A.*";
 
     return hasActiveMed(pt, code, false);
 
