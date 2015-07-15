@@ -23,7 +23,7 @@ function map( patient ){
 
     var maxDate;//undefined
 
-    var hl = hasInRangeLab( patient, 'LOINC', '39469-2', false, 2.5, Number.POSITIVE_INFINITY, 'mmol/L', minDate, maxDate, false );
+    var hl = hasInRangeLab( patient, 'LOINC', '39469-2', false, Number.NEGATIVE_INFINITY, 2.5, 'mmol/L', minDate, maxDate, false );
 
     var denominator = ap && hc;
 

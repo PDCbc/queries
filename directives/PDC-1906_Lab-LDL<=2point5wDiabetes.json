@@ -1,15 +1,15 @@
 {
     "type": "QUERY",
-    "name" : "PDC-1906_Lab-LDL>=2point5wDiabetes.json",
+    "name" : "PDC-1906_Lab-LDL<=2point5wDiabetes.json",
     "description" : "Active patients who have had the lab in the time period and are the specified age.",
-    "map": "queries/PDC-1906_Lab-LDL>=2point5wDiabetes.js",
+    "map": "queries/PDC-1906_Lab-LDL<=2point5wDiabetes.js",
     "reduce" : "Resources/PDC_general-reduce.js",
     "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "hasA1C.js"],
     "qualified_by":[""],
     "tests" : [
         {
             "name" : "TC1",
-            "data" : "test/data/PDC-1906_Lab-LDL>=2point5wDiabetes_data_1.json",
+            "data" : "test/data/PDC-1906_Lab-LDL<=2point5wDiabetes_data_1.json",
             "verifier" : "./verify/PDC_verify_tc1.js",
             "data_processor" : "./data_processor/PDC_processor-2.js"
         }

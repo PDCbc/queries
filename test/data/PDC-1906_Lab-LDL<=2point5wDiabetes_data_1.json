@@ -33,7 +33,7 @@
             "_id": {
               "$oid": "551cce86c58406644d0000e0"
             },
-            "scalar": "3.0",
+            "scalar": "2.4",
             "units": "mmol/L",
             "_type": "PhysicalQuantityResultValue"
           }
