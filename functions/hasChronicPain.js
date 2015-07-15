@@ -5,7 +5,7 @@
 */
 function hasChronicPain( pt ){
     var system = "ICD9";
-    var condition = "^338\..*";
+    var condition = "^338\.4";
 
     return hasCondition(pt, system, condition);
 }
