@@ -3,6 +3,8 @@
 
 function map( patient ){
 
+  if( !filterProviders(patient.json.primary_care_provider_id, "PracticeReflection"))return;
+
   var gender = patient.gender();
 
   var genders = ['F','M','UN'];

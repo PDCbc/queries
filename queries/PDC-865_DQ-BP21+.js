@@ -4,6 +4,8 @@
 
 function map( patient ){
 
+  if( !filterProviders(patient.json.primary_care_provider_id, "PracticeReflection"))return;
+
   var obj = patient.json;
 
   var ap = activePatient(patient);

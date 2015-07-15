@@ -3,6 +3,8 @@
  */
 function map( patient ){
 
+  if( !filterProviders(patient.json.primary_care_provider_id, "PracticeReflection"))return;
+  
   var ap = activePatient(patient);
   var ia = isAge(patient, 65);
   var hm = hasActiveThyroidHormone(patient);

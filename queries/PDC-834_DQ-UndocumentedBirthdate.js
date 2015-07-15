@@ -4,6 +4,8 @@
 
 function map( patient ){
 
+  if( !filterProviders(patient.json.primary_care_provider_id, "PracticeReflection"))return;
+  
   var bd = new Date( patient.json.birthdate*1000 );
 
   // Today's date.
