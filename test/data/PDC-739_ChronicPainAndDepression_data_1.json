@@ -1,0 +1,10 @@
+[
+  { "primary_care_provider_id" : "PROVIDER1",
+    "birthdate": -70,
+    "medications" : [],
+    "conditions" : [
+      { "codes": { "ICD9": ["338.0"]}, "time": 1263167138, "description": "Chronic Pain"},
+      { "codes": { "ICD9": ["311"]}, "time": 1263167138, "description": "Depression"}
+    ]
+  }
+]
