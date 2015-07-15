@@ -6,7 +6,7 @@
 * @param minDose {Number} - the minimum dose to check.
         if this value is not provided any dose will be considered.
 *
-* @return - true if the patient has an active statin medication
+* @return - true if the patient has an active medication
 *               false otherwise.
 */
 function hasActiveDigoxin( pt, minDose){

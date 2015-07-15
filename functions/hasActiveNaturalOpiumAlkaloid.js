@@ -7,7 +7,7 @@
 */
 function hasActiveNaturalOpiumAlkaloid( pt ){
 
-    var code = "^N02AA*";
+    var code = "^N02AA.*";
 
     return hasActiveMed(pt, code, false);
 
