@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "isFrail",
+    "path" : "functions/isEol.js",
+    "description" : "Test the isFrail function which determines if patients are frail ",
+    "test" : "./functions/test_isFrail.js"
+}
