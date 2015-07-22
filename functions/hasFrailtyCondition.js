@@ -155,16 +155,110 @@ function hasFrailtyCondition( pt ){
                     //X77 Malignant neoplasm genital other
                     conditions[c].codes["ICD9"][s].match("^184.0")|| conditions[c].codes["ICD9"][s].match("^184.4")||
                     conditions[c].codes["ICD9"][s].match("^184.9")|| conditions[c].codes["ICD9"][s].match("^182.0")||
-                    conditions[c].codes["ICD9"][s].match("^179")|| conditions[c].codes["ICD9"][s].match("^183.0")||
+                    conditions[c].codes["ICD9"][s].match("^179")||   conditions[c].codes["ICD9"][s].match("^183.0")||
                     //Y78 Malignant neoplasm male genital / mammae
                     conditions[c].codes["ICD9"][s].match("^175.9")||
                     conditions[c].codes["ICD9"][s].match("^187.4")||
                     conditions[c].codes["ICD9"][s].match("^187.9")||
                     conditions[c].codes["ICD9"][s].match("^186.9")||
 
-                      // **start with incontinence
-                    conditions[c].codes["ICD9"][s].match("^158.8")||
-                    conditions[c].codes["ICD9"][s].match("^158.9")||
+                    //**INCONTINENCE**
+                    //D17 Incontinence of bowel
+                    conditions[c].codes["ICD9"][s].match("^787.6")||
+                    //U04 Incontinence urine
+                    conditions[c].codes["ICD9"][s].match("^625.6")||  conditions[c].codes["ICD9"][s].match("^788.3+")||
+                    //X87 Uterovaginal prolapse
+                    conditions[c].codes["ICD9"][s].match("^618.00")|| conditions[c].codes["ICD9"][s].match("^618.01")||
+                    conditions[c].codes["ICD9"][s].match("^618.02")|| conditions[c].codes["ICD9"][s].match("^618.03")||
+                    conditions[c].codes["ICD9"][s].match("^618.04")|| conditions[c].codes["ICD9"][s].match("^618.2")||
+                    conditions[c].codes["ICD9"][s].match("^618.3")||  conditions[c].codes["ICD9"][s].match("^618.4")||
+                    conditions[c].codes["ICD9"][s].match("^618.84")|| conditions[c].codes["ICD9"][s].match("^618.9")||
+
+                    //**GI/LIVER DISEASE**
+                    //D72 Viral hepatitis
+                    conditions[c].codes["ICD9"][s].match("^070.1")||  conditions[c].codes["ICD9"][s].match("^070.3+")||
+                    conditions[c].codes["ICD9"][s].match("^070.41")|| conditions[c].codes["ICD9"][s].match("^070.49")||
+                    conditions[c].codes["ICD9"][s].match("^070.51")|| conditions[c].codes["ICD9"][s].match("^070.53")||
+                    conditions[c].codes["ICD9"][s].match("^070.54")|| conditions[c].codes["ICD9"][s].match("^070.59")||
+                    conditions[c].codes["ICD9"][s].match("^070.9")||
+                    //D97 Cirrhosis / liver disease
+                    conditions[c].codes["ICD9"][s].match("^139.8")|| conditions[c].codes["ICD9"][s].match("^571.0")||
+                    conditions[c].codes["ICD9"][s].match("^571.1")|| conditions[c].codes["ICD9"][s].match("^571.2")||
+                    conditions[c].codes["ICD9"][s].match("^571.3")|| conditions[c].codes["ICD9"][s].match("^571.40")||
+                    conditions[c].codes["ICD9"][s].match("^571.41")||conditions[c].codes["ICD9"][s].match("^571.49")||
+                    conditions[c].codes["ICD9"][s].match("^571.5")|| conditions[c].codes["ICD9"][s].match("^571.6")||
+                    conditions[c].codes["ICD9"][s].match("^571.8")|| conditions[c].codes["ICD9"][s].match("^571.9")||
+                    conditions[c].codes["ICD9"][s].match("^572.0")|| conditions[c].codes["ICD9"][s].match("^572.2")||
+                    conditions[c].codes["ICD9"][s].match("^572.8")|| conditions[c].codes["ICD9"][s].match("^573.3")||
+                    conditions[c].codes["ICD9"][s].match("^573.4")|| conditions[c].codes["ICD9"][s].match("^573.9")||
+                    conditions[c].codes["ICD9"][s].match("^572.4")||
+                    //D75 Malignant neoplasm colon/rectum
+                    conditions[c].codes["ICD9"][s].match("^153.1")|| conditions[c].codes["ICD9"][s].match("^153.3")||
+                    conditions[c].codes["ICD9"][s].match("^153.4")|| conditions[c].codes["ICD9"][s].match("^153.7")||
+                    conditions[c].codes["ICD9"][s].match("^153.9")|| conditions[c].codes["ICD9"][s].match("^154.0")||
+                    conditions[c].codes["ICD9"][s].match("^154.1")|| conditions[c].codes["ICD9"][s].match("^154.3")||
+                    //D85 Duodenal ulcer
+                    conditions[c].codes["ICD9"][s].match("^532.10")|| conditions[c].codes["ICD9"][s].match("^532.90")||
+                    //D86 Peptic ulcer other
+                    conditions[c].codes["ICD9"][s].match("^251.8")|| conditions[c].codes["ICD9"][s].match("^531.10")||
+                    conditions[c].codes["ICD9"][s].match("^531.90")||conditions[c].codes["ICD9"][s].match("^533.90")||
+                    conditions[c].codes["ICD9"][s].match("^534.90")||
+                    //D94 Chronic enteritis/ulcerative colitis
+                    conditions[c].codes["ICD9"][s].match("^555.0")|| conditions[c].codes["ICD9"][s].match("^555.9")||
+                    conditions[c].codes["ICD9"][s].match("^556.5")|| conditions[c].codes["ICD9"][s].match("^556.6")||
+                    conditions[c].codes["ICD9"][s].match("^556.9")|| conditions[c].codes["ICD9"][s].match("^558.1")||
+
+                    //**OESOPHAGUS DISEASE**
+                    //D84 Oesophagus disease
+                    conditions[c].codes["ICD9"][s].match("^530.0")|| conditions[c].codes["ICD9"][s].match("^530.11")||
+                    conditions[c].codes["ICD9"][s].match("^530.20")||conditions[c].codes["ICD9"][s].match("^530.21")||
+                    conditions[c].codes["ICD9"][s].match("^530.3")|| conditions[c].codes["ICD9"][s].match("^530.5")||
+                    conditions[c].codes["ICD9"][s].match("^530.6")|| conditions[c].codes["ICD9"][s].match("^530.7")||
+                    conditions[c].codes["ICD9"][s].match("^530.9")||
+
+                    //**VISUAL IMPAIRMENT**
+                    //F83 Retinopathy
+                    conditions[c].codes["ICD9"][s].match("^362.0")|| conditions[c].codes["ICD9"][s].match("^362.1")||
+                    conditions[c].codes["ICD9"][s].match("^362.20")||conditions[c].codes["ICD9"][s].match("^362.29")||
+                    conditions[c].codes["ICD9"][s].match("^362.6")|| conditions[c].codes["ICD9"][s].match("^362.89")||
+                    //F94 Blindness
+                    conditions[c].codes["ICD9"][s].match("^369.00")||conditions[c].codes["ICD9"][s].match("^369.20")||
+                    conditions[c].codes["ICD9"][s].match("^369.3")||
+                    //F84 Macular degeneration
+                    conditions[c].codes["ICD9"][s].match("^362.5")||
+                    //F93 Glaucoma
+                    conditions[c].codes["ICD9"][s].match("^365.0")|| conditions[c].codes["ICD9"][s].match("^365.1+")||
+                    conditions[c].codes["ICD9"][s].match("^365.2+")||conditions[c].codes["ICD9"][s].match("^365.59")||
+                    conditions[c].codes["ICD9"][s].match("^365.60")||conditions[c].codes["ICD9"][s].match("^365.61")||
+                    conditions[c].codes["ICD9"][s].match("^365.62")||conditions[c].codes["ICD9"][s].match("^365.64")||
+                    conditions[c].codes["ICD9"][s].match("^365.65")||
+
+                    //**CATARACT**
+                    //F92 Cataract
+                    conditions[c].codes["ICD9"][s].match("^366.00")||conditions[c].codes["ICD9"][s].match("^366.10")||
+                    conditions[c].codes["ICD9"][s].match("^366.16")||conditions[c].codes["ICD9"][s].match("^366.18")||
+                    conditions[c].codes["ICD9"][s].match("^366.20")||conditions[c].codes["ICD9"][s].match("^366.3")||
+                    conditions[c].codes["ICD9"][s].match("^366.41")||conditions[c].codes["ICD9"][s].match("^366.45")||
+                    conditions[c].codes["ICD9"][s].match("^366.46")||conditions[c].codes["ICD9"][s].match("^366.5")||
+                    conditions[c].codes["ICD9"][s].match("^366.8")|| conditions[c].codes["ICD9"][s].match("^366.9")||
+
+                    //**HEARING IMPAIRMENT**
+                    //H84 Presbyacusis
+                    conditions[c].codes["ICD9"][s].match("^388.01")||
+                    //H85 Acoustic trauma
+                    conditions[c].codes["ICD9"][s].match("^388.10")||
+                    conditions[c].codes["ICD9"][s].match("^388.12")||
+                    //H86 Deafness
+                    conditions[c].codes["ICD9"][s].match("^388.2")||
+                    conditions[c].codes["ICD9"][s].match("^389.00")||
+                    conditions[c].codes["ICD9"][s].match("^389.10")||
+                    conditions[c].codes["ICD9"][s].match("^389.14")||
+                    conditions[c].codes["ICD9"][s].match("^389.16")||
+                    conditions[c].codes["ICD9"][s].match("^389.20")||
+                    conditions[c].codes["ICD9"][s].match("^389.7")||
+                    conditions[c].codes["ICD9"][s].match("^389.8")||
+                    conditions[c].codes["ICD9"][s].match("^389.9")||
+                    //...respiratory problems
                     conditions[c].codes["ICD9"][s].match("^198.5")
 
                 ){
