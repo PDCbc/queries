@@ -1,21 +1,18 @@
 /**
- * T/F: is this patient an end of life patient as per EoL blueprint?
+ * T/F: is this patient frail as per Drubbel et. al's frailty index?
  *  - 55 and over
- *  - Is palliative: V66.7
- *  - Or has a clinical indicator of one or more advanced conditions (conditions are derived from SPICT)
+ *  - Has an FI score greater than 0.5
  * @param pt
  * @returns {boolean}
  */
 
-function isEol(pt) {
-    console.log(pt); //***remove me before merge***
-    var system = "ICD9";
-    var condition = "^V66.7"; //Encounter for palliative care
+function isFrail(pt) {
+    //console.log(pt); //***remove me before merge***
 
     if (isAge(pt, 55) && (activePatient(pt))) {
 
-        // Does the patient have a code for palliative care or meet the defined frailty criteria
-        if((hasCondition(pt, system, condition)) || hasFrailtyCondition(pt))
+        // Does the patient meet the frailty condition i.e. has an F.I. score greater than 0.5
+        if( hasFrailtyCondition(pt))
             return true;
     }
 
