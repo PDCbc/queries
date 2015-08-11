@@ -1,0 +1,14 @@
+[
+  { "primary_care_provider_id" : "PROVIDER1",
+    "birthdate": -67,
+    "gender": "F",
+    "medications" : [],
+    "results" : [
+      {
+        "codes": { "SNOMEDCT": ["171149006"]},
+        "start_time": 1263167138,
+        "description": "cervical screen"
+      }
+    ]
+  }
+]

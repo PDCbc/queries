@@ -41,11 +41,17 @@ module.exports = {
 	testEolPatient: function(){
 
         try {
-            if (isEol(setUp())) {
+
+            if (!isEol(setUp())) {
+
                 return {result: true, message: "test passed!"}
+
             } else {
+
                 return {result: false, message: "passing undefined patient to isEol() should yield false."};
+
             }
+
         }catch(e){
 
                 console.log(e);

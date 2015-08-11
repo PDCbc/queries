@@ -2,20 +2,21 @@
 * Filters out providers based on id's and the initiative they are in.
 *
 * @param providerId {string} - the provider identifier to filter against.
-* @param initiative {string} - the initiative identifier. One of: 
+* @param initiative {string} - the initiative identifier. One of:
 *       - "PPh" : polypharmacy
-* 
+*
 * @returns - true if the provider is part of the specified initiative
-*               false otherwise. 
+*               false otherwise.
 */
 function filterProviders(providerId, initiative){
 
     //check that we have valid inputs
     if ( !providerId  || !initiative ) {
 
-        return false; 
+        return false;
 
     }
+
 
     var inits = {
 
@@ -24,18 +25,23 @@ function filterProviders(providerId, initiative){
             "PROVIDER1",
             "PROVIDER2"
         ],
+        "PracticeReflection" : [
+                "cpsid",  //currently contains some test values.
+                "PROVIDER1",
+                "PROVIDER2"
+            ],
         "PopulationHealth" : [
                 "cpsid",  //currently contains some test values.
                 "PROVIDER1",
                 "PROVIDER2"
             ]
-    }; 
+    };
 
 
     //check that the initiative is valid.
     if ( inits[initiative] === undefined ){
 
-        return false; 
+        return false;
 
     }
 
@@ -45,7 +51,7 @@ function filterProviders(providerId, initiative){
 
     }else{
 
-        return false; 
+        return false;
 
     }
 

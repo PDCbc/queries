@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "getGender",
+	"path": "functions/getGender.js",
+	"description": "Gets the gender of patient",
+	"test": "functions/test_getGender.js"
+}

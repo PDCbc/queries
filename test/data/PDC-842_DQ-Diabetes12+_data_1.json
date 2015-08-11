@@ -1,0 +1,10 @@
+[
+
+  { "primary_care_provider_id" : "PROVIDER1",
+    "birthdate": -13,
+    "medications" : [],
+    "conditions" : [
+      { "codes": { "ICD9": ["250.0"]}, "time": 1263167138, "description": "Diabetes"}
+    ]
+  }
+]

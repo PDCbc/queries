@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION",
+    "name" : "hasInRangeLab",
+    "path" : "functions/hasInRangeLab.js",
+    "description" : "Determines whether a patient has had a given Lab in range or not.",
+    "test" : "./functions/test_hasInRangeLab.js"
+}

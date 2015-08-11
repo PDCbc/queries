@@ -1,0 +1,21 @@
+[
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "birthdate": -70,
+    "gender": "M"
+  },
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "birthdate": -30,
+    "gender": "UN"
+  },
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "birthdate": -20,
+    "gender": "F"
+  },
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "birthdate": -20
+  }
+]

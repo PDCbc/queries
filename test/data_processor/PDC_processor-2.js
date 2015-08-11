@@ -5,12 +5,14 @@ function preProcess(data){
 
 	var now = null; //get the current time.
 	var x = null;
-	for(i in data){
+	for(var i in data){
 		//set the birthdates.
 		now = new Date();
 		data[i].birthdate = Math.floor(now.setFullYear(now.getFullYear()+data[i].birthdate)/1000)-86400;
 
-		for(m in data[i].medications){
+		var m;
+
+		for( m in data[i].medications ){
 
 			//set the start date of the medication
 			now = new Date();
@@ -21,14 +23,25 @@ function preProcess(data){
 			data[i].medications[m].end_time = Math.floor(now.setFullYear(now.getFullYear()+data[i].medications[m].end_time)/1000);
 		}
 
-		for(n in data[i].vital_signs)
+		for( m in data[i].vital_signs )
 		{
-			now = new Date();
 			//set the start date of the cmo
-			data[i].vital_signs[n].start_time = Math.floor(now.setFullYear(now.getFullYear()+data[i].vital_signs[n].start_time)/1000);
+			now = new Date();
+			now = Math.floor(now.getTime()/1000 - 1000);
+
+			data[i].vital_signs[m].start_time = now;
 		}
 
-		x = new Date();  Math.floor((new Date()).getTime()/1000) - 1000;
+		for( m in data[i].results )
+		{
+			//set the start date of the cmo
+			now = new Date();
+			now = Math.floor(now.getTime()/1000 - 1000);
+
+			data[i].results[m].start_time = now;
+		}
+
+		x = new Date();
 
 		x = Math.floor(x.getTime()/1000 - 1000);
 

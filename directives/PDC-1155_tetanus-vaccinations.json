@@ -1,0 +1,13 @@
+{
+	"type": "QUERY",
+	"name": "PDC-1155_tetanus-vaccinations",
+	"description": "Percentage of patients over the age of 25 with tetanus vaccination administered in the last 10 years.",
+	"map": "queries/PDC-1155_tetanus-vaccinations.js",
+	"reduce": "Resources/PDC_general-reduce.js",
+	"functions": [],
+	"qualified_by": [
+		""
+	],
+	"tests": [],
+	"title": "PDC-1155"
+}

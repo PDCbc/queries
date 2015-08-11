@@ -1,7 +1,7 @@
 {
-    "type" : "FUNCTION", 
+    "type" : "FUNCTION",
     "name" : "hasActiveDigoxin",
     "path" : "functions/hasActiveDigoxin.js",
-    "description" : "Determines if a patient has an active digoxin medication", 
+    "description" : "Determines if a patient has an active instance of this medication", 
     "test" : "./functions/test_hasActiveDigoxin.js"
 }

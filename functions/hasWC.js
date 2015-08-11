@@ -6,8 +6,6 @@ function hasWC( pt, minDate, maxDate, complement ){
     var minVal;//undefined
     var maxVal;//undefined
 
-    var loincResult = hasCMO( pt, system1, cmo1, minDate, maxDate, complement );
-
     return hasCMO( pt, system1, cmo1, minDate, maxDate, complement ) ||
             hasCMO( pt, system2, cmo2, minDate, maxDate, complement );
 }

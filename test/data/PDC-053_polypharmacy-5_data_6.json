@@ -1,6 +1,6 @@
 [
   { "primary_care_provider_id" : "PROVIDER1", 
-    "birthdate": -70, 
+    "birthdate": -70,
     "medications" : [
       {
         "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,

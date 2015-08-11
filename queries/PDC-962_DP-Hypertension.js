@@ -1,7 +1,6 @@
 /**
- * Query Title: PDC-960
+ * Query Title: PDC-962_DP-Hypertension
  * Query Type:  Ratio
- *                (population is 20 - 120 years of age)
  */
 function map( patient ){
 

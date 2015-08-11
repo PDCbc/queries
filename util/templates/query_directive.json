@@ -1,0 +1,10 @@
+{
+  "type" : "QUERY",
+  "name" : null,
+  "description" : null,
+  "map": null,
+  "reduce" : "Resources/PDC_general-reduce.js",
+  "functions" : [],
+  "qualified_by":[""],
+  "tests" : []
+}

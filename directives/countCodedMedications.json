@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "countCodedMedications",
+	"path": "functions/countCodedMedications.js",
+	"description": "Counts the number of coded medications",
+	"test": "functions/test_countCodedMedications.js"
+}

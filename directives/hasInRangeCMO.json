@@ -1,7 +1,7 @@
 {
-    "type" : "FUNCTION", 
-    "name" : "hasCMO",
+    "type" : "FUNCTION",
+    "name" : "hasInRangeCMO",
     "path" : "functions/hasInRangeCMO.js",
-    "description" : "Determines whether a patient has had a given clinically measured observation or not.", 
+    "description" : "Determines whether a patient has had a given clinically measured observation or not.",
     "test" : "./functions/test_hasInRangeCMO.js"
 }

@@ -1,0 +1,18 @@
+{
+    "type": "QUERY",
+    "name" : "PDC-1149_CervixScreening",
+    "description" : "Active patients who have the screen documented. Population includes active patients ages 21 -> 69 or under",
+    "map": "queries/PDC-1149_CervixScreening.js",
+    "reduce" : "Resources/PDC_general-reduce.js",
+    "functions" : ["functions/activePatient.js", "functions/isAge.js", "functions/hasWC.js", "functions/hasBMI.js", "functions/hasHeight.js", "functions/hasWeight.js"],
+    "qualified_by":[""],
+    "tests" : [
+        {
+            "name" : "TC1",
+            "data" : "test/data/PDC-1149_CervixScreening_data_1.json",
+            "verifier" : "./verify/PDC_verify_tc1.js",
+            "data_processor" : "./data_processor/PDC_processor-2.js",
+            "comments":"with current encounter (active patient)"
+        }
+    ]
+}

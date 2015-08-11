@@ -1,7 +1,6 @@
 /**
- * Query Title: PDC-1004
+ * Query Title: PDC-602_DQ-Obesity-Adult
  * Query Type:  Ratio
- * Description: BMI-WC Check
  */
 function map( patient ){
 
@@ -14,23 +13,23 @@ function map( patient ){
         return;
     }
 
-    var ia = isAge( patient, 19, 1000 );
-
-    console.log('patient: ' + JSON.stringify(patient));
-    console.log('ia:' + ia);
+    var ia = isAge( patient, 19 );
 
     var ap = activePatient( patient );
-
-    console.log('ia:' + ia);
-    console.log('ap:' + ap);
 
     var minDate = new Date();
     minDate.setFullYear(minDate.getFullYear()-2);
 
-    var hm = hasWC( patient, minDate ) || hasBMI( patient, minDate ) || ( hasWeight( patient, minDate ) && hasHeight( patient, minDate ) );
+    var wc = hasWC( patient, minDate );
 
-    console.log('hm:' + hm);
-    
+    var bmi = hasBMI( patient, minDate );
+
+    var height = hasHeight( patient, minDate );
+
+    var weight = hasWeight( patient, minDate );
+
+    var hm = wc || bmi || ( weight && height );
+
     var denominator = ia && ap;
 
     var numerator   =  ia && ap && hm;

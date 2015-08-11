@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "validDate",
+	"path": "functions/validDate.js",
+	"description": "Determines if the date is valid",
+	"test": "functions/test_validDate.js"
+}

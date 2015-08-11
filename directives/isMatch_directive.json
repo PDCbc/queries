@@ -1,7 +1,0 @@
-{
-    "type" : "FUNCTION", 
-    "name" : "isMatch",
-    "path" : "functions/isMatch.js",
-    "description" : "Determines if a particular list had any matches in it.", 
-    "test" : "./functions/test_isMatch.js"
-}

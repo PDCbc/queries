@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION",
+    "name" : "hasImmunization",
+    "path" : "functions/hasImmunization.js",
+    "description" : "Determines whether a patient has a given immunization or not.",
+    "test" : "./functions/test_hasImmunization.js"
+}

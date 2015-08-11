@@ -1,47 +1,23 @@
 /*
 * Determines if a patient has an active statin.
-* - Uses the definition of a statin provided in isStatin(). 
-* - Uses the definition of a an active medication defined in isActiveMed 
+* - Uses the definition of a statin provided in isStatin().
+* - Uses the definition of a an active medication defined in isActiveMed
 *
 * @param pt {object} - the patient API object.
-* 
+*
 * @return - true if the patient has an active statin medication
-*               false otherwise. 
+*               false otherwise.
 */
 function hasActiveStatin( pt ){
-    
-    //check if the input was valid.
-    if ( 
-        pt === undefined    ||
-        pt === null         ||
-        pt.json === undefined || 
-        pt.json ===  null 
-    ){
-        return false; 
-    }
 
-    var meds = pt.medications(); 
+    var code = "^C10(AA|BX|BA).*";
 
-    if ( 
-        meds === undefined  || 
-        meds === null       || 
-        meds.length === 0 
-    ){
+    /*
+    var code1 = "^C10BAA";
+    var code2 = "^C10BX";
+    var codes3 = "^C10BA";
+    */
 
-        return false
-    }
-
-
-    for ( var i = 0; i < meds.length; i++ ){
-
-        if ( isActiveMed(meds[i]) && isStatin(meds[i]) ){
-
-            return true; 
-
-        }
-
-    }
-
-    return false; 
+    return hasActiveMed(pt, code, false);
 
 }

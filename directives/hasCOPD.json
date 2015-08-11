@@ -2,6 +2,6 @@
     "type" : "FUNCTION",
     "name" : "hasCOPD",
     "path" : "functions/hasCOPD.js",
-    "description" : "Determines whether a patient has COPD or not.",
+    "description" : "Determines whether a patient has condition or not.",
     "test" : "./functions/test_hasCOPD.js"
 }

@@ -1,0 +1,14 @@
+[
+  { "primary_care_provider_id" : "PROVIDER1",
+    "birthdate": -50,
+    "gender": "F",
+    "medications" : [],
+    "vital_signs" : [
+      {
+        "codes": { "LOINC": ["39156-5"]},
+        "start_time": 0,
+        "description": "BMI"
+      }
+    ]
+  }
+]

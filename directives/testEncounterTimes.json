@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "testEncounterTimes",
+    "path" : "functions/testEncounterTimes.js",
+    "description" : "", 
+    "test" : "./functions/test_encounterDates.js"
+}

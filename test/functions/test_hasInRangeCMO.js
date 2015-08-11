@@ -67,7 +67,7 @@ module.exports = {
 
     },
 
-    testPatientWithWCOutsideOfRange: function(){
+    testPatientWithCMOOutsideOfRange: function(){
         var patient = new hQuery.Patient( setUp() );
 
         var result = hasInRangeCMO( patient, 'LOINC', '^8480-6$', true, Number.NEGATIVE_INFINITY, 102, 'cm');
@@ -82,7 +82,7 @@ module.exports = {
         }
     },
 
-    testPatientWithWCInsideOfRange: function(){
+    testPatientWithCMOInsideOfRange: function(){
         var patient = new hQuery.Patient( setUp() );
 
         patient.json.vital_signs[0].values[0].scalar = 100;//put patients CMO in Range

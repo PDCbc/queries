@@ -1,6 +1,7 @@
 /**
 @namespace scoping into the hquery namespace
 */
+
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; },
   __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
@@ -17,7 +18,11 @@ Converts a a number in UTC Seconds since the epoch to a date.
 
 
 hQuery.dateFromUtcSeconds = function(utcSeconds) {
-  return new Date(utcSeconds * 1000);
+  if (utcSeconds === null) {
+    return null;
+  } else {
+    return new Date(utcSeconds * 1000);
+  }
 };
 
 /**
@@ -1704,7 +1709,6 @@ hQuery.Medication = (function(_super) {
 
   Medication.prototype.statusOfMedication = function() {
     var _ref, _ref1;
-    console.log(this.json["statusOfMedication"]); 
     return new hQuery.StatusOfMedication((_ref = this.json['statusOfMedication']) != null ? _ref['code'] : void 0, (_ref1 = this.json['statusOfMedication']) != null ? _ref1['codeSystem'] : void 0);
   };
 
@@ -3057,13 +3061,21 @@ hQuery.Patient = (function(_super) {
   };
 
   /**
-  @returns {Date} containing the patients birthdate
+  @returns {Date} containing the patients birthdate or null if the date was invalid
   */
 
 
   Patient.prototype.birthtime = function() {
+    var d;
     if (this.json['birthdate']) {
-      return hQuery.dateFromUtcSeconds(this.json['birthdate']);
+      d = hQuery.dateFromUtcSeconds(this.json['birthdate']);
+      if (isNaN(d.getTime())) {
+        return null;
+      } else {
+        return d;
+      }
+    } else {
+      return null;
     }
   };
 

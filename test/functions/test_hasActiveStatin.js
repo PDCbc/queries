@@ -5,31 +5,33 @@ function setUp() {
         "primary_care_provider_id": "cpsid",
         "birthdate": 0,
         "medications" : [{
-            "_id" : { "$oid" : "551cce86c58406644d0000c4" }, 
-            "_type" : "Medication", 
+            "_id" : { "$oid" : "551cce86c58406644d0000c4" },
+            "_type" : "Medication",
             "time" : -1,
-            "start_time" : new Date(), "end_time" : new Date(), 
+            "start_time" : new Date(), "end_time" : new Date(),
             "statusOfMedication" : { "value" : "active" },
-            "codes" : {}, 
+            "codes" : {},
             "freeTextSig" : ""
         }]
-    };   
+    };
 
-    return obj; 
+    return obj;
 }
 
 module.exports = {
 
     /*
     * Test behavior when no patient is provided, i.e. undefined condition.
-    * 
+    *
     * Expected: false.
     */
     testUndefinedPatient : function(){
 
+        var result;
+
         try{
 
-            var result = hasActiveStatin(); 
+            result = hasActiveStatin();
 
         }catch(e){
             console.log(e);
@@ -37,31 +39,31 @@ module.exports = {
 
         if (result === false ){
 
-            return {result : true, message:"test passed!"}
+            return {result : true, message:"test passed!"};
 
         }else{
 
-            return {result:false, message:"expected false for input undefined"}
+            return {result:false, message:"expected false for input undefined"};
 
         }
     },
 
     /*
     * Test behavior when null patient is provided.
-    * 
+    *
     * Expected: false.
     */
     testNullPatient : function(){
 
-        var result = hasActiveStatin(null); 
+        var result = hasActiveStatin(null);
 
         if (result === false ){
 
-            return {result : true, message:"test passed!"}
+            return {result : true, message:"test passed!"};
 
         }else{
 
-            return {result:false, message:"expected false for input null"}
+            return {result:false, message:"expected false for input null"};
 
         }
 
@@ -69,31 +71,31 @@ module.exports = {
 
     /*
     * Test normal behavior with whoATC: C10AA
-    * 
+    *
     * Expected: true.
     */
     testNormal : function(){
 
-        var c = setUp(); 
+        var c = setUp();
 
-        c.medications[0].codes["whoATC"] = ['C10AA', "C10BX"];
+        c.medications[0].codes.whoATC = ["C10AA", "C10AB", "C10BX"];
 
         c = new hQuery.Patient(c);
 
-        var result = hasActiveStatin(c); 
+        var result = hasActiveStatin(c);
 
 
         if (result === true ){
 
-            return {result : true, message:"test passed!"}
+            return {result : true, message:"test passed!"};
 
         }else{
 
-            return {result:false, message:"expected true for patient with two active statins"}
+            return {result:false, message:"expected true for patient with two active statins"};
 
         }
 
-    }, 
+    },
 
     /*
     * Test behavior with empty medications list
@@ -102,13 +104,13 @@ module.exports = {
     */
     testEmptyMedicationList : function(){
 
-        var c = setUp(); 
+        var c = setUp();
 
-        c.medications = []; 
+        c.medications = [];
 
         c = new hQuery.Patient(c);
 
-        var result = hasActiveStatin(c); 
+        var result = hasActiveStatin(c);
 
 
         if (result === false ){
@@ -121,7 +123,7 @@ module.exports = {
 
         }
 
-    }, 
+    },
 
     /*
     * Test behavior with undefined medication list
@@ -130,13 +132,13 @@ module.exports = {
     */
     testUndefinedMedicationList : function(){
 
-        var c = setUp(); 
+        var c = setUp();
 
-        delete c.medications; 
+        delete c.medications;
 
         c = new hQuery.Patient(c);
 
-        var result = hasActiveStatin(c); 
+        var result = hasActiveStatin(c);
 
 
         if (result === false ){
@@ -149,7 +151,7 @@ module.exports = {
 
         }
 
-    }, 
+    },
 
     /*
     * Test behavior with null medication list
@@ -158,13 +160,13 @@ module.exports = {
     */
     testNullMedicationList : function(){
 
-        var c = setUp(); 
+        var c = setUp();
 
-        c.medications = null; 
+        c.medications = null;
 
         c = new hQuery.Patient(c);
 
-        var result = hasActiveStatin(c); 
+        var result = hasActiveStatin(c);
 
 
         if (result === false ){
@@ -177,7 +179,7 @@ module.exports = {
 
         }
 
-    }, 
+    },
 
     /*
     * Test behavior with completed medication that is a statin
@@ -186,7 +188,7 @@ module.exports = {
     */
     testInactiveStatinInList : function(){
 
-        var c = setUp(); 
+        var c = setUp();
 
         c.medications[0].codes["whoATC"] = ["C10AA"];
         c.medications[0].statusOfMedication = "completed";
@@ -196,7 +198,7 @@ module.exports = {
 
         c = new hQuery.Patient(c);
 
-        var result = hasActiveStatin(c); 
+        var result = hasActiveStatin(c);
 
 
         if (result === false ){
@@ -208,6 +210,6 @@ module.exports = {
             return {result:false, message:"expected false for patient with inactive statin"}
 
         }
-    } 
- 
+    }
+
 }

@@ -2,6 +2,6 @@
     "type" : "FUNCTION",
     "name" : "hasBMI",
     "path" : "functions/hasBMI.js",
-    "description" : "Determines whether a patient has a documented BMI or not.",
+    "description" : "Determines whether a patient has a documented measurement or not.",
     "test" : "./functions/test_hasBMI.js"
 }

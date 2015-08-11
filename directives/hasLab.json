@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION",
+    "name" : "hasLab",
+    "path" : "functions/hasLab.js",
+    "description" : "Determines whether a patient has a documented lab or not.",
+    "test" : "./functions/test_hasLab.js"
+}

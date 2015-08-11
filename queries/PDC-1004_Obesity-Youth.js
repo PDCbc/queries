@@ -1,7 +1,6 @@
 /**
- * Query Title: PDC-1785
+ * Query Title: PDC-1004_Obesity-Youth
  * Query Type:  Ratio
- * Description: BMI-WC Check
  */
 function map( patient ){
 
@@ -16,11 +15,17 @@ function map( patient ){
 
     var ap = activePatient( patient );
 
-    var hm = hasOutOfRangeWC( patient, true ) || hasOutOfRangeBMI( patient, true );
+    var ia = isAge( patient, 12, 19);
 
-    var denominator = ap;
+    var wc = hasOutOfRangeWC( patient, true );
 
-    var numerator   =  ap && hm;
+    var bmi = hasOutOfRangeBMI( patient, true );
+
+    var hm = wc || bmi;
+
+    var denominator = ap & ia;
+
+    var numerator   =  ap && ia & hm;
 
     emit( "denominator_" + patient.json.primary_care_provider_id,  + denominator );
 
