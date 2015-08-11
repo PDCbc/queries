@@ -5,6 +5,7 @@
  */
 function map( patient ){
 
-  emit( patient.json.primary_care_provider_id, +isEol(patient) );
+    emit("numerator_"+patient.json.primary_care_provider_id, +activePatient(patient));
+    emit( "denominator_"+patient.json.primary_care_provider_id, +(activePatient(patient) && isEol(patient)) );
 
 }
