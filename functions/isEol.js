@@ -8,7 +8,6 @@
  */
 
 function isEol(pt) {
-    console.log(pt); //***remove me before merge***
     var system = "ICD9";
     var condition = "^V66.7"; //Encounter for palliative care
 
