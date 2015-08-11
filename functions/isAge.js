@@ -38,7 +38,6 @@ function isAge( pt, ageMin, ageMax ) {
 
     }
 
-
 	//check that the ageNow value is defined.
 	if(ageNow){
 
