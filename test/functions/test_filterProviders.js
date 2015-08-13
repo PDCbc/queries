@@ -1,10 +1,10 @@
 /*
-* tests the filterProviders function.
-*/
+ * tests the filterProviders function.
+ */
 
 function setUp() {
     var obj = {
-        "primary_care_provider_id" : "PROVIDER1",
+        "primary_care_provider_id": "PROVIDER1",
     };
 
     return obj;
@@ -13,108 +13,151 @@ function setUp() {
 module.exports = {
 
     /*
-    * Test the case where no providerId or initiative is given.
-    *
-    * Expected: false.
-    */
-	testUndefinedParams : function(){
+     * Test the case where no providerId or initiative is given.
+     *
+     * Expected: false.
+     */
+    testUndefinedParams: function () {
 
         var r = filterProviders();
 
-        if ( r === false ) {
+        if (r === false) {
 
-            return {result : true, message: 'test passed!'};
+            return {result: true, message: 'test passed!'};
 
-        }else{
+        } else {
 
-            return {result : false, message: "expected false if no providerId and initiative are defined."}
+            return {result: false, message: "expected false if no providerId and initiative are defined."}
 
         }
 
     },
 
     /*
-    * Test case where providerId is given, but no initiative.
-    *
-    * expected: false.
-    */
-    testUndefinedInitiative : function(){
+     * Test case where providerId is given, but no initiative.
+     *
+     * expected: false.
+     */
+    testUndefinedInitiative: function () {
 
         var r = filterProviders("cpsid");
 
-        if ( r === false ) {
+        if (r === false) {
 
-            return {result : true, message: 'test passed!'};
+            return {result: true, message: 'test passed!'};
 
-        }else{
+        } else {
 
-            return {result : false, message: "expected false if no initiative are defined."}
+            return {result: false, message: "expected false if no initiative are defined."}
 
         }
 
     },
 
     /*
-    * Test case where initiative is given, but providerId is null
-    *
-    * expected: false.
-    */
-    testNullProvider : function(){
+     * Test case where initiative is given, but providerId is null
+     *
+     * expected: false.
+     */
+    testNullProvider: function () {
 
         var r = filterProviders(null, "PPhRR");
 
-        if ( r === false ) {
+        if (r === false) {
 
-            return {result : true, message: 'test passed!'};
+            return {result: true, message: 'test passed!'};
 
-        }else{
+        } else {
 
-            return {result : false, message: "expected false if providerId is null"}
+            return {result: false, message: "expected false if providerId is null"}
 
         }
 
     },
 
     /*
-    * Test case normal case
-    *
-    * expected: false.
-    */
+     * Test case normal case
+     *
+     * expected: false.
+     */
 
-    testNormal : function(){
+    testNormal: function () {
 
         var r = filterProviders("cpsid", "PPhRR");
 
-        if ( r === true ){
+        if (r === true) {
 
-            return {result : true, message : "test passed!"};
+            return {result: true, message: "test passed!"};
 
-        }else{
+        } else {
 
-            return {result : false, message : "expected true for a normal provider input."}
+            return {result: false, message: "expected true for a normal provider input."}
         }
 
     },
 
     /*
-    * Test case normal case
-    *
-    * expected: false.
-    */
+     * Test case normal case
+     *
+     * expected: false.
+     */
 
-    testRejectProvider : function(){
+    testRejectProvider: function () {
 
         var r = filterProviders("NOT A CPSID", "PPh");
 
-        if ( r === false ){
+        if (r === false) {
 
-            return {result : true, message : "test passed!"};
+            return {result: true, message: "test passed!"};
 
-        }else{
+        } else {
 
-            return {result : false, message : "expected false for a normal provider not in the initiative."}
+            return {result: false, message: "expected false for a normal provider not in the initiative."}
         }
 
+    },
+
+    /**
+     * Test ALL case, should accept the provider is in one of the initiative lists.
+     *
+     * expected: true
+     */
+    testAllPositiveCase: function () {
+
+        var r = filterProviders("cpsid", "ALL");
+
+        if (r === true) {
+
+            return {result: true, message: "test passed!"};
+
+        } else {
+
+            return {
+                result : false,
+                message: "expected true for 'ALL' initiative input and a provider id that is in atleast on initiative"
+            }
+
+        }
+    },
+
+    /**
+     * Test ALL case, should reject a provider who is not in any initiative, but the ALL initiative is provided.
+     *
+     * expected: true
+     */
+    testAllNegativeCase: function () {
+
+        var r = filterProviders("NOT A CPSID ", "ALL");
+
+        if (r === false) {
+
+            return {result: true, message: "test passed!"};
+
+        } else {
+
+            return {result: false, message: "expected false for a normal provider not in the initiative."}
+
+        }
     }
 
-}
+};
