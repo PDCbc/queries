@@ -6,6 +6,7 @@
  *        - "PPhRR" : polypharmacy
  *       - "PracticeReflection" : Practice Reflection
  *       - "PopulationHealth" : PopulationHealth
+ *       - "Attachment" : Attachment Initiative
  *       - 'ALL' : all initiatives allow these queries.
  *
  * @returns - true if the provider is part of the specified initiative
@@ -33,6 +34,11 @@ function filterProviders(providerId, initiative) {
             "PROVIDER2"
         ],
         "PopulationHealth"  : [
+            "cpsid",  //currently contains some test values.
+            "PROVIDER1",
+            "PROVIDER2"
+        ],
+        "Attachment" : [
             "cpsid",  //currently contains some test values.
             "PROVIDER1",
             "PROVIDER2"

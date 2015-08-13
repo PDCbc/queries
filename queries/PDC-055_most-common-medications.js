@@ -3,32 +3,32 @@
  * Query Type:  Ratio Set
  * Description: Rx: Top Med Classes
  */
-function map( patient ){
+function map(patient) {
 
-  try{
+    try {
 
-    if( filterProviders(patient.json.primary_care_provider_id, "PPhRR") ){
+        if (filterProviders(patient.json.primary_care_provider_id, "PPhRR")) {
 
-      if( activePatient( patient ) ){
+            if (activePatient(patient)) {
 
-        // Coded entry lists
-        var medList  = patient.medications(),
+                // Coded entry lists
+                var medList     = patient.medications(),
 
-        // Filter for active meds
-        medications = filter_activeMeds( medList );
+                    // Filter for active meds
+                    medications = filter_activeMeds(medList);
 
-        // Emit results, top will be handled by Visualizer
-        emit_medications( medications );
+                // Emit results, top will be handled by Visualizer
+                emit_medications(medications);
 
-      }
+            }
+
+        }
+
+    } catch (e) {
+
+        emit("FAILURE" + e);
 
     }
-    
-  }catch(e){
-
-    emit("FAILURE"+e); 
-
-  }
 
 }
 
@@ -36,37 +36,37 @@ function map( patient ){
  * Emits a list of medication codes and code types
  *   - proper names handled by DCLAPI module
  */
-function emit_medications( codedEntryList ){
+function emit_medications(codedEntryList) {
 
     // Physician ID, for emit
     var physicianID = "_" + patient.json.primary_care_provider_id,
 
-    // How many characters to use in ATC codes
-    atcCutoff = 3;
+        // How many characters to use in ATC codes
+        atcCutoff   = 3;
 
-    for( var i = 0, L = codedEntryList.length; i < L; i++ ){
+    for (var i = 0, L = codedEntryList.length; i < L; i++) {
 
-        var med = codedEntryList[ i ].medicationInformation().codedProduct();
+        var med = codedEntryList[i].medicationInformation().codedProduct();
 
-        for( var j = 0; M = med.length, j < M; j++ ){
+        for (var j = 0; M = med.length, j < M; j++) {
 
-            var m = med[ j ],
-            type = m.codeSystemName(),
-            code = m.code();
+            var m    = med[j],
+                type = m.codeSystemName(),
+                code = m.code();
 
-            if( !type || !code || !type.toLowerCase() ){
+            if (!type || !code || !type.toLowerCase()) {
 
                 break;
 
             }
 
-            if( type.toLowerCase() === 'whoatc'){
+            if (type.toLowerCase() === 'whoatc') {
 
-                code = code.substring( 0, atcCutoff );
+                code = code.substring(0, atcCutoff);
 
             }
 
-            emit( code + '_' + type + physicianID, 1 );
+            emit(code + '_' + type + physicianID, 1);
 
         }
 

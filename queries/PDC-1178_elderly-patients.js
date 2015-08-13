@@ -5,6 +5,10 @@
  */
 function map( patient ){
 
+  if (!filterProviders(patient.json.primary_care_provider_id, "ALL")) {
+    return;
+  }
+
   var denominator = activePatient( patient ); 
 
   var numerator   = denominator && isAge( patient, 65 );   

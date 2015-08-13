@@ -1,17 +1,19 @@
 /**
  * Query Title: PDC-1924_BetaBlocker65+
  */
-function map( patient ){
+function map(patient) {
 
-  if( !filterProviders(patient.json.primary_care_provider_id, "PracticeReflection"))return;
-  
-  var ap = activePatient(patient);
-  var ia = isAge(patient, 65);
-  var hm = hasActiveBetaBlocker(patient);
+    if (!filterProviders(patient.json.primary_care_provider_id, "PracticeReflection")) {
+        return;
+    }
 
-  var denominator = ap && ia;
-  var numerator = ap && ia && hm;
+    var ap = activePatient(patient);
+    var ia = isAge(patient, 65);
+    var hm = hasActiveBetaBlocker(patient);
 
-  emit( "denominator_"+patient.json.primary_care_provider_id, +denominator );
-  emit( "numerator_"+patient.json.primary_care_provider_id, +numerator );
+    var denominator = ap && ia;
+    var numerator   = ap && ia && hm;
+
+    emit("denominator_" + patient.json.primary_care_provider_id, +denominator);
+    emit("numerator_" + patient.json.primary_care_provider_id, +numerator);
 }

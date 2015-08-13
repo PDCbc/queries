@@ -5,14 +5,16 @@
  */
 function map(patient) {
 
-    if(filterProviders())
+    if (filterProviders(patient.json.primary_care_provider_id, "ALL")) {
 
-    var denominator = true;
+        var denominator = true;
 
-    var numerator = denominator && activePatient(patient);
+        var numerator = denominator && activePatient(patient);
 
-    emit("denominator_" + patient.json.primary_care_provider_id, +denominator);
+        emit("denominator_" + patient.json.primary_care_provider_id, +denominator);
 
-    emit("numerator_" + patient.json.primary_care_provider_id, +numerator);
+        emit("numerator_" + patient.json.primary_care_provider_id, +numerator);
+
+    }
 
 }

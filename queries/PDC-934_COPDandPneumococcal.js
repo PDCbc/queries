@@ -2,21 +2,26 @@
 // PDC-934_COPDandPneumococcal
 //
 
-function map( patient ){
-  
-  var obj = patient.json;
+function map(patient) {
 
-  var hv = hasPneumococcalVax( patient );
 
-  var hc = hasCOPD( patient );
+    if (!filterProviders(patient.json.primary_care_provider_id, "PopulationHealth")) {
+        return;
+    }
 
-  var ia = activePatient( patient );
+    var obj = patient.json;
 
-  var numerator = hv && hc && ia;
+    var hv = hasPneumococcalVax(patient);
 
-  var denominator = ia;
+    var hc = hasCOPD(patient);
 
-  emit( "denominator_" + patient.json.primary_care_provider_id,  + denominator );
+    var ia = activePatient(patient);
 
-  emit( "numerator_" + patient.json.primary_care_provider_id, + numerator   );
+    var numerator = hv && hc && ia;
+
+    var denominator = ia;
+
+    emit("denominator_" + patient.json.primary_care_provider_id, +denominator);
+
+    emit("numerator_" + patient.json.primary_care_provider_id, +numerator);
 }

@@ -8,7 +8,7 @@ function map(patient) {
     try {
 
 
-        if (filterProviders(patient.json.primary_care_provider_id, "PPhRR")) {
+        if (filterProviders(patient.json.primary_care_provider_id, "Attachment")) {
 
         //get the number of encounters in the last month.
         var encounters = countEncounters(patient, 1);
