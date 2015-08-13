@@ -5,6 +5,10 @@
 
 function map(patient){
 
+    if (!filterProviders(patient.json.primary_care_provider_id, "PopulationHealth")) {
+        return;
+    }
+
     var denominator = activePatient( patient ) && isAge(patient, 25);
 
     var numerator = denominator && hasTenanusVax(patient);
