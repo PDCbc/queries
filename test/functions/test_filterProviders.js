@@ -118,13 +118,13 @@ module.exports = {
     },
 
     /**
-     * Test ALL case, should accept the provider is in one of the initiative lists.
+     * Test ANY case, should accept the provider is in one of the initiative lists.
      *
      * expected: true
      */
-    testAllPositiveCase: function () {
+    testAnyPositiveCase: function () {
 
-        var r = filterProviders("cpsid", "ALL");
+        var r = filterProviders("cpsid", "ANY");
 
         if (r === true) {
 
@@ -141,13 +141,13 @@ module.exports = {
     },
 
     /**
-     * Test ALL case, should reject a provider who is not in any initiative, but the ALL initiative is provided.
+     * Test ALL case, should reject a provider who is not in any initiative, but the ANY initiative is provided.
      *
      * expected: true
      */
-    testAllNegativeCase: function () {
+    testAnyNegativeCase: function () {
 
-        var r = filterProviders("NOT A CPSID ", "ALL");
+        var r = filterProviders("NOT A CPSID ", "ANY");
 
         if (r === false) {
 

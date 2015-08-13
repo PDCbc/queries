@@ -5,7 +5,7 @@
  */
 function map(patient) {
 
-    if (filterProviders(patient.json.primary_care_provider_id, "ALL")) {
+    if (filterProviders(patient.json.primary_care_provider_id, "ANY")) {
 
         var denominator = true;
 

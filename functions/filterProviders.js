@@ -7,7 +7,7 @@
  *       - "PracticeReflection" : Practice Reflection
  *       - "PopulationHealth" : PopulationHealth
  *       - "Attachment" : Attachment Initiative
- *       - 'ALL' : all initiatives allow these queries.
+ *       - 'ANY' : all initiatives allow these queries.
  *
  * @returns - true if the provider is part of the specified initiative
  *               false otherwise.
@@ -46,7 +46,7 @@ function filterProviders(providerId, initiative) {
     };
 
 
-    if (initiative === "ALL") {
+    if (initiative === "ANY") {
 
         //if we are checking for all, just check that they are in
         // on of the initiatives.
