@@ -13,7 +13,6 @@
 *   the message field contains a message which is displayed if the test fails
 */
 function verify(results){
-    console.log(results); //***remove me before merge***
     if ( 
         results[1]._id === "numerator_PROVIDER1"  &&
         results[1].value === 2
