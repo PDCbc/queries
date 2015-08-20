@@ -1,10 +1,10 @@
 /*
-* Determines whether a particular condition is part of those defined by the SPICT document as an indicator of Eol
+* Determines whether a patient is frail according to Drubbel et. al's FI index
 * 
-* A patient is assumed to be Eol( or a physician would not be surprised if they passed in the next 6 months to a year)
-* if they have one or more of the SPICT clinical indicators listed below as ICD 9 codes.
-*
-* The exact SPICT indicators and the ICD9 codes/explanations can be found in the EoL Patient Definition doc
+* A patient is assumed to be frail if they have a certain FI score. This score is found by dividing the number
+* of deficits they have (countDeficits) with 36 (the total number of health deficits e.g. general complaints,
+* neoplams, etc)
+* The ICD9 codes/explanations can be found in the Frailty Definition doc
 *
 * @param pt - the patient api object
 *
@@ -39,7 +39,7 @@ function meetsFrailtyConditions( pt ){
             conditions[c].codes["ICD9"].length > 0
         ){
 
-            //loop through the codes for this condition and check if any of them match the SPICT ones
+            //loop through the codes for this condition and check if any of them match the Drubbel ones
             for( var s = 0; s < conditions[c].codes["ICD9"].length; s++ ){
 
                 if( //**GENERAL COMPLAINTS**
