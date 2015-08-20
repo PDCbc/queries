@@ -15,8 +15,8 @@
 function verify(results){
     console.log(results); //***remove me before merge***
     if ( 
-        results[0]._id === "PROVIDER1"  &&
-        results[0].value === 2
+        results[1]._id === "numerator_PROVIDER1"  &&
+        results[1].value === 2
     ){
        return {result: true}; 
     }else{
