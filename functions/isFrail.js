@@ -1,7 +1,7 @@
 /**
  * T/F: is this patient frail as per Drubbel et. al's frailty index?
  *  - 55 and over
- *  - Has an FI score greater than 0.5
+ *  - Has an FI score greater than 0.25
  * @param pt
  * @returns {boolean}
  */
@@ -11,8 +11,8 @@ function isFrail(pt) {
 
     if (isAge(pt, 55) && (activePatient(pt))) {
 
-        // Does the patient meet the frailty condition i.e. has an F.I. score greater than 0.5
-        if( hasFrailtyCondition(pt))
+        // Does the patient meet the frailty condition i.e. has an F.I. score greater than 0.25
+        if(meetsFrailtyConditions(pt))
             return true;
     }
 

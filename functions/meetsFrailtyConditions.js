@@ -7,11 +7,11 @@
 * The exact SPICT indicators and the ICD9 codes/explanations can be found in the EoL Patient Definition doc
 *
 * @param pt - the patient api object
- *
- * @returns true if the patient has any of the conditions, false otherwise.
+*
+* @returns true if the patient has any of the conditions, false otherwise.
 */
 
-function hasFrailtyCondition( pt ){
+function meetsFrailtyConditions( pt ){
     //check if the pt api is correctly set up.
     if( pt === undefined || pt === null || pt.json === undefined || pt.json === null ){
 
@@ -28,6 +28,8 @@ function hasFrailtyCondition( pt ){
 
     }
 
+    var countDeficits = 0;
+
     for( var c = 0; c < conditions.length; c ++ ){
 
         //check to see that we have an ICD9 code system for the condition.
@@ -40,8 +42,7 @@ function hasFrailtyCondition( pt ){
             //loop through the codes for this condition and check if any of them match the SPICT ones
             for( var s = 0; s < conditions[c].codes["ICD9"].length; s++ ){
 
-                if(
-                    //**GENERAL COMPLAINTS**
+                if( //**GENERAL COMPLAINTS**
                     //A01 Pain general/multiple sites
                     conditions[c].codes["ICD9"][s].match("^780.96")||
                     //A04 Weakness/tiredness general
@@ -69,9 +70,10 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^369.6+")||conditions[c].codes["ICD9"][s].match("^369.7+")||
                     conditions[c].codes["ICD9"][s].match("^369.8+")||
                     //Z28 Limited function/disability (social)
-                    conditions[c].codes["ICD9"][s].match("^V62.4")||
+                    conditions[c].codes["ICD9"][s].match("^V62.4"))
+                {countDeficits++}
 
-                    //**NEOPLASM - OTHER**
+                if( //**NEOPLASM - OTHER**
                     //A79 Malignancy NOS
                     conditions[c].codes["ICD9"][s].match("^164.9")|| conditions[c].codes["ICD9"][s].match("^176.9")||
                     conditions[c].codes["ICD9"][s].match("^197.0")|| conditions[c].codes["ICD9"][s].match("^197.7")||
@@ -157,12 +159,11 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^184.9")|| conditions[c].codes["ICD9"][s].match("^182.0")||
                     conditions[c].codes["ICD9"][s].match("^179")||   conditions[c].codes["ICD9"][s].match("^183.0")||
                     //Y78 Malignant neoplasm male genital / mammae
-                    conditions[c].codes["ICD9"][s].match("^175.9")||
-                    conditions[c].codes["ICD9"][s].match("^187.4")||
-                    conditions[c].codes["ICD9"][s].match("^187.9")||
-                    conditions[c].codes["ICD9"][s].match("^186.9")||
+                    conditions[c].codes["ICD9"][s].match("^175.9")|| conditions[c].codes["ICD9"][s].match("^187.4")||
+                    conditions[c].codes["ICD9"][s].match("^187.9")|| conditions[c].codes["ICD9"][s].match("^186.9"))
+                {countDeficits++}
 
-                    //**INCONTINENCE**
+                if( //**INCONTINENCE**
                     //D17 Incontinence of bowel
                     conditions[c].codes["ICD9"][s].match("^787.6")||
                     //U04 Incontinence urine
@@ -172,9 +173,10 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^618.02")|| conditions[c].codes["ICD9"][s].match("^618.03")||
                     conditions[c].codes["ICD9"][s].match("^618.04")|| conditions[c].codes["ICD9"][s].match("^618.2")||
                     conditions[c].codes["ICD9"][s].match("^618.3")||  conditions[c].codes["ICD9"][s].match("^618.4")||
-                    conditions[c].codes["ICD9"][s].match("^618.84")|| conditions[c].codes["ICD9"][s].match("^618.9")||
+                    conditions[c].codes["ICD9"][s].match("^618.84")|| conditions[c].codes["ICD9"][s].match("^618.9"))
+                {countDeficits++}
 
-                    //**GI/LIVER DISEASE**
+                if( //**GI/LIVER DISEASE**
                     //D72 Viral hepatitis
                     conditions[c].codes["ICD9"][s].match("^070.1")||  conditions[c].codes["ICD9"][s].match("^070.3+")||
                     conditions[c].codes["ICD9"][s].match("^070.41")|| conditions[c].codes["ICD9"][s].match("^070.49")||
@@ -206,17 +208,19 @@ function hasFrailtyCondition( pt ){
                     //D94 Chronic enteritis/ulcerative colitis
                     conditions[c].codes["ICD9"][s].match("^555.0")|| conditions[c].codes["ICD9"][s].match("^555.9")||
                     conditions[c].codes["ICD9"][s].match("^556.5")|| conditions[c].codes["ICD9"][s].match("^556.6")||
-                    conditions[c].codes["ICD9"][s].match("^556.9")|| conditions[c].codes["ICD9"][s].match("^558.1")||
+                    conditions[c].codes["ICD9"][s].match("^556.9")|| conditions[c].codes["ICD9"][s].match("^558.1"))
+                {countDeficits++}
 
-                    //**OESOPHAGUS DISEASE**
+                if( //**OESOPHAGUS DISEASE**
                     //D84 Oesophagus disease
                     conditions[c].codes["ICD9"][s].match("^530.0")|| conditions[c].codes["ICD9"][s].match("^530.11")||
                     conditions[c].codes["ICD9"][s].match("^530.20")||conditions[c].codes["ICD9"][s].match("^530.21")||
                     conditions[c].codes["ICD9"][s].match("^530.3")|| conditions[c].codes["ICD9"][s].match("^530.5")||
                     conditions[c].codes["ICD9"][s].match("^530.6")|| conditions[c].codes["ICD9"][s].match("^530.7")||
-                    conditions[c].codes["ICD9"][s].match("^530.9")||
+                    conditions[c].codes["ICD9"][s].match("^530.9"))
+                {countDeficits++}
 
-                    //**VISUAL IMPAIRMENT**
+                if( //**VISUAL IMPAIRMENT**
                     //F83 Retinopathy
                     conditions[c].codes["ICD9"][s].match("^362.0")|| conditions[c].codes["ICD9"][s].match("^362.1")||
                     conditions[c].codes["ICD9"][s].match("^362.20")||conditions[c].codes["ICD9"][s].match("^362.29")||
@@ -231,18 +235,20 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^365.2+")||conditions[c].codes["ICD9"][s].match("^365.59")||
                     conditions[c].codes["ICD9"][s].match("^365.60")||conditions[c].codes["ICD9"][s].match("^365.61")||
                     conditions[c].codes["ICD9"][s].match("^365.62")||conditions[c].codes["ICD9"][s].match("^365.64")||
-                    conditions[c].codes["ICD9"][s].match("^365.65")||
+                    conditions[c].codes["ICD9"][s].match("^365.65"))
+                {countDeficits++}
 
-                    //**CATARACT**
+                if( //**CATARACT**
                     //F92 Cataract
                     conditions[c].codes["ICD9"][s].match("^366.00")||conditions[c].codes["ICD9"][s].match("^366.10")||
                     conditions[c].codes["ICD9"][s].match("^366.16")||conditions[c].codes["ICD9"][s].match("^366.18")||
                     conditions[c].codes["ICD9"][s].match("^366.20")||conditions[c].codes["ICD9"][s].match("^366.3")||
                     conditions[c].codes["ICD9"][s].match("^366.41")||conditions[c].codes["ICD9"][s].match("^366.45")||
                     conditions[c].codes["ICD9"][s].match("^366.46")||conditions[c].codes["ICD9"][s].match("^366.5")||
-                    conditions[c].codes["ICD9"][s].match("^366.8")|| conditions[c].codes["ICD9"][s].match("^366.9")||
+                    conditions[c].codes["ICD9"][s].match("^366.8")|| conditions[c].codes["ICD9"][s].match("^366.9"))
+                {countDeficits++}
 
-                    //**HEARING IMPAIRMENT**
+                if( //**HEARING IMPAIRMENT**
                     //H84 Presbyacusis
                     conditions[c].codes["ICD9"][s].match("^388.01")||
                     //H85 Acoustic trauma
@@ -253,9 +259,10 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^389.10")|| conditions[c].codes["ICD9"][s].match("^389.14")||
                     conditions[c].codes["ICD9"][s].match("^389.16")|| conditions[c].codes["ICD9"][s].match("^389.20")||
                     conditions[c].codes["ICD9"][s].match("^389.7")|| conditions[c].codes["ICD9"][s].match("^389.8")||
-                    conditions[c].codes["ICD9"][s].match("^389.9")||
+                    conditions[c].codes["ICD9"][s].match("^389.9"))
+                {countDeficits++}
 
-                    //**RESPIRATORY PROBLEMS**
+                if( //**RESPIRATORY PROBLEMS**
                     //K02 Pressure/tightness of heart
                     conditions[c].codes["ICD9"][s].match("^786.51")||
                     //R02 Shortness of breath/dyspnoea w/o K02
@@ -272,15 +279,17 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^482.83")|| conditions[c].codes["ICD9"][s].match("^483.0")||
                     conditions[c].codes["ICD9"][s].match("^482.9")|| conditions[c].codes["ICD9"][s].match("^483.1")||
                     conditions[c].codes["ICD9"][s].match("^483.8")|| conditions[c].codes["ICD9"][s].match("^485")||
-                    conditions[c].codes["ICD9"][s].match("^486")||
+                    conditions[c].codes["ICD9"][s].match("^486"))
+                {countDeficits++}
 
-                    //**ANGINA PECTORIS**
+                if( //**ANGINA PECTORIS**
                     //K74 Angina Pectoris
                     conditions[c].codes["ICD9"][s].match("^411.1")|| conditions[c].codes["ICD9"][s].match("^413.1")||
                     conditions[c].codes["ICD9"][s].match("^413.9")|| conditions[c].codes["ICD9"][s].match("^411.81")||
-                    conditions[c].codes["ICD9"][s].match("^411.89")||
+                    conditions[c].codes["ICD9"][s].match("^411.89"))
+                {countDeficits++}
 
-                    //**MYOCARDIAL DISEASE**
+                if( //**MYOCARDIAL DISEASE**
                     //K75 Acute myocardial infarction
                     conditions[c].codes["ICD9"][s].match("^410.01")|| conditions[c].codes["ICD9"][s].match("^410.11")||
                     conditions[c].codes["ICD9"][s].match("^410.21")|| conditions[c].codes["ICD9"][s].match("^410.31")||
@@ -294,27 +303,32 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^412")|| conditions[c].codes["ICD9"][s].match("^414.10")||
                     conditions[c].codes["ICD9"][s].match("^414.19")|| conditions[c].codes["ICD9"][s].match("^414.11")||
                     conditions[c].codes["ICD9"][s].match("^414.12")|| conditions[c].codes["ICD9"][s].match("^414.8")||
-                    conditions[c].codes["ICD9"][s].match("^414.9")||
+                    conditions[c].codes["ICD9"][s].match("^414.9"))
+                {countDeficits++}
 
-                    //**HEART FAILURE**
+                if( //**HEART FAILURE**
                     //K77 Heart failure
                     conditions[c].codes["ICD9"][s].match("^428.1")|| conditions[c].codes["ICD9"][s].match("^428.0")||
-                    conditions[c].codes["ICD9"][s].match("^428.9")||
+                    conditions[c].codes["ICD9"][s].match("^428.9"))
+                {countDeficits++}
 
-                    //**ATRIAL FIBRILLATION/FLUTTER**
+                if( //**ATRIAL FIBRILLATION/FLUTTER**
                     //K78 Atrial fibrillation/flutter
-                    conditions[c].codes["ICD9"][s].match("^427.3+")||
+                    conditions[c].codes["ICD9"][s].match("^427.3+"))
+                {countDeficits++}
 
-                    //**HYPERTENSION-UNCOMPLICATED**
+                if( //**HYPERTENSION-UNCOMPLICATED**
                     //K86 Hypertension - uncomplicated
-                    conditions[c].codes["ICD9"][s].match("^401*")||
+                    conditions[c].codes["ICD9"][s].match("^401*"))
+                {countDeficits++}
 
-                    //**HYPERTENSION-UNCOMPLICATED**
+                if( //**HYPERTENSION-UNCOMPLICATED**
                     //K87 Hypertension - complicated
                     conditions[c].codes["ICD9"][s].match("^402*")|| conditions[c].codes["ICD9"][s].match("^403*")||
-                    conditions[c].codes["ICD9"][s].match("^405*")|| conditions[c].codes["ICD9"][s].match("^437.2")||
+                    conditions[c].codes["ICD9"][s].match("^405*")|| conditions[c].codes["ICD9"][s].match("^437.2"))
+                {countDeficits++}
 
-                    //**DIZZINESS**
+                if( //**DIZZINESS**
                     //A06 Fainting/syncope
                     conditions[c].codes["ICD9"][s].match("^780.2")||
                     //H82 Vertiginous syndrome / labyrinthitis
@@ -326,9 +340,10 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^458.1")|| conditions[c].codes["ICD9"][s].match("^458.0")||
                     conditions[c].codes["ICD9"][s].match("^458.9")||
                     //N17 Vertigo/dizziness
-                    conditions[c].codes["ICD9"][s].match("^780.4")||
+                    conditions[c].codes["ICD9"][s].match("^780.4"))
+                {countDeficits++}
 
-                    //**TIA/CVA
+                if( //**TIA/CVA
                     //K89 Transient cerebral ischaemia
                     conditions[c].codes["ICD9"][s].match("^435.0")|| conditions[c].codes["ICD9"][s].match("^435.1")||
                     conditions[c].codes["ICD9"][s].match("^435.3")|| conditions[c].codes["ICD9"][s].match("^362.34")||
@@ -339,9 +354,10 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^432*")|| conditions[c].codes["ICD9"][s].match("^433.91")||
                     conditions[c].codes["ICD9"][s].match("^433.01")|| conditions[c].codes["ICD9"][s].match("^433.31")||
                     conditions[c].codes["ICD9"][s].match("^433.81")|| conditions[c].codes["ICD9"][s].match("^434.91")||
-                    conditions[c].codes["ICD9"][s].match("^434.01")||
+                    conditions[c].codes["ICD9"][s].match("^434.01"))
+                {countDeficits++}
 
-                    //**VASCULAR DISEASE**
+                if( //**VASCULAR DISEASE**
                     //K91 Atherosclerosis
                     conditions[c].codes["ICD9"][s].match("^433.20")|| conditions[c].codes["ICD9"][s].match("^433.00")||
                     conditions[c].codes["ICD9"][s].match("^433.10")|| conditions[c].codes["ICD9"][s].match("^433.90")||
@@ -381,9 +397,10 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^456.4")|| conditions[c].codes["ICD9"][s].match("^456.6")||
                     conditions[c].codes["ICD9"][s].match("^459.2")|| conditions[c].codes["ICD9"][s].match("^459.9")||
                     conditions[c].codes["ICD9"][s].match("^459.89")|| conditions[c].codes["ICD9"][s].match("^785.51")||
-                    conditions[c].codes["ICD9"][s].match("^785.50")||
+                    conditions[c].codes["ICD9"][s].match("^785.50"))
+                {countDeficits++}
 
-                    //**FRACTURE/OSTEOPOROSIS**
+                if( //**FRACTURE/OSTEOPOROSIS**
                     //A80 Trauma/injury NOS
                     conditions[c].codes["ICD9"][s].match("^874.2")|| conditions[c].codes["ICD9"][s].match("^874.3")||
                     conditions[c].codes["ICD9"][s].match("^900.9")|| conditions[c].codes["ICD9"][s].match("^879.0")||
@@ -427,9 +444,10 @@ function hasFrailtyCondition( pt ){
                     //L95 Osteoporosis
                     conditions[c].codes["ICD9"][s].match("^733.0")|| conditions[c].codes["ICD9"][s].match("^733.03")||
                     conditions[c].codes["ICD9"][s].match("^579.3")|| conditions[c].codes["ICD9"][s].match("^733.09")||
-                    conditions[c].codes["ICD9"][s].match("^733.00")||
+                    conditions[c].codes["ICD9"][s].match("^733.00"))
+                {countDeficits++}
 
-                    //**ARTHRITIS/OSTEOARTHROSIS**
+                if( //**ARTHRITIS/OSTEOARTHROSIS**
                     //L88 Rheumatoid arthritis / related condition
                     conditions[c].codes["ICD9"][s].match("^714.1")|| conditions[c].codes["ICD9"][s].match("^714.2")||
                     conditions[c].codes["ICD9"][s].match("^714.0")|| conditions[c].codes["ICD9"][s].match("^714.30")||
@@ -444,14 +462,16 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^715.34")|| conditions[c].codes["ICD9"][s].match("^715.94")||
                     conditions[c].codes["ICD9"][s].match("^715.11")|| conditions[c].codes["ICD9"][s].match("^715.30")||
                     conditions[c].codes["ICD9"][s].match("^715.90")|| conditions[c].codes["ICD9"][s].match("^715.10")||
-                    conditions[c].codes["ICD9"][s].match("^715.20")|| conditions[c].codes["ICD9"][s].match("^715.28")||
+                    conditions[c].codes["ICD9"][s].match("^715.20")|| conditions[c].codes["ICD9"][s].match("^715.28"))
+                {countDeficits++}
 
-                    //**OSTEOARTHROSIS KNEE**
+                if( //**OSTEOARTHROSIS KNEE**
                     //L90 Osteoarthrosis of knee
                     conditions[c].codes["ICD9"][s].match("^715.26")|| conditions[c].codes["ICD9"][s].match("^715.36")||
-                    conditions[c].codes["ICD9"][s].match("^715.96")||
+                    conditions[c].codes["ICD9"][s].match("^715.96"))
+                {countDeficits++}
 
-                    //**NEUROLOGIC DISEASE**
+                if( //**NEUROLOGIC DISEASE**
                     //N86 Multiple sclerosis
                     conditions[c].codes["ICD9"][s].match("^340")||
                     //N99 Neurological disease, other
@@ -513,9 +533,10 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^356.0")|| conditions[c].codes["ICD9"][s].match("^356.1")||
                     conditions[c].codes["ICD9"][s].match("^356.2")|| conditions[c].codes["ICD9"][s].match("^356.9")||
                     conditions[c].codes["ICD9"][s].match("^357.0")|| conditions[c].codes["ICD9"][s].match("^357.9")||
-                    conditions[c].codes["ICD9"][s].match("^357.5")||
+                    conditions[c].codes["ICD9"][s].match("^357.5"))
+                {countDeficits++}
 
-                    //**DEPRESSION**
+                 if(//**DEPRESSION**
                     //P03 Feeling depressed
                     conditions[c].codes["ICD9"][s].match("^300.9")||
                     conditions[c].codes["ICD9"][s].match("^799.25")||
@@ -525,9 +546,10 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^298.0")|| conditions[c].codes["ICD9"][s].match("^296.20")||
                     conditions[c].codes["ICD9"][s].match("^311")|| conditions[c].codes["ICD9"][s].match("^296.3*")||
                     conditions[c].codes["ICD9"][s].match("^300.4")|| conditions[c].codes["ICD9"][s].match("^301.12")||
-                    conditions[c].codes["ICD9"][s].match("^296.99")|| conditions[c].codes["ICD9"][s].match("^296.90")||
+                    conditions[c].codes["ICD9"][s].match("^296.99")|| conditions[c].codes["ICD9"][s].match("^296.90"))
+                 {countDeficits++}
 
-                    //**SLEEP DISTURBANCE**
+                 if(//**SLEEP DISTURBANCE**
                     //P06 Sleep disturbance
                     conditions[c].codes["ICD9"][s].match("^327.00")|| conditions[c].codes["ICD9"][s].match("^327.01")||
                     conditions[c].codes["ICD9"][s].match("^327.09")|| conditions[c].codes["ICD9"][s].match("^780.52")||
@@ -542,9 +564,10 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^307.42")|| conditions[c].codes["ICD9"][s].match("^307.44")||
                     conditions[c].codes["ICD9"][s].match("^327.15")|| conditions[c].codes["ICD9"][s].match("^327.19")||
                     conditions[c].codes["ICD9"][s].match("^307.46")|| conditions[c].codes["ICD9"][s].match("^307.47")||
-                    conditions[c].codes["ICD9"][s].match("^307.49")||
+                    conditions[c].codes["ICD9"][s].match("^307.49"))
+                 {countDeficits++}
 
-                    //**COGNITIVE IMPAIRMENT**
+                 if(//**COGNITIVE IMPAIRMENT**
                     //P20 Memory / concentration / orientation disturbance
                     conditions[c].codes["ICD9"][s].match("^780.97")|| conditions[c].codes["ICD9"][s].match("^780.93")||
                     conditions[c].codes["ICD9"][s].match("^797")|| conditions[c].codes["ICD9"][s].match("^V62.89")||
@@ -557,9 +580,10 @@ function hasFrailtyCondition( pt ){
                     //P70 Dementia / Alzheimer’s disease
                     conditions[c].codes["ICD9"][s].match("^290.4+")|| conditions[c].codes["ICD9"][s].match("^294.10")||
                     conditions[c].codes["ICD9"][s].match("^294.20")|| conditions[c].codes["ICD9"][s].match("^294.21")||
-                    conditions[c].codes["ICD9"][s].match("^331.0")||
+                    conditions[c].codes["ICD9"][s].match("^331.0"))
+                 {countDeficits++}
 
-                    //**PSYCHIATRIC PROBLEMS/SUBSTANCE ABUSE**
+                if( //**PSYCHIATRIC PROBLEMS/SUBSTANCE ABUSE**
                     //P71 Organic psychosis other
                     conditions[c].codes["ICD9"][s].match("^293.0")|| conditions[c].codes["ICD9"][s].match("^293.1")||
                     conditions[c].codes["ICD9"][s].match("^293.84")|| conditions[c].codes["ICD9"][s].match("^310.9")||
@@ -611,19 +635,22 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^305.6+")|| conditions[c].codes["ICD9"][s].match("^305.7+")||
                     conditions[c].codes["ICD9"][s].match("^304.4+")|| conditions[c].codes["ICD9"][s].match("^305.3+")||
                     conditions[c].codes["ICD9"][s].match("^304.5+")|| conditions[c].codes["ICD9"][s].match("^305.9+")||
-                    conditions[c].codes["ICD9"][s].match("^305.8+")|| conditions[c].codes["ICD9"][s].match("^304.6+")||
+                    conditions[c].codes["ICD9"][s].match("^305.8+")|| conditions[c].codes["ICD9"][s].match("^304.6+"))
+                {countDeficits++}
 
-                    //**COPD**
+                if( //**COPD**
                     //R95 Chronic obstructive pulmonary disease
                     conditions[c].codes["ICD9"][s].match("^492.0")|| conditions[c].codes["ICD9"][s].match("^492.8")||
                     conditions[c].codes["ICD9"][s].match("^491.20")|| conditions[c].codes["ICD9"][s].match("^493.20")||
-                    conditions[c].codes["ICD9"][s].match("^496")||
+                    conditions[c].codes["ICD9"][s].match("^496"))
+                {countDeficits++}
 
-                    //**ASTHMA**
+                if( //**ASTHMA**
                     //R96 Asthma
-                    conditions[c].codes["ICD9"][s].match("^493*")||
+                    conditions[c].codes["ICD9"][s].match("^493*"))
+                {countDeficits++}
 
-                    //**SKIN PROBLEMS**
+                if( //**SKIN PROBLEMS**
                     //S70 Herpes zoster
                     conditions[c].codes["ICD9"][s].match("^053.1+")|| conditions[c].codes["ICD9"][s].match("^053.2+")||
                     conditions[c].codes["ICD9"][s].match("^053.8")|| conditions[c].codes["ICD9"][s].match("^053.9")||
@@ -632,9 +659,10 @@ function hasFrailtyCondition( pt ){
                     //S97 Chronic ulcer skin
                     conditions[c].codes["ICD9"][s].match("^454.0")|| conditions[c].codes["ICD9"][s].match("^707.0+")||
                     conditions[c].codes["ICD9"][s].match("^707.10")|| conditions[c].codes["ICD9"][s].match("^707.19")||
-                    conditions[c].codes["ICD9"][s].match("^707.8")|| conditions[c].codes["ICD9"][s].match("^707.9")||
+                    conditions[c].codes["ICD9"][s].match("^707.8")|| conditions[c].codes["ICD9"][s].match("^707.9"))
+                {countDeficits++}
 
-                    //**WEIGHT PROBLEMS**
+                if( //**WEIGHT PROBLEMS**
                     //T05 Feeding problem of adult
                     conditions[c].codes["ICD9"][s].match("^783.3")||
                     //T07 Weight gain
@@ -644,9 +672,10 @@ function hasFrailtyCondition( pt ){
                     //T83 Overweight
                     conditions[c].codes["ICD9"][s].match("^278.00")||
                     //T82 Obesity
-                    conditions[c].codes["ICD9"][s].match("^278.03")|| conditions[c].codes["ICD9"][s].match("^278.00")||
+                    conditions[c].codes["ICD9"][s].match("^278.03")|| conditions[c].codes["ICD9"][s].match("^278.00"))
+                {countDeficits++}
 
-                    //**THYROID DISORDERS**
+                if( //**THYROID DISORDERS**
                     //T85 Hyperthyroidism/thyrotoxicosis
                     conditions[c].codes["ICD9"][s].match("^242.0+")|| conditions[c].codes["ICD9"][s].match("^242.1+")||
                     conditions[c].codes["ICD9"][s].match("^242.2+")|| conditions[c].codes["ICD9"][s].match("^242.3+")||
@@ -655,15 +684,17 @@ function hasFrailtyCondition( pt ){
                     //T86 Hypothyroidism/myxoedema
                     conditions[c].codes["ICD9"][s].match("^240.9")|| conditions[c].codes["ICD9"][s].match("^244.8")||
                     conditions[c].codes["ICD9"][s].match("^244.2")|| conditions[c].codes["ICD9"][s].match("^244.3")||
-                    conditions[c].codes["ICD9"][s].match("^780.01")|| conditions[c].codes["ICD9"][s].match("^244.9")||
+                    conditions[c].codes["ICD9"][s].match("^780.01")|| conditions[c].codes["ICD9"][s].match("^244.9"))
+                {countDeficits++}
 
-                    //**DIABETES MELLITUS**
+                if( //**DIABETES MELLITUS**
                     //T90 Diabetes mellitus
                     conditions[c].codes["ICD9"][s].match("^250.00")|| conditions[c].codes["ICD9"][s].match("^250.02")||
                     conditions[c].codes["ICD9"][s].match("^250.80")|| conditions[c].codes["ICD9"][s].match("^250.30")||
-                    conditions[c].codes["ICD9"][s].match("^250.12")||
+                    conditions[c].codes["ICD9"][s].match("^250.12"))
+                {countDeficits++}
 
-                    //**URINARY DISEASE**
+                if( //**URINARY DISEASE**
                     //U99 Urinary disease, other
                     conditions[c].codes["ICD9"][s].match("^591")|| conditions[c].codes["ICD9"][s].match("^593.5")||
                     conditions[c].codes["ICD9"][s].match("^593.7+")|| conditions[c].codes["ICD9"][s].match("^599.60")||
@@ -688,15 +719,17 @@ function hasFrailtyCondition( pt ){
                     conditions[c].codes["ICD9"][s].match("^598.00")|| conditions[c].codes["ICD9"][s].match("^598.9")||
                     conditions[c].codes["ICD9"][s].match("^599.1")|| conditions[c].codes["ICD9"][s].match("^599.2")||
                     conditions[c].codes["ICD9"][s].match("^599.3")|| conditions[c].codes["ICD9"][s].match("^599.9")||
-                    conditions[c].codes["ICD9"][s].match("^788.99")||
+                    conditions[c].codes["ICD9"][s].match("^788.99"))
+                {countDeficits++}
 
-                    //**PROSTRATE PROBLEMS**
+                if( //**PROSTRATE PROBLEMS**
                     //Y77 Malignant neoplasm prostate
                     conditions[c].codes["ICD9"][s].match("^233.4")|| conditions[c].codes["ICD9"][s].match("^185")||
                     //Y85 Benign prostatic hypertrophy
-                    conditions[c].codes["ICD9"][s].match("^600.0+")|| conditions[c].codes["ICD9"][s].match("^600.1+")||
+                    conditions[c].codes["ICD9"][s].match("^600.0+")|| conditions[c].codes["ICD9"][s].match("^600.1+"))
+                {countDeficits++}
 
-                    //**SOCIAL PROBLEMS**
+                if( //**SOCIAL PROBLEMS**
                     //Z01 Poverty/financial problem
                     conditions[c].codes["ICD9"][s].match("^V60.2")|| conditions[c].codes["ICD9"][s].match("^V60.89")||
                     conditions[c].codes["ICD9"][s].match("^V60.9")||
@@ -721,13 +754,19 @@ function hasFrailtyCondition( pt ){
                     //handled above
                     //Z15 Loss/death of partner problem
                     conditions[c].codes["ICD9"][s].match("^V61.07")|| conditions[c].codes["ICD9"][s].match("^V62.82")||
-                    conditions[c].codes["ICD9"][s].match("^V61.03")
+                    conditions[c].codes["ICD9"][s].match("^V61.03"))
+                {countDeficits++}
 
-                ){
+                if( //**POLYPHARMACY**
+                    //10 or more medications
+                    countMedications(pt)>= 10)
+                {countDeficits++}
 
-                    return true;
-
-                }
+            }
+            //If the patient has 9 or more deficits, they are considered frail ***this value is subject to change***
+            if((countDeficits/36) > 0.25)
+            {
+                return true;
             }
         }
     }
