@@ -1,23 +1,45 @@
 {
-    "type" : "QUERY", 
-    "name" : "PDC-058_secondary-statins",
-    "description" : "Prevalence of cardiopulmonary events for active patients who are prescribed a statin.", 
-    "map": "queries/PDC-058_secondary-statins-map.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "functions/activePatient.js", "functions/isActiveMed.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/empty_dataset.json",
-            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc1.js",
-            "comment": "test the case where there are no patients, similar to other tests."
-        },{
-            "name" : "TC2",
-            "data" : "test/data/PDC-057_primary-statins_data-2.json",
-            "verifier" : "./verify/PDC-058_secondary-statins_verify_tc2.js", 
-            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-10.js",
-            "comment": ""
-        }
-    ]
+  "type": "QUERY",
+  "name": "PDC-058_secondary-statins",
+  "description": "This metric evaluates the percentage of active patients, 65 years old and older, on statins for secondary prevention, whereby secondary prevention is the presence of documented myocardial infarction (MI), acute MI or stroke.",
+  "map": "queries/PDC-058_secondary-statins-map.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/filter_activeMeds.js",
+    "functions/isAge.js",
+    "functions/isMatch.js",
+    "functions/activePatient.js",
+    "functions/isActiveMed.js"
+  ],
+  "display_name": "Statins for Secondary Prevention",
+  "units": "patient",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PPhRR",
+  ],
+  "contact": "pdc@pdc.io",
+  "qualified_by": [
+    ""
+  ],
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/empty_dataset.json",
+      "verifier": "./verify/PDC-053_polypharmacy-5_verify_tc1.js",
+      "comment": "test the case where there are no patients, similar to other tests."
+    },
+    {
+      "name": "TC2",
+      "data": "test/data/PDC-057_primary-statins_data-2.json",
+      "verifier": "./verify/PDC-058_secondary-statins_verify_tc2.js",
+      "data_processor": "./data_processor/PDC-053_polypharmacy-5_processor-10.js",
+      "comment": ""
+    }
+  ]
 }

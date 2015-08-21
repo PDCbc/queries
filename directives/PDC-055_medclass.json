@@ -1,10 +1,22 @@
 {
     "type" : "QUERY", 
     "name" : "PDC-055_medclass",
-    "description" : "Emits the medication classes for all active medications prescribed to active patients.", 
+    "title" : "PDC-055",
+    "description" : "This metric provides an analysis of the top ten medication classes prescribed by individual physicians for their active patients.",
+    "display_name" : "Top 10 Most Frequently Prescribed Medications",
     "map": "queries/PDC-055_most-common-medications.js",
     "reduce" : "Resources/PDC_general-reduce.js",
     "functions" : ["functions/filter_activeMeds.js", "functions/activePatient.js"],
+    "units" : "Prescriptions",
+    "panels" :[
+        "PPhRR"
+    ],
+    "query_type" : "CLASS",
+    "target"  : {
+        "value" : "N/A",
+        "reference": "N/A",
+        "description" : "N/A"
+    },
     "qualified_by":[""],
     "tests" : [
         {

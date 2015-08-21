@@ -3,9 +3,9 @@
     "name" : "PDC-053_polypharmacy-5",
     "title" : "PDC-053",
     "display_name" : "Polypharmacy > 5 in the Elderly",
-    "unit" : "patient",
+    "units" : "Patients",
     "target" : {
-       "value":"20%",
+       "value":"N/A",
        "reference":"N/A",
        "description":"N/A"
     }, 
@@ -14,7 +14,7 @@
     "panels" : ["PPhRR", "PracticeReflection"],
     "contact" : "pdc@pdc.io",
     "definition" : "Calculated as a ratio. Denominator: active patients with age >= 65, numerator: active patients with age >= 65 who have 5 or more active medications.",
-    "description" : "The percentage of elderly patients, 65 and older, that are active patients and are on 5 or more current medications.", 
+    "description" : "This metric assesses the number of active patients that are currently on more than 5 medications for patients that are 65 years of age or older.",
     "map": "queries/PDC-053_polypharmacy-map-5.js", 
     "reduce" : "Resources/PDC_general-reduce.js",
     "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js"],
