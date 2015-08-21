@@ -1,20 +1,34 @@
 {
-	"type": "QUERY",
-	"name": "PDC-836_DQ-CodedMedications",
-	"description": "Coded Medications",
-	"map": "queries/PDC-836_DQ-CodedMedications.js",
-	"reduce": "Resources/PDC_general-reduce.js",
-	"functions": [],
-	"qualified_by": [
-		""
-	],
-	"tests": [
-      {
-        "name": "TC1",
-        "data": "test/data/PDC-836_DQ-CodedMedications_data_1.json",
-        "data_processor": "./data_processor/PDC_processor-2.js",
-        "verifier" : "./verify/PDC_verify_tc1.js"
-	  }
-	],
-	"title": "PDC-836"
+  "type": "QUERY",
+  "title": "PDC-836",
+  "name": "PDC-836_DQ-CodedMedications",
+  "display_name": "Percentage of Medications that are Coded",
+  "description": "What percentage of current medications is coded? ",
+  "map": "queries/PDC-836_DQ-CodedMedications.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth",
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-836_DQ-CodedMedications_data_1.json",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "verifier": "./verify/PDC_verify_tc1.js"
+    }
+  ]
 }

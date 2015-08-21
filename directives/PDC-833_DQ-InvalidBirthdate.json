@@ -1,20 +1,34 @@
 {
-	"type": "QUERY",
-	"name": "PDC-833_DQ-InvalidBirthdate",
-	"description": "Invalid Birthdate",
-	"map": "queries/PDC-833_DQ-InvalidBirthdate.js",
-	"reduce": "Resources/PDC_general-reduce.js",
-	"functions": [],
-	"qualified_by": [
-		""
-	],
-	"tests": [
-      {
-        "name": "TC1",
-        "data": "test/data/PDC-833_DQ-InvalidBirthdate_data_1.json",
-        "data_processor": "./data_processor/PDC_processor-2.js",
-        "verifier" : "./verify/PDC_verify2_tc1.js"
-	  }
-	],
-	"title": "PDC-833"
+  "type": "QUERY",
+  "title": "PDC-833",
+  "name": "PDC-833_DQ-InvalidBirthdate",
+  "display_name": "Active Patients with Invalid Date of Birth",
+  "description": "What percentage of patients, calculated as active, has an invalid date of birth?",
+  "map": "queries/PDC-833_DQ-InvalidBirthdate.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth",
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-833_DQ-InvalidBirthdate_data_1.json",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "verifier": "./verify/PDC_verify2_tc1.js"
+    }
+  ]
 }

@@ -1,20 +1,34 @@
 {
-	"type": "QUERY",
-	"name": "PDC-832_DQ-DocumentedGender",
-	"description": "Documented Gender",
-	"map": "queries/PDC-832_DQ-DocumentedGender.js",
-	"reduce": "Resources/PDC_general-reduce.js",
-	"functions": [],
-	"qualified_by": [
-		""
-	],
-	"tests": [
-      {
-        "name": "TC1",
-        "data": "test/data/PDC-832_DQ-DocumentedGender_data_1.json",
-        "data_processor": "./data_processor/PDC_processor-2.js",
-        "verifier" : "./verify/PDC_verify_tc1.js"
-	  }
-	],
-	"title": "PDC-832"
+  "type": "QUERY",
+  "title": "PDC-832",
+  "name": "PDC-832_DQ-DocumentedGender",
+  "display_name": "Active Patients Missing Gender",
+  "description": "What percentage of patients, calculated as active, with no documented gender?",
+  "map": "queries/PDC-832_DQ-DocumentedGender.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth",
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-832_DQ-DocumentedGender_data_1.json",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "verifier": "./verify/PDC_verify_tc1.js"
+    }
+  ]
 }

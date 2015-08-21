@@ -1,20 +1,34 @@
 {
-	"type": "QUERY",
-	"name": "PDC-889_DQ-BMI",
-	"description": "BMI",
-	"map": "queries/PDC-889_DQ-BMI.js",
-	"reduce": "Resources/PDC_general-reduce.js",
-	"functions": [],
-	"qualified_by": [
-		""
-	],
-	"tests": [
-      {
-        "name": "TC1",
-        "data": "test/data/PDC-889_DQ-BMI_data_1.json",
-        "data_processor": "./data_processor/PDC_processor-2.js",
-        "verifier" : "./verify/PDC_verify_tc1.js"
-	  }
-	],
-	"title": "PDC-889"
+  "type": "QUERY",
+  "name": "PDC-889_DQ-BMI",
+  "display_name": "Documentation Rate for BMI",
+  "title": "PDC-889",
+  "description": "Count of all active patients greater than or equal to >= 21 years old with Body Mass Index (BMI) documented in the last 3 years?",
+  "map": "queries/PDC-889_DQ-BMI.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth",
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-889_DQ-BMI_data_1.json",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "verifier": "./verify/PDC_verify_tc1.js"
+    }
+  ]
 }

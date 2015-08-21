@@ -1,20 +1,34 @@
 {
-	"type": "QUERY",
-	"name": "PDC-842_DQ-Diabetes12+",
-	"description": "Coded Conditions",
-	"map": "queries/PDC-842_DQ-Diabetes12+.js",
-	"reduce": "Resources/PDC_general-reduce.js",
-	"functions": [],
-	"qualified_by": [
-		""
-	],
-	"tests": [
-      {
-        "name": "TC1",
-        "data": "test/data/PDC-842_DQ-Diabetes12+_data_1.json",
-        "data_processor": "./data_processor/PDC_processor-2.js",
-        "verifier" : "./verify/PDC_verify_tc1.js"
-	  }
-	],
-	"title": "PDC-840"
+  "type": "QUERY",
+  "title": "PDC-842",
+  "name": "PDC-842_DQ-Diabetes12+",
+  "display_name": "Percentage of Patients with Diabetes",
+  "description": "What percentage of patients, calculated as active, 12 yrs and over, have Diabetes on the problem list?",
+  "map": "queries/PDC-842_DQ-Diabetes12+.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth",
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-842_DQ-Diabetes12+_data_1.json",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "verifier": "./verify/PDC_verify_tc1.js"
+    }
+  ]
 }

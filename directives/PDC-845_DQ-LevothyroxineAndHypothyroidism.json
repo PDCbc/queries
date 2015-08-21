@@ -1,20 +1,34 @@
 {
-	"type": "QUERY",
-	"name": "PDC-845_DQ-LevothyroxineAndHypothyroidism",
-	"description": "LevothyroxineAndHypothyroidism",
-	"map": "queries/PDC-845_DQ-LevothyroxineAndHypothyroidism.js",
-	"reduce": "Resources/PDC_general-reduce.js",
-	"functions": [],
-	"qualified_by": [
-		""
-	],
-	"tests": [
-      {
-        "name": "TC1",
-        "data": "test/data/PDC-845_DQ-LevothyroxineAndHypothyroidism_data_1.json",
-        "data_processor": "./data_processor/PDC_processor-2.js",
-        "verifier" : "./verify/PDC_verify_tc1.js"
-	  }
-	],
-	"title": "PDC-845"
+  "type": "QUERY",
+  "title": "PDC-845",
+  "display_name": "Hypothyroidism Completeness Estimate",
+  "name": "PDC-845_DQ-LevothyroxineAndHypothyroidism",
+  "description": "Of patients with Levothyroxine medications, what percentage has Hypothyroidism on the problem list?",
+  "map": "queries/PDC-845_DQ-LevothyroxineAndHypothyroidism.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth",
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-845_DQ-LevothyroxineAndHypothyroidism_data_1.json",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "verifier": "./verify/PDC_verify_tc1.js"
+    }
+  ]
 }
