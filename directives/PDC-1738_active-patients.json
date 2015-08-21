@@ -1,16 +1,35 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-1738_active-patients",
-    "description" : "Active patients who are over the age of 65.", 
-    "map": "queries/PDC-1738_active-patients.js", 
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/activePatient.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/empty_dataset.json",
-            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc1.js" 
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-1738",
+  "name": "PDC-1738_active-patients",
+  "display_name": "Calculated Active Patients",
+  "description": "Number of calculated active patients.",
+  "map": "queries/PDC-1738_active-patients.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/activePatient.js"
+  ],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment",
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/empty_dataset.json",
+      "verifier": "./verify/PDC-053_polypharmacy-5_verify_tc1.js"
+    }
+  ]
 }
