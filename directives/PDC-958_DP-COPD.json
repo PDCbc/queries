@@ -1,18 +1,46 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-958_DP-COPD",
-    "description" : "Active patients who have the condition in the problem list. Population includes active patients ages 20 through 120.",
-    "map": "queries/PDC-958_DP-COPD.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/activePatient.js", "functions/isAge.js", "functions/hasHypertension.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/PDC-958_DP-COPD_data_1.json",
-            "verifier" : "./verify/PDC_verify_tc1.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js",
-            "comments":"without current encounter (active patient)"
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-958",
+  "name": "PDC-958_DP-COPD",
+  "display_name": "Documented Prevalence of COPD",
+  "description": "This metric shows the percentage of active patients with Chronic Obstructive Pulmonary Disease (COPD) documented current medical profile; active patient population age >18 to 100 yrs.",
+  "map": "queries/PDC-958_DP-COPD.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/activePatient.js",
+    "functions/isAge.js",
+    "functions/hasHypertension.js"
+  ],
+  "qualified_by": [
+    ""
+  ],
+  "functions": [
+    "functions/activePatient.js",
+    "functions/isAge.js",
+    "functions/hasDiabetes.js"
+  ],
+  "qualified_by": [
+    ""
+  ],
+  "units": "Patients",
+  "target": {
+    "value": "9.3%",
+    "reference": "Public Health Agency of Canada – Canada 2010-11",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-958_DP-COPD_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "comments": "without current encounter (active patient)"
+    }
+  ]
 }

@@ -1,17 +1,36 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-1787_DP-CD",
-    "description" : "Active patients who have the condition in the problem list. Population includes active patients of any age",
-    "map": "queries/PDC-1787_DP-CD.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "hasCD.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/PDC-1787_DP-CD_data_1.json",
-            "verifier" : "./verify/PDC_verify_tc1.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js"
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-1787",
+  "name": "PDC-1787_DP-CD",
+  "display_name": "Documented Prevalence of Cerebrovascular Disease in Adults",
+  "description": "Active patients who have the condition in the problem list. Population includes active patients of any age",
+  "map": "queries/PDC-1787_DP-CD.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/filter_activeMeds.js",
+    "functions/isAge.js",
+    "functions/isMatch.js",
+    "hasCD.js"
+  ],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "1.3%",
+    "reference": "Public Health Agency of Canada – Canada 2010-11",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-1787_DP-CD_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js"
+    }
+  ]
 }

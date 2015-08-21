@@ -1,17 +1,36 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-954_DP-CKD",
-    "description" : "Active patients who the condition in the problem list. Population includes active patients ages 20 through 120.",
-    "map": "queries/PDC-954_DP-CKD.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "hasCKD.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/PDC-954_DP-CKD_data_1.json",
-            "verifier" : "./verify/PDC_verify_tc1.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js"
-        }
-    ]
+  "type": "QUERY",
+  "name": "PDC-954",
+  "name": "PDC-954_DP-CKD",
+  "display_name": "Documented Prevalence of Chronic Kidney Disease in Adults",
+  "description": "Active patients who the condition in the problem list. Population includes active patients ages 20 through 120.",
+  "map": "queries/PDC-954_DP-CKD.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/filter_activeMeds.js",
+    "functions/isAge.js",
+    "functions/isMatch.js",
+    "hasCKD.js"
+  ],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "12.5%",
+    "reference": "Canadian Health Measures Survey - Canada 2007-8",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-954_DP-CKD_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js"
+    }
+  ]
 }

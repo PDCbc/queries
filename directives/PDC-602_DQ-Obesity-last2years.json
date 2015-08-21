@@ -1,18 +1,41 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-602_DQ-Obesity-last2years",
-    "description" : "Active patients who have the issue documented in CMOs. Population includes active patients ages over 19",
-    "map": "queries/PDC-602_DQ-Obesity-last2years.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/activePatient.js", "functions/isAge.js", "functions/hasWC.js", "functions/hasBMI.js", "functions/hasHeight.js", "functions/hasWeight.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/PDC-602_DQ-Obesity-last2years_data_1.json",
-            "verifier" : "./verify/PDC_verify_tc1.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js",
-            "comments":"with current encounter (active patient)"
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-602",
+  "name": "PDC-602_DQ-Obesity-last2years",
+  "display_name": "Documented Prevalence of Obesity in Adolescents",
+  "description": "This metric shows the percentage of overweight or obese active patients age 12-19 yrs",
+  "map": "queries/PDC-602_DQ-Obesity-last2years.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/activePatient.js",
+    "functions/isAge.js",
+    "functions/hasWC.js",
+    "functions/hasBMI.js",
+    "functions/hasHeight.js",
+    "functions/hasWeight.js"
+  ],
+  "units": "Patients",
+  "target": {
+    "value": "5.4%",
+    "reference": "Public Health Agency of Canada – BC 2011",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "qualified_by": [
+    ""
+  ],
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-602_DQ-Obesity-last2years_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "comments": "with current encounter (active patient)"
+    }
+  ]
 }

@@ -1,18 +1,37 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-1786_DP-IHD",
-    "description" : "Active patients who have the condition in the problem list. Population includes active patients of all ages.",
-    "map": "queries/PDC-1786_DP-IHD.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/activePatient.js", "functions/isAge.js", "functions/hasIHD.js", "functions/hasCondition.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/PDC-1786_IHD_data_1.json",
-            "verifier" : "./verify/PDC_verify_tc1.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js",
-            "comments":"with current encounter (active patient)"
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-1786",
+  "name": "PDC-1786_DP-IHD",
+  "display_name": "Documented Prevalence of Ischemic Heart Disease",
+  "description": "This metric shows the percentage of active patients with Ischemic Heart Disease documented in a current medical profile; active patient population age > 18 to 100 yrs",
+  "map": "queries/PDC-1786_DP-IHD.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/activePatient.js",
+    "functions/isAge.js",
+    "functions/hasIHD.js",
+    "functions/hasCondition.js"
+  ],
+  "units": "Patients",
+  "target": {
+    "value": "8.4%",
+    "reference": "Heart and Stroke Foundation - BC2013",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "qualified_by": [],
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-1786_IHD_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "comments": "with current encounter (active patient)"
+    }
+  ]
 }

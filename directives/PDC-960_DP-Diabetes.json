@@ -1,32 +1,52 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-960_DP-Diabetes",
-    "description" : "Active patients who have the condition in the problem list. Population includes active patients ages 20 through 120.",
-    "map": "queries/PDC-960_DP-Diabetes.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/activePatient.js", "functions/isAge.js", "functions/hasDiabetes.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/PDC-960_DP-Diabetes_data_1.json",
-            "verifier" : "./verify/PDC-960_DP-Diabetes_verify_tc1.js",
-            "data_processor" : "./data_processor/PDC_processor-1.js",
-            "comments":"without current encounter (not active patient)"
-        },
-        {
-            "name" : "TC2",
-            "data" : "test/data/PDC-960_DP-Diabetes_data_2.json",
-            "verifier" : "./verify/PDC-960_DP-Diabetes_verify_tc2.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js",
-            "comments":"with current encounter (active patient)"
-        },
-        {
-            "name" : "TC3",
-            "data" : "test/data/PDC-960_DP-Diabetes_data_3.json",
-            "verifier" : "./verify/PDC-960_DP-Diabetes_verify_tc3.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js",
-            "comments":"with current encounter (active patient)"
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-960",
+  "name": "PDC-960_DP-Diabetes",
+  "display_name": "Documented Prevalence of Diabetes",
+  "description": "This metric shows the percentage of active patients with Diabetes documented in a current medical profile; active patient population age >18 to 100 yrs.",
+  "map": "queries/PDC-960_DP-Diabetes.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/activePatient.js",
+    "functions/isAge.js",
+    "functions/hasDiabetes.js"
+  ],
+  "qualified_by": [
+    ""
+  ],
+  "units": "Patients",
+  "target": {
+    "value": "5.4%",
+    "reference": "Public Health Agency of Canada – BC 2011",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-960_DP-Diabetes_data_1.json",
+      "verifier": "./verify/PDC-960_DP-Diabetes_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-1.js",
+      "comments": "without current encounter (not active patient)"
+    },
+    {
+      "name": "TC2",
+      "data": "test/data/PDC-960_DP-Diabetes_data_2.json",
+      "verifier": "./verify/PDC-960_DP-Diabetes_verify_tc2.js",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "comments": "with current encounter (active patient)"
+    },
+    {
+      "name": "TC3",
+      "data": "test/data/PDC-960_DP-Diabetes_data_3.json",
+      "verifier": "./verify/PDC-960_DP-Diabetes_verify_tc3.js",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "comments": "with current encounter (active patient)"
+    }
+  ]
 }
