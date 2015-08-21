@@ -5,7 +5,17 @@
  */
 function map( patient ){
 
-    emit("denominator_"+patient.json.primary_care_provider_id, +activePatient(patient));
-    emit( "numerator_"+patient.json.primary_care_provider_id, +(activePatient(patient) && isEol(patient)) );
+    try{
+
+        if (filterProviders(patient.json.primary_care_provider_id, "PracticeReflection")){
+
+            emit("denominator_"+patient.json.primary_care_provider_id, +activePatient(patient));
+            emit( "numerator_"+patient.json.primary_care_provider_id, +(activePatient(patient) && isEol(patient)) );
+        }
+
+    }catch(e){
+        emit("FAILURE_"+e);
+    }
+
 
 }
