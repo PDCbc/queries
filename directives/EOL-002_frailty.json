@@ -1,0 +1,17 @@
+{
+    "type": "QUERY",
+    "name" : "EOL-001",
+    "description" : "Frail patients who are 55 years and over.",
+    "map": "queries/EOL-002_frailty.js",
+    "reduce" : "Resources/PDC_general-reduce.js",
+    "functions" : [],
+    "qualified_by":[""],
+    "tests" : [
+        {
+            "name" : "TC1",
+            "data" : "test/data/EOL-002_data_1.json",
+            "verifier" : "./verify/EOL-002_verify_tc1.js",
+            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-3.js" 
+        }
+    ]
+}
