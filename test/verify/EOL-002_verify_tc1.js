@@ -1,8 +1,6 @@
 /**
-* A verifier function for the query: PDC-955_CHF
-* 
-* @author: Simon Diemert
-* @date: 2015-05-07
+* A verifier function for the query: EOL-002_frailty
+*
 */
 
 /*
@@ -16,7 +14,7 @@ function verify(results){
     console.log(results); //***remove me before merge***
     if ( 
         results[1]._id === "numerator_PROVIDER1"  &&
-        results[1].value === 0
+        results[1].value === 2
     ){
        return {result: true}; 
     }else{

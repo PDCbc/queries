@@ -1,8 +1,6 @@
 /**
-* A verifier function for the query: PDC-955_CHF
-* 
-* @author: Simon Diemert
-* @date: 2015-05-07
+* A verifier function for the query: EOL-001
+*
 */
 
 /*
