@@ -12,7 +12,7 @@ function isFrail(pt) {
     if (isAge(pt, 55) && (activePatient(pt))) {
 
         // Does the patient meet the frailty condition i.e. has an F.I. score greater than 0.25
-        if(meetsFrailtyConditions(pt))
+        if(hasFrailtyConditions(pt))
             return true;
     }
 

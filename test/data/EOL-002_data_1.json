@@ -11,7 +11,7 @@
     "medications" : [],
     "comment": "Inappropriate age, has condition",
     "conditions" : [
-      { "codes": { "ICD9": ["585.5"]}, "time": 1263167138, "description": "Chronic kidney disease, stage 5"}
+      { "codes": { "ICD9": ["585.6"]}, "time": 1263167138, "description": "End stage renal disease"}
     ]
   },
 
@@ -20,45 +20,51 @@
     "medications" : [],
     "comment" : "Appropriate age, has condition but index will be less than 0.25",
     "conditions" : [
-      { "codes": { "ICD9": ["585.5"]}, "time": 1263167138, "description": "Chronic kidney disease, stage 5"}
+      { "codes": { "ICD9": ["585.6"]}, "time": 1263167138, "description": "End stage renal disease"}
     ]
   },
 
   { "primary_care_provider_id" : "PROVIDER1", 
     "birthdate": -96,
     "medications" : [
-      { "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "time" : -1,
-        "start_time" : -1, "end_time" : 1,
-        "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }
-      },{ "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "time" : -1,
-        "start_time" : -1, "end_time" : 1,
-        "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }
-      },{ "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "time" : -1,
-        "start_time" : -1, "end_time" : 1,
-        "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }
-      },{ "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "time" : -1,
-        "start_time" : -1, "end_time" : 1,
-        "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }
-      },{ "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "time" : -1,
-        "start_time" : -1, "end_time" : 1,
-        "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }
-      },{ "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "time" : -1,
-        "start_time" : -1, "end_time" : 1,
-        "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }
-      },{ "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "time" : -1,
-        "start_time" : -1, "end_time" : 1,
-        "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }
-      },{ "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "time" : -1,
-        "start_time" : -1, "end_time" : 1,
-        "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }
-      },{ "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "time" : -1,
-        "start_time" : -1, "end_time" : 1,
-        "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ] }
+      {
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
+      },{
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
+      },{
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
+      },{
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
+      },{
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
+      },{
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
+      },{
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
+      },{
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
+      },{
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
+      },{
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
+      },{
+        "_id" : { "$oid" : "551cce86c58406644d0000c4" }, "_type" : "Medication", "freeTextSig" : " 77", "statusOfMedication" : { "value" : "active" }, "codes" : { "HC-DIN" : [ "00559407" ], "whoATC" : [ "N02BE01" ]}, "time" : -1,
+        "start_time" : -1, "end_time" : 1
       }
     ],
     "comment" : "Appropriate age, has 8 conditions & polypharmacy",
     "conditions" : [
-      { "codes": { "ICD9": ["585.4","411.1","410.01","388.01","366.16","362.5","070.30","799.3"]},
+      { "codes": { "ICD9": ["585.6","411.1","410.01","388.01","366.16","362.5","070.30","799.3"]},
         "time": 1263167138, "description": "8 Frail Conditions"}
     ]
   },
@@ -66,9 +72,9 @@
   { "primary_care_provider_id" : "PROVIDER1",
     "birthdate": -55,
     "medications" : [],
-    "comment" : "Appropriate age & index will be 0.25. Also testing regex with 362.5 & 070.3 & age boundary",
+    "comment" : "Appropriate age & index will be 0.25. Also testing regex with 208.00 & 070.3 & age boundary",
     "conditions" : [
-      { "codes": { "ICD9": ["585.4","411.1","410.01","388.01","366.16","362.5","070.30","799.3","164.9"]},
+      { "codes": { "ICD9": ["585.6","411.1","410.01","388.01","366.16","208.00","070.30","799.3","164.9"]},
         "time": 1263167138, "description": "9 Frail Conditions"}
     ]
   }
