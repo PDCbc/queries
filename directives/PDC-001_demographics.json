@@ -3,7 +3,7 @@
   "name" : "PDC-001_demographics",
   "title" : "PDC-001",
   "description" : "This metric counts at the total number of active patients in a physicians practice and groups the results on gender and age.",
-  "display_name" : "",
+  "display_name" : "Practice Demographics Profile",
   "units" : "patient",
   "target" : {
     "value":"N/A",
