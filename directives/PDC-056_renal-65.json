@@ -1,11 +1,21 @@
 {
     "type" : "QUERY", 
     "name" : "PDC-056_renal",
-    "description" : "Prevalence of individuals who have impaired renal function and are on digoxin.", 
+    "description" : "This metric assesses the use of Digoxin (>125 mcg/day) in those active patients with impaired renal function who are 65 years of age or older.",
+    "display_name" : "Digoxin Medication Use",
     "map": "queries/PDC-056_renal-map-65.js",
     "reduce" : "Resources/PDC_general-reduce.js",
     "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "functions/activePatient.js", "functions/isActiveMed.js"],
     "qualified_by":[""],
+    "panels" : [
+        "PPhRR"
+    ],
+    "query_type" : "RATIO",
+    "target" : {
+        "value":"N/A",
+        "reference":"N/A",
+        "description":"N/A"
+    },
     "tests" : [
         {
             "name" : "TC1",

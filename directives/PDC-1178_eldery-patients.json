@@ -1,22 +1,42 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-1178_elderly-patients",
-    "description" : "Active patients who are over the age of 65.", 
-    "map": "queries/PDC-1178_elderly-patients.js", 
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/activePatient.js", "functions/isAge.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/empty_dataset.json",
-            "verifier" : "./verify/PDC-053_polypharmacy-5_verify_tc1.js" 
-        },
-        {
-            "name" : "TC2",
-            "data" : "test/data/PDC-1178_elderly-patients_data_2.json",
-            "verifier" : "./verify/PDC-1178_elderly-patients_verify_tc2.js",
-            "data_processor" : "./data_processor/PDC-053_polypharmacy-5_processor-3.js" 
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-1178",
+  "name": "PDC-1178_elderly-patients",
+  "display": "Active Elderly Patients",
+  "description": "Active patients who are over the age of 65.",
+  "map": "queries/PDC-1178_elderly-patients.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/activePatient.js",
+    "functions/isAge.js"
+  ],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment",
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/empty_dataset.json",
+      "verifier": "./verify/PDC-053_polypharmacy-5_verify_tc1.js"
+    },
+    {
+      "name": "TC2",
+      "data": "test/data/PDC-1178_elderly-patients_data_2.json",
+      "verifier": "./verify/PDC-1178_elderly-patients_verify_tc2.js",
+      "data_processor": "./data_processor/PDC-053_polypharmacy-5_processor-3.js"
+    }
+  ]
 }

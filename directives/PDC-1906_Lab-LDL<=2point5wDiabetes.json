@@ -1,17 +1,36 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-1906_Lab-LDL<=2point5wDiabetes.json",
-    "description" : "Active patients who have had the lab in the time period and are the specified age.",
-    "map": "queries/PDC-1906_Lab-LDL<=2point5wDiabetes.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "hasA1C.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/PDC-1906_Lab-LDL<=2point5wDiabetes_data_1.json",
-            "verifier" : "./verify/PDC_verify_tc1.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js"
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-1906",
+  "name": "PDC-1906_Lab-LDL<=2point5wDiabetes",
+  "display_name": "Diabetics with LDL <= 2.5 mmol/L in last year",
+  "description": "LDL <= 2.5 mmol/L in last 1y / diabetes",
+  "map": "queries/PDC-1906_Lab-LDL<=2point5wDiabetes.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/filter_activeMeds.js",
+    "functions/isAge.js",
+    "functions/isMatch.js",
+    "hasA1C.js"
+  ],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-1906_Lab-LDL<=2point5wDiabetes_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js"
+    }
+  ]
 }

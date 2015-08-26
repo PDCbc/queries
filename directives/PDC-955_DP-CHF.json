@@ -1,23 +1,44 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-955_DP-CHF",
-    "description" : "Active patients who have the condition documented in the problem list. Population includes active patients ages 20 through 120.",
-    "map": "queries/PDC-955_DP-CHF.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "functions/hasCHF.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/PDC-955_DP-CHF_data_1.json",
-            "verifier" : "./verify/PDC_verify_tc1.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js"
-        },
-        {
-            "name" : "TC2",
-            "data" : "test/data/PDC-955_DP-CHF_data_2.json",
-            "verifier" : "./verify/PDC-955_DP-CHF_verify_tc2.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js"
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-955",
+  "name": "PDC-955_DP-CHF",
+  "display_name": "Documented Prevalence of Congestive Heart Failure",
+  "description": "This metric shows the percentage of active patients with Congestive Heart Failure (CHF) documented in a current medical profile; active patient population age >18 to 100 yrs.",
+  "map": "queries/PDC-955_DP-CHF.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "units": "Patients",
+  "target": {
+    "value":"3.5%",
+    "reference": "Public Health Agency of Canada – BC 2011",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "functions": [
+    "functions/filter_activeMeds.js",
+    "functions/isAge.js",
+    "functions/isMatch.js",
+    "functions/hasCHF.js"
+  ],
+  "qualified_by": [
+    ""
+  ],
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-955_DP-CHF_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js"
+    },
+    {
+      "name": "TC2",
+      "data": "test/data/PDC-955_DP-CHF_data_2.json",
+      "verifier": "./verify/PDC-955_DP-CHF_verify_tc2.js",
+      "data_processor": "./data_processor/PDC_processor-2.js"
+    }
+  ]
 }

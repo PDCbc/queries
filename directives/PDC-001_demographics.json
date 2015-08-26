@@ -1,0 +1,22 @@
+{
+  "type": "QUERY",
+  "name" : "PDC-001_demographics",
+  "title" : "PDC-001",
+  "description" : "This metric counts at the total number of active patients in a physicians practice and groups the results on gender and age.",
+  "display_name" : "Practice Demographics Profile",
+  "units" : "patient",
+  "target" : {
+    "value":"N/A",
+    "reference":"N/A",
+    "description":"N/A"
+  },
+  "query_type" : "STRATIFIED",
+  "status" : "ACTIVE",
+  "panels" : ["PPhRR", "PracticeReflection", "Attachment", "PracticeReflection"],
+  "contact" : "pdc@pdc.io",
+  "map": "queries/PDC-001_population-map.js",
+  "reduce" : "Resources/PDC_general-reduce.js",
+  "functions" : [],
+  "qualified_by":[],
+  "tests" : []
+}

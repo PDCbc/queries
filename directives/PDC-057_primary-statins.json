@@ -1,7 +1,17 @@
 {
     "type" : "QUERY", 
     "name" : "PDC-057_primary-statins",
-    "description" : "Prevalence of cardiopulmonary events for active patients who are prescribed a statin.", 
+    "description" : "This metric evaluates the percentage of active patients, 65 years old and older, on statins for primary prevention, whereby primary prevention is the absence of documented myocardial infarction (MI), acute MI or stroke.",
+    "display_name" : "Statins for Primary Prevention",
+    "units" : "patients",
+    "query_type"  : "RATIO",
+    "target" : {
+        "value":"N/A",
+        "reference":"N/A",
+        "description":"N/A"
+    },
+    "status" : "ACTIVE",
+    "panels" : ["PPhRR"],
     "map": "queries/PDC-057_primary-statins-map.js",
     "reduce" : "Resources/PDC_general-reduce.js",
     "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "functions/activePatient.js", "functions/isActiveMed.js"],

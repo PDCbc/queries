@@ -1,20 +1,35 @@
 {
-	"type": "QUERY",
-	"name": "PDC-831_DQ-EncounterFrequency",
-	"description": "Encounter Frequency",
-	"map": "queries/PDC-831_DQ-EncounterFrequency.js",
-	"reduce": "Resources/PDC_general-reduce.js",
-	"functions": [],
-	"qualified_by": [
-		""
-	],
-	"tests": [
-      {
-        "name": "TC1",
-        "data": "test/data/PDC-831_DQ-EncounterFrequency_data_1.json",
-        "data_processor": "./data_processor/PDC_processor-2.js",
-        "verifier" : "./verify/PDC_verify_tc1.js"
-	  }
-	],
-	"title": "PDC-831"
+  "type": "QUERY",
+  "title": "PDC-831",
+  "name": "PDC-831_DQ-EncounterFrequency",
+  "display_name": "Active Patients Seen in the Last 3 Years",
+  "description": "What percentage of patients, flagged as active, had at least one encounter or one prescription in the past 36 months?",
+  "map": "queries/PDC-831_DQ-EncounterFrequency.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth",
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-831_DQ-EncounterFrequency_data_1.json",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "verifier": "./verify/PDC_verify_tc1.js"
+    }
+  ],
+  "title": "PDC-831"
 }

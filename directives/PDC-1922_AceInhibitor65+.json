@@ -1,20 +1,32 @@
 {
-	"type": "QUERY",
-	"name": "PDC-1922_AceInhibitor65+",
-	"description": "PDC-1922_AceInhibitor65+",
-	"map": "queries/PDC-1922_AceInhibitor65+.js",
-	"reduce": "Resources/PDC_general-reduce.js",
-	"functions": [],
-	"qualified_by": [
-		""
-	],
-	"tests": [
-      {
-        "name": "TC1",
-        "data": "test/data/PDC-1922_AceInhibitor65+_data_1.json",
-        "data_processor": "./data_processor/PDC_processor-2.js",
-        "verifier" : "./verify/PDC_verify_tc1.js"
-	  }
-	],
-	"title": "PDC-1922_AceInhibitor65+"
+  "type": "QUERY",
+  "title" : "PDC-1922",
+  "name": "PDC-1922_AceInhibitor65+",
+  "display_name": "Angiotensin Converting Enzyme (ACE) Inhibitor Use",
+  "description": "This metric shows the percentage of active patients, 65 and over, on an active medication for angiotensin converting enzyme (ACE) inhibitors, excluding combinations.",
+  "map": "queries/PDC-1922_AceInhibitor65+.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "units" : "Patient",
+  "target" : {
+    "value":"N/A",
+    "reference":"N/A",
+    "description":"N/A"
+  },
+  "query_type" : "RATIO",
+  "status" : "ACTIVE",
+  "panels" : ["PracticeReflection"],
+  "contact" : "pdc@pdc.io",
+  "functions": [],
+  "qualified_by": [
+    ""
+  ],
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-1922_AceInhibitor65+_data_1.json",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "verifier": "./verify/PDC_verify_tc1.js"
+    }
+  ],
+  "title": "PDC-1922_AceInhibitor65+"
 }

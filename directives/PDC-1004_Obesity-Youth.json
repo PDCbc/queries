@@ -1,18 +1,41 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-1004_Obesity-Youth",
-    "description" : "Active patients who have the issue documented in CMOs. Population includes active patients ages 12 through 19.",
-    "map": "queries/PDC-1004_Obesity-Youth.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/activePatient.js", "functions/isAge.js", "functions/hasWC.js", "functions/hasBMI.js", "functions/hasHeight.js", "functions/hasWeight.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/PDC-1004_Obesity-Youth_data_1.json",
-            "verifier" : "./verify/PDC_verify_tc1.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js",
-            "comments":"with current encounter (active patient)"
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-1004",
+  "name": "PDC-1004_Obesity-Youth",
+  "display_name": "Documented Prevalence of Obesity in Adults",
+  "description": "This metric shows the percentage of overweight or obese active patients age 12-19 yrs",
+  "map": "queries/PDC-1004_Obesity-Youth.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "units": "Patients",
+  "target": {
+    "value": "5.4%",
+    "reference": "Public Health Agency of Canada – BC 2011",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "functions": [
+    "functions/activePatient.js",
+    "functions/isAge.js",
+    "functions/hasWC.js",
+    "functions/hasBMI.js",
+    "functions/hasHeight.js",
+    "functions/hasWeight.js"
+  ],
+  "qualified_by": [
+    ""
+  ],
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-1004_Obesity-Youth_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "comments": "with current encounter (active patient)"
+    }
+  ]
 }

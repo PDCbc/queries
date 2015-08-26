@@ -1,18 +1,39 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-1907_BloodPressure-Diabetes",
-    "description" : "Active patients who have the issue documented in the clinically measured observations. Population includes active patients of all ages.",
-    "map": "queries/PDC-1907_BloodPressure-Diabetes.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/activePatient.js", "functions/isAge.js", "functions/hasBMI.js", "functions/hasWC.js","functions/hasHeight.js","functions/hasWeight.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/PDC-1907_BloodPressure-Diabetes_data_1.json",
-            "verifier" : "./verify/PDC_verify_tc1.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js",
-            "comments":"with current encounter (active patient)"
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-1907",
+  "name": "PDC-1907_BloodPressure-Diabetes",
+  "display_name": "Diabetics with Normal Blood Pressure",
+  "description": "BP <= 130/80 in last 1y / diabetes",
+  "map": "queries/PDC-1907_BloodPressure-Diabetes.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/activePatient.js",
+    "functions/isAge.js",
+    "functions/hasBMI.js",
+    "functions/hasWC.js",
+    "functions/hasHeight.js",
+    "functions/hasWeight.js"
+  ],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-1907_BloodPressure-Diabetes_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "comments": "with current encounter (active patient)"
+    }
+  ]
 }

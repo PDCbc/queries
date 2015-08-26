@@ -1,17 +1,36 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-1903_Lab-FBS46+.json",
-    "description" : "Active patients who have had the lab in the time period and are the specified age.",
-    "map": "queries/PDC-1903_Lab-FBS46+.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "hasFBS.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/PDC-1903_Lab-FBS46+_data_1.json",
-            "verifier" : "./verify/PDC_verify_tc1.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js"
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-1903",
+  "name": "PDC-1903_Lab-FBS46+",
+  "display_name": "Diabetes Screening with Fasting Glucose Only",
+  "description": "Fasting blood sugar in last 3 years for active patients age >= 46",
+  "map": "queries/PDC-1903_Lab-FBS46+.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/filter_activeMeds.js",
+    "functions/isAge.js",
+    "functions/isMatch.js",
+    "hasFBS.js"
+  ],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-1903_Lab-FBS46+_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js"
+    }
+  ]
 }

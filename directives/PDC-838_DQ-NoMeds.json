@@ -1,20 +1,34 @@
 {
-	"type": "QUERY",
-	"name": "PDC-838_DQ-NoMeds",
-	"description": "Not on Medications",
-	"map": "queries/PDC-838_DQ-NoMeds.js",
-	"reduce": "Resources/PDC_general-reduce.js",
-	"functions": [],
-	"qualified_by": [
-		""
-	],
-	"tests": [
-      {
-        "name": "TC1",
-        "data": "test/data/PDC-838_DQ-NoMeds_data_1.json",
-        "data_processor": "./data_processor/PDC_processor-2.js",
-        "verifier" : "./verify/PDC_verify_tc1.js"
-	  }
-	],
-	"title": "PDC-838"
+  "type": "QUERY",
+  "title": "PDC-838",
+  "name": "PDC-838_DQ-NoMeds",
+  "display_name": "Patients with No Current Medications",
+  "description": "What percentage of patients, calculated as active, have no current medication?",
+  "map": "queries/PDC-838_DQ-NoMeds.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth",
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-838_DQ-NoMeds_data_1.json",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "verifier": "./verify/PDC_verify_tc1.js"
+    }
+  ]
 }

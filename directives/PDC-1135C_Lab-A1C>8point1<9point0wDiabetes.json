@@ -1,17 +1,36 @@
 {
-    "type": "QUERY",
-    "name" : "PDC-1135C_Lab-A1C>8point1<9point0wDiabetes.json",
-    "description" : "Active patients who have had the lab in the time period and are the specified age.",
-    "map": "queries/PDC-1135C_Lab-A1C>8point1<9point0wDiabetes.js",
-    "reduce" : "Resources/PDC_general-reduce.js",
-    "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js", "hasA1C.js"],
-    "qualified_by":[""],
-    "tests" : [
-        {
-            "name" : "TC1",
-            "data" : "test/data/PDC-1135C_Lab-A1C>8point1<9point0wDiabetes_data_1.json",
-            "verifier" : "./verify/PDC_verify_tc1.js",
-            "data_processor" : "./data_processor/PDC_processor-2.js"
-        }
-    ]
+  "type": "QUERY",
+  "title": "PDC-1135C",
+  "name": "PDC-1135C_Lab-A1C>8point1<9point0wDiabetes",
+  "display_name": "PDC-1135C_Lab-A1C>8point1<9point0wDiabetes",
+  "description": "This metric shows the percentage of Diabetics with a last lab result for HBA1C that is between 8.1-9.0 mmol/L",
+  "map": "queries/PDC-1135C_Lab-A1C>8point1<9point0wDiabetes.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/filter_activeMeds.js",
+    "functions/isAge.js",
+    "functions/isMatch.js",
+    "hasA1C.js"
+  ],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "qualified_by": [],
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-1135C_Lab-A1C>8point1<9point0wDiabetes_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js"
+    }
+  ]
 }

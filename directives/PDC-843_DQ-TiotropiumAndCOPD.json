@@ -1,20 +1,34 @@
 {
-	"type": "QUERY",
-	"name": "PDC-843_DQ-TiotropiumAndCOPD",
-	"description": "TiotropiumAndCOPD",
-	"map": "queries/PDC-843_DQ-TiotropiumAndCOPD.js",
-	"reduce": "Resources/PDC_general-reduce.js",
-	"functions": [],
-	"qualified_by": [
-		""
-	],
-	"tests": [
-      {
-        "name": "TC1",
-        "data": "test/data/PDC-843_DQ-TiotropiumAndCOPD_data_1.json",
-        "data_processor": "./data_processor/PDC_processor-2.js",
-        "verifier" : "./verify/PDC_verify_tc1.js"
-	  }
-	],
-	"title": "PDC-843"
+  "type": "QUERY",
+  "title": "PDC-843",
+  "display_name": "COPD Completeness Estimate",
+  "name": "PDC-843_DQ-TiotropiumAndCOPD",
+  "description": "Of patients with Tiotropium medication, what percentage has COPD on the problem list?",
+  "map": "queries/PDC-843_DQ-TiotropiumAndCOPD.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth",
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-843_DQ-TiotropiumAndCOPD_data_1.json",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "verifier": "./verify/PDC_verify_tc1.js"
+    }
+  ]
 }

@@ -1,20 +1,34 @@
 {
-	"type": "QUERY",
-	"name": "PDC-834_DQ-UndocumentedBirthdate",
-	"description": "Undocumented Birthdate",
-	"map": "queries/PDC-834_DQ-UndocumentedBirthdate.js",
-	"reduce": "Resources/PDC_general-reduce.js",
-	"functions": [],
-	"qualified_by": [
-		""
-	],
-	"tests": [
-      {
-        "name": "TC1",
-        "data": "test/data/PDC-834_DQ-UndocumentedBirthdate_data_1.json",
-        "data_processor": "./data_processor/PDC_processor-2.js",
-        "verifier" : "./verify/PDC_verify_tc1.js"
-	  }
-	],
-	"title": "PDC-834"
+  "type": "QUERY",
+  "title": "PDC-834",
+  "name": "PDC-834_DQ-UndocumentedBirthdate",
+  "display_name": "Active Patients with No Date of Birth",
+  "description": "What percentage of patients, calculated as active, has no documented date of birth?",
+  "map": "queries/PDC-834_DQ-UndocumentedBirthdate.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth",
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-834_DQ-UndocumentedBirthdate_data_1.json",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "verifier": "./verify/PDC_verify_tc1.js"
+    }
+  ]
 }
