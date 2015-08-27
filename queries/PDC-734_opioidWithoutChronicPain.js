@@ -1,10 +1,9 @@
 /**
- * title : PDC-733
- * description : Patients with documented chronic pain that have an active opioid medication.
+ * title : PDC-734
+ * description : Of patients who are over the age of 21, how many have an active opioid prescription but no documented diagnosis of chronic pain.
  */
 
 function map(patient) {
-
 
     if (!filterProviders(patient.json.primary_care_provider_id, "PracticeReflection")) {
         return;
@@ -15,9 +14,9 @@ function map(patient) {
     var ap  = activePatient(patient);
     var age = isAge(patient, 21);
 
-    var denominator = age && ap;
+    var denominator = age && ap && op;
 
-    var numerator = age && ap && hc && op;
+    var numerator = age && ap && op && !hc;
 
     emit("denominator_" + patient.json.primary_care_provider_id, +denominator);
 

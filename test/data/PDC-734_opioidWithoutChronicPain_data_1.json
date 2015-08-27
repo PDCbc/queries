@@ -1,0 +1,60 @@
+[
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "birthdate": -70,
+    "medications": [
+      {
+        "_type": "Medication",
+        "start_time": -1,
+        "statusOfMedication": {
+          "value": "active"
+        },
+        "codes": {
+          "whoATC": [
+            "N02A"
+          ]
+        }
+      }
+    ],
+    "conditions": [
+      {
+        "codes": {
+          "ICD9": [
+            "NOT CHRONIC PAIN"
+          ]
+        },
+        "time": 1263167138,
+        "description": "Not Chronic Pain"
+      }
+    ]
+  },
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "birthdate": -20,
+    "medications": [
+      {
+        "_type": "Medication",
+        "start_time": -1,
+        "statusOfMedication": {
+          "value": "active"
+        },
+        "codes": {
+          "whoATC": [
+            "N02A22"
+          ]
+        }
+      }
+    ],
+    "conditions": [
+      {
+        "codes": {
+          "ICD9": [
+            "338.4"
+          ]
+        },
+        "time": 1263167138,
+        "description": "Chronic Pain"
+      }
+    ]
+  }
+]
