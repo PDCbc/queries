@@ -1,0 +1,24 @@
+{
+	"type": "QUERY",
+	"title": "PDC-733",
+	"name": "PDC-733_chronicPainAndOpiods",
+	"display_name": "Chronic Pain and Opioids",
+	"description": "Percentage of patients with documented chronic pain that have an active opioid medication.",
+	"map": "queries/PDC-733_chronicPainAndOpiods.js",
+	"reduce": "Resources/PDC_general-reduce.js",
+	"functions": [],
+	"qualified_by": [],
+	"units": "Patients",
+	"target": {
+		"value": "N/A",
+		"reference": "N/A",
+		"description": "N/A"
+	},
+	"query_type": "RATIO",
+	"status": "ACTIVE",
+	"panels": [
+		"PracticeReflection"
+	],
+	"contact": "pdc@pdc.io",
+	"tests": []
+}
