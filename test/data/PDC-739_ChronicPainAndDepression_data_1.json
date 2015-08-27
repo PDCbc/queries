@@ -3,7 +3,7 @@
     "birthdate": -70,
     "medications" : [],
     "conditions" : [
-      { "codes": { "ICD9": ["338.0"]}, "time": 1263167138, "description": "Chronic Pain"},
+      { "codes": { "ICD9": ["338.4"]}, "time": 1263167138, "description": "Chronic Pain"},
       { "codes": { "ICD9": ["311"]}, "time": 1263167138, "description": "Depression"}
     ]
   }
