@@ -10,15 +10,17 @@ function map(patient) {
         return;
     }
 
-    var hc = hasChronicPain( patient ) && hasOpioid( patient );
-    var ap = activePatient( patient );
+    var hc  = hasChronicPain(patient);
+    var op  = hasOpioid(patient);
+    var ap  = activePatient(patient);
+    var age = isAge(patient, 21);
 
-    var denominator = ap;
+    var denominator = age && ap;
 
-    var numerator   =  ap && hc;
+    var numerator = age && ap && hc;
 
-    emit( "denominator_" + patient.json.primary_care_provider_id,  + denominator );
+    emit("denominator_" + patient.json.primary_care_provider_id, +denominator);
 
-    emit( "numerator_" + patient.json.primary_care_provider_id, + numerator   );
+    emit("numerator_" + patient.json.primary_care_provider_id, +numerator);
 
 }

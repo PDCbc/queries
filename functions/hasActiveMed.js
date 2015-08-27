@@ -48,6 +48,7 @@ function hasActiveMed(pt, med, doseLimit, minDose, maxDose) {
     );
 
     for (var i = 0; i < meds.length; i++) {
+
         var m = meds[i];
 
         for (var j = 0; j < m.json.codes.whoATC.length; j++) {

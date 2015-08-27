@@ -11,6 +11,8 @@ function hasOpioid(pt) {
 
     }
 
-    return hasActiveMed(pt, "^N02A.*$", Number.POSITIVE_INFINITY);
+    var x = hasActiveMed(pt, "^N02A.*$");
+
+    return x;
 
 }
