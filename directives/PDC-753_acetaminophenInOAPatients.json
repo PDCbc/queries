@@ -1,0 +1,27 @@
+{
+	"type": "QUERY",
+	"title": "PDC-753",
+	"name": "PDC-753_acetaminophenInOAPatients",
+	"display_name": null,
+	"description": "The percentage of patients who have been prescribed acetaminophen as a first line of non-narcotic therapy.",
+	"map": "queries/PDC-753_acetaminophenInOAPatients.js",
+	"reduce": "Resources/PDC_general-reduce.js",
+	"functions": [],
+	"qualified_by": [],
+	"units": "Patients",
+	"target": {
+		"value": "N/A",
+		"reference": "N/A",
+		"description": "N/A"
+	},
+	"query_type": "RATIO|CLASS|STRATIFIED",
+	"status": "ACTIVE|INACTIVE",
+	"panels": [
+		"PPhRR",
+		"PracticeReflection",
+		"Attachment",
+		"PopulationHealth"
+	],
+	"contact": "pdc@pdc.io",
+	"tests": []
+}
