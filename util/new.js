@@ -205,6 +205,7 @@ function newFunction() {
 function newQueryTest() {
 
     //TODO: implement me.
+    logger.info("Not supported! No files changed.");
 
 }
 

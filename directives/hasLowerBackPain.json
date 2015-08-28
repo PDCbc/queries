@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "hasLowerBackPain",
+	"path": "functions/hasLowerBackPain.js",
+	"description": "Determines if the patient has a diagnosis of lower back pain.",
+	"test": "functions/test_hasLowerBackPain.js"
+}

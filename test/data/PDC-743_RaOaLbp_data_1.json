@@ -1,0 +1,34 @@
+[
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "birthdate": -70,
+    "medications": [],
+    "conditions": [
+      {
+        "codes": {
+          "ICD9": [
+            "724"
+          ]
+        },
+        "time": 1263167138,
+        "description": "LBP"
+      }
+    ]
+  },
+  {
+    "primary_care_provider_id": "PROVIDER1",
+    "birthdate": -70,
+    "medications": [],
+    "conditions": [
+      {
+        "codes": {
+          "ICD9": [
+            "715.0"
+          ]
+        },
+        "time": 1263167138,
+        "description": "OA"
+      }
+    ]
+  }
+]
