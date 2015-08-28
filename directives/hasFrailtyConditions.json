@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "hasFrailtyConditions",
+    "path" : "functions/hasFrailtyConditions.js",
+    "description" : "Determines if the patient has condtions that make them frail.",
+    "test" : "./functions/test_hasFrailtyConditions.js"
+}
