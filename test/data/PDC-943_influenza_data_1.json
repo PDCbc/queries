@@ -1,0 +1,26 @@
+[
+  { "primary_care_provider_id" : "PROVIDER1",
+    "birthdate": -67,
+    "gender": "F",
+    "medications" : [],
+    "conditions" : [
+      { "codes": { "ICD9": ["496"]}, "time": 1263167138, "description": "COPD"}
+    ],
+    "immunizations": [
+      {
+        "_id": {
+          "$oid": "551cce86c58406644d0000c3"
+        },
+        "codes": {
+          "whoATC": [
+            "J07BBxx"
+          ]
+        },
+        "mood_code": "EVN",
+        "_type": "Immunization",
+        "start_time": 1351641600,
+        "description": "Influenza"
+      }
+    ]
+  }
+]

@@ -1,6 +1,8 @@
 /**
  * title : $$TITLE$$
  * description : $$DESCRIPTION$$
+ *
+ * @param patient {Patient} - hquery patient api object.
  */
 
 function map(patient) {
