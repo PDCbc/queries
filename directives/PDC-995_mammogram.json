@@ -1,0 +1,24 @@
+{
+	"type": "QUERY",
+	"title": "PDC-995",
+	"name": "PDC-995_mammogram",
+	"display_name": null,
+	"description": "The percentage of females aged 50 to 70 years old who had a mammogram in the last 2 years.",
+	"map": "queries/PDC-995_mammogram.js",
+	"reduce": "Resources/PDC_general-reduce.js",
+	"functions": [],
+	"qualified_by": [],
+	"units": "Patients",
+	"target": {
+		"value": "N/A",
+		"reference": "N/A",
+		"description": "N/A"
+	},
+	"query_type": "RATIO",
+	"status": "ACTIVE",
+	"panels": [
+		"PopulationHealth"
+	],
+	"contact": "pdc@pdc.io",
+	"tests": []
+}
