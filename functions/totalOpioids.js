@@ -13,7 +13,7 @@ function totalOpioids(pt) {
         return 0;
     }
 
-    var meds = pt.json.medications;
+    var meds = pt.medications();
     var m    = null;
 
     var freq = 0;
@@ -25,9 +25,12 @@ function totalOpioids(pt) {
 
         m = meds[i];
 
-        if (!isActiveMed(m) || !isOpioid(m)) {
+        if (!isActiveMed(m) || !isOpioid(m.json)) {
             continue;
         }
+
+        m = m.json;
+
 
         //check to make sure the fields we need are present.
         if (
@@ -49,13 +52,14 @@ function totalOpioids(pt) {
                 freq = m.administrationTiming.frequency.numerator.value;
 
                 if (
-                    m.values[0].unit &&
-                    m.values[0].unit.toLowerCase() === 'mg' &&
+                    m.values[0].units &&
+                    m.values[0].units.toLowerCase() === 'mg' &&
                     m.values[0].scalar
+
                 ) {
 
                     try {
-                        dailyTotal += freq * Number(5);
+                        dailyTotal += freq * Number(m.values[0].scalar);
                     } catch (e) {
                         continue;
                     }
