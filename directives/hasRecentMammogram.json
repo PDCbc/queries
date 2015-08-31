@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "hasRecentMammogram",
+	"path": "functions/hasRecentMammogram.js",
+	"description": "Determines if the patient has a mammogram in the last 2 year.",
+	"test": "functions/test_hasRecentMammogram.js"
+}

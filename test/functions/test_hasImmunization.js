@@ -258,7 +258,7 @@ module.exports = {
 
         d.setFullYear(d.getFullYear() - 1);
 
-        p.immunizations[0].start_time = d.getTime();
+        p.immunizations[0].start_time = Math.floor(d.getTime()/1000);
 
         p = new hQuery.Patient(p);
 

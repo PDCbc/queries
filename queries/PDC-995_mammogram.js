@@ -25,5 +25,4 @@ function map(patient) {
 
     emit("numerator_" + patient.json.primary_care_provider_id, +numerator);
 
-
 }
