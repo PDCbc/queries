@@ -11,8 +11,12 @@ function map(patient) {
         return;
     }
 
+    var meds = patient.json.medications;
 
-    var meds   = patient.medications();
+    if (!meds) {
+        return;
+    }
+
     var med    = null;
     var timing = null;
 
@@ -20,14 +24,14 @@ function map(patient) {
 
         med = meds[m];
 
-        if (!med.json.administrationTiming) {
+        if (!med.administrationTiming) {
 
             emit(patient.json.primary_care_provider_id + "_noTiming", 1);
             continue;
 
         }
 
-        timing = med.json.administrationTiming;
+        timing = med.administrationTiming;
 
         if (!timing.frequency) {
 
@@ -37,23 +41,23 @@ function map(patient) {
 
             emit(patient.json.primary_care_provider_id + "_no-frequency.numerator", 1);
 
-        } else if(!timing.frequency.denominator){
+        } else if (!timing.frequency.denominator) {
 
             emit(patient.json.primary_care_provider_id + "_no-frequency.denominator", 1);
 
-        } else if(!timing.frequency.numerator.value){
+        } else if (!timing.frequency.numerator.value) {
 
             emit(patient.json.primary_care_provider_id + "_no-frequency.numerator.value", 1);
 
-        } else if(!timing.frequency.denominator.unit){
+        } else if (!timing.frequency.denominator.unit) {
 
             emit(patient.json.primary_care_provider_id + "_no-frequency.denominator.unit", 1);
 
-        } else if(!timing.frequency.denominator.value){
+        } else if (!timing.frequency.denominator.value) {
 
             emit(patient.json.primary_care_provider_id + "_no-frequency.denominator.value", 1);
 
-        }else{
+        } else {
 
             emit(patient.json.primary_care_provider_id + "_frequency.denominator.unit_" + timing.frequency.denominator.unit, 1);
 

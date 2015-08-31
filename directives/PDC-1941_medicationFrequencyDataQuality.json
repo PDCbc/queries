@@ -24,5 +24,10 @@
     "PopulationHealth"
   ],
   "contact": "pdc@pdc.io",
-  "tests": []
+  "tests": [    {
+    "name": "TC1",
+    "data": "test/data/PDC-1929_Biguinide65+_data_1.json",
+    "data_processor": "./data_processor/PDC_processor-2.js",
+    "verifier": "./verify/PDC_verify_tc1.js"
+  }]
 }
