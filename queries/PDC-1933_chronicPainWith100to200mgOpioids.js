@@ -1,6 +1,8 @@
 /**
- * title : PDC-1932
- * description : The percentage of calculated active patients that have a diagnosis of chronic pain and have active opioid prescriptions totaling more than 200 mg/day.
+ * title : PDC-1933
+ * description : The percentage of calculated active patients that have a diagnosis of chronic pain and have active opioid prescriptions with a medical equivalent of 100-200 mg/day
+ *
+ * @param patient {Patient} - hquery patient api object.
  */
 
 function map(patient) {
@@ -9,14 +11,13 @@ function map(patient) {
         return;
     }
 
-
     var op = totalOpioids(patient);
     var ap = activePatient(patient);
     var cp = hasChronicPain(patient);
 
 
     var denominator = ap & cp;
-    var numerator   = denominator && (op >= 200);
+    var numerator   = denominator && (op < 200 && op >= 100);
 
     emit("denominator_" + patient.json.primary_care_provider_id, +denominator);
     emit("numerator_" + patient.json.primary_care_provider_id, +numerator);
