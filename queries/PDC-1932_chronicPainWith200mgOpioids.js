@@ -9,9 +9,7 @@ function map(patient) {
         return;
     }
 
-    //YOUR QUERY LOGIC HERE
-    //SUGGEST TO OFFLOAD THIS TO FUNCTIONS.
 
-    emit("SOME KEY", 1);
+
 
 }
