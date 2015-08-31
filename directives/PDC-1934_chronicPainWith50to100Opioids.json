@@ -1,0 +1,24 @@
+{
+	"type": "QUERY",
+	"title": "PDC-1934",
+	"name": "PDC-1934_chronicPainWith50to100Opioids",
+	"display_name": "Chronic Pain with 50-100 mg/day of Active Opioids",
+	"description": "The percentage of calculated active patients that have a diagnosis of chronic pain and have active opioid prescriptions with a medical equivalent of 50-100 mg/day.",
+	"map": "queries/PDC-1934_chronicPainWith50to100Opioids.js",
+	"reduce": "Resources/PDC_general-reduce.js",
+	"functions": [],
+	"qualified_by": [],
+	"units": "Patients",
+	"target": {
+		"value": "N/A",
+		"reference": "N/A",
+		"description": "N/A"
+	},
+	"query_type": "RATIO",
+	"status": "ACTIVE",
+	"panels": [
+		"PracticeReflection"
+	],
+	"contact": "pdc@pdc.io",
+	"tests": []
+}

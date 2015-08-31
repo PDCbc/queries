@@ -14,13 +14,10 @@
 		"reference": "N/A",
 		"description": "N/A"
 	},
-	"query_type": "RATIO|CLASS|STRATIFIED",
-	"status": "ACTIVE|INACTIVE",
+	"query_type": "RATIO",
+	"status": "ACTIVE",
 	"panels": [
-		"PPhRR",
-		"PracticeReflection",
-		"Attachment",
-		"PopulationHealth"
+		"PracticeReflection"
 	],
 	"contact": "pdc@pdc.io",
 	"tests": []
