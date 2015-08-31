@@ -29,13 +29,36 @@ function map(patient) {
 
         timing = med.json.administrationTiming;
 
-        if (!timing.frequency || !timing.frequency.numerator || !timing.frequency.denominator || !timing.frequency.numerator.value || !timing.frequency.denominator.units || !timing.frequency.denominator.value) {
+        if (!timing.frequency) {
 
-            emit(patient.json.primary_care_provider_id + "_noFrequency", 1);
-            continue;
+            emit(patient.json.primary_care_provider_id + "_no-frequency", 1);
+
+        } else if (!timing.frequency.numerator) {
+
+            emit(patient.json.primary_care_provider_id + "_no-frequency.numerator", 1);
+
+        } else if(!timing.frequency.denominator){
+
+            emit(patient.json.primary_care_provider_id + "_no-frequency.denominator", 1);
+
+        } else if(!timing.frequency.numerator.value){
+
+            emit(patient.json.primary_care_provider_id + "_no-frequency.numerator.value", 1);
+
+        } else if(!timing.frequency.denominator.unit){
+
+            emit(patient.json.primary_care_provider_id + "_no-frequency.denominator.unit", 1);
+
+        } else if(!timing.frequency.denominator.value){
+
+            emit(patient.json.primary_care_provider_id + "_no-frequency.denominator.value", 1);
+
+        }else{
+
+            emit(patient.json.primary_care_provider_id + "_frequency.denominator.unit_" + timing.frequency.denominator.unit, 1);
+
         }
 
-        emit(patient.json.primary_care_provider_id + "_frequency-unit_"+timing.frequency.denominator.units, 1);
 
     }
 
