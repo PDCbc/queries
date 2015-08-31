@@ -1,0 +1,7 @@
+{
+  "type" : "FUNCTION",
+  "name" : "hasChronicPain",
+  "path" : "functions/hasChronicPain.js",
+  "description" : "Determines if a patient has a diagnosis of chronic pain",
+  "test" : "./functions/test_hasChronicPain.js"
+}
