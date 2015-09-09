@@ -1,24 +1,32 @@
 {
-	"type": "QUERY",
-	"title": "PDC-753",
-	"name": "PDC-753_acetaminophenInOAPatients",
-	"display_name": "Acetaminophen Use in OA Patients",
-	"description": "The percentage of calculated active OA patients who have been prescribed acetaminophen as a first line of non-narcotic therapy.",
-	"map": "queries/PDC-753_acetaminophenInOAPatients.js",
-	"reduce": "Resources/PDC_general-reduce.js",
-	"functions": [],
-	"qualified_by": [],
-	"units": "Patients",
-	"target": {
-		"value": "N/A",
-		"reference": "N/A",
-		"description": "N/A"
-	},
-	"query_type": "RATIO",
-	"status": "ACTIVE",
-	"panels": [
-		"PracticeReflection"
-	],
-	"contact": "pdc@pdc.io",
-	"tests": []
+  "type": "QUERY",
+  "title": "PDC-753",
+  "name": "PDC-753_acetaminophenInOAPatients",
+  "display_name": "Acetaminophen Use in OA Patients",
+  "description": "The percentage of calculated active OA patients who have been prescribed acetaminophen as a first line of non-narcotic therapy.",
+  "map": "queries/PDC-753_acetaminophenInOAPatients.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PracticeReflection"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-753_OAWithActiveAcetaminophen_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "comments": ""
+    }
+  ]
 }
