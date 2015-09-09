@@ -5,13 +5,19 @@
 
 function map(patient) {
 
-    if (!filterProviders(patient.json.primary_care_provider_id, "PracticeReflection|Polypharmacy|PopulationHealth|DataQuality|...")) {
+    if (!filterProviders(patient.json.primary_care_provider_id, "PracticeReflection")) {
         return;
     }
 
-    //YOUR QUERY LOGIC HERE
-    //SUGGEST TO OFFLOAD THIS TO FUNCTIONS.
+    var active = activePatient(patient);
+    var oa = hasOA(patient);
+    var acet = hasAcetaminophen(patient);
 
-    emit("SOME KEY", 1);
+    var num = active && oa;
+
+    var den = num && acet;
+
+    emit("denominator_" + patient.json.primary_care_provider_id, +den);
+    emit("numerator_" + patient.json.primary_care_provider_id, +num);
 
 }

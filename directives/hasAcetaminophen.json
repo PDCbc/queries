@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "hasAcetaminophen",
+	"path": "functions/hasAcetaminophen.js",
+	"description": "Determines if the patient has a prescription for Acetaminophen",
+	"test": "functions/test_hasAcetaminophen.js"
+}
