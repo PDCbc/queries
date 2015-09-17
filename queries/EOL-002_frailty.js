@@ -14,7 +14,7 @@ function map( patient ){
         }
 
     }catch(e){
-        emit("FAILURE_"+e);
+        emit("FAILURE_"+e, 1);
     }
 
 }
