@@ -11,18 +11,19 @@
 *   the message field contains a message which is displayed if the test fails
 */
 function verify(results){
-    console.log(results); //***remove me before merge***
-    if ( 
-        results[1]._id === "numerator_PROVIDER1"  &&
-        results[1].value === 2
-    ){
-       return {result: true}; 
-    }else{
-
-        return {result: false, message: "numerator and denominator was not as expected!"}
-
+    //test for undefined providers:
+    for(i in results){
+        if(results[i]._id.match(".*_[0-9]*-[0-9]*_undefined")){
+            return {result: false, message: "undefined provider"};
+        }
     }
 
+    //test for the right number of emits.
+    if(results[1].value!= 2){
+        return {result: false, message: "number of patients emitted was not correct"};
+    }
+
+    return {result: true, message: "test passed!"};
 }
 
 module.exports = {
