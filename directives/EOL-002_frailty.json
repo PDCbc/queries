@@ -1,7 +1,19 @@
 {
     "type": "QUERY",
     "name" : "EOL-002_frailty",
+    "title" : "EOL-002",
     "description" : "Frail patients who are 55 years and over.",
+    "display_name" : "End of Life Query (Frailty)",
+    "units" : "patient",
+    "target" : {
+        "value": "N/A",
+        "reference": "N/A",
+        "description": "N/A"
+    },
+    "query_type" : "STRATIFIED",
+    "status" : "ACTIVE",
+    "panels" : ["PPhRR", "PracticeReflection", "Attachment", "PracticeReflection"],
+    "contact" : "pdc@pdc.io",
     "map": "queries/EOL-002_frailty.js",
     "reduce" : "Resources/PDC_general-reduce.js",
     "functions" : [],
