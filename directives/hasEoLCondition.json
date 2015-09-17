@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "hasEoLCondition",
+    "path" : "functions/hasEoLCondition.js",
+    "description" : "Test the hasEoLCondition function which determines if patients have certain EoL(SPICT) conditions ",
+    "test" : "./functions/test_hasEoLCondition.js"
+}
