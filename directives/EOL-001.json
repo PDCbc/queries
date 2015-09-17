@@ -1,7 +1,19 @@
 {
     "type": "QUERY",
     "name" : "EOL-001",
+    "title" : "EOL-001",
     "description" : "EoL patients who are 55 years and over.",
+    "display_name" : "End of Life Query (SPICT)",
+    "units" : "patient",
+    "target" : {
+        "value":"N/A",
+        "reference":"N/A",
+        "description":"N/A"
+    },
+    "query_type" : "STRATIFIED",
+    "status" : "ACTIVE",
+    "panels" : ["PPhRR", "PracticeReflection", "Attachment", "PracticeReflection"],
+    "contact" : "pdc@pdc.io",
     "map": "queries/EOL-001.js",
     "reduce" : "Resources/PDC_general-reduce.js",
     "functions" : [],
