@@ -42,51 +42,51 @@ function hasEoLCondition( pt ){
 
                 if(
                     // Neurological disease
-                    conditions[c].codes["ICD9"][s].match("^784.5") ||
-                    conditions[c].codes["ICD9"][s].match("^V41.6") ||
-                    conditions[c].codes["ICD9"][s].match("^770.16")||
-                    conditions[c].codes["ICD9"][s].match("^518.81")||
-                    conditions[c].codes["ICD9"][s].match("^518.83")||
-                    conditions[c].codes["ICD9"][s].match("^518.84")||
+                    conditions[c].codes["ICD9"][s].match("^784\.5") ||
+                    conditions[c].codes["ICD9"][s].match("^V41\.6") ||
+                    conditions[c].codes["ICD9"][s].match("^770\.16")||
+                    conditions[c].codes["ICD9"][s].match("^518\.81")||
+                    conditions[c].codes["ICD9"][s].match("^518\.83")||
+                    conditions[c].codes["ICD9"][s].match("^518\.84")||
                     // Liver disease
-                    conditions[c].codes["ICD9"][s].match("^571.2")||
-                    conditions[c].codes["ICD9"][s].match("^571.5")||
-                    conditions[c].codes["ICD9"][s].match("^571.6")||
-                    conditions[c].codes["ICD9"][s].match("^572.2")||
-                    conditions[c].codes["ICD9"][s].match("^572.4")||
-                    conditions[c].codes["ICD9"][s].match("^567.23")||
-                    conditions[c].codes["ICD9"][s].match("^789.51")||
-                    conditions[c].codes["ICD9"][s].match("^456.0")||
-                    conditions[c].codes["ICD9"][s].match("^456.1")||
-                    conditions[c].codes["ICD9"][s].match("^456.2")||
+                    conditions[c].codes["ICD9"][s].match("^571\.2")||
+                    conditions[c].codes["ICD9"][s].match("^571\.5")||
+                    conditions[c].codes["ICD9"][s].match("^571\.6")||
+                    conditions[c].codes["ICD9"][s].match("^572\.2")||
+                    conditions[c].codes["ICD9"][s].match("^572\.4")||
+                    conditions[c].codes["ICD9"][s].match("^567\.23")||
+                    conditions[c].codes["ICD9"][s].match("^789\.51")||
+                    conditions[c].codes["ICD9"][s].match("^456\.0")||
+                    conditions[c].codes["ICD9"][s].match("^456\.1")||
+                    conditions[c].codes["ICD9"][s].match("^456\.2")||
                     // Respiratory disease
                     conditions[c].codes["ICD9"][s].match("^491\..*")||
                     conditions[c].codes["ICD9"][s].match("^492\..*")||
                     conditions[c].codes["ICD9"][s].match("^494\..*")||
                     conditions[c].codes["ICD9"][s].match("^496\..*")||
-                    conditions[c].codes["ICD9"][s].match("^V46.2")||
+                    conditions[c].codes["ICD9"][s].match("^V46\.2")||
                     // Dementia/Frailty
-                    conditions[c].codes["ICD9"][s].match("^780.31")||
-                    conditions[c].codes["ICD9"][s].match("^780.32")||
+                    conditions[c].codes["ICD9"][s].match("^780\.31")||
+                    conditions[c].codes["ICD9"][s].match("^780\.32")||
                     // Kidney disease
-                    conditions[c].codes["ICD9"][s].match("^585.4")||
-                    conditions[c].codes["ICD9"][s].match("^585.5")||
+                    conditions[c].codes["ICD9"][s].match("^585\.4")||
+                    conditions[c].codes["ICD9"][s].match("^585\.5")||
                     // Heart/vascular disease
                     conditions[c].codes["ICD9"][s].match("^428\..*")||
-                    conditions[c].codes["ICD9"][s].match("^402.01")||
-                    conditions[c].codes["ICD9"][s].match("^402.11")||
-                    conditions[c].codes["ICD9"][s].match("^402.91")||
-                    conditions[c].codes["ICD9"][s].match("^404.01")||
-                    conditions[c].codes["ICD9"][s].match("^404.03")||
-                    conditions[c].codes["ICD9"][s].match("^404.11")||
-                    conditions[c].codes["ICD9"][s].match("^404.13")||
-                    conditions[c].codes["ICD9"][s].match("^404.91")||
-                    conditions[c].codes["ICD9"][s].match("^404.93")||
+                    conditions[c].codes["ICD9"][s].match("^402\.01")||
+                    conditions[c].codes["ICD9"][s].match("^402\.11")||
+                    conditions[c].codes["ICD9"][s].match("^402\.91")||
+                    conditions[c].codes["ICD9"][s].match("^404\.01")||
+                    conditions[c].codes["ICD9"][s].match("^404\.03")||
+                    conditions[c].codes["ICD9"][s].match("^404\.11")||
+                    conditions[c].codes["ICD9"][s].match("^404\.13")||
+                    conditions[c].codes["ICD9"][s].match("^404\.91")||
+                    conditions[c].codes["ICD9"][s].match("^404\.93")||
                     // Cancer
-                    conditions[c].codes["ICD9"][s].match("^196.9")||
-                    conditions[c].codes["ICD9"][s].match("^197.7")||
-                    conditions[c].codes["ICD9"][s].match("^198.3")||
-                    conditions[c].codes["ICD9"][s].match("^198.5")
+                    conditions[c].codes["ICD9"][s].match("^196\.9")||
+                    conditions[c].codes["ICD9"][s].match("^197\.7")||
+                    conditions[c].codes["ICD9"][s].match("^198\.3")||
+                    conditions[c].codes["ICD9"][s].match("^198\.5")
 
                 ){
 
