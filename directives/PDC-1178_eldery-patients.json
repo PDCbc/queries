@@ -2,7 +2,7 @@
   "type": "QUERY",
   "title": "PDC-1178",
   "name": "PDC-1178_elderly-patients",
-  "display": "Active Elderly Patients",
+  "display_name": "Active Elderly Patients",
   "description": "Active patients who are over the age of 65.",
   "map": "queries/PDC-1178_elderly-patients.js",
   "reduce": "Resources/PDC_general-reduce.js",
