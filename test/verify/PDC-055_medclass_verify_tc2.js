@@ -13,10 +13,8 @@
 function verify(results){
 	
 	if( 
-		results[0]._id === "00559407_HC-DIN_PROVIDER1" && 
-		results[0].value === 5  && 
-		results[1]._id === "N02_whoATC_PROVIDER1" && 
-		results[1].value === 5 
+		results[0]._id === "N02_whoATC_PROVIDER1" && 
+		results[0].value === 5 
 	){
 
 		return {result : true, message : "test passed"}; 

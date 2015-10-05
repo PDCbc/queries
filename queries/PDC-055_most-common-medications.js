@@ -63,10 +63,10 @@ function emit_medications(codedEntryList) {
             if (type.toLowerCase() === 'whoatc') {
 
                 code = code.substring(0, atcCutoff);
+                emit(code + '_' + type + physicianID, 1);
 
             }
 
-            emit(code + '_' + type + physicianID, 1);
 
         }
 
