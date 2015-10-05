@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "initiatives",
+    "path" : "functions/initiatives.js",
+    "description" : "List of the providers associated with each initiative", 
+    "test" : ""
+}
