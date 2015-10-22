@@ -11,7 +11,7 @@
     }, 
     "query_type" : "RATIO",
     "status" : "ACTIVE",
-    "panels" : ["PPhRR", "PracticeReflection"],
+    "panels" : ["PPhRR"],
     "contact" : "pdc@pdc.io",
     "definition" : "Calculated as a ratio. Denominator: active patients with age >= 65, numerator: active patients with age >= 65 who have 5 or more active medications.",
     "description" : "This metric assesses the number of active patients that are currently on more than 5 medications for patients that are 65 years of age or older.",
