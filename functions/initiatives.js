@@ -17,7 +17,7 @@ function initatives(){
             "PROVIDER2"
         ],
         "Attachment" : [
-            "cpsid",.
+            "cpsid",
             "PROVIDER1",
             "PROVIDER2"
         ]
