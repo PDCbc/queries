@@ -4,7 +4,7 @@
 * Leverages the definition provided in the Data Dictionary on the PDC Polarian instance, defined as:
 *
 *  (Record is flagged as active OR record in NOT flagged as inactive ) AND 
-* 		(Documented encounter with 24 months OR Documented Prescription within 24 months)
+* 		(Documented encounter with 36 months OR Documented Prescription within 24 months)
 *
 * NOTE: the first part of the condition is satisfied by the record being in an E2E export...therefore we need not check it. 
 *
