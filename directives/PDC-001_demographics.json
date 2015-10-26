@@ -12,7 +12,7 @@
   },
   "query_type" : "STRATIFIED",
   "status" : "ACTIVE",
-  "panels" : ["PPhRR", "PracticeReflection", "Attachment", "PracticeReflection"],
+  "panels" : ["Attachment"],
   "contact" : "pdc@pdc.io",
   "map": "queries/PDC-001_population-map.js",
   "reduce" : "Resources/PDC_general-reduce.js",

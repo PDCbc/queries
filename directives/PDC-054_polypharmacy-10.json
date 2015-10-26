@@ -12,7 +12,7 @@
   },
   "query_type" : "RATIO",
   "status" : "ACTIVE",
-  "panels" : [ "PPhRR", "PracticeReflection"],
+  "panels" : [ "PPhRR"],
   "definition" : "Calculated as a ratio. Denominator: active patients with age >= 65, numerator: active patients with age >= 65 who have 10 or more documented medications.",
   "map": "queries/PDC-054_polypharmacy-map-10.js",
   "reduce": "Resources/PDC_general-reduce.js",
