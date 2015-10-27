@@ -19,10 +19,7 @@
   "query_type": "RATIO",
   "status": "ACTIVE",
   "panels": [
-    "PPhRR",
-    "PracticeReflection",
-    "Attachment",
-    "PopulationHealth"
+    "Attachment"
   ],
   "contact": "pdc@pdc.io",
   "tests": [
