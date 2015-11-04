@@ -10,7 +10,7 @@ function map(patient) {
     }
 
 
-    var pdcEpoch = new Date(2010, 0, 24);//jan 1st 2010
+    var pdcEpoch = new Date(2010, 0, 24);//jan 1st 2010 - date fix for query executions
     //constants
     var gdrs = ["female", "male", "undifferentiated", "undefined"];
 
@@ -50,7 +50,7 @@ function map(patient) {
       if (age >= 90)
           emit('{' +
                 '"gender"' + ':' + '"' + gdr + '"' + ',' +
-                '"age"' + ":" + '"90+"' + ',' +
+                '"ageRange"' + ":" + '"90+"' + ',' +
                 '"pid"' + ":" + '"' + pid + '"' + ',' +
                 '"date"' + ':' + '"' + referenceDate.getTime() +
                 '"}', 1);
@@ -59,7 +59,7 @@ function map(patient) {
       {
         emit('{' +
               '"gender"' + ':' + '"' + gdrs[g] + '"' + ',' +
-              '"age"' + ":" + '"90+"' + ',' +
+              '"ageRange"' + ":" + '"90+"' + ',' +
               '"pid"' + ":" + '"' + pid + '"' + ',' +
               '"date"' + ':' + '"' + referenceDate.getTime() +
               '"}', 0);
@@ -71,14 +71,14 @@ function map(patient) {
           if (age >= i && age < ( i + 10 ))
               emit('{' +
                   '"gender"' + ':' + '"' + gdr + '"' + ',' +
-                  '"age"' + ":" + '"' + range + '"' + ',' +
+                  '"ageRange"' + ":" + '"' + range + '"' + ',' +
                   '"pid"' + ':' + '"' + pid + '"' + ',' +
                   '"date"' + ':' + '"' + referenceDate.getTime() +
                   '"}', 1);
           for (var j = 0; j < gdrs.length; j++) {
               emit('{' +
                   '"gender"' + ':' + '"' + gdrs[j] + '"' + ',' +
-                  '"age"' + ":" + '"' + range + '"' + ',' +
+                  '"ageRange"' + ":" + '"' + range + '"' + ',' +
                   '"pid"' + ':' + '"' + pid + '"' + ',' +
                   '"date"' + ':' + '"' + referenceDate.getTime() + '"}', 0);
           }
