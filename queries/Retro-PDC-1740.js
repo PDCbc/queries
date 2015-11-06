@@ -11,7 +11,7 @@ function map(patient) {
 
       if (filterProviders(patient.json.primary_care_provider_id, "Attachment"))
       {
-        var pdcEpoch = new Date(2010, 0, 1);//first of january 2010
+        var pdcEpoch = new Date(2010, 0, 24);//first of january 2010 adjust for execution date
         var now = new Date();
         var monthIncrement = 1;
 
@@ -44,29 +44,30 @@ function genderCycle(gender, g, patient, referenceTime, encounters, ageRange)
 {
   var ageRanges = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89', '90+'];
 
-  if(gender === g)
+  if (encounters !== null && ageRange !== null && gender !== null)
   {
-    if (encounters !== null && ageRange !== null && gender !== null)
+    if(gender === g)
     {
-      emit('{' +
-              '"gender"' + ':' + '"' + g + '",' +
-              '"ageRange"' + ':' + '"' + ageRange + '",' +
-              '"pid"' + ':' + '"' + patient.json.primary_care_provider_id + '",' +
-              '"date"' + ':' + '"' + referenceTime.getTime() + '"' +
-           '}', encounters);
-    }
-  }
 
-  //simple but inefficient -- could emit all other cases rather than always emitting zero
-  ageRanges.forEach(
-    function(ar)
-    {
-      emit('{' +
-              '"gender"' + ':' + '"' + g + '",' +
-              '"ageRange"' + ':' + '"' + ageRange + '",' +
-              '"pid"' + ':' + '"' + patient.json.primary_care_provider_id + '",' +
-              '"date"' + ':' + '"' + referenceTime.getTime() + '"' +
-           '}', 0);
+        emit('{' +
+                '"gender"' + ':' + '"' + g + '",' +
+                '"ageRange"' + ':' + '"' + ageRange + '",' +
+                '"pid"' + ':' + '"' + patient.json.primary_care_provider_id + '",' +
+                '"date"' + ':' + '"' + referenceTime.getTime() + '"' +
+             '}', encounters);
     }
-  );
+
+    //simple but inefficient -- could emit all other cases rather than always emitting zero
+    ageRanges.forEach(
+      function(ar)
+      {
+        emit('{' +
+                '"gender"' + ':' + '"' + g + '",' +
+                '"ageRange"' + ':' + '"' + ageRange + '",' +
+                '"pid"' + ':' + '"' + patient.json.primary_care_provider_id + '",' +
+                '"date"' + ':' + '"' + referenceTime.getTime() + '"' +
+             '}', 0);
+      }
+    );
+  }
 }
