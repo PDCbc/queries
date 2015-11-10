@@ -1,6 +1,7 @@
 {
   "type": "QUERY",
   "name": "PDC-058_secondary-statins",
+  "title" : "PDC-058",
   "description": "This metric evaluates the percentage of active patients, 65 years old and older, on statins for secondary prevention, whereby secondary prevention is the presence of documented myocardial infarction (MI), acute MI or stroke.",
   "map": "queries/PDC-058_secondary-statins-map.js",
   "reduce": "Resources/PDC_general-reduce.js",
