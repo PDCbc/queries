@@ -1,6 +1,7 @@
 {
     "type" : "QUERY", 
     "name" : "PDC-056_renal",
+    "title" : "PDC-056",
     "description" : "This metric assesses the use of Digoxin (>125 mcg/day) in those active patients with impaired renal function who are 65 years of age or older.",
     "display_name" : "Digoxin Medication Use",
     "map": "queries/PDC-056_renal-map-65.js",
