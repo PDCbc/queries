@@ -2,9 +2,9 @@
   "type": "QUERY",
   "title": "Retro-PDC-1738",
   "name": "Retro-PDC-1738_active-patients",
-  "display_name": "",
-  "description": "",
-  "map": "queries/Retro-PDC-1738",
+  "display_name": "Retro Attached Patients",
+  "description": "Retro attached patients",
+  "map": "queries/Retro-PDC-1738.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "functions": [
     "functions/activePatient.js"

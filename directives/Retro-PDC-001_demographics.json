@@ -1,7 +1,7 @@
 {
   "type": "QUERY",
-  "name" : "Retro-PDC-001_demographics",
   "title" : "Retro-PDC-001",
+  "name" : "Retro-PDC-001_demographics",
   "description" : "Retrospective version of the demographics query.",
   "display_name" : "Practice Demographics Profile",
   "units" : "patient",
