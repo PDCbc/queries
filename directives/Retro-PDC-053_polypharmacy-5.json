@@ -1,0 +1,23 @@
+{
+    "type": "QUERY",
+    "name" : "Retro-PDC-053_polypharmacy-5",
+    "title" : "Retro-PDC-053",
+    "display_name" : "Polypharmacy > 5 in the Elderly",
+    "units" : "Patients",
+    "target" : {
+       "value":"N/A",
+       "reference":"N/A",
+       "description":"N/A"
+    }, 
+    "query_type" : "RATIO",
+    "status" : "ACTIVE",
+    "panels" : ["PPhRR"],
+    "contact" : "pdc@pdc.io",
+    "definition" : "",
+    "description" : "",
+    "map": "queries/Retro-PDC-053.js", 
+    "reduce" : "Resources/PDC_general-reduce.js",
+    "functions" : ["functions/filter_activeMeds.js", "functions/isAge.js", "functions/isMatch.js"],
+    "qualified_by":[""],
+    "tests" : []
+}
