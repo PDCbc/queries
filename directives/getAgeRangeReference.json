@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "getAgeRangeReference",
+	"path": "functions/getAgeRangeReference.js",
+	"description": "determines which age stratification a patient falls within",
+	"test": "functions/test_getAgeRange.js"
+}

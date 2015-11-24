@@ -1,5 +1,6 @@
 {
     "type" : "QUERY", 
+    "title" : "PDC-057",
     "name" : "PDC-057_primary-statins",
     "description" : "This metric evaluates the percentage of active patients, 65 years old and older, on statins for primary prevention, whereby primary prevention is the absence of documented myocardial infarction (MI), acute MI or stroke.",
     "display_name" : "Statins for Primary Prevention",

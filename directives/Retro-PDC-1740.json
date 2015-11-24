@@ -1,0 +1,26 @@
+{
+  "type": "QUERY",
+  "title": "Retro-PDC-1740",
+  "name": "Retro-PDC-1740_encounters",
+  "display_name": "Retro Encounters",
+  "description": "Retro Encounters",
+  "map": "queries/Retro-PDC-1740.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "units" : "Encounters",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "STRATIFIED",
+  "status": "ACTIVE",
+  "panels": [
+    "Attachment"
+  ],
+  "contact": "pdc@pdc.io",
+  "functions": [],
+  "qualified_by": [
+    ""
+  ],
+  "tests": []
+}

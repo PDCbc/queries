@@ -1,0 +1,22 @@
+{
+  "type": "QUERY",
+  "title" : "Retro-PDC-001",
+  "name" : "Retro-PDC-001_demographics",
+  "description" : "Retrospective version of the demographics query.",
+  "display_name" : "Practice Demographics Profile",
+  "units" : "patient",
+  "target" : {
+    "value":"N/A",
+    "reference":"N/A",
+    "description":"N/A"
+  },
+  "query_type" : "STRATIFIED",
+  "status" : "ACTIVE",
+  "panels" : ["Attachment"],
+  "contact" : "pdc@pdc.io",
+  "map": "queries/Retro-PDC-001.js",
+  "reduce" : "Resources/PDC_general-reduce.js",
+  "functions" : [],
+  "qualified_by":[],
+  "tests" : []
+}

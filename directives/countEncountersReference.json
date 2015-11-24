@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "countEncountersReference",
+	"path": "functions/countEncountersReference.js",
+	"description": "Counts the number of encounters within a given time frame",
+	"test": ""
+}

@@ -1,0 +1,7 @@
+{
+    "type" : "FUNCTION", 
+    "name" : "isAgeReference",
+    "path" : "functions/isAgeReference.js",
+    "description" : "Test the isAge function which determines if patients age is between two bounds ", 
+    "test" : "./functions/test_isAge.js"
+}

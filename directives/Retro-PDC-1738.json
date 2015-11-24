@@ -1,0 +1,26 @@
+{
+  "type": "QUERY",
+  "title": "Retro-PDC-1738",
+  "name": "Retro-PDC-1738_active-patients",
+  "display_name": "Retro Attached Patients",
+  "description": "Retro attached patients",
+  "map": "queries/Retro-PDC-1738.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [
+    "functions/activePatient.js"
+  ],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "Attachment"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": []
+}
