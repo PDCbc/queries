@@ -9,79 +9,78 @@ function map(patient) {
         return;
     }
 
+    var pdcEpoch = new Date(2010, 0, 24);//jan 1st 2010 adjust for execution date
 
-    var pdcEpoch = new Date(2010, 0, 24);//jan 1st 2010 - date fix for query executions
     //constants
     var gdrs = ["female", "male", "undifferentiated", "undefined"];
+    var ageRanges = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89', '90+'];
 
     // Store physician ID, via JSON key
     var pid = patient.json.primary_care_provider_id;
 
     //no functionality to capture change in gender over time
-    var gdr = patient.gender();
+    var gdr = getGender(patient);
 
-    //quareterly results
-    for( var referenceDate = new Date(pdcEpoch.getTime()); referenceDate < Date.now(); referenceDate.setMonth(referenceDate.getMonth()+1))
+    //monthly results
+    for( var referenceDate = new Date(pdcEpoch.getTime()); referenceDate.getTime() < new Date().getTime(); referenceDate.setMonth(referenceDate.getMonth()+1))
     {
+
       if(!activePatient(patient, referenceDate))
       {
+        //exclude patients that are not calculated active
+        //but emit zeros so that there are results for the whole time range
+
+        for(var m=0; m<ageRanges.length; m++)
+        {
+          var ari = ageRanges[m];
+
+          for (var n=0; n<gdrs.length; n++)
+          {
+            emit('{' +
+                  '"gender"' + ':' + '"' + gdrs[n] + '"' + ',' +
+                  '"ageRange"' + ":" + '"'+ ari + '"' + ',' +
+                  '"pid"' + ":" + '"' + pid + '"' + ',' +
+                  '"date"' + ':' + '"' + referenceDate.getTime() +
+                  '"}', 0);
+          }
+        }
+
         continue;
       }
 
       //Store age and gender, via patient Object functions
-      var age = patient.age(referenceDate);
+      var ageRange = getAgeRangeReference(patient, undefined, referenceDate);
 
-      // Convert gdr to an expected value
-      if (gdr && gdr.toString().toUpperCase() === "F")
-          gdr = "female";
-      else if (gdr && gdr.toString().toUpperCase() === "M")
-          gdr = "male";
-      else if (gdr && gdr.toString().toUpperCase() === "UN")
-          gdr = "undifferentiated";
-      else
-          gdr = "undefined";
-
-      // Edge cases assigned -1 (out of specified ranges)
-      if (typeof age !== 'number' || age < 0) {
-          return;
+      if(ageRange === null)
+      {
+        //ignore out of range values
+        continue;
       }
 
-      // Emit for 90+ special case
-      if (age >= 90)
+
+      for(var i=0; i<ageRanges.length; i++)
+      {
+        var ageRangeIter = ageRanges[i];
+
+        if(ageRange === ageRangeIter)
+        {
           emit('{' +
                 '"gender"' + ':' + '"' + gdr + '"' + ',' +
-                '"ageRange"' + ":" + '"90+"' + ',' +
+                '"ageRange"' + ":" + '"' + ageRangeIter + '"' + ',' +
                 '"pid"' + ":" + '"' + pid + '"' + ',' +
                 '"date"' + ':' + '"' + referenceDate.getTime() +
                 '"}', 1);
+        }
 
-      for(var g=0; g<gdrs.length; g++)
-      {
-        emit('{' +
-              '"gender"' + ':' + '"' + gdrs[g] + '"' + ',' +
-              '"ageRange"' + ":" + '"90+"' + ',' +
-              '"pid"' + ":" + '"' + pid + '"' + ',' +
-              '"date"' + ':' + '"' + referenceDate.getTime() +
-              '"}', 0);
-      }
-
-      // Emit for remaining ranges (10 yrs, descending)
-      for (var i = 80; i >= 0; i -= 10) {
-          var range = i + "-" + ( i + 9 );
-          if (age >= i && age < ( i + 10 ))
-              emit('{' +
-                  '"gender"' + ':' + '"' + gdr + '"' + ',' +
-                  '"ageRange"' + ":" + '"' + range + '"' + ',' +
-                  '"pid"' + ':' + '"' + pid + '"' + ',' +
-                  '"date"' + ':' + '"' + referenceDate.getTime() +
-                  '"}', 1);
-          for (var j = 0; j < gdrs.length; j++) {
-              emit('{' +
-                  '"gender"' + ':' + '"' + gdrs[j] + '"' + ',' +
-                  '"ageRange"' + ":" + '"' + range + '"' + ',' +
-                  '"pid"' + ':' + '"' + pid + '"' + ',' +
-                  '"date"' + ':' + '"' + referenceDate.getTime() + '"}', 0);
-          }
+        for (var j=0; j<gdrs.length; j++)
+        {
+          emit('{' +
+                '"gender"' + ':' + '"' + gdrs[j] + '"' + ',' +
+                '"ageRange"' + ":" + '"'+ ageRangeIter + '"' + ',' +
+                '"pid"' + ":" + '"' + pid + '"' + ',' +
+                '"date"' + ':' + '"' + referenceDate.getTime() +
+                '"}', 0);
+        }
       }
     }
 }
