@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "hasRecentInfluenzaVaccine",
+	"path": "functions/hasRecentInfluenzaVaccine.js",
+	"description": "Determines if the patient has had an influenza vaccine in the last year.",
+	"test": "functions/test_hasRecentInfluenzaVaccine.js"
+}

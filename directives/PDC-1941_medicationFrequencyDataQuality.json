@@ -1,0 +1,33 @@
+{
+  "type": "QUERY",
+  "title": "PDC-1941",
+  "name": "PDC-1941_medicationFrequencyDataQuality",
+  "display_name": "ata Quality - Medication Frequency Units",
+  "description": "Emits the units of frequency used to describe medications.",
+  "map": "queries/PDC-1941_medicationFrequencyDataQuality.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+
+  "panels": [
+    "PPhRR",
+    "PracticeReflection",
+    "Attachment",
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [    {
+    "name": "TC1",
+    "data": "test/data/PDC-1929_Biguinide65+_data_1.json",
+    "data_processor": "./data_processor/PDC_processor-2.js",
+    "verifier": "./verify/PDC_verify_tc1.js"
+  }]
+}

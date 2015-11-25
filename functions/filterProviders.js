@@ -23,7 +23,7 @@ function filterProviders(providerId, initiative) {
 
     var inits = initatives();
 
-    if (initiative === "ANY") {
+    if (initiative.toUpperCase() === "ANY" || initiative.toUpperCase() === "ALL") {
 
         //if we are checking for all, just check that they are in
         // on of the initiatives.
@@ -45,13 +45,13 @@ function filterProviders(providerId, initiative) {
     } else {
 
         //check that the initiative is valid.
-        if (inits[initiative] === undefined) {
+        if (inits[initiative.toUpperCase()] === undefined) {
 
             return false;
 
         }
 
-        if (inits[initiative].indexOf(providerId) > -1) {
+        if (inits[initiative.toUpperCase()].indexOf(providerId) > -1) {
 
             return true;
 

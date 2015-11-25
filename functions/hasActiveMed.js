@@ -1,12 +1,20 @@
-function hasActiveMed( pt, med, doseLimit, minDose, maxDose){
+/**
+ * @param pt {Patient} - hQuery patient API object.
+ * @param med {String} - a regular expression string to match against the ATC codes for the patient's medications.
+ * @param doseLimit
+ * @param minDose
+ * @param maxDose
+ * @returns {boolean}
+ */
+function hasActiveMed(pt, med, doseLimit, minDose, maxDose) {
 
     //check if the input was valid.
     if (
-        pt === undefined    ||
-        pt === null         ||
+        pt === undefined ||
+        pt === null ||
         pt.json === undefined ||
-        pt.json ===  null
-    ){
+        pt.json === null
+    ) {
         return false;
     }
 
@@ -19,60 +27,54 @@ function hasActiveMed( pt, med, doseLimit, minDose, maxDose){
     var meds = pt.medications();
 
     if (
-        meds === undefined  ||
-        meds === null       ||
+        meds === undefined ||
+        meds === null ||
         meds.length === 0
-    ){
+    ) {
 
         return false;
     }
 
     meds = meds.filter(
-      function(m)
-      {
-        atcCoded = m.json.codes !== null &&
+        function (m) {
+            atcCoded = m.json.codes !== null &&
                 m.json.codes !== undefined &&
                 m.json.codes.whoATC !== null &&
                 m.json.codes.whoATC !== undefined &&
                 m.json.codes.whoATC.length > 0;
 
-        return isActiveMed(m) && atcCoded;
-      }
+            return isActiveMed(m) && atcCoded;
+        }
     );
 
-    for(var i=0; i<meds.length; i++)
-    {
-      var m = meds[i];
+    for (var i = 0; i < meds.length; i++) {
 
-      for( var j=0; j<m.json.codes.whoATC.length; j++)
-      {
-        var c = m.json.codes.whoATC[j];
+        var m = meds[i];
 
-        if(c.match(med))
-        {
+        for (var j = 0; j < m.json.codes.whoATC.length; j++) {
+            var c = m.json.codes.whoATC[j];
 
-          if(!doseLimit)
-          {
-            return true;
-          }
+            if (c.match(med)) {
 
-          if(m.json.values && m.json.values[0].scalar)
-          {
-            try
-            {
-                var v = parseFloat(m.json.values[0].scalar);
-
-                if( v >= minDose){
+                if (!doseLimit) {
                     return true;
                 }
+
+                if (m.json.values && m.json.values[0].scalar) {
+                    try {
+                        var v = parseFloat(m.json.values[0].scalar);
+
+                        if (v >= minDose) {
+                            return true;
+                        }
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
+                }
             }
-            catch(e){
-              console.log(e);
-            }
-          }
         }
-      }
     }
 
-  return false;
+    return false;
 }

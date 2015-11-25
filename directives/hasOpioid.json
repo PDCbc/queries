@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "hasOpioid",
+	"path": "functions/hasOpioid.js",
+	"description": "Determines if the patient has an active opioid medication.",
+	"test": "functions/test_hasOpioid.js"
+}

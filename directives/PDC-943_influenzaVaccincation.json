@@ -1,0 +1,31 @@
+{
+  "type": "QUERY",
+  "title": "PDC-943",
+  "name": "PDC-943_influenzaVaccincation",
+  "display_name": "Influenza Immunization in the Elderly",
+  "description": "Percentage of active patients aged 65 or older who have a documented influenza vaccination.",
+  "map": "queries/PDC-943_influenzaVaccincation.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PopulationHealth"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-943_influenza_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+	"type": "QUERY",
+	"title": "PDC-1932",
+	"name": "PDC-1932_chronicPainWith200mgOpioids",
+	"display_name": "Chronic Pain with >200 mg/day of Active Opioids",
+	"description": "The percentage of patients that have a diagnosis of chronic pain and have active opioid prescriptions totaling more than 200 mg/day.",
+	"map": "queries/PDC-1932_chronicPainWith200mgOpioids.js",
+	"reduce": "Resources/PDC_general-reduce.js",
+	"functions": [],
+	"qualified_by": [],
+	"units": "Patients",
+	"target": {
+		"value": "N/A",
+		"reference": "N/A",
+		"description": "N/A"
+	},
+	"query_type": "RATIO",
+	"status": "ACTIVE",
+	"panels": [
+		"PracticeReflection"
+	],
+	"contact": "pdc@pdc.io",
+	"tests": []
+}

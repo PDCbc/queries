@@ -1,0 +1,31 @@
+{
+  "type": "QUERY",
+  "title": "PDC-743",
+  "name": "PDC-743_RaOaLbp",
+  "display_name": null,
+  "description": "The percentage of patients with a diagnosis of Rheumatoid Arthritis (RA), Osteoarthritis (OA), or Lower Back Pain (LBP).",
+  "map": "queries/PDC-743_RaOaLbp.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PracticeReflection"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-743_RaOaLbp_data_1.json",
+      "verifier": "./verify/PDC_verify2_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js"
+    }
+  ]
+}

@@ -1,13 +1,19 @@
 /**
  * title : $$TITLE$$
  * description : $$DESCRIPTION$$
+ *
+ * @param patient {Patient} - hquery patient api object.
  */
 
-function map(patient){
+function map(patient) {
 
-   //YOUR QUERY LOGIC HERE
-   //SUGGEST TO OFFLOAD THIS TO FUNCTIONS.
+    if (!filterProviders(patient.json.primary_care_provider_id, "PracticeReflection|Polypharmacy|PopulationHealth|DataQuality|...")) {
+        return;
+    }
 
-   emit("SOME KEY", 1);
+    //YOUR QUERY LOGIC HERE
+    //SUGGEST TO OFFLOAD THIS TO FUNCTIONS.
+
+    emit("SOME KEY", 1);
 
 }

@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "isOpioid",
+	"path": "functions/isOpioid.js",
+	"description": "Determines if a medication is a opioid using a whoATC code.",
+	"test": "functions/test_isOpioid.js"
+}

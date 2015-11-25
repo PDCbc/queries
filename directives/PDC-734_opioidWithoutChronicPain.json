@@ -1,0 +1,32 @@
+{
+  "type": "QUERY",
+  "title": "PDC-734",
+  "name": "PDC-734_opioidWithoutChronicPain",
+  "display_name": "Active Opioid Without Chronic Pain",
+  "description": "Of patients who are over the age of 21, how many have an active opioid prescription but no documented diagnosis of chronic pain.",
+  "map": "queries/PDC-734_opioidWithoutChronicPain.js",
+  "reduce": "Resources/PDC_general-reduce.js",
+  "functions": [],
+  "qualified_by": [],
+  "units": "Patients",
+  "target": {
+    "value": "N/A",
+    "reference": "N/A",
+    "description": "N/A"
+  },
+  "query_type": "RATIO",
+  "status": "ACTIVE",
+  "panels": [
+    "PracticeReflection"
+  ],
+  "contact": "pdc@pdc.io",
+  "tests": [
+    {
+      "name": "TC1",
+      "data": "test/data/PDC-734_opioidWithoutChronicPain_data_1.json",
+      "verifier": "./verify/PDC_verify_tc1.js",
+      "data_processor": "./data_processor/PDC_processor-2.js",
+      "comments": ""
+    }
+  ]
+}

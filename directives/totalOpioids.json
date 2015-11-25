@@ -1,0 +1,7 @@
+{
+	"type": "FUNCTION",
+	"name": "totalOpioids",
+	"path": "functions/totalOpioids.js",
+	"description": "Determines the total daily does of active opioid medications in milligrams (mg).",
+	"test": "functions/test_totalOpioids.js"
+}
