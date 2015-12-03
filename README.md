@@ -210,6 +210,11 @@ people:
 * hQuery
 * Specifics:
 
+
+### Mangaing Providers
+
+Queries have a method of filtering which provides have their data included in the map/reduce process. This is accomplished via two functions: `filterProviders()` and `initatives()`. The `filterProviders()` function should be called in each query with the ID of the provider and the initiative the query is part of. Provider IDs should be organized into the JavaScript object within the `initiatives()` function; these get pulled in by `filterProviders()`. Consider PDC-001 as an example of how this process should work. 
+
 ## Test Utility
 
 The test utility allows one to run a set of queries and/or functions who's directives (in the directives/ directory) match the input regex pattern. See the directive section of this README for details on how to create a directive. 
