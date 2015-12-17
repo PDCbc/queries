@@ -1,22 +1,22 @@
 function initatives(){
     return {
 
-        "PPhRR"             : [
+        "PPHRR"             : [
             "cpsid",
             "PROVIDER1",
             "PROVIDER2"
         ],
-        "PracticeReflection": [
+        "PRACTICEREFLECTION": [
             "cpsid",
             "PROVIDER1",
             "PROVIDER2"
         ],
-        "PopulationHealth"  : [
+        "POPULATIONHEALTH"  : [
             "cpsid",
             "PROVIDER1",
             "PROVIDER2"
         ],
-        "Attachment" : [
+        "ATTACHEMENT" : [
             "cpsid",
             "PROVIDER1",
             "PROVIDER2"
