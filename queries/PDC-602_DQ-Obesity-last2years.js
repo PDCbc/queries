@@ -13,7 +13,7 @@ function map( patient ){
         return;
     }
 
-    var ia = isAge( patient, 19 );
+    var ia = isAge( patient, 20 );
 
     var ap = activePatient( patient );
 
