@@ -3,7 +3,7 @@
   "title": "PDC-846",
   "name": "PDC-846_DQ-AntiGoutWithGout",
   "display_name": "Gout Completeness Estimate",
-  "description": "AntiGoutWithGout",
+  "description": "Of patients with a current anti-Gout medication, what percentage has Gout on the problem list?",
   "map": "queries/PDC-846_DQ-AntiGoutWithGout.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "functions": [],
