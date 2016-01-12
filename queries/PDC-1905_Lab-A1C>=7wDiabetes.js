@@ -18,7 +18,7 @@ function map(patient) {
 
     var minDate = new Date();
 
-    minDate.setMonth(minDate.getMonth() - 6);
+    minDate.setMonth(minDate.getMonth() - 12);
 
     var maxDate;//undefined
 
