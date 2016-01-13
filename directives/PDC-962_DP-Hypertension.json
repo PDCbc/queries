@@ -3,7 +3,7 @@
   "title": "PDC-962",
   "name": "PDC-962_DP-Hypertension",
   "display_name": "Documented Prevalence of Hypertension",
-  "description": "This metric shows the percentage of active patients with Hypertension documented in a current medical profile; active patient population age >18 to 100 yrs.",
+  "description": "This metric shows the percentage of active patients with Hypertension documented in a current medical profile; active patient population age 20 to 120 yrs.",
   "map": "queries/PDC-962_DP-Hypertension.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "units": "Patients",
