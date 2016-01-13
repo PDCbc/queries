@@ -3,7 +3,7 @@
   "title": "PDC-865",
   "display_name": "Documentation Rate for Blood Pressure",
   "name": "PDC-865_DQ-BP21+",
-  "description": "BP 21+",
+  "description": "What percentage of active patients, >= 21 years old have had a documented blood pressure",
   "map": "queries/PDC-865_DQ-BP21+.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "functions": [],
