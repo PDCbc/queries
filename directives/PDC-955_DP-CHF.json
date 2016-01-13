@@ -3,7 +3,7 @@
   "title": "PDC-955",
   "name": "PDC-955_DP-CHF",
   "display_name": "Documented Prevalence of Congestive Heart Failure",
-  "description": "This metric shows the percentage of active patients with Congestive Heart Failure (CHF) documented in a current medical profile; active patient population age >18 to 100 yrs.",
+  "description": "This metric shows the percentage of active patients with Congestive Heart Failure (CHF) documented in a current medical profile; active patient population age 20 to 120 yrs.",
   "map": "queries/PDC-955_DP-CHF.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "units": "Patients",
