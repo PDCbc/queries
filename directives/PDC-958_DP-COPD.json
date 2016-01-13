@@ -3,7 +3,7 @@
   "title": "PDC-958",
   "name": "PDC-958_DP-COPD",
   "display_name": "Documented Prevalence of COPD",
-  "description": "This metric shows the percentage of active patients with Chronic Obstructive Pulmonary Disease (COPD) documented current medical profile; active patient population age >18 to 100 yrs.",
+  "description": "This metric shows the percentage of active patients with Chronic Obstructive Pulmonary Disease (COPD) documented current medical profile; active patient population age 20 to 120 yrs.",
   "map": "queries/PDC-958_DP-COPD.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "functions": [
