@@ -8,7 +8,7 @@
   "reduce": "Resources/PDC_general-reduce.js",
   "units": "Patients",
   "target": {
-    "value": "5.4%",
+    "value": "50.9%",
     "reference": "Public Health Agency of Canada – BC 2011",
     "description": "N/A"
   },
