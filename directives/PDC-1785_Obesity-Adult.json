@@ -3,7 +3,7 @@
   "title": "PDC-1785",
   "name": "PDC-1785_Obesity-Adult",
   "display_name": "Documented Prevalence of Obesity (all active patients)",
-  "description": "This metric shows the percentage of active patients whose last Body Mass Index (BMI) reading is equal to or greater => than 30 or Waist Circumference is greater than > 102 for males and > 95 for females ; active patient population age > 12 to 100 yrs.",
+  "description": "This metric shows the percentage of active patients whose last Body Mass Index (BMI) reading is equal to or greater => than 30 or Waist Circumference is greater than > 102 for males and > 95 for females",
   "map": "queries/PDC-1785_Obesity-Adult.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "units": "Patients",
