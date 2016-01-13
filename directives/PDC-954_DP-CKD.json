@@ -3,7 +3,7 @@
   "name": "PDC-954",
   "name": "PDC-954_DP-CKD",
   "display_name": "Documented Prevalence of Chronic Kidney Disease in Adults",
-  "description": "Active patients who the condition in the problem list. Population includes active patients ages 20 through 120.",
+  "description": "The percentage of active patients with documented Chroic Kidney Disease in the medical profile, ages 20 to 120.",
   "map": "queries/PDC-954_DP-CKD.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "functions": [
