@@ -1,9 +1,9 @@
-//PDC-831_EncounterFrquency
+//PDC-831_DQEncounterFrquency
 //% of patients with an encounter in the last 36 months
 
 function map(patient) {
 
-    if (!filterProviders(patient.json.primary_care_provider_id, "Attachment")) {
+    if (!filterProviders(patient.json.primary_care_provider_id, "PracticeReflection")) {
         return;
     }
 
