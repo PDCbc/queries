@@ -3,7 +3,7 @@
   "name": "PDC-889_DQ-BMI",
   "display_name": "Documentation Rate for BMI",
   "title": "PDC-889",
-  "description": "Count of all active patients greater than or equal to >= 21 years old with Body Mass Index (BMI) documented in the last 3 years?",
+  "description": "Percentage of active patients >= 21 years old with Body Mass Index (BMI) documented.",
   "map": "queries/PDC-889_DQ-BMI.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "functions": [],

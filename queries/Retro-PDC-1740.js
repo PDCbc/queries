@@ -5,69 +5,76 @@
 
 function map(patient) {
 
-    try {
+    if (!filterProviders(patient.json.primary_care_provider_id, "ANY")) {
+        return;
+    }
 
-      var genders = ['female', 'male', 'undefined', 'undifferentiated'];
+    var pid = patient.json.primary_care_provider_id;
 
-      if (filterProviders(patient.json.primary_care_provider_id, "Attachment"))
-      {
-        var pdcEpoch = new Date(2010, 0, 24);//first of january 2010 adjust for execution date
-        var now = new Date();
-        var monthIncrement = 1;
+    var genders   = ['female', 'male', 'undefined', 'undifferentiated'];
+    var ageRanges = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89', '90+'];
 
-        var gender = getGender(patient);//gender modelled as time invariant
+    var pdcEpoch = new Date(2010, 0, 24);//first of january 2010 adjust for execution date
 
-        for( var referenceTime = new Date(pdcEpoch.getTime()); referenceTime<now; referenceTime.setMonth(referenceTime.getMonth()+monthIncrement))
-        {
-          //get the number of encounters in the last month.
-          var encounters = countEncountersReference(patient, monthIncrement, referenceTime);
-          var ageRange = getAgeRangeReference(patient, undefined, referenceTime);
+    var now            = new Date();
+    var monthIncrement = 1;
 
-          for( var i=0; i<genders.length;i++)
-          {
-            genderCycle(gender, genders[i], patient, referenceTime, encounters, ageRange);
-          }
+    var gender = getGender(patient);//gender modelled as time invariant
+
+    for (var referenceTime = new Date(pdcEpoch.getTime()); referenceTime < now; referenceTime.setMonth(referenceTime.getMonth() + monthIncrement)) {
+
+        //get the number of encounters in the last month.
+        var encounters = countEncountersReference(patient, monthIncrement, referenceTime);
+
+        if (!activePatient(patient, referenceTime)) {
+            //exclude patients that are not calculated active
+            //but emit zeros so that there are results for the whole time range
+
+            for (var m = 0; m < ageRanges.length; m++) {
+                var ari = ageRanges[m];
+
+                for (var n = 0; n < genders.length; n++) {
+                    emit('{' +
+                        '"gender"' + ':' + '"' + genders[n] + '"' + ',' +
+                        '"ageRange"' + ":" + '"' + ari + '"' + ',' +
+                        '"pid"' + ":" + '"' + pid + '"' + ',' +
+                        '"date"' + ':' + '"' + referenceTime.getTime() +
+                        '"}', 0);
+                }
+            }
+            continue;
         }
-      }
-      else
-      {
-        throw new Error('filtered out');
-      }
-    } catch (e) {
 
-        emit("FAILURE_" + e, -1);
+        // they are an active patient....
+
+        var ageRange = getAgeRangeReference(patient, undefined, referenceTime);
+
+        if (ageRange === null) {
+            //ignore out of range values
+            continue;
+        }
+
+        for (var i = 0; i < ageRanges.length; i++) {
+            var ageRangeIter = ageRanges[i];
+
+            if (ageRange === ageRangeIter) {
+                emit('{' +
+                    '"gender"' + ':' + '"' + gender + '"' + ',' +
+                    '"ageRange"' + ":" + '"' + ageRangeIter + '"' + ',' +
+                    '"pid"' + ":" + '"' + pid + '"' + ',' +
+                    '"date"' + ':' + '"' + referenceTime.getTime() +
+                    '"}', encounters);
+            }
+
+            for (var j = 0; j < genders.length; j++) {
+                emit('{' +
+                    '"gender"' + ':' + '"' + genders[j] + '"' + ',' +
+                    '"ageRange"' + ":" + '"' + ageRangeIter + '"' + ',' +
+                    '"pid"' + ":" + '"' + pid + '"' + ',' +
+                    '"date"' + ':' + '"' + referenceTime.getTime() +
+                    '"}', 0);
+            }
+        }
 
     }
-}
-
-function genderCycle(gender, g, patient, referenceTime, encounters, ageRange)
-{
-  var ageRanges = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89', '90+'];
-
-  if (encounters !== null && ageRange !== null && gender !== null)
-  {
-    if(gender === g)
-    {
-
-        emit('{' +
-                '"gender"' + ':' + '"' + g + '",' +
-                '"ageRange"' + ':' + '"' + ageRange + '",' +
-                '"pid"' + ':' + '"' + patient.json.primary_care_provider_id + '",' +
-                '"date"' + ':' + '"' + referenceTime.getTime() + '"' +
-             '}', encounters);
-    }
-
-    //simple but inefficient -- could emit all other cases rather than always emitting zero
-    ageRanges.forEach(
-      function(ar)
-      {
-        emit('{' +
-                '"gender"' + ':' + '"' + g + '",' +
-                '"ageRange"' + ':' + '"' + ageRange + '",' +
-                '"pid"' + ':' + '"' + patient.json.primary_care_provider_id + '",' +
-                '"date"' + ':' + '"' + referenceTime.getTime() + '"' +
-             '}', 0);
-      }
-    );
-  }
 }

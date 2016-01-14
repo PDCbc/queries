@@ -1,5 +1,5 @@
 /**
- * Query Title: PDC-1906_Lab-LDL>=2point5wDiabetes
+ * Query Title: PDC-1906_Lab-LDL<=2point5wDiabetes
  * Query Type:  Ratio
  */
 function map(patient) {

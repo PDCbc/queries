@@ -3,7 +3,7 @@
   "title": "PDC-1786",
   "name": "PDC-1786_DP-IHD",
   "display_name": "Documented Prevalence of Ischemic Heart Disease",
-  "description": "This metric shows the percentage of active patients with Ischemic Heart Disease documented in a current medical profile; active patient population age > 18 to 100 yrs",
+  "description": "This metric shows the percentage of active patients with Ischemic Heart Disease documented in a current medical profile",
   "map": "queries/PDC-1786_DP-IHD.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "functions": [

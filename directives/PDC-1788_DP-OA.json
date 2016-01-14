@@ -3,7 +3,7 @@
   "title": "PDC-1788",
   "name": "PDC-1788_DP-OA",
   "display_name": "Documented Prevalence of Osteoarthritis in Adults",
-  "description": "This metric shows the percentage of active patients with Osteoarthritis disease documented in a current medical profile; active patient population age > 18 to 100",
+  "description": "This metric shows the percentage of active patients with Osteoarthritis disease documented in a current medical profile",
   "map": "queries/PDC-1788_DP-OA.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "functions": [

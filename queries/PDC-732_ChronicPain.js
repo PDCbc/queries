@@ -6,7 +6,7 @@ function map( patient ){
 
     var providerId = patient.json.primary_care_provider_id;
 
-    var initiative = "PopulationHealth";
+    var initiative = "PracticeReflection";
 
     if(!filterProviders(providerId, initiative))
     {

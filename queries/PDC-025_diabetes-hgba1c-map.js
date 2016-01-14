@@ -36,7 +36,7 @@ function map(patient) {
      *
      * Additional criteria:
      *   - HGBA1C recorded
-     *   ---> in last year
+     *   ---> in last six months
      */
     function checkNumerator() {
         // Values

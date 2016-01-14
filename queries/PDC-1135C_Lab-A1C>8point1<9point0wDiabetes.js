@@ -1,5 +1,5 @@
 /**
- * Query Title: PDC-1135B_Lab-A1C>7point1<8point0wDiabetes
+ * Query Title: PDC-1135C_LastLab-A1C>8point1<9point0wDiabetes
  * Query Type:  Ratio
  */
 function map(patient) {

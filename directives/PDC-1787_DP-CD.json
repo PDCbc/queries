@@ -3,7 +3,7 @@
   "title": "PDC-1787",
   "name": "PDC-1787_DP-CD",
   "display_name": "Documented Prevalence of Cerebrovascular Disease in Adults",
-  "description": "Active patients who have the condition in the problem list. Population includes active patients of any age",
+  "description": "Percentage of active patients with Cerebrovascular Disease documented in the current medical profile",
   "map": "queries/PDC-1787_DP-CD.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "functions": [

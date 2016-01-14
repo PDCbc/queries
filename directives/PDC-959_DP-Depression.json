@@ -3,7 +3,7 @@
   "title": "PDC-959",
   "name": "PDC-959_DP-Depression",
   "display_name": "Documented Prevalence of Depression",
-  "description": "This metric shows the percentage of active patients with Depression documented in a current medical or Psychiatric profile; active patient population age > 12 to 100",
+  "description": "This metric shows the percentage of active patients with Depression documented in a current medical profile, age 20 to 100",
   "map": "queries/PDC-959_DP-Depression.js",
   "reduce": "Resources/PDC_general-reduce.js",
   "functions": [
