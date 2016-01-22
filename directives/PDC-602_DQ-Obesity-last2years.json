@@ -1,8 +1,8 @@
 {
   "type": "QUERY",
   "title": "PDC-602",
-  "name": "PDC-602_DQ-Obesity-last2years",
-  "display_name": "Documented Prevalence of Obesity in Adolescents",
+  "name": "PDC-602_DQ-Obesity-Adults",
+  "display_name": "Documented Prevalence of Obesity in Adults",
   "description": "This metric shows the percentage of overweight or obese active patients age 20+ yrs",
   "map": "queries/PDC-602_DQ-Obesity-last2years.js",
   "reduce": "Resources/PDC_general-reduce.js",
