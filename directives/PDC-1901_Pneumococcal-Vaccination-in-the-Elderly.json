@@ -1,5 +1,6 @@
 {
     "type": "QUERY",
+    "title": "PDC-1901",
     "name" : "PDC-1901_Pneumococcal-Vaccination-in-the-Elderly",
     "description" : "Active patients who have the issue documented in CMOs. Population includes active patients ages 20 or under",
     "map": "queries/PDC-1901_Pneumococcal-Vaccination-in-the-Elderly.js",
