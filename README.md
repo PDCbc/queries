@@ -54,6 +54,14 @@ Each query and library function **must** have a *directive* (found in the direct
     "display_name" : "A name to show in the interface",
     "title" : "PDC-XXXX", 
     "query_type" : "RATIO | STRATIFIED",
+    "status" : "ACTIVE | INACTIVE",
+    "units" : "patients | medications | encounters | ...",
+    "target" : {
+    	"value":"N/A",
+    	"reference":"N/A",
+    	"description":"N/A"
+     },
+    "panels" : ["PopulationHealth", "PracticeReflection", "..."],
     "description" : "SOME DESCRIPTION", 
     "map": "PATH TO MAP FUNCTION", 
     "reduce" : "PATH TO REDUCE FUNCTION",
