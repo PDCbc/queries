@@ -63,6 +63,7 @@ Each query and library function **must** have a *directive* (found in the direct
      },
     "panels" : ["PopulationHealth", "PracticeReflection", "..."],
     "description" : "SOME DESCRIPTION", 
+    "definition" : "A more precise definition based on the query requirement",
     "map": "PATH TO MAP FUNCTION", 
     "reduce" : "PATH TO REDUCE FUNCTION",
     "functions" : ["PATH TO HELPER FUNCTION 1", ...],  
@@ -84,8 +85,20 @@ for example:
 ```JSON
 {
     "type": "QUERY",
+    "title" : "PDC-053",
     "name" : "PDC-053_polypharmacy-5",
-    "description" : "The percentage of elderly patients, 65 and older, that are active patients and are on 10 or more current medications.", 
+    "description" : "The percentage of elderly patients, 65 and older, that are active patients and are on 10 or more current medications.",
+    "definition" : "Calculated as a ratio. Denominator: active patients with age >= 65, numerator: active patients with age >= 65 who have 5 or more active medications.",
+    "display_name" : "Polypharmacy in the Eldery",
+    "units" : "patients",
+    "status" : "ACTIVE",
+    "panels" : ["PPhRR"],
+    "query_type" : "RATIO",
+    "target" : {
+       "value":"N/A",
+       "reference":"N/A",
+       "description":"N/A"
+    },
     "map": "queries/PDC-053_polypharmacy-map-5.js",
     "reduce" : "Resources/PDC_general-reduce.js",
     "functions" : [""],
