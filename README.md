@@ -51,6 +51,9 @@ Each query and library function **must** have a *directive* (found in the direct
 {
     "name" : "QUERY NAME",
     "type" : "QUERY", 
+    "display_name" : "A name to show in the interface",
+    "title" : "PDC-XXXX", 
+    "query_type" : "RATIO | STRATIFIED",
     "description" : "SOME DESCRIPTION", 
     "map": "PATH TO MAP FUNCTION", 
     "reduce" : "PATH TO REDUCE FUNCTION",
