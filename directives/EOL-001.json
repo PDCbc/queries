@@ -10,9 +10,9 @@
         "reference":"N/A",
         "description":"N/A"
     },
-    "query_type" : "STRATIFIED",
+    "query_type" : "RATIO",
     "status" : "ACTIVE",
-    "panels" : ["PPhRR", "PracticeReflection", "Attachment", "PracticeReflection"],
+    "panels" : ["PracticeReflection"],
     "contact" : "pdc@pdc.io",
     "map": "queries/EOL-001.js",
     "reduce" : "Resources/PDC_general-reduce.js",
