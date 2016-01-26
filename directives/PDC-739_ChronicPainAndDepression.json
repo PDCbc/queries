@@ -1,5 +1,6 @@
 {
     "type": "QUERY",
+    "title": "PDC-739",
     "name" : "PDC-739_ChronicPainAndDepression",
     "description" : "PDC-739_ChronicPainAndDepression",
     "map": "queries/PDC-739_ChronicPainAndDepression.js",
