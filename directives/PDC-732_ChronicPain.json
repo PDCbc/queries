@@ -1,6 +1,6 @@
 {
     "type": "QUERY",
-    "title": "PDC-732"
+    "title": "PDC-732",
     "name" : "PDC-732_ChronicPain",
     "description" : "PDC-732_ChronicPain",
     "map": "queries/PDC-732_ChronicPain.js",
