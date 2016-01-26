@@ -1,7 +1,7 @@
 /**
  * Query Title:EOL-001
  * Query Type:  Count
- * Description: Number of patients per provider who are end of life
+ * Description: Percentage of active patients, 55 years or older, per provider who are end of life either documented as palliative or one or more advanced conditions.
  */
 function map( patient ){
 
