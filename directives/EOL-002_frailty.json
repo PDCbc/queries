@@ -2,7 +2,6 @@
     "type": "QUERY",
     "title": "EOL-002",
     "name" : "EOL-002_frailty",
-    "title" : "EOL-002",
     "description" : "Frail patients who are 55 years and over.",
     "display_name" : "End of Life Query (Frailty)",
     "units" : "patient",
