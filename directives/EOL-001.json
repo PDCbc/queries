@@ -1,18 +1,18 @@
 {
     "type": "QUERY",
-    "name" : "EOL-001",
+    "name" : "EOL-001_countEndofLife",
     "title" : "EOL-001",
-    "description" : "EoL patients who are 55 years and over.",
-    "display_name" : "End of Life Query (SPICT)",
+    "description" : "Percentage of active patients, > 55 years old, who are documented End of Life (SPICT)",
+    "display_name" : "Prevalence of End of Life Patients",
     "units" : "patient",
     "target" : {
         "value":"N/A",
         "reference":"N/A",
         "description":"N/A"
     },
-    "query_type" : "STRATIFIED",
+    "query_type" : "RATIO",
     "status" : "ACTIVE",
-    "panels" : ["PPhRR", "PracticeReflection", "Attachment", "PracticeReflection"],
+    "panels" : ["PracticeReflection"],
     "contact" : "pdc@pdc.io",
     "map": "queries/EOL-001.js",
     "reduce" : "Resources/PDC_general-reduce.js",

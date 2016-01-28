@@ -27,6 +27,5 @@
       "data_processor": "./data_processor/PDC_processor-2.js",
       "verifier": "./verify/PDC_verify_tc1.js"
     }
-  ],
-  "title": "PDC-1925_DihydropyridineCalciumChannelBlocker65+"
+  ]
 }
