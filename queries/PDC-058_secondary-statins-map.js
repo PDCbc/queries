@@ -1,13 +1,13 @@
 /**
  * Query Title: PDC-058
  * Query Type:  Ratio
- * Desctiption: Statin: Secondary prev
+ * Desctiption: Statin: Secondary prevention, age >= 65.
  */
 function map( patient ){
 
     try{
         if ( filterProviders(patient.json.primary_care_provider_id, "PPhRR") ){
-            var denominator = activePatient( patient ) && hasActiveStatin( patient ); 
+            var denominator = isAge( patient, 65 ) && activePatient( patient ) && hasActiveStatin( patient ); 
 
             var numerator   = denominator && hasCardiacEvent( patient ); 
 
