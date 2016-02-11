@@ -3,18 +3,13 @@
  * Query Type:  Ratio
  * Description: The ratio of active to inactive patients.
  */
-function map(patient) {
+function map( patient )
+{
+  var denominator = true;
 
-    if (filterProviders(patient.json.primary_care_provider_id, "ANY")) {
+  var numerator = denominator && activePatient(patient);
 
-        var denominator = true;
+  emit("denominator_" + patient.json.primary_care_provider_id, +denominator);
 
-        var numerator = denominator && activePatient(patient);
-
-        emit("denominator_" + patient.json.primary_care_provider_id, +denominator);
-
-        emit("numerator_" + patient.json.primary_care_provider_id, +numerator);
-
-    }
-
+  emit("numerator_" + patient.json.primary_care_provider_id, +numerator);
 }
