@@ -5,10 +5,6 @@
 
 function map(patient) {
 
-    if (!filterProviders(patient.json.primary_care_provider_id, "ANY")) {
-        return;
-    }
-
     var pid = patient.json.primary_care_provider_id;
 
     var genders   = ['female', 'male', 'undefined', 'undifferentiated'];

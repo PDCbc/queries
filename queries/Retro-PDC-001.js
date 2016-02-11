@@ -3,11 +3,8 @@
  * Query Type:  Pyramid
  * Description: Population Pyramid
  */
-function map(patient) {
-
-    if (!filterProviders(patient.json.primary_care_provider_id, "ANY")) {
-        return;
-    }
+function map(patient)
+{
 
     var pdcEpoch = new Date(2010, 0, 24);//jan 1st 2010 adjust for execution date
 
