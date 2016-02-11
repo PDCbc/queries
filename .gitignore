@@ -6,3 +6,4 @@ tmp/
 tmp/*
 node_modules/
 .idea/
+.directory
