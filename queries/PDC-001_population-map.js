@@ -5,16 +5,10 @@
  */
 function map(patient) {
 
-    if(!filterProviders(patient.json.primary_care_provider_id, "Attachment")){
-        return;
-    }
-    
     if(!activePatient(patient)){
         return;
     }
     
-     activePatient(patient)
-
     //constants
     var gdrs = ["female_", "male_", "undifferentiated_", "undefined_"];
 
