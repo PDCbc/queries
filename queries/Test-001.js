@@ -3,7 +3,7 @@
  * Query Type:  Count
  * Description: Count all patients, very basic testing only
  */
-function map(patient) {
+function map( patient )
+{
   emit( "records", 1 );
 }
-
