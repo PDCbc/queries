@@ -3,12 +3,14 @@
  * Query Type:  Pyramid
  * Description: Population Pyramid
  */
-function map(patient) {
-
+function map( patient )
+{
     if(!activePatient(patient)){
         return;
     }
-    
+
+     activePatient(patient)
+
     //constants
     var gdrs = ["female_", "male_", "undifferentiated_", "undefined_"];
 
