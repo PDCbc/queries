@@ -3,73 +3,90 @@
  * Query Type:  Pyramid
  * Description: Population Pyramid
  */
-function map(patient)
+function map( patient )
 {
+  // Store physician ID, via JSON key
+  var pid = patient.json.primary_care_provider_id;
 
-    var pdcEpoch = new Date(2010, 0, 24);//jan 1st 2010 adjust for execution date
+  // Store gender (can't change) and index
+  var gdr = getGender( patient );
+  var index_gdrs;
+  //
+  if( gdr.toString().toUpperCase() === "FEMALE" )
+    index_gdrs = 0;
+  else if( gdr.toString().toUpperCase() === "MALE" )
+    index_gdrs = 1;
+  else if( gdr.toString().toUpperCase() === "UNDEFINED" )
+    index_gdrs = 2;
+  else
+    index_gdrs = 3;
 
-    //constants
-    var gdrs      = ["female", "male", "undifferentiated", "undefined"];
-    var ageRanges = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89', '90+'];
+  // Constants
+  var all_gdrs =[ "female", "male", "undifferentiated", "undefined" ];
+  var all_ages =[ '0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89', '90+' ];
 
-    // Store physician ID, via JSON key
-    var pid = patient.json.primary_care_provider_id;
+  // Start, end (now) and counter dates
+  var start = new Date(2010, 0, 24);//jan 1st 2010 adjust for execution date
+  var end = new Date().getTime();
+  var i = new Date( start.getTime() );
+  //
+  // Monthly results
+  for( ; i.getTime() < end; i.setMonth( i.getMonth() + 1 ))
+  {
+    // Array to emit from (by age range, then FEMALE/MALE/OTHER/UNDEF)
+    var mask = [
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0 ]
+    ];
 
-    //no functionality to capture change in gender over time
-    var gdr = getGender(patient);
+    // Mask rows assigned by ageRange and columns by index_gdrs
+    var index_ages;
 
-    //monthly results
-    for (var referenceDate = new Date(pdcEpoch.getTime()); referenceDate.getTime() < new Date().getTime(); referenceDate.setMonth(referenceDate.getMonth() + 1)) {
+    // Store age and date at time i
+    var i_age  = patient.age( i );
+    var i_date = i.getTime();
 
-        if (!activePatient(patient, referenceDate)) {
-            //exclude patients that are not calculated active
-            //but emit zeros so that there are results for the whole time range
+    // Add to mask if values check out
+    if(
+      activePatient( patient, i )&&
+      typeof i_age === 'number' &&
+      i_age >= 0
+    ){
+      // Divide age by ten and round down to get age range
+      index_ages = Math.floor( i_age / 10 );
 
-            for (var m = 0; m < ageRanges.length; m++) {
-                var ari = ageRanges[m];
+      // Cap off ranges at 90+
+      if( index_ages > 9 )
+        index_ages = 9;
 
-                for (var n = 0; n < gdrs.length; n++) {
-                    emit('{' +
-                        '"gender"' + ':' + '"' + gdrs[n] + '"' + ',' +
-                        '"ageRange"' + ":" + '"' + ari + '"' + ',' +
-                        '"pid"' + ":" + '"' + pid + '"' + ',' +
-                        '"date"' + ':' + '"' + referenceDate.getTime() +
-                        '"}', 0);
-                }
-            }
-
-            continue;
-        }
-
-        //Store age and gender, via patient Object functions
-        var ageRange = getAgeRangeReference(patient, undefined, referenceDate);
-
-        if (ageRange === null) {
-            //ignore out of range values
-            continue;
-        }
-
-
-        for (var i = 0; i < ageRanges.length; i++) {
-            var ageRangeIter = ageRanges[i];
-
-            if (ageRange === ageRangeIter) {
-                emit('{' +
-                    '"gender"' + ':' + '"' + gdr + '"' + ',' +
-                    '"ageRange"' + ":" + '"' + ageRangeIter + '"' + ',' +
-                    '"pid"' + ":" + '"' + pid + '"' + ',' +
-                    '"date"' + ':' + '"' + referenceDate.getTime() +
-                    '"}', 1);
-            }
-
-            for (var j = 0; j < gdrs.length; j++) {
-                emit('{' +
-                    '"gender"' + ':' + '"' + gdrs[j] + '"' + ',' +
-                    '"ageRange"' + ":" + '"' + ageRangeIter + '"' + ',' +
-                    '"pid"' + ":" + '"' + pid + '"' + ',' +
-                    '"date"' + ':' + '"' + referenceDate.getTime() +
-                    '"}', 0);
-            }
-        }
+      // Store in max
+      mask[ index_ages ][ index_gdrs ] = 1;
     }
+
+    // Output mask, arranged by g=gender and a=age
+    for( var a = 0; a < all_ages.length; a++ )
+    {
+      for( var g = 0; g < all_gdrs.length; g++ )
+      {
+        emit(
+          '{' +
+            '"gender":"'   + all_gdrs[ g ] + '"' + ',' +
+            '"ageRange":"' + all_ages[ a ] + '"' + ',' +
+            '"pid":"'      + pid           + '"' + ',' +
+            '"date":"'     + i_date        + '"' +
+          '}',
+          mask[ a ][ g ]
+        );
+      }
+    }
+  }
 }
